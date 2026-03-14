@@ -573,43 +573,11 @@ section:first-child { margin-top: 0; }
 .section-wrap.active .page > *:nth-child(6) { animation-delay:.24s }
 .section-wrap.active .page > *:nth-child(7) { animation-delay:.28s }
 
-/* ── PRINT BUTTON ── */
-.print-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  color: var(--navy-deep);
-  border: 1.5px solid var(--border-str);
-  padding: 9px 17px;
-  border-radius: 8px;
-  font-family: 'Aptos', Calibri, 'Segoe UI', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: background .15s, border-color .15s, transform .1s, box-shadow .15s;
-  box-shadow: 0 1px 4px rgba(0,0,0,.06);
-  white-space: nowrap;
-  margin-left: 20px;
-  flex-shrink: 0;
-}
-.print-btn:hover {
-  background: var(--silver-lt);
-  border-color: var(--border-str);
-  box-shadow: 0 3px 10px rgba(0,0,0,.1);
-  transform: translateY(-1px);
-}
-.print-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 3px rgba(0,0,0,.08);
-}
-.print-btn svg { flex-shrink: 0; }
+
 
 /* ── PRINT STYLES ── */
 @media print {
-  .nav-tabs, .print-btn { display: none !important; }
+  .nav-tabs { display: none !important; }
   .section-wrap { display: block !important; }
   .header { border-radius: 0 !important; }
   .page { padding: 24px 36px !important; }
@@ -641,15 +609,7 @@ section:first-child { margin-top: 0; }
         <div class="hdr-date">February 2026</div>
         <div class="hdr-gen">Generated Mar 7, 2026</div>
       </div>
-      <button class="print-btn" onclick="printReport()">
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="2" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.7"/>
-          <path d="M4 10H3a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1h-1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-          <rect x="5" y="13" width="10" height="5" rx="0.5" stroke="currentColor" stroke-width="1.7"/>
-          <circle cx="15.5" cy="12.5" r="1" fill="currentColor"/>
-        </svg>
-        Print / Save PDF
-      </button>
+
     </div>
   </div>
 </div>
@@ -1422,27 +1382,7 @@ function showTab(name) {
 }
 
 
-/* ── PRINT ── */
-function printReport() {
-  const wraps = document.querySelectorAll('.section-wrap');
-  const activeWrap = document.querySelector('.section-wrap.active');
 
-  wraps.forEach(el => {
-    el.style.display = 'block';
-    el.style.animation = 'none';
-  });
-
-  setTimeout(() => {
-    window.print();
-    setTimeout(() => {
-      wraps.forEach(el => {
-        el.style.display = '';
-        el.style.animation = '';
-      });
-      if (activeWrap) activeWrap.classList.add('active');
-    }, 500);
-  }, 200);
-}
 
 </script>
 </body>
