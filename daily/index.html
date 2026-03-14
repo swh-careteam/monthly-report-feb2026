@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SWH Care Team | Daily Reports</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:#f4f6fb;--surface:#ffffff;--surface-2:#f0f4fa;--border:rgba(0,0,0,0.08);
+      --border-bright:rgba(255,255,255,0.15);--text:#0f1923;--text-2:#4a5a72;--text-3:#94a3b8;
+      --accent:#0891b2;--accent-dim:rgba(34,211,238,0.12);
+      --font-h:'Rajdhani',sans-serif;--font-b:'Exo 2',sans-serif;--font-m:'DM Mono',monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--font-b);background:var(--bg);min-height:100vh;color:var(--text);}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:linear-gradient(rgba(26,86,232,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(26,86,232,0.03) 1px,transparent 1px);background-size:40px 40px;}
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 80% 40% at 50% 0%,rgba(8,145,178,0.06) 0%,transparent 60%);}
+    .wrapper{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:clamp(1rem,2vw,2rem) clamp(1rem,3vw,2.5rem) 4rem;}
+    header{display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1.25rem;
+      background:var(--surface);border:1px solid var(--border-bright);border-radius:14px;margin-bottom:2rem;flex-wrap:wrap;gap:0.5rem;box-shadow:0 1px 3px rgba(0,0,0,0.06),0 4px 20px rgba(0,0,0,0.04);}
+    .back-link{display:flex;align-items:center;gap:0.4rem;color:var(--text-2);text-decoration:none;
+      font-family:var(--font-h);font-size:0.9rem;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s;}
+    .back-link:hover{color:var(--accent);}
+    .page-title{font-family:var(--font-h);font-size:1.15rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);}
+    h1{font-family:var(--font-h);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;
+      letter-spacing:0.05em;text-transform:uppercase;color:var(--text);margin-bottom:0.4rem;}
+    .page-sub{font-size:0.88rem;color:var(--text-2);margin-bottom:2rem;}
+    .report-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+    .report-card{display:flex;flex-direction:column;background:var(--surface);border-radius:12px;
+      border:1px solid var(--border);overflow:hidden;text-decoration:none;color:inherit;
+      transition:border-color 0.25s,box-shadow 0.25s,transform 0.2s;}
+    .report-card:hover{transform:translateY(-2px);border-color:rgba(8,145,178,0.4);box-shadow:0 4px 20px rgba(8,145,178,0.10);}
+    .card-stripe{height:3px;background:linear-gradient(90deg,#0891b2,#0369a1);}
+    .card-body{padding:1.1rem 1.25rem 1rem;flex:1;display:flex;flex-direction:column;gap:0.35rem;}
+    .card-tag{font-family:var(--font-m);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:#0891b2;}
+    .card-title{font-family:var(--font-h);font-size:1.05rem;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;color:var(--text);}
+    .card-date{font-size:0.78rem;color:var(--text-3);}
+    .card-footer{padding:0.65rem 1.25rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+    .card-arrow{font-size:0.78rem;color:var(--text-3);display:flex;align-items:center;gap:0.3rem;}
+    .empty-state{text-align:center;padding:3rem 1rem;color:var(--text-3);font-size:0.85rem;
+      border:1px dashed var(--border);border-radius:10px;line-height:1.8;}
+    .empty-state code{color:var(--accent);font-family:var(--font-m);}
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <header>
+    <a href="../index.html" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Hub
+    </a>
+    <div class="page-title">📅 Daily Reports</div>
+  </header>
+
+  <h1>Daily Reports</h1>
+  <p class="page-sub">Day-over-day queue and agent performance snapshots.</p>
+
+  <div class="report-grid" id="report-grid"></div>
+</div>
+<script>
+  // ── ADD DAILY REPORTS HERE ──
+  // { id: 'YYYY-MM-DD', path: 'YYYY-MM-DD.html', label: 'Optional override' }
+  const dailyReports = [
+    // { id: '2026-03-14', path: '2026-03-14.html' },
+  ];
+
+  function friendlyDate(iso) {
+    const [y,m,d] = iso.split('-').map(Number);
+    return new Date(y,m-1,d).toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  }
+
+  const grid = document.getElementById('report-grid');
+  const sorted = dailyReports.sort((a,b) => b.id.localeCompare(a.id));
+
+  if (sorted.length === 0) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      No daily reports published yet.<br>
+      Upload files as <code>daily/YYYY-MM-DD.html</code><br>
+      then add an entry to the registry in this file.
+    </div>`;
+  } else {
+    grid.innerHTML = sorted.map(r => `
+      <a href="${r.path}" class="report-card">
+        <div class="card-stripe"></div>
+        <div class="card-body">
+          <div class="card-tag">Daily Report</div>
+          <div class="card-title">${r.label || friendlyDate(r.id)}</div>
+          <div class="card-date">${r.id}</div>
+        </div>
+        <div class="card-footer">
+          <div class="card-arrow">View Report
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>`).join('');
+  }
+</script>
+</body>
+</html>

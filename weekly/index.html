@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SWH Care Team | Weekly Reports</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#f4f6fb;--surface:#ffffff;--border:rgba(0,0,0,0.08);--border-bright:rgba(0,0,0,0.13);
+      --text:#0f1923;--text-2:#4a5a72;--text-3:#94a3b8;--accent:#7c3aed;
+      --font-h:'Rajdhani',sans-serif;--font-b:'Exo 2',sans-serif;--font-m:'DM Mono',monospace;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:var(--font-b);background:var(--bg);min-height:100vh;color:var(--text);}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:linear-gradient(rgba(26,86,232,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(26,86,232,0.03) 1px,transparent 1px);background-size:40px 40px;}
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 80% 40% at 50% 0%,rgba(124,58,237,0.06) 0%,transparent 60%);}
+    .wrapper{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:clamp(1rem,2vw,2rem) clamp(1rem,3vw,2.5rem) 4rem;}
+    header{display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1.25rem;
+      background:var(--surface);border:1px solid var(--border-bright);border-radius:14px;margin-bottom:2rem;flex-wrap:wrap;gap:0.5rem;box-shadow:0 1px 3px rgba(0,0,0,0.06),0 4px 20px rgba(0,0,0,0.04);}
+    .back-link{display:flex;align-items:center;gap:0.4rem;color:var(--text-2);text-decoration:none;
+      font-family:var(--font-h);font-size:0.9rem;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s;}
+    .back-link:hover{color:var(--accent);}
+    .page-title{font-family:var(--font-h);font-size:1.15rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);}
+    h1{font-family:var(--font-h);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;
+      letter-spacing:0.05em;text-transform:uppercase;color:var(--text);margin-bottom:0.4rem;}
+    .page-sub{font-size:0.88rem;color:var(--text-2);margin-bottom:2rem;}
+    .report-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+    .report-card{display:flex;flex-direction:column;background:var(--surface);border-radius:12px;
+      border:1px solid var(--border);overflow:hidden;text-decoration:none;color:inherit;
+      transition:border-color 0.25s,box-shadow 0.25s,transform 0.2s;}
+    .report-card:hover{transform:translateY(-2px);border-color:rgba(124,58,237,0.35);box-shadow:0 4px 20px rgba(124,58,237,0.08);}
+    .card-stripe{height:3px;background:linear-gradient(90deg,#7c3aed,#5b21b6);}
+    .card-body{padding:1.1rem 1.25rem 1rem;flex:1;display:flex;flex-direction:column;gap:0.35rem;}
+    .card-tag{font-family:var(--font-m);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:#7c3aed;}
+    .card-title{font-family:var(--font-h);font-size:1.05rem;font-weight:600;letter-spacing:0.03em;text-transform:uppercase;color:var(--text);}
+    .card-date{font-size:0.78rem;color:var(--text-3);}
+    .card-footer{padding:0.65rem 1.25rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+    .card-arrow{font-size:0.78rem;color:var(--text-3);display:flex;align-items:center;gap:0.3rem;}
+    .empty-state{text-align:center;padding:3rem 1rem;color:var(--text-3);font-size:0.85rem;
+      border:1px dashed var(--border);border-radius:10px;line-height:1.8;}
+    .empty-state code{color:var(--accent);font-family:var(--font-m);}
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <header>
+    <a href="../index.html" class="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Hub
+    </a>
+    <div class="page-title">📊 Weekly Reports</div>
+  </header>
+
+  <h1>Weekly Reports</h1>
+  <p class="page-sub">7-day trend summaries with channel breakdowns.</p>
+
+  <div class="report-grid" id="report-grid"></div>
+</div>
+<script>
+  // ── ADD WEEKLY REPORTS HERE ──
+  // { id: 'YYYY-WXX', path: 'YYYY-WXX.html', label: 'Week of March 10, 2026' }
+  const weeklyReports = [
+    // { id: '2026-W11', path: '2026-W11.html', label: 'Week of Mar 9–13, 2026' },
+  ];
+
+  const grid = document.getElementById('report-grid');
+  const sorted = weeklyReports.sort((a,b) => b.id.localeCompare(a.id));
+
+  if (sorted.length === 0) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      No weekly reports published yet.<br>
+      Upload files as <code>weekly/YYYY-WXX.html</code><br>
+      then add an entry to the registry in this file.
+    </div>`;
+  } else {
+    grid.innerHTML = sorted.map(r => `
+      <a href="${r.path}" class="report-card">
+        <div class="card-stripe"></div>
+        <div class="card-body">
+          <div class="card-tag">Weekly Report</div>
+          <div class="card-title">${r.label || r.id}</div>
+          <div class="card-date">${r.id}</div>
+        </div>
+        <div class="card-footer">
+          <div class="card-arrow">View Report
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>`).join('');
+  }
+</script>
+</body>
+</html>
