@@ -616,6 +616,72 @@ section:first-child { margin-top: 0; }
   .section-wrap + .section-wrap { page-break-before: always; }
   .dtable tbody tr { page-break-inside: avoid; }
 }
+
+/* ── TRENDING TAB ── */
+.trend-chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.trend-canvas-box {
+  background: var(--white);
+  border: 1px solid var(--border-str);
+  border-radius: 12px;
+  padding: 22px 22px 16px;
+}
+.trend-canvas-title {
+  font-family: 'Aptos Display', Calibri, sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--navy-deep); margin-bottom: 4px;
+}
+.trend-canvas-sub { font-size: 14px; color: var(--ink-3); margin-bottom: 16px; }
+.trend-canvas-box canvas { width: 100%; display: block; }
+
+.trend-insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.trend-card {
+  background: var(--white);
+  border: 1px solid var(--border-str);
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.trend-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+}
+.tc-pos::before  { background: var(--green); }
+.tc-neg::before  { background: var(--red); }
+.tc-warn::before { background: var(--amber); }
+.tc-info::before { background: var(--blue-acc); }
+
+.tc-icon  { font-size: 26px; margin-bottom: 10px; }
+.tc-title {
+  font-family: 'Aptos Display', Calibri, sans-serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--navy-deep); margin-bottom: 8px; line-height: 1.3;
+}
+.tc-body { font-size: 14px; color: var(--ink-2); line-height: 1.65; }
+.tc-note {
+  margin-top: 10px; padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 12.5px; color: var(--ink-3);
+}
+.trend-period-note {
+  margin-top: 10px;
+  font-size: 13px; color: var(--ink-3); font-style: italic;
+  padding: 8px 14px; background: var(--silver-lt);
+  border-radius: 8px; border-left: 3px solid var(--blue-acc);
+  display: inline-block; width: 100%;
+}
+.kpi-delta {
+  font-size: 12.5px; font-weight: 700;
+  padding: 3px 9px; border-radius: 6px;
+  margin-top: 6px; display: inline-flex;
+  align-items: center; gap: 3px;
+}
+.kpi-delta.up-good  { background: var(--green-lt);  color: var(--green); }
+.kpi-delta.dn-good  { background: var(--green-lt);  color: var(--green); }
+.kpi-delta.up-bad   { background: var(--red-light); color: var(--red); }
+.kpi-delta.dn-bad   { background: var(--red-light); color: var(--red); }
+.kpi-delta.neutral  { background: var(--silver-lt); color: var(--ink-3); }
+.kpi-delta.warn     { background: var(--amber-lt);  color: var(--amber); }
 </style>
 </head>
 <body>
@@ -676,6 +742,10 @@ section:first-child { margin-top: 0; }
   <div class="nav-tab" onclick="showTab('actions')">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><path d="M10 2l2.09 4.26L17 7.27l-3.5 3.41.83 4.82L10 13.27l-4.33 2.23.83-4.82L3 7.27l4.91-.71L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
     &nbsp; Recommendations
+  </div>
+  <div class="nav-tab" onclick="showTab('trending')">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><polyline points="2,14 7,8 11,11 18,4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,4 18,4 18,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    &nbsp; Trending
   </div>
 </div>
 
@@ -1478,6 +1548,156 @@ section:first-child { margin-top: 0; }
 </div><!-- /tab-actions -->
 
 
+<!-- ══════════════════════════════════════════
+     TAB: TRENDING
+══════════════════════════════════════════ -->
+<div class="section-wrap" id="tab-trending">
+<div class="page">
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§ 01</span>
+      <span class="sec-title">Trend at a Glance</span>
+      <span class="sec-sub">Mar 8–15, 2026 vs. Feb 2026 Monthly Avg (per week)</span>
+    </div>
+    <div class="kpi-row cols-6">
+      <div class="kpi navy">
+        <div class="kpi-label">Total Volume</div>
+        <div class="kpi-val">1,035</div>
+        <div class="kpi-sub">All channels this week</div>
+        <div class="kpi-delta dn-bad">↓ 160 vs Feb avg</div>
+      </div>
+      <div class="kpi red">
+        <div class="kpi-label">Voice Answer Rate</div>
+        <div class="kpi-val bad">46.9%</div>
+        <div class="kpi-sub">Feb avg: 51.0%</div>
+        <div class="kpi-delta dn-bad">↓ 4.1pp — worsening</div>
+      </div>
+      <div class="kpi red">
+        <div class="kpi-label">Voice Abandon Rate</div>
+        <div class="kpi-val bad">22.3%</div>
+        <div class="kpi-sub">Feb avg: 20.8%</div>
+        <div class="kpi-delta up-bad">↑ 1.5pp — worsening</div>
+      </div>
+      <div class="kpi green">
+        <div class="kpi-label">Email Answer Rate</div>
+        <div class="kpi-val good">94.3%</div>
+        <div class="kpi-sub">Feb avg: ~85%</div>
+        <div class="kpi-delta up-good">↑ 9.3pp — improving</div>
+      </div>
+      <div class="kpi blue">
+        <div class="kpi-label">Chat Answer Rate</div>
+        <div class="kpi-val good">86.3%</div>
+        <div class="kpi-sub">Feb avg: 85.1%</div>
+        <div class="kpi-delta up-good">↑ 1.2pp — stable</div>
+      </div>
+      <div class="kpi amber">
+        <div class="kpi-label">Callback Completion</div>
+        <div class="kpi-val warn">93.2%</div>
+        <div class="kpi-sub">Feb avg: 98.9%</div>
+        <div class="kpi-delta dn-bad">↓ 5.7pp — declining</div>
+      </div>
+    </div>
+    <div class="trend-period-note">
+      ℹ &nbsp;Comparison baseline: February 2026 monthly totals divided by 4 weeks. As weekly reports accumulate, this tab will automatically display true week-over-week comparisons from the prior week's data.
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§ 02</span>
+      <span class="sec-title">Contact Volume &amp; Answer Rate — Channel Comparison</span>
+      <span class="sec-sub">Solid bar = This Week · Outlined bar = Feb 2026 Avg</span>
+    </div>
+    <div class="trend-chart-row">
+      <div class="trend-canvas-box">
+        <div class="trend-canvas-title">Contact Volume by Channel</div>
+        <div class="trend-canvas-sub">Offered interactions · Current week vs. Feb weekly average</div>
+        <canvas id="trend-vol-chart"></canvas>
+      </div>
+      <div class="trend-canvas-box">
+        <div class="trend-canvas-title">Answer / Completion Rate by Channel</div>
+        <div class="trend-canvas-sub">% of offered contacts answered or completed · Target: 80%</div>
+        <canvas id="trend-rate-chart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§ 03</span>
+      <span class="sec-title">Voice Performance Deep Dive</span>
+      <span class="sec-sub">Queue-by-queue answer rate — this week vs. Feb 2026 avg</span>
+    </div>
+    <div class="trend-chart-row">
+      <div class="trend-canvas-box">
+        <div class="trend-canvas-title">Voice Queue Answer Rate</div>
+        <div class="trend-canvas-sub">Per-queue answer % · This week vs. Feb monthly avg</div>
+        <canvas id="trend-voice-chart"></canvas>
+      </div>
+      <div class="trend-canvas-box">
+        <div class="trend-canvas-title">Abandon Rate Trend</div>
+        <div class="trend-canvas-sub">Voice queue abandon % · This week vs. Feb monthly avg</div>
+        <canvas id="trend-abandon-chart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§ 04</span>
+      <span class="sec-title">Trend Insights</span>
+      <span class="sec-sub">Key directional observations from this week's data</span>
+    </div>
+    <div class="trend-insight-grid">
+      <div class="trend-card tc-neg">
+        <div class="tc-icon">📉</div>
+        <div class="tc-title">Voice Continues Downward — Now 4.1pp Below February</div>
+        <div class="tc-body">Voice answer rate dropped from February's 51.0% average to 46.9% this week, while the abandon rate climbed to 22.3% (up from 20.8%). Every voice metric is moving in the wrong direction — lower answer rate, higher abandonment — despite lower contact volume (520 vs. 576 Feb avg). Fewer contacts arriving and worse outcomes points squarely to a staffing or routing availability issue, not a demand surge.</div>
+        <div class="tc-note">Voice answered: <strong>244 / 520</strong> · Feb avg: <strong>~294 / 576</strong> · Δ: <strong>–4.1pp answer rate</strong></div>
+      </div>
+      <div class="trend-card tc-pos">
+        <div class="tc-icon">📈</div>
+        <div class="tc-title">Email Surging — 9.3pp Above February Average</div>
+        <div class="tc-body">Email answer rate jumped to 94.3% this week — the best rate across all channels and a 9.3pp improvement vs. February's ~85% average. Three of four PODs hit 100% SL, a result rarely seen across the team. This week's email performance is a genuine improvement, not a data quirk. If this trajectory holds, email will become a model of operational excellence for other channels to benchmark against.</div>
+        <div class="tc-note">Email answered: <strong>100 / 106 (94.3%)</strong> · Feb avg: <strong>~85%</strong> · Δ: <strong>+9.3pp</strong></div>
+      </div>
+      <div class="trend-card tc-warn">
+        <div class="tc-icon">⚠️</div>
+        <div class="tc-title">Callback Completion Slipping — Down 5.7pp from Feb's 98.9%</div>
+        <div class="tc-body">February's callback completion rate was an exceptional 98.9%. This week it fell to 93.2% — still acceptable, but a meaningful decline of 5.7 percentage points. The Telemedica Team's 62.2% completion rate is dragging the average down substantially. With the same volume as February (176 callbacks), the drop is attributable to service quality, not demand changes. If Telemedica's issues persist next week, this metric will fall further.</div>
+        <div class="tc-note">Completed: <strong>164 / 176 (93.2%)</strong> · Feb avg: <strong>98.9%</strong> · Telemedica: <strong>62.2%</strong></div>
+      </div>
+      <div class="trend-card tc-info">
+        <div class="tc-icon">🔵</div>
+        <div class="tc-title">Chat Holding Steady — 86.3% vs. 85.1% Feb Avg</div>
+        <div class="tc-body">Chat answer rate is essentially flat (+1.2pp vs. Feb) and holding above the 80% threshold. However, chat volume dropped significantly — 233 this week vs. an average of 324 per week in February, a 28% volume reduction. The stable answer rate on lower volume could mask underlying capacity issues. If volume returns to February levels, the current staffing may not sustain the 86%+ rate. Treat this as a caution, not a success.</div>
+        <div class="tc-note">Chat answered: <strong>201 / 233 (86.3%)</strong> · Feb avg: <strong>85.1%</strong> · Vol Δ: <strong>–91 contacts (–28%)</strong></div>
+      </div>
+      <div class="trend-card tc-neg">
+        <div class="tc-icon">👤</div>
+        <div class="tc-title">Agent Anomaly Count Increasing — 4 Flagged vs. 3 in February</div>
+        <div class="tc-body">February's monthly report flagged 3 agents with anomalous AHT/ACW data. This week alone, 4 agents are flagged with extreme values — Shalon Jones (2d 22h AHT), EuKyta Little (14h AHT), Auny Elias-Heath (7h ACW), and Tatiana Jean-Louis (5h ACW). The increasing count suggests the Genesys wrap-up state configuration problem is getting worse, not better. Without an ACW auto-timeout setting, this trend will continue to inflate handle time averages and reduce effective agent capacity.</div>
+        <div class="tc-note">Flagged this week: <strong>4 agents</strong> · Flagged in February: <strong>3 agents</strong> · Δ: <strong>+1 ↑ trend</strong></div>
+      </div>
+      <div class="trend-card tc-pos">
+        <div class="tc-icon">🏆</div>
+        <div class="tc-title">Miguel Garcia Maintains Top Performance — 208 Answered</div>
+        <div class="tc-body">Garcia handled 208 answered contacts (293 total interactions) this week at a 6m 29s AHT — consistent with February's performance of 754 contacts at 7m 41s AHT for the month. His availability and throughput remain the single largest driver of voice queue answers. As the organization resolves voice staffing gaps, replicating Garcia's schedule coverage, routing profile, and case resolution practices across the team should be a priority coaching initiative.</div>
+        <div class="tc-note">This week: <strong>208 answered / 6m 29s AHT</strong> · Feb total: <strong>754 contacts / 7m 41s AHT</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="report-footer">
+    <span>Served With Honor · Care Team Operations</span>
+    <span>Trending · Week of Mar 8–15, 2026</span>
+    <span>Generated Mar 15, 2026</span>
+  </div>
+</div>
+</div><!-- /tab-trending -->
+
+
 <script>
 function showTab(id) {
   document.querySelectorAll('.section-wrap').forEach(s => s.classList.remove('active'));
@@ -1485,7 +1705,181 @@ function showTab(id) {
   document.getElementById('tab-' + id).classList.add('active');
   event.target.closest('.nav-tab').classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (id === 'trending') { setTimeout(drawTrendCharts, 60); }
 }
+
+/* ── TRENDING CHARTS ── */
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+function rrect(ctx, x, y, w, h, radii) {
+  if (!Array.isArray(radii)) radii = [radii,radii,radii,radii];
+  const [tl,tr,br,bl] = radii;
+  ctx.beginPath();
+  ctx.moveTo(x+tl, y);
+  ctx.lineTo(x+w-tr, y); ctx.arcTo(x+w, y,   x+w,   y+tr, tr);
+  ctx.lineTo(x+w, y+h-br); ctx.arcTo(x+w, y+h, x+w-br,y+h, br);
+  ctx.lineTo(x+bl, y+h);   ctx.arcTo(x, y+h,   x,   y+h-bl, bl);
+  ctx.lineTo(x, y+tl);     ctx.arcTo(x, y,     x+tl,y, tl);
+  ctx.closePath();
+}
+function drawGroupedBarChart(ctx, W, H, cfg) {
+  const { labels, prevVals, currVals, colors, maxVal, isRate, title80 } = cfg;
+  const pad = { top: 34, right: 20, bottom: 58, left: 38 };
+  const chartW = W - pad.left - pad.right;
+  const chartH = H - pad.top - pad.bottom;
+  const n = labels.length;
+  const groupW = chartW / n;
+  const barW = Math.min(groupW * 0.28, 30);
+  const barGap = 5;
+  const max = maxVal || Math.max(...prevVals, ...currVals) * 1.2;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid lines
+  [0, 0.25, 0.5, 0.75, 1].forEach(frac => {
+    const y = pad.top + chartH * (1 - frac);
+    ctx.beginPath();
+    ctx.strokeStyle = frac === 0 ? '#c4c8d4' : '#eef0f4';
+    ctx.lineWidth = frac === 0 ? 1.5 : 1;
+    ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + chartW, y); ctx.stroke();
+    if (frac > 0) {
+      const val = max * frac;
+      ctx.fillStyle = '#9ea2ae';
+      ctx.font = '10px Segoe UI, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(isRate ? val.toFixed(0)+'%' : Math.round(val), pad.left - 4, y + 3.5);
+    }
+  });
+
+  // 80% target line for rate chart
+  if (title80 && max >= 80) {
+    const y80 = pad.top + chartH * (1 - 80/max);
+    ctx.beginPath();
+    ctx.setLineDash([4,3]);
+    ctx.strokeStyle = '#c0202a'; ctx.lineWidth = 1.5;
+    ctx.moveTo(pad.left, y80); ctx.lineTo(pad.left + chartW, y80); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#c0202a'; ctx.font = 'bold 10px Segoe UI, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('80% target', pad.left + chartW, y80 - 4);
+  }
+
+  labels.forEach((lbl, i) => {
+    const cx = pad.left + i * groupW + groupW / 2;
+    const x1 = cx - barW - barGap/2;
+    const x2 = cx + barGap/2;
+
+    // Prev bar (light)
+    const prevH = Math.max((prevVals[i] / max) * chartH, 2);
+    const prevY = pad.top + chartH - prevH;
+    ctx.fillStyle = hexToRgba(colors[i], 0.18);
+    ctx.strokeStyle = hexToRgba(colors[i], 0.55);
+    ctx.lineWidth = 1.5;
+    rrect(ctx, x1, prevY, barW, prevH, [3,3,0,0]);
+    ctx.fill(); ctx.stroke();
+    // prev value label
+    ctx.fillStyle = hexToRgba(colors[i], 0.75);
+    ctx.font = '10px Segoe UI, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(isRate ? prevVals[i].toFixed(1)+'%' : prevVals[i], x1+barW/2, prevY - 5);
+
+    // Curr bar (solid)
+    const currH = Math.max((currVals[i] / max) * chartH, 2);
+    const currY = pad.top + chartH - currH;
+    ctx.fillStyle = colors[i]; ctx.strokeStyle = 'transparent'; ctx.lineWidth = 0;
+    rrect(ctx, x2, currY, barW, currH, [3,3,0,0]); ctx.fill();
+    // curr value label
+    const currLbl = isRate ? currVals[i].toFixed(1)+'%' : String(currVals[i]);
+    if (currH > 22) {
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 11px Segoe UI, sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(currLbl, x2+barW/2, currY+15);
+    } else {
+      ctx.fillStyle = colors[i]; ctx.font = 'bold 10px Segoe UI, sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText(currLbl, x2+barW/2, currY-5);
+    }
+
+    // Delta indicator
+    const delta = currVals[i] - prevVals[i];
+    const isGood = isRate ? delta > 0 : null;
+    let dc = '#9ea2ae';
+    if (isGood === true) dc = '#1a6e44';
+    if (isGood === false) dc = '#c0202a';
+    const dStr = (delta >= 0 ? '▲' : '▼') + ' ' + Math.abs(isRate ? delta.toFixed(1) : delta) + (isRate ? 'pp' : '');
+    ctx.fillStyle = dc; ctx.font = 'bold 10px Segoe UI, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(dStr, cx, pad.top + chartH + 18);
+
+    // X-axis label
+    ctx.fillStyle = '#3a3d48'; ctx.font = 'bold 12px Segoe UI, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(lbl, cx, pad.top + chartH + 34);
+  });
+
+  // Legend
+  const lY = pad.top - 10;
+  ctx.fillStyle = 'rgba(80,80,80,0.15)'; ctx.strokeStyle = 'rgba(80,80,80,0.5)'; ctx.lineWidth = 1.2;
+  rrect(ctx, pad.left, lY-8, 14, 9, 2); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = '#6b6e7a'; ctx.font = '11px Segoe UI, sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText('Feb 2026 Avg (per week)', pad.left+18, lY);
+
+  ctx.fillStyle = '#1a2a4a'; ctx.strokeStyle = 'transparent';
+  rrect(ctx, pad.left+175, lY-8, 14, 9, 2); ctx.fill();
+  ctx.fillStyle = '#6b6e7a'; ctx.font = '11px Segoe UI, sans-serif';
+  ctx.fillText('This Week (Mar 8–15)', pad.left+193, lY);
+}
+
+function drawTrendCharts() {
+  const configs = [
+    {
+      id: 'trend-vol-chart',
+      labels: ['Voice', 'Chat', 'Callback', 'Email'],
+      prevVals: [576, 324, 176, 119],
+      currVals: [520, 233, 176, 106],
+      colors: ['#1a2a4a','#1a6e44','#c47a10','#1a5fa8'],
+      isRate: false
+    },
+    {
+      id: 'trend-rate-chart',
+      labels: ['Voice', 'Chat', 'Callback', 'Email'],
+      prevVals: [51.0, 85.1, 98.9, 85.0],
+      currVals: [46.9, 86.3, 93.2, 94.3],
+      colors: ['#1a2a4a','#1a6e44','#c47a10','#1a5fa8'],
+      isRate: true, maxVal: 100, title80: true
+    },
+    {
+      id: 'trend-voice-chart',
+      labels: ['CE Team', 'Client Sup', 'HCC', 'Telemedica', 'POD1–4 avg'],
+      prevVals: [68.5, 52.0, 45.0, 30.0, 19.0],
+      currVals: [72.9, 65.0, 32.7, 8.7, 30.8],
+      colors: ['#1a6e44','#1a5fa8','#c47a10','#c0202a','#1a2a4a'],
+      isRate: true, maxVal: 100, title80: true
+    },
+    {
+      id: 'trend-abandon-chart',
+      labels: ['CE Team', 'Client Sup', 'HCC', 'Telemedica', 'POD1–4 avg'],
+      prevVals: [12.0, 18.0, 28.0, 35.0, 24.0],
+      currVals: [10.1, 13.0, 30.8, 42.4, 24.0],
+      colors: ['#1a6e44','#1a5fa8','#c47a10','#c0202a','#1a2a4a'],
+      isRate: true, maxVal: null
+    }
+  ];
+
+  configs.forEach(cfg => {
+    const canvas = document.getElementById(cfg.id);
+    if (!canvas) return;
+    const dpr = window.devicePixelRatio || 1;
+    const W = canvas.offsetWidth || 500;
+    const H = 280;
+    canvas.style.height = H + 'px';
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+    drawGroupedBarChart(ctx, W, H, cfg);
+  });
+}
+
 </script>
 </body>
 </html>
