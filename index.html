@@ -404,6 +404,10 @@
   <div class="section-label"><span>Recent Daily Reports</span></div>
   <div class="report-grid" id="recent-daily"></div>
 
+  <!-- RECENT WEEKLY -->
+  <div class="section-label"><span>Recent Weekly Reports</span></div>
+  <div class="report-grid" id="recent-weekly"></div>
+
   <!-- RECENT MONTHLY -->
   <div class="section-label"><span>Monthly Reports</span></div>
   <div class="report-grid" id="recent-monthly"></div>
@@ -443,6 +447,7 @@
   const reports = [
     { type: 'monthly', id: '2026-02', path: 'monthly/2026-02.html', label: 'February 2026' },
     // { type: 'daily', id: '2026-03-14', path: 'daily/2026-03-14.html', label: '' },
+    { type: 'weekly', id: '2026-03-15', path: 'weekly/2026-03-15.html', label: 'Week of Mar 8–15, 2026' },
   ];
 
   const today = toISODate(new Date());
@@ -519,7 +524,26 @@
       </a>`).join('');
   }
   document.getElementById('monthly-count').textContent = `${monthlyReports.length} report${monthlyReports.length !== 1 ? 's' : ''} available`;
-  document.getElementById('weekly-count').textContent = `${reports.filter(r=>r.type==='weekly').length} reports available`;
+
+  const weeklyReports = reports.filter(r => r.type === 'weekly').sort((a,b) => b.id.localeCompare(a.id)).slice(0, 6);
+  const weeklyEl = document.getElementById('recent-weekly');
+  if (weeklyReports.length === 0) {
+    weeklyEl.innerHTML = `<div class="empty-state">No weekly reports published yet.<br>Upload <code>weekly/YYYY-MM-DD.html</code> and add it to the registry above.</div>`;
+  } else {
+    weeklyEl.innerHTML = weeklyReports.map(r => `
+      <a href="${r.path}" class="report-card weekly">
+        <div class="card-stripe"></div>
+        <div class="card-body">
+          <div class="card-tag">Weekly Report</div>
+          <div class="card-title">${r.label || friendlyDate(r.id)}</div>
+          <div class="card-date">${r.id}</div>
+        </div>
+        <div class="card-footer">
+          <div class="card-arrow">View Report <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </a>`).join('');
+  }
+  document.getElementById('weekly-count').textContent = `${weeklyReports.length} report${weeklyReports.length !== 1 ? 's' : ''} available`;
   document.getElementById('footer-ts').textContent = 'Updated: ' + new Date().toLocaleString('en-US', { dateStyle:'medium', timeStyle:'short' });
 </script>
 </body>
