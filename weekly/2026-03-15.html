@@ -48,6 +48,31 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── BACK TO HUB BUTTON ── */
+.btn-hub {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  background: var(--silver-lt);
+  color: var(--navy-deep);
+  font-family: 'Aptos', Calibri, 'Segoe UI', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 1.5px solid var(--border-str);
+  transition: background .15s, border-color .15s;
+  white-space: nowrap;
+}
+.btn-hub:hover {
+  background: var(--silver);
+  border-color: var(--navy);
+}
+.btn-hub svg { flex-shrink: 0; }
+
 /* ── HEADER ── */
 .header {
   background: var(--white);
@@ -111,7 +136,7 @@ body {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: 24px;
   padding-left: 36px;
   border-left: 1px solid var(--border);
   height: 100%;
@@ -702,6 +727,10 @@ section:first-child { margin-top: 0; }
       <div class="header-eyebrow">Care Team Operations &nbsp;·&nbsp; Genesys Cloud CX &nbsp;·&nbsp; Voice · Email · Chat · Callback</div>
     </div>
     <div class="header-right">
+      <a href="https://swh-careteam.github.io/performance-reports/" class="btn-hub">
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M9 11.5L4.5 7 9 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Reporting Hub
+      </a>
       <div class="hdr-period-block">
         <div class="hdr-period">Reporting Period</div>
         <div class="hdr-date">Mar 8 – 15, 2026</div>
