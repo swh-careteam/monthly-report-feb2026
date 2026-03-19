@@ -116,16 +116,16 @@
     }
     .dashboard-btn {
       display: flex; align-items: center; gap: 0.5rem;
-      background: var(--navy); color: #fff;
+      background: #197BBD; color: #fff;
       border: none; border-radius: 8px;
       padding: 0.45rem 1rem;
       font-family: 'Aptos', Calibri, sans-serif; font-weight: 700; font-size: 0.85rem;
       letter-spacing: 0.06em; text-transform: uppercase;
       text-decoration: none; cursor: pointer;
       transition: background 0.2s, box-shadow 0.2s;
-      box-shadow: 0 2px 8px rgba(26,42,74,0.2);
+      box-shadow: 0 2px 8px rgba(25,123,189,0.3);
     }
-    .dashboard-btn:hover { background: var(--navy-mid); box-shadow: 0 4px 16px rgba(26,42,74,0.3); }
+    .dashboard-btn:hover { background: #1568a0; box-shadow: 0 4px 16px rgba(25,123,189,0.4); }
 
     /* ── HERO ── */
     .hero {
@@ -164,57 +164,6 @@
     .section-label::after {
       content: ''; flex: 1; height: 1px;
       background: linear-gradient(90deg, var(--border-str), transparent);
-    }
-
-    /* ── FEATURED (TODAY) ── */
-    .featured-card {
-      display: flex; align-items: stretch;
-      background: var(--white);
-      border: 1px solid var(--border-str);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(26,95,168,0.07);
-      transition: box-shadow 0.3s, border-color 0.3s;
-      text-decoration: none; color: inherit;
-    }
-    .featured-card:hover {
-      border-color: rgba(26,95,168,0.4);
-      box-shadow: 0 4px 24px rgba(26,95,168,0.10);
-    }
-    .featured-accent {
-      width: 5px; flex-shrink: 0;
-      background: linear-gradient(180deg, var(--blue-acc), var(--navy));
-    }
-    .featured-body {
-      padding: 1.5rem 2rem; flex: 1;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 1rem; flex-wrap: wrap;
-    }
-    .featured-tag {
-      font-size: 0.68rem; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--blue-acc);
-      font-weight: 700; margin-bottom: 0.4rem;
-    }
-    .featured-title {
-      font-family: 'Aptos Display', Calibri, sans-serif; font-size: 1.4rem; font-weight: 700;
-      letter-spacing: 0.02em; text-transform: uppercase; color: var(--navy-deep);
-    }
-    .featured-date {
-      font-size: 0.82rem; color: var(--ink-3); margin-top: 0.3rem;
-    }
-    .featured-right { display: flex; align-items: center; gap: 0.6rem; }
-    .view-btn {
-      display: flex; align-items: center; gap: 0.4rem;
-      background: var(--blue-lt); color: var(--blue-acc);
-      border: 1px solid rgba(26,95,168,0.25);
-      padding: 0.55rem 1.1rem; border-radius: 8px;
-      font-family: 'Aptos', Calibri, sans-serif; font-size: 0.85rem; font-weight: 700;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      text-decoration: none; transition: background 0.2s, border-color 0.2s;
-    }
-    .view-btn:hover { background: #d1e3f5; border-color: rgba(26,95,168,0.4); }
-    .no-report {
-      font-size: 0.85rem; color: var(--ink-4); font-style: italic;
     }
 
     /* ── REPORT GRID ── */
@@ -396,10 +345,6 @@
     </a>
   </div>
 
-  <!-- TODAY'S REPORT (FEATURED) -->
-  <div class="section-label"><span>Today's Report</span></div>
-  <div id="today-featured"></div>
-
   <!-- RECENT DAILY -->
   <div class="section-label"><span>Recent Daily Reports</span></div>
   <div class="report-grid" id="recent-daily"></div>
@@ -451,39 +396,6 @@
   ];
 
   const today = toISODate(new Date());
-  const todayReport = reports.find(r => r.type === 'daily' && r.id === today);
-  const featuredEl = document.getElementById('today-featured');
-  if (todayReport) {
-    featuredEl.innerHTML = `
-      <a href="${todayReport.path}" class="featured-card">
-        <div class="featured-accent"></div>
-        <div class="featured-body">
-          <div class="featured-left">
-            <div class="featured-tag">📅 Daily Report — Today</div>
-            <div class="featured-title">Care Team · ${friendlyDate(today)}</div>
-            <div class="featured-date">Published today</div>
-          </div>
-          <div class="featured-right">
-            <a href="${todayReport.path}" class="view-btn">
-              View Report
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </div>
-      </a>`;
-  } else {
-    featuredEl.innerHTML = `
-      <div class="featured-card" style="cursor:default; border-color:var(--border);">
-        <div class="featured-accent" style="background:var(--border);"></div>
-        <div class="featured-body">
-          <div class="featured-left">
-            <div class="featured-tag" style="color:var(--ink-4);">📅 Daily Report — Today</div>
-            <div class="featured-title" style="color:var(--ink-3);">${friendlyDate(today)}</div>
-            <div class="no-report">No report published yet for today.</div>
-          </div>
-        </div>
-      </div>`;
-  }
 
   const dailyReports = reports.filter(r => r.type === 'daily').sort((a,b) => b.id.localeCompare(a.id)).slice(0, 6);
   const dailyEl = document.getElementById('recent-daily');
