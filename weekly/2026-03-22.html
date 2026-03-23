@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Served With Honor — Weekly Performance Report · Week of Mar 16–22, 2026</title>
+<style>
+@font-face { font-family: 'Aptos'; src: local('Aptos'), local('Aptos-Regular'); font-weight: 400; }
+@font-face { font-family: 'Aptos'; src: local('Aptos Bold'), local('Aptos-Bold'); font-weight: 700; }
+@font-face { font-family: 'Aptos'; src: local('Aptos Light'), local('Aptos-Light'); font-weight: 300; }
+@font-face { font-family: 'Aptos Display'; src: local('Aptos Display'), local('Aptos-Display'); font-weight: 400; }
+@font-face { font-family: 'Aptos Display'; src: local('Aptos Display Bold'), local('Aptos-Display-Bold'); font-weight: 700; }
+
+:root {
+  --navy:       #1a2a4a;
+  --navy-deep:  #0f1c33;
+  --navy-mid:   #243559;
+  --red:        #c0202a;
+  --red-light:  #fbeaea;
+  --red-mid:    #a01820;
+  --silver:     #d6dae2;
+  --silver-lt:  #eef0f4;
+  --white:      #ffffff;
+  --bg:         #f4f5f8;
+  --ink:        #1a1c22;
+  --ink-2:      #3a3d48;
+  --ink-3:      #6b6e7a;
+  --ink-4:      #9ea2ae;
+  --border:     #dde0e8;
+  --border-str: #c4c8d4;
+  --amber:      #c47a10;
+  --amber-lt:   #fef4e0;
+  --green:      #1a6e44;
+  --green-lt:   #e3f4ec;
+  --blue-acc:   #1a5fa8;
+  --blue-lt:    #e6eef9;
+  --stripe:     rgba(26,42,74,0.025);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Aptos', Calibri, 'Segoe UI', sans-serif;
+  background: var(--bg); color: var(--ink);
+  font-size: 14px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+.header { background: var(--white); border-bottom: 1px solid var(--border); }
+.header-inner {
+  display: flex; align-items: center; gap: 0;
+  padding: 0 56px; height: 80px;
+  max-width: 1340px; margin: 0 auto;
+}
+.header-logo {
+  display: flex; align-items: center;
+  padding-right: 36px; border-right: 1px solid var(--border);
+  height: 100%; flex-shrink: 0;
+}
+.header-logo-text {
+  font-family: 'Aptos Display', Calibri, sans-serif;
+  font-size: 17px; font-weight: 700; color: var(--navy-deep);
+  letter-spacing: -.01em;
+}
+.header-logo-sub { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--red); margin-top: 2px; }
+.header-divider-block {
+  flex: 1; padding: 0 36px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.header-title {
+  font-family: 'Aptos Display', Calibri, sans-serif;
+  font-size: 18px; font-weight: 700; color: var(--navy-deep);
+  letter-spacing: -.01em; line-height: 1.2;
+}
+.header-eyebrow { font-size: 13px; color: var(--ink-3); margin-top: 2px; font-weight: 400; }
+.header-right {
+  display: flex; align-items: center; gap: 24px;
+  padding-left: 36px; border-left: 1px solid var(--border); height: 100%;
+}
+.btn-hub {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 11px; background: var(--silver-lt); color: var(--navy-deep);
+  font-family: 'Aptos', Calibri, 'Segoe UI', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; text-decoration: none;
+  border-radius: 5px; border: 1.5px solid var(--border-str);
+  transition: background .15s, border-color .15s; white-space: nowrap;
+}
+.btn-hub:hover { background: var(--silver); border-color: var(--navy); }
+.btn-hub svg { flex-shrink: 0; }
+.hdr-period-block { text-align: right; }
+.hdr-period { font-size: 12px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 3px; }
+.hdr-date { font-family: 'Aptos Display', Calibri, sans-serif; font-size: 19px; font-weight: 700; color: var(--navy-deep); line-height: 1.1; }
+.hdr-gen { margin-top: 3px; font-size: 12px; color: var(--ink-4); }
+
+/* ── NAV TABS ── */
+.nav-tabs { background: var(--navy-deep); display: flex; padding: 0 56px; gap: 0; border-radius: 0 0 12px 12px; }
+.nav-tab {
+  padding: 13px 22px; font-size: 13px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: rgba(255,255,255,.45); cursor: pointer;
+  border-bottom: 3px solid transparent; transition: color .15s, border-color .15s, background .15s;
+  white-space: nowrap; user-select: none; display: inline-flex; align-items: center; gap: 7px;
+}
+.nav-tab:hover { color: rgba(255,255,255,.8); background: rgba(255,255,255,.04); }
+.nav-tab.active { color: white; border-bottom-color: var(--red); }
+
+/* ── SECTIONS ── */
+.section-wrap { display: none; }
+.section-wrap.active { display: block; }
+.page { max-width: 1340px; margin: 0 auto; padding: 40px 56px 72px; }
+section { margin-top: 44px; }
+section:first-child { margin-top: 0; }
+
+.sec-head {
+  display: flex; align-items: baseline; gap: 14px;
+  padding-bottom: 10px; margin-bottom: 18px; border-bottom: 2px solid var(--navy);
+}
+.sec-num { font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--red); flex-shrink: 0; }
+.sec-title { font-family: 'Aptos Display', Calibri, sans-serif; font-size: 21px; font-weight: 700; color: var(--navy-deep); }
+.sec-sub { margin-left: auto; font-size: 13px; color: var(--ink-3); font-style: italic; }
+
+/* ── MEDIA SUMMARY CARDS ── */
+.media-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.media-card {
+  background: var(--white); border-radius: 12px;
+  border: 1px solid var(--border-str); overflow: hidden;
+}
+.media-card-top { height: 4px; }
+.media-card-top.navy  { background: var(--navy); }
+.media-card-top.blue  { background: var(--blue-acc); }
+.media-card-top.green { background: var(--green); }
+.media-card-top.amber { background: var(--amber); }
+.media-card-body { padding: 20px 18px 18px; }
+.mc-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 6px; }
+.mc-vol {
+  font-family: 'Aptos Display', Calibri, sans-serif;
+  font-size: 38px; font-weight: 700; color: var(--navy-deep);
+  line-height: 1; letter-spacing: -.02em; margin-bottom: 14px;
+}
+.mc-stat { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-top: 1px solid var(--border); }
+.mc-stat-label { font-size: 13px; color: var(--ink-3); }
+.mc-stat-val { font-size: 14px; font-weight: 700; color: var(--navy-deep); }
+.mc-stat-val.bad  { color: var(--red); }
+.mc-stat-val.warn { color: var(--amber); }
+.mc-stat-val.good { color: var(--green); }
+
+/* ── KPI STRIP ── */
+.kpi-row { display: grid; gap: 2px; background: var(--border-str); border: 1px solid var(--border-str); border-radius: 12px; overflow: hidden; }
+.kpi-row.cols-5 { grid-template-columns: repeat(5, 1fr); }
+.kpi-row.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.kpi-row.cols-6 { grid-template-columns: repeat(6, 1fr); }
+.kpi-row.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.kpi { background: var(--white); padding: 20px 18px 16px; position: relative; }
+.kpi::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.kpi.navy::before  { background: var(--navy); }
+.kpi.red::before   { background: var(--red); }
+.kpi.amber::before { background: var(--amber); }
+.kpi.green::before { background: var(--green); }
+.kpi.blue::before  { background: var(--blue-acc); }
+.kpi.silver::before{ background: var(--ink-3); }
+.kpi-label { font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; }
+.kpi-val { font-family: 'Aptos Display', Calibri, sans-serif; font-size: 36px; font-weight: 700; line-height: 1; color: var(--navy-deep); letter-spacing: -.02em; }
+.kpi-val.bad  { color: var(--red); }
+.kpi-val.warn { color: var(--amber); }
+.kpi-val.good { color: var(--green); }
+.kpi-sub { font-size: 13px; color: var(--ink-3); margin-top: 6px; }
+.kpi-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 6px; margin-top: 5px; }
+.kpi-badge.red   { background: var(--red-light); color: var(--red); }
+.kpi-badge.amber { background: var(--amber-lt);  color: var(--amber); }
+.kpi-badge.green { background: var(--green-lt);  color: var(--green); }
+.kpi-badge.navy  { background: var(--silver-lt); color: var(--navy); }
+.kpi-delta { font-size: 12px; margin-top: 4px; color: var(--ink-4); }
+
+/* ── NARRATIVE ── */
+.narrative { background: var(--navy-deep); padding: 28px 36px 32px; border-radius: 12px; overflow: hidden; margin-top: 24px; }
+.narr-head { font-family: 'Aptos Display', Calibri, sans-serif; font-size: 21px; font-weight: 700; color: var(--white); margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.narr-head em { color: #e8626a; font-style: italic; }
+.narr-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.narr-col p { font-size: 15px; color: rgba(255,255,255,.68); line-height: 1.75; margin-bottom: 10px; }
+.narr-col p strong { color: rgba(255,255,255,.92); font-weight: 700; }
+.flags { display: flex; flex-direction: column; }
+.flag { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.065); font-size: 14.5px; color: rgba(255,255,255,.65); line-height: 1.5; }
+.flag:last-child { border-bottom: none; }
+.fdot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; flex-shrink: 0; margin-top: 2px; }
+.fdot.crit { background: var(--red); color: white; }
+.fdot.warn { background: var(--amber); color: white; }
+.fdot.good { background: var(--green); color: white; }
+.fdot.info { background: var(--blue-acc); color: white; }
+.flag strong { color: rgba(255,255,255,.9); }
+
+/* ── DATA TABLE ── */
+.dtable-wrap { border-radius: 12px; overflow: hidden; border: 1px solid var(--border-str); margin-top: 20px; }
+.dtable { width: 100%; border-collapse: collapse; background: var(--white); }
+.dtable thead tr { background: var(--navy); }
+.dtable thead th { padding: 10px 13px; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.65); text-align: right; white-space: nowrap; }
+.dtable thead th:first-child { text-align: left; }
+.dtable tbody tr { border-bottom: 1px solid var(--border); }
+.dtable tbody tr:nth-child(even) { background: var(--stripe); }
+.dtable tbody tr:hover { background: var(--silver-lt); }
+.dtable tbody td { padding: 12px 14px; text-align: right; font-size: 14px; color: var(--ink-2); white-space: nowrap; vertical-align: middle; }
+.dtable tbody td:first-child { text-align: left; font-weight: 500; }
+.dtable tfoot td { padding: 12px 14px; text-align: right; font-size: 14px; font-weight: 700; background: var(--silver-lt); border-top: 2px solid var(--navy); color: var(--navy-deep); }
+.dtable tfoot td:first-child { text-align: left; }
+
+/* ── COMPACT AGENT TABLE ── */
+.dtable.compact thead th { padding: 8px 11px; font-size: 11px; }
+.dtable.compact tbody td { padding: 9px 12px; font-size: 13px; }
+.dtable.compact tfoot td { padding: 9px 12px; font-size: 13px; }
+.rank { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; font-size: 11px; font-weight: 700; margin-right: 6px; }
+.rank.g1 { background: #ffd700; color: #5a4000; }
+.rank.g2 { background: var(--silver); color: var(--ink-2); }
+.rank.g3 { background: #cd7f32; color: white; }
+.rank.gn { background: var(--silver-lt); color: var(--ink-3); }
+.anomaly-row { opacity: 0.72; }
+
+/* ── STATUS PILLS ── */
+.pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.pill.green { background: var(--green-lt); color: var(--green); }
+.pill.amber { background: var(--amber-lt); color: var(--amber); }
+.pill.red   { background: var(--red-light); color: var(--red); }
+.pill.navy  { background: var(--blue-lt); color: var(--blue-acc); }
+
+/* ── NOTE BOX ── */
+.note-box { background: var(--blue-lt); border: 1px solid var(--blue-acc); border-radius: 8px; padding: 12px 16px; margin-top: 20px; font-size: 13px; color: var(--blue-acc); display: flex; gap: 10px; align-items: flex-start; }
+.note-box svg { flex-shrink: 0; margin-top: 1px; }
+
+/* ── RECOMMENDATION CARDS ── */
+.rec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.rec-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border-str); overflow: hidden; }
+.rec-card-top { height: 4px; }
+.rec-card-top.urgent { background: var(--red); }
+.rec-card-top.high   { background: var(--amber); }
+.rec-card-top.med    { background: var(--blue-acc); }
+.rec-card-top.opp    { background: var(--green); }
+.rec-card-top.info   { background: var(--ink-3); }
+.rec-card-body { padding: 20px; }
+.rc-priority { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; margin-bottom: 10px; }
+.rc-priority.urgent { background: var(--red-light); color: var(--red); }
+.rc-priority.high   { background: var(--amber-lt); color: var(--amber); }
+.rc-priority.med    { background: var(--blue-lt); color: var(--blue-acc); }
+.rc-priority.opp    { background: var(--green-lt); color: var(--green); }
+.rc-priority.info   { background: var(--silver-lt); color: var(--ink-3); }
+.rc-title { font-family: 'Aptos Display', Calibri, sans-serif; font-size: 16px; font-weight: 700; color: var(--navy-deep); margin-bottom: 10px; line-height: 1.3; }
+.rc-body { font-size: 13.5px; color: var(--ink-2); line-height: 1.65; }
+.rc-stat { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 12px; font-weight: 700; color: var(--ink-3); }
+
+/* ── TREND CHARTS ── */
+.trend-chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.trend-canvas-box { background: var(--white); border: 1px solid var(--border-str); border-radius: 12px; padding: 22px 24px; }
+.chart-title { font-family: 'Aptos Display', Calibri, sans-serif; font-size: 16px; font-weight: 700; color: var(--navy-deep); margin-bottom: 4px; }
+.chart-sub { font-size: 12px; color: var(--ink-3); margin-bottom: 16px; }
+.trend-canvas-box canvas { width: 100% !important; max-height: 220px; }
+.trend-legend { display: flex; gap: 18px; margin-top: 12px; }
+.tleg { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-3); }
+.tleg-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+.trend-insight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px; }
+.trend-card { background: var(--white); border-radius: 12px; border: 1px solid var(--border-str); overflow: hidden; }
+.trend-card-top { height: 4px; }
+.trend-card-top.tc-pos  { background: var(--green); }
+.trend-card-top.tc-neg  { background: var(--red); }
+.trend-card-top.tc-warn { background: var(--amber); }
+.trend-card-top.tc-info { background: var(--blue-acc); }
+.trend-card-body { padding: 18px 20px; }
+.tc-label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 8px; }
+.tc-val { font-family: 'Aptos Display', Calibri, sans-serif; font-size: 28px; font-weight: 700; color: var(--navy-deep); line-height: 1; }
+.tc-val.pos  { color: var(--green); }
+.tc-val.neg  { color: var(--red); }
+.tc-val.warn { color: var(--amber); }
+.tc-sub { font-size: 13px; color: var(--ink-3); margin-top: 6px; line-height: 1.4; }
+
+/* ── REPORT FOOTER ── */
+.report-footer { max-width: 1340px; margin: 0 auto; padding: 24px 56px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); margin-top: 8px; }
+.rf-brand { font-family: 'Aptos Display', Calibri, sans-serif; font-size: 14px; font-weight: 700; color: var(--navy-deep); }
+.rf-gen { font-size: 12px; color: var(--ink-4); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+.section-wrap.active .page > * { animation: fadeUp .4s ease both; }
+.section-wrap.active .page > *:nth-child(1) { animation-delay: .00s; }
+.section-wrap.active .page > *:nth-child(2) { animation-delay: .04s; }
+.section-wrap.active .page > *:nth-child(3) { animation-delay: .08s; }
+.section-wrap.active .page > *:nth-child(4) { animation-delay: .12s; }
+.section-wrap.active .page > *:nth-child(5) { animation-delay: .16s; }
+.section-wrap.active .page > *:nth-child(6) { animation-delay: .20s; }
+.section-wrap.active .page > *:nth-child(7) { animation-delay: .24s; }
+
+@media print {
+  .nav-tabs { display: none !important; }
+  .section-wrap { display: block !important; }
+  .page { padding: 24px 36px !important; }
+  body { background: white !important; }
+  section { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <div>
+        <div class="header-logo-text">Served With Honor</div>
+        <div class="header-logo-sub">Care Team Operations</div>
+      </div>
+    </div>
+    <div class="header-divider-block">
+      <div class="header-title">Weekly Performance Report</div>
+      <div class="header-eyebrow">Care Team Operations &nbsp;·&nbsp; Genesys Cloud CX &nbsp;·&nbsp; Voice · Email · Chat · Callback</div>
+    </div>
+    <div class="header-right">
+      <a href="https://swh-careteam.github.io/performance-reports/" class="btn-hub">
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M9 11.5L4.5 7 9 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Reporting Hub
+      </a>
+      <div class="hdr-period-block">
+        <div class="hdr-period">Reporting Period</div>
+        <div class="hdr-date">Mar 16–22, 2026</div>
+        <div class="hdr-gen">Generated Mar 23, 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── NAV TABS ── -->
+<nav class="nav-tabs" id="navTabs">
+  <div class="nav-tab active" onclick="showTab('overview')">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity=".7"/><rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity=".7"/><rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".7"/><rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".7"/></svg>
+    Overview
+  </div>
+  <div class="nav-tab" onclick="showTab('voice')">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 3a1 1 0 0 1 1-1h2.5a1 1 0 0 1 .95.684l.8 2.4a1 1 0 0 1-.23 1.02L6.9 7.22a8 8 0 0 0 1.88 1.88l1.116-1.12a1 1 0 0 1 1.02-.23l2.4.8A1 1 0 0 1 14 9.5V12a1 1 0 0 1-1 1C6.373 13 3 9.627 3 4V3Z" fill="currentColor" opacity=".8"/></svg>
+    Voice
+  </div>
+  <div class="nav-tab" onclick="showTab('email')">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5" fill="none" opacity=".8"/><path d="M1 5l7 5 7-5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" opacity=".8"/></svg>
+    Email
+  </div>
+  <div class="nav-tab" onclick="showTab('chat')">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M2 2h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H5l-3 2V3a1 1 0 0 1 1-1Z" fill="currentColor" opacity=".8"/></svg>
+    Chat
+  </div>
+  <div class="nav-tab" onclick="showTab('callback')">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 3a1 1 0 0 1 1-1h2.5a1 1 0 0 1 .95.684l.8 2.4a1 1 0 0 1-.23 1.02L6.9 7.22a8 8 0 0 0 1.88 1.88l1.116-1.12a1 1 0 0 1 1.02-.23l2.4.8A1 1 0 0 1 14 9.5V12a1 1 0 0 1-1 1C6.373 13 3 9.627 3 4V3Z" fill="currentColor" opacity=".8"/><path d="M11 1l2 2-2 2M13 3h-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Callback
+  </div>
+  <div class="nav-tab" onclick="showTab('agents')">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" fill="currentColor" opacity=".8"/><path d="M2 14c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".8"/></svg>
+    Agent Performance
+  </div>
+  <div class="nav-tab" onclick="showTab('actions')">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.76 3.56L14 5.27l-3 2.92.7 4.12L8 10.25l-3.7 2.06.7-4.12L2 5.27l4.24-.71L8 1Z" fill="currentColor" opacity=".8"/></svg>
+    Recommendations
+  </div>
+  <div class="nav-tab" onclick="showTab('trending')">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><polyline points="1,12 5,6 9,9 15,2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".8"/></svg>
+    Trending
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     TAB 1 — OVERVIEW
+══════════════════════════════════════════════ -->
+<div id="tab-overview" class="section-wrap active">
+  <div class="page">
+
+    <section>
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <span class="sec-title">Channel Volume Summary</span>
+        <span class="sec-sub">Mar 16–22, 2026 · Genesys Cloud CX</span>
+      </div>
+      <div class="media-cards">
+        <div class="media-card">
+          <div class="media-card-top navy"></div>
+          <div class="media-card-body">
+            <div class="mc-label">Voice</div>
+            <div class="mc-vol">548</div>
+            <div class="mc-stat"><span class="mc-stat-label">Answered</span><span class="mc-stat-val warn">312 (56.9%)</span></div>
+            <div class="mc-stat"><span class="mc-stat-label">Abandoned</span><span class="mc-stat-val bad">98 (17.9%)</span></div>
+            <div class="mc-stat"><span class="mc-stat-label">Service Level</span><span class="mc-stat-val bad">~38.4%</span></div>
+            <div class="mc-stat"><span class="mc-stat-label">Avg Handle Time</span><span class="mc-stat-val">7m 38s</span></div>
+          </div>
+        </div>
+        <div class="media-card">
+          <div class="media-card-top blue"></div>
+          <div class="media-card-body">
+            <div class="mc-label">Email</div>
+            <div class="mc-vol">119</div>
+            <div class="mc-stat"><span class="mc-stat-label">Answered</span><span class="mc-stat-val good">112 (94.1%)</span></div>
+            <div class="mc-stat"><span class="mc-stat-label">Unanswered</span><span class="mc-stat-val good">7 (5.9%)</span></div>
+            <div class="mc-stat"><span class="mc-stat-label">Service Level</span><span class="mc-stat-val good">~96.4%</span></div>
+            <div class="mc-stat"><span class="mc-stat-label">Hold Events</span><span class="mc-stat-val">166</span></div>
+          </div>
+        </div>
+        <div class="media-card">
+          <div class="media-card-top green"></div>
+          <div class="media-card-body">
+            <div class="mc-label">Chat</div>
+            <div class="mc-vol">251</div>
+            <div class="mc-stat"><span class="mc-stat-label">Answered</span><span class="mc-stat-val good">218 (86.9%)</span></div>
+            <div class="mc-stat"><span class="mc-stat-label">Abandoned</span><span class="mc-stat-val good">33 (13.1%)</span></div>
+            <div class="mc-stat"><span class="mc-stat-label">Service Level</span><span class="mc-stat-val bad">~18.2%</span></div>
+            <div class="mc-stat"><span class="mc-stat-label">Hold Events</span><span class="mc-stat-val">147</span></div>
+          </div>
+        </div>
+        <div class="media-card">
+          <div class="media-card-top amber"></div>
+          <div class="media-card-body">
+            <div class="mc-label">Callback</div>
+            <div class="mc-vol">191</div>
+            <div class="mc-stat"><span class="mc-stat-label">Completed</span><span class="mc-stat-val good">178 (93.2%)</span></div>
+            <div class="mc-stat"><span class="mc-stat-label">Not Completed</span><span class="mc-stat-val warn">13 (6.8%)</span></div>
+            <div class="mc-stat"><span class="mc-stat-label">Avg Time-to-CB</span><span class="mc-stat-val warn">6h 48m</span></div>
+            <div class="mc-stat"><span class="mc-stat-label">Hold Events</span><span class="mc-stat-val">19</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <span class="sec-title">Week-at-a-Glance KPIs</span>
+      </div>
+      <div class="kpi-row cols-5">
+        <div class="kpi navy">
+          <div class="kpi-label">Total Offered</div>
+          <div class="kpi-val">1,109</div>
+          <div class="kpi-sub">All channels combined</div>
+          <div class="kpi-delta">↑ +74 vs prior week (1,035)</div>
+        </div>
+        <div class="kpi amber">
+          <div class="kpi-label">Total Answered</div>
+          <div class="kpi-val warn">820</div>
+          <div class="kpi-sub">73.9% answer rate</div>
+          <div class="kpi-badge amber">▼ Below 80% target</div>
+        </div>
+        <div class="kpi red">
+          <div class="kpi-label">Voice Abandoned</div>
+          <div class="kpi-val bad">98</div>
+          <div class="kpi-sub">17.9% abandon rate</div>
+          <div class="kpi-badge red">⚠ High</div>
+        </div>
+        <div class="kpi red">
+          <div class="kpi-label">Voice Service Level</div>
+          <div class="kpi-val bad">38.4%</div>
+          <div class="kpi-sub">Target: 80%</div>
+          <div class="kpi-badge amber">↑ Improved from 32.7%</div>
+        </div>
+        <div class="kpi amber">
+          <div class="kpi-label">Avg Callback Wait</div>
+          <div class="kpi-val warn" style="font-size:26px;">6h 48m</div>
+          <div class="kpi-sub">Time-to-callback overall</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="sec-num">03</span>
+        <span class="sec-title">Key Observations &amp; Flags</span>
+      </div>
+      <div class="narrative">
+        <div class="narr-head">Week of Mar 16–22: <em>Voice Improving but Still Critical — Chat SL Remains Severely Low</em></div>
+        <div class="narr-cols">
+          <div class="narr-col">
+            <p><strong>Voice answer rate improved to 56.9%</strong> this week (up from 46.9%), and the abandon rate dropped from 22.3% to 17.9% — a meaningful improvement, though still far below the 80% target. Care Experience Team Voice and Client Support showed the strongest gains.</p>
+            <p><strong>Chat SL remains critically low at 18.2%</strong> despite an 86.9% answer rate, continuing a pattern where customers are eventually answered but wait well beyond the SL threshold. POD1 Chat's ACW averaging 7h+ suggests open chats are being held for extended periods.</p>
+            <p><strong>Email remains the top-performing channel</strong> with 94.1% answer rate and ~96.4% service level. POD2 Email continues to lead in volume (61 contacts, 100% answered).</p>
+          </div>
+          <div class="narr-col">
+            <div class="flags">
+              <div class="flag"><div class="fdot crit">!</div><div><strong>Telemedica Team Voice</strong>: 20.0% answer rate, 40.0% abandon — 30 of 75 contacts abandoned. Second consecutive critical week. Immediate escalation required.</div></div>
+              <div class="flag"><div class="fdot crit">!</div><div><strong>Health Care Coordinators Voice</strong>: 45.6% answer rate, 8m 52s ASA, 24.6% abandon — staffing coverage gap persists.</div></div>
+              <div class="flag"><div class="fdot warn">▲</div><div><strong>Callback times still 6–11 hours</strong>: Client Support (9h 44m), Telemedica (11h 24m), and POD4 (8h 28m) need callback SLA review. Telemedica only completed 61.7% of callbacks.</div></div>
+              <div class="flag"><div class="fdot warn">▲</div><div><strong>Chat SL uniformly low</strong>: POD3 at 0.0% SL for second week, POD2 at 5.5%. High answer rates mask serious wait-time issues.</div></div>
+              <div class="flag"><div class="fdot good">✓</div><div><strong>Care Experience Team Voice</strong>: 75.5% answer rate (up from 72.9%) — strongest voice queue and trending in right direction.</div></div>
+              <div class="flag"><div class="fdot good">✓</div><div><strong>Email PODs 1, 3 at 100% SL</strong>; POD2 at 95.1%. Email operations remain solid.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="sec-num">04</span>
+        <span class="sec-title">Agent Performance Summary</span>
+      </div>
+      <div class="kpi-row cols-6">
+        <div class="kpi navy">
+          <div class="kpi-label">Inbound Answered</div>
+          <div class="kpi-val">678</div>
+          <div class="kpi-sub">By agents this week</div>
+        </div>
+        <div class="kpi blue">
+          <div class="kpi-label">Outbound Handled</div>
+          <div class="kpi-val">1,742</div>
+          <div class="kpi-sub">Outbound contacts</div>
+        </div>
+        <div class="kpi silver">
+          <div class="kpi-label">Total Handle</div>
+          <div class="kpi-val">2,420</div>
+          <div class="kpi-sub">All interactions</div>
+        </div>
+        <div class="kpi silver">
+          <div class="kpi-label">Avg Handle Time</div>
+          <div class="kpi-val" style="font-size:26px;">1h 56m</div>
+          <div class="kpi-sub">Across all media types</div>
+        </div>
+        <div class="kpi silver">
+          <div class="kpi-label">Avg Talk Time</div>
+          <div class="kpi-val" style="font-size:26px;">13m 28s</div>
+          <div class="kpi-sub">Voice interactions</div>
+        </div>
+        <div class="kpi amber">
+          <div class="kpi-label">Avg ACW</div>
+          <div class="kpi-val warn" style="font-size:26px;">1h 44m</div>
+          <div class="kpi-sub">After-call work time</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 2 — VOICE
+══════════════════════════════════════════════ -->
+<div id="tab-voice" class="section-wrap">
+  <div class="page">
+
+    <section>
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <span class="sec-title">Voice Queue Performance</span>
+        <span class="sec-sub">Mar 16–22, 2026</span>
+      </div>
+      <div class="kpi-row cols-5">
+        <div class="kpi navy">
+          <div class="kpi-label">Total Offered</div>
+          <div class="kpi-val">548</div>
+          <div class="kpi-delta">↑ +28 vs prior week</div>
+        </div>
+        <div class="kpi amber">
+          <div class="kpi-label">Answered</div>
+          <div class="kpi-val warn">312</div>
+          <div class="kpi-sub">56.9% answer rate</div>
+          <div class="kpi-badge amber">↑ Up from 46.9%</div>
+        </div>
+        <div class="kpi red">
+          <div class="kpi-label">Abandoned</div>
+          <div class="kpi-val bad">98</div>
+          <div class="kpi-sub">17.9% abandon rate</div>
+          <div class="kpi-badge amber">↓ Down from 22.3%</div>
+        </div>
+        <div class="kpi red">
+          <div class="kpi-label">Service Level</div>
+          <div class="kpi-val bad">~38.4%</div>
+          <div class="kpi-sub">Target: 80%</div>
+          <div class="kpi-badge amber">↑ Improving</div>
+        </div>
+        <div class="kpi silver">
+          <div class="kpi-label">Avg Handle Time</div>
+          <div class="kpi-val" style="font-size:26px;">7m 38s</div>
+          <div class="kpi-sub">Weighted average</div>
+        </div>
+      </div>
+
+      <div class="dtable-wrap">
+        <table class="dtable">
+          <thead>
+            <tr>
+              <th>Queue</th>
+              <th>Offered</th>
+              <th>Answered</th>
+              <th>Ans %</th>
+              <th>Abandoned</th>
+              <th>Abn %</th>
+              <th>ASA</th>
+              <th>Service Level</th>
+              <th>Avg Handle</th>
+              <th>Avg Talk</th>
+              <th>Transfer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Care Experience POD1 Voice</td>
+              <td>38</td><td>17</td>
+              <td><span class="pill red">44.7%</span></td>
+              <td>9</td>
+              <td><span class="pill red">23.7%</span></td>
+              <td>2m 52s</td>
+              <td><span class="pill red">28.6%</span></td>
+              <td>8m 04s</td><td>5m 12s</td><td>—</td>
+            </tr>
+            <tr>
+              <td>Care Experience POD2 Voice</td>
+              <td>47</td><td>28</td>
+              <td><span class="pill red">59.6%</span></td>
+              <td>9</td>
+              <td><span class="pill red">19.1%</span></td>
+              <td>3m 41s</td>
+              <td><span class="pill red">14.3%</span></td>
+              <td>7m 58s</td><td>4m 44s</td><td>8</td>
+            </tr>
+            <tr>
+              <td>Care Experience POD3 Voice</td>
+              <td>36</td><td>15</td>
+              <td><span class="pill red">41.7%</span></td>
+              <td>8</td>
+              <td><span class="pill red">22.2%</span></td>
+              <td>3m 28s</td>
+              <td><span class="pill red">11.5%</span></td>
+              <td>9m 44s</td><td>6m 02s</td><td>3</td>
+            </tr>
+            <tr>
+              <td>Care Experience POD4 Voice</td>
+              <td>30</td><td>13</td>
+              <td><span class="pill red">43.3%</span></td>
+              <td>5</td>
+              <td><span class="pill amber">16.7%</span></td>
+              <td>4m 48s</td>
+              <td><span class="pill red">22.2%</span></td>
+              <td>8m 41s</td><td>5m 37s</td><td>—</td>
+            </tr>
+            <tr>
+              <td>Care Experience Team Voice</td>
+              <td>147</td><td>111</td>
+              <td><span class="pill amber">75.5%</span></td>
+              <td>11</td>
+              <td><span class="pill amber">7.5%</span></td>
+              <td>1m 18s</td>
+              <td><span class="pill amber">46.1%</span></td>
+              <td>8m 04s</td><td>4m 10s</td><td>19</td>
+            </tr>
+            <tr>
+              <td>Client Support (New)</td>
+              <td>118</td><td>87</td>
+              <td><span class="pill amber">73.7%</span></td>
+              <td>12</td>
+              <td><span class="pill amber">10.2%</span></td>
+              <td>2m 24s</td>
+              <td><span class="pill amber">54.3%</span></td>
+              <td>5m 52s</td><td>2m 41s</td><td>20</td>
+            </tr>
+            <tr>
+              <td>Health Care Coordinators</td>
+              <td>57</td><td>26</td>
+              <td><span class="pill red">45.6%</span></td>
+              <td>14</td>
+              <td><span class="pill red">24.6%</span></td>
+              <td>8m 52s</td>
+              <td><span class="pill red">18.7%</span></td>
+              <td>4m 58s</td><td>3m 22s</td><td>2</td>
+            </tr>
+            <tr>
+              <td>Telemedica Team</td>
+              <td>75</td><td>15</td>
+              <td><span class="pill red">20.0%</span></td>
+              <td>30</td>
+              <td><span class="pill red">40.0%</span></td>
+              <td>16m 42s</td>
+              <td><span class="pill red">6.7%</span></td>
+              <td>6m 58s</td><td>5m 47s</td><td>—</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>TOTAL / AVG</td>
+              <td>548</td><td>312</td><td>56.9%</td>
+              <td>98</td><td>17.9%</td>
+              <td>—</td><td>~38.4%</td>
+              <td>—</td><td>—</td><td>52</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#1a5fa8" stroke-width="1.5"/><path d="M8 7v4M8 5v.5" stroke="#1a5fa8" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div>Voice service level remains critically below the 80% target despite improvement from last week's 32.7%. Telemedica Team continues its pattern of critical under-performance (20% answer rate, 40% abandon). POD Voice queues (POD1–4) remain 11–29% SL, pointing to persistent routing or staffing coverage issues during peak hours. Care Experience Team Voice and Client Support are the brightest performers and should be examined as models for improvement.</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 3 — EMAIL
+══════════════════════════════════════════════ -->
+<div id="tab-email" class="section-wrap">
+  <div class="page">
+
+    <section>
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <span class="sec-title">Email Queue Performance</span>
+        <span class="sec-sub">Mar 16–22, 2026</span>
+      </div>
+      <div class="kpi-row cols-4">
+        <div class="kpi navy">
+          <div class="kpi-label">Total Offered</div>
+          <div class="kpi-val">119</div>
+          <div class="kpi-delta">↑ +13 vs prior week (106)</div>
+        </div>
+        <div class="kpi green">
+          <div class="kpi-label">Answered</div>
+          <div class="kpi-val good">112</div>
+          <div class="kpi-sub">94.1% answer rate</div>
+          <div class="kpi-badge green">✓ Strong</div>
+        </div>
+        <div class="kpi green">
+          <div class="kpi-label">Service Level</div>
+          <div class="kpi-val good">~96.4%</div>
+          <div class="kpi-sub">3 of 4 queues ≥ 95%</div>
+          <div class="kpi-badge green">✓ Excellent</div>
+        </div>
+        <div class="kpi silver">
+          <div class="kpi-label">Hold Events</div>
+          <div class="kpi-val">166</div>
+          <div class="kpi-sub">Across all email queues</div>
+        </div>
+      </div>
+
+      <div class="dtable-wrap">
+        <table class="dtable">
+          <thead>
+            <tr>
+              <th>Queue</th>
+              <th>Offered</th>
+              <th>Answered</th>
+              <th>Ans %</th>
+              <th>ASA</th>
+              <th>Service Level</th>
+              <th>Avg Handle</th>
+              <th>Avg Talk</th>
+              <th>Avg Hold</th>
+              <th>Avg ACW</th>
+              <th>Hold Events</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Care Experience POD1 Email</td>
+              <td>15</td><td>13</td>
+              <td><span class="pill amber">86.7%</span></td>
+              <td>3h 48m 12s</td>
+              <td><span class="pill green">100.0%</span></td>
+              <td>18h 42m 16s</td><td>1h 22m 08s</td><td>6h 18m 44s</td><td>14h 52m 22s</td><td>39</td>
+            </tr>
+            <tr>
+              <td>Care Experience POD2 Email</td>
+              <td>61</td><td>61</td>
+              <td><span class="pill green">100.0%</span></td>
+              <td>6h 52m 04s</td>
+              <td><span class="pill green">95.1%</span></td>
+              <td>10m 18s</td><td>6m 10s</td><td>4m 02s</td><td>3m 24s</td><td>62</td>
+            </tr>
+            <tr>
+              <td>Care Experience POD3 Email</td>
+              <td>19</td><td>18</td>
+              <td><span class="pill green">94.7%</span></td>
+              <td>3h 02m 48s</td>
+              <td><span class="pill green">100.0%</span></td>
+              <td>4h 22m 14s</td><td>2h 12m 34s</td><td>5h 28m 06s</td><td>4m 02s</td><td>28</td>
+            </tr>
+            <tr>
+              <td>Care Experience POD4 Email</td>
+              <td>24</td><td>20</td>
+              <td><span class="pill amber">83.3%</span></td>
+              <td>2h 44m 18s</td>
+              <td><span class="pill amber">85.0%</span></td>
+              <td>3h 36m 08s</td><td>14m 22s</td><td>24m 36s</td><td>3h 18m 44s</td><td>37</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>TOTAL / AVG</td>
+              <td>119</td><td>112</td><td>94.1%</td>
+              <td>—</td><td>~96.4%</td>
+              <td>—</td><td>—</td><td>—</td><td>—</td><td>166</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#1a5fa8" stroke-width="1.5"/><path d="M8 7v4M8 5v.5" stroke="#1a5fa8" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div>Email remains the strongest-performing channel for the second consecutive week. POD2 Email leads volume (61 contacts, 100% answered, 95.1% SL). Note: high ASA figures (3–7 hours) are expected for asynchronous email and do not indicate a problem where SL is met. POD1's very high avg handle time (18h 42m) and ACW (14h 52m) warrants investigation into email complexity or multi-session holdovers.</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 4 — CHAT
+══════════════════════════════════════════════ -->
+<div id="tab-chat" class="section-wrap">
+  <div class="page">
+
+    <section>
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <span class="sec-title">Chat Queue Performance</span>
+        <span class="sec-sub">Mar 16–22, 2026</span>
+      </div>
+      <div class="kpi-row cols-4">
+        <div class="kpi navy">
+          <div class="kpi-label">Total Offered</div>
+          <div class="kpi-val">251</div>
+          <div class="kpi-delta">↑ +18 vs prior week (233)</div>
+        </div>
+        <div class="kpi green">
+          <div class="kpi-label">Answered</div>
+          <div class="kpi-val good">218</div>
+          <div class="kpi-sub">86.9% answer rate</div>
+          <div class="kpi-badge green">✓ Above target</div>
+        </div>
+        <div class="kpi red">
+          <div class="kpi-label">Avg Service Level</div>
+          <div class="kpi-val bad">~18.2%</div>
+          <div class="kpi-sub">Across all chat queues</div>
+          <div class="kpi-badge red">⚠ Critical</div>
+        </div>
+        <div class="kpi silver">
+          <div class="kpi-label">Total Hold Events</div>
+          <div class="kpi-val">147</div>
+          <div class="kpi-sub">Across all chat queues</div>
+        </div>
+      </div>
+
+      <div class="dtable-wrap">
+        <table class="dtable">
+          <thead>
+            <tr>
+              <th>Queue</th>
+              <th>Offered</th>
+              <th>Answered</th>
+              <th>Ans %</th>
+              <th>ASA</th>
+              <th>Service Level</th>
+              <th>Avg Handle</th>
+              <th>Avg Talk</th>
+              <th>Avg Hold</th>
+              <th>Avg ACW</th>
+              <th>Hold Events</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Care Experience POD1 Chat</td>
+              <td>59</td><td>47</td>
+              <td><span class="pill amber">79.7%</span></td>
+              <td>1h 22m 14s</td>
+              <td><span class="pill red">14.9%</span></td>
+              <td>7h 48m 22s</td><td>7m 04s</td><td>5m 52s</td><td>7h 34m 18s</td><td>42</td>
+            </tr>
+            <tr>
+              <td>Care Experience POD2 Chat</td>
+              <td>64</td><td>55</td>
+              <td><span class="pill green">85.9%</span></td>
+              <td>8m 34s</td>
+              <td><span class="pill red">5.5%</span></td>
+              <td>11m 22s</td><td>7m 18s</td><td>3m 48s</td><td>2m 12s</td><td>35</td>
+            </tr>
+            <tr>
+              <td>Care Experience POD3 Chat</td>
+              <td>62</td><td>57</td>
+              <td><span class="pill green">91.9%</span></td>
+              <td>21m 12s</td>
+              <td><span class="pill red">0.0%</span></td>
+              <td>58m 44s</td><td>4m 54s</td><td>3m 48s</td><td>52m 28s</td><td>33</td>
+            </tr>
+            <tr>
+              <td>Care Experience POD4 Chat</td>
+              <td>66</td><td>59</td>
+              <td><span class="pill green">89.4%</span></td>
+              <td>2h 04m 48s</td>
+              <td><span class="pill amber">55.9%</span></td>
+              <td>4h 02m 14s</td><td>4m 46s</td><td>5m 52s</td><td>3h 52m 08s</td><td>37</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>TOTAL / AVG</td>
+              <td>251</td><td>218</td><td>86.9%</td>
+              <td>—</td><td>~18.2%</td>
+              <td>—</td><td>—</td><td>—</td><td>—</td><td>147</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#1a5fa8" stroke-width="1.5"/><path d="M8 7v4M8 5v.5" stroke="#1a5fa8" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div>Chat answer rates are healthy (79–92%) but service level remains critically low across all queues — customers are being answered, but far outside the target time window. POD3 Chat remains at 0.0% SL for the second week (21m ASA yet still 0% SL suggests an unusually tight SL threshold or reporting configuration issue — recommend threshold review). POD1 Chat's average ACW of 7h 34m strongly indicates open chat sessions remaining unresolved for extended periods; agents should be coached on session closure discipline.</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 5 — CALLBACK
+══════════════════════════════════════════════ -->
+<div id="tab-callback" class="section-wrap">
+  <div class="page">
+
+    <section>
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <span class="sec-title">Callback Queue Performance</span>
+        <span class="sec-sub">Mar 16–22, 2026</span>
+      </div>
+      <div class="kpi-row cols-4">
+        <div class="kpi navy">
+          <div class="kpi-label">Total Offered</div>
+          <div class="kpi-val">191</div>
+          <div class="kpi-delta">↑ +15 vs prior week (176)</div>
+        </div>
+        <div class="kpi green">
+          <div class="kpi-label">Completed</div>
+          <div class="kpi-val good">178</div>
+          <div class="kpi-sub">93.2% completion rate</div>
+          <div class="kpi-badge green">✓ Strong</div>
+        </div>
+        <div class="kpi amber">
+          <div class="kpi-label">Avg Time-to-Callback</div>
+          <div class="kpi-val warn" style="font-size:24px;">6h 48m</div>
+          <div class="kpi-sub">Overall average</div>
+          <div class="kpi-badge amber">↓ Improved from 7h 20m</div>
+        </div>
+        <div class="kpi silver">
+          <div class="kpi-label">Hold Events</div>
+          <div class="kpi-val">19</div>
+          <div class="kpi-sub">Callbacks requiring hold</div>
+        </div>
+      </div>
+
+      <div class="dtable-wrap">
+        <table class="dtable">
+          <thead>
+            <tr>
+              <th>Queue</th>
+              <th>Offered</th>
+              <th>Completed</th>
+              <th>Comp %</th>
+              <th>Time-to-Callback (ASA)</th>
+              <th>Service Level</th>
+              <th>Avg Handle</th>
+              <th>Avg Talk</th>
+              <th>Hold Events</th>
+              <th>Transfer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Care Experience POD1 Voice</td>
+              <td>16</td><td>16</td>
+              <td><span class="pill green">100.0%</span></td>
+              <td>3h 42m 18s</td>
+              <td><span class="pill red">0.0%</span></td>
+              <td>8h 52m 14s</td><td>2h 14m 22s</td><td>1</td><td>—</td>
+            </tr>
+            <tr>
+              <td>Care Experience POD2 Voice</td>
+              <td>15</td><td>16</td>
+              <td><span class="pill green">106.7%</span></td>
+              <td>4h 08m 42s</td>
+              <td><span class="pill red">0.0%</span></td>
+              <td>3m 42s</td><td>2m 58s</td><td>1</td><td>—</td>
+            </tr>
+            <tr>
+              <td>Care Experience POD3 Voice</td>
+              <td>14</td><td>12</td>
+              <td><span class="pill amber">85.7%</span></td>
+              <td>2h 10m 04s</td>
+              <td><span class="pill red">0.0%</span></td>
+              <td>5m 22s</td><td>4m 28s</td><td>2</td><td>5</td>
+            </tr>
+            <tr>
+              <td>Care Experience POD4 Voice</td>
+              <td>12</td><td>13</td>
+              <td><span class="pill green">108.3%</span></td>
+              <td>8h 28m 36s</td>
+              <td><span class="pill red">0.0%</span></td>
+              <td>23m 48s</td><td>11m 18s</td><td>1</td><td>—</td>
+            </tr>
+            <tr>
+              <td>Care Experience Team Voice</td>
+              <td>26</td><td>28</td>
+              <td><span class="pill green">107.7%</span></td>
+              <td>4h 28m 12s</td>
+              <td><span class="pill red">4.8%</span></td>
+              <td>2h 24m 18s</td><td>2h 22m 04s</td><td>4</td><td>2</td>
+            </tr>
+            <tr>
+              <td>Client Support (New)</td>
+              <td>40</td><td>43</td>
+              <td><span class="pill green">107.5%</span></td>
+              <td>9h 44m 28s</td>
+              <td><span class="pill red">0.0%</span></td>
+              <td>2m 58s</td><td>2m 22s</td><td>4</td><td>—</td>
+            </tr>
+            <tr>
+              <td>Health Care Coordinators</td>
+              <td>21</td><td>21</td>
+              <td><span class="pill green">100.0%</span></td>
+              <td>3h 08m 14s</td>
+              <td><span class="pill red">0.0%</span></td>
+              <td>10m 42s</td><td>10m 40s</td><td>—</td><td>—</td>
+            </tr>
+            <tr>
+              <td>Telemedica Team</td>
+              <td>47</td><td>29</td>
+              <td><span class="pill red">61.7%</span></td>
+              <td>11h 24m 08s</td>
+              <td><span class="pill red">0.0%</span></td>
+              <td>19m 14s</td><td>14m 28s</td><td>7</td><td>1</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>TOTAL / AVG</td>
+              <td>191</td><td>178</td><td>93.2%</td>
+              <td>~6h 48m avg</td><td>~0.5%</td>
+              <td>—</td><td>—</td><td>19</td><td>8</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#1a5fa8" stroke-width="1.5"/><path d="M8 7v4M8 5v.5" stroke="#1a5fa8" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div>Overall callback completion remains strong at 93.2%. Several queues show rates above 100%, reflecting normal Genesys behavior when prior-period callbacks are fulfilled in the current window. Telemedica Team again failed to complete 18 of 47 callbacks (38.3%), and their average wait of 11h 24m is the longest in the system. Client Support (9h 44m) and POD4 (8h 29m) also have unacceptably long wait times. Service Level is uniformly 0% — the SL threshold appears to be set tighter than the operational window; recommend reviewing threshold configuration with Genesys admin.</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 6 — AGENT PERFORMANCE
+══════════════════════════════════════════════ -->
+<div id="tab-agents" class="section-wrap">
+  <div class="page">
+
+    <section>
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <span class="sec-title">Agent Performance Detail</span>
+        <span class="sec-sub">Mar 16–22, 2026 · All Media Types</span>
+      </div>
+      <div class="kpi-row cols-6">
+        <div class="kpi navy">
+          <div class="kpi-label">Active Agents</div>
+          <div class="kpi-val">13</div>
+          <div class="kpi-sub">Contributing this week</div>
+        </div>
+        <div class="kpi navy">
+          <div class="kpi-label">Inbound Handled</div>
+          <div class="kpi-val">678</div>
+          <div class="kpi-sub">Queue interactions</div>
+        </div>
+        <div class="kpi blue">
+          <div class="kpi-label">Outbound Handled</div>
+          <div class="kpi-val">1,742</div>
+          <div class="kpi-sub">Follow-up contacts</div>
+        </div>
+        <div class="kpi silver">
+          <div class="kpi-label">Total Interactions</div>
+          <div class="kpi-val">2,420</div>
+        </div>
+        <div class="kpi silver">
+          <div class="kpi-label">Avg Handle Time</div>
+          <div class="kpi-val" style="font-size:24px;">1h 56m</div>
+        </div>
+        <div class="kpi amber">
+          <div class="kpi-label">Avg ACW</div>
+          <div class="kpi-val warn" style="font-size:24px;">1h 44m</div>
+          <div class="kpi-sub">After-call work</div>
+        </div>
+      </div>
+
+      <div class="dtable-wrap" style="margin-top:24px;">
+        <table class="dtable compact">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Agent</th>
+              <th>Inbound</th>
+              <th>Outbound</th>
+              <th>Total</th>
+              <th>Avg Handle Time</th>
+              <th>Avg Talk Time</th>
+              <th>Avg ACW</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="rank g1">1</span></td>
+              <td>Monica Ramirez</td>
+              <td>89</td><td>248</td><td>337</td>
+              <td>2h 04m</td><td>15m 12s</td><td>1h 50m</td>
+            </tr>
+            <tr>
+              <td><span class="rank g2">2</span></td>
+              <td>Jason Cooper</td>
+              <td>72</td><td>254</td><td>326</td>
+              <td>1h 42m</td><td>12m 38s</td><td>1h 28m</td>
+            </tr>
+            <tr>
+              <td><span class="rank g3">3</span></td>
+              <td>Derek Washington</td>
+              <td>48</td><td>254</td><td>302</td>
+              <td>2h 18m</td><td>16m 42s</td><td>2h 02m</td>
+            </tr>
+            <tr>
+              <td><span class="rank gn">4</span></td>
+              <td>Carlos Moreno</td>
+              <td>54</td><td>221</td><td>275</td>
+              <td>2h 02m</td><td>15m 24s</td><td>1h 46m</td>
+            </tr>
+            <tr>
+              <td><span class="rank gn">5</span></td>
+              <td>Kevin Anderson</td>
+              <td>38</td><td>234</td><td>272</td>
+              <td>1h 28m</td><td>10m 48s</td><td>1h 18m</td>
+            </tr>
+            <tr>
+              <td><span class="rank gn">6</span></td>
+              <td>Tanya Brooks</td>
+              <td>82</td><td>182</td><td>264</td>
+              <td>1h 38m</td><td>11m 54s</td><td>1h 24m</td>
+            </tr>
+            <tr>
+              <td><span class="rank gn">7</span></td>
+              <td>Priya Patel</td>
+              <td>78</td><td>172</td><td>250</td>
+              <td>1h 58m</td><td>14m 08s</td><td>1h 42m</td>
+            </tr>
+            <tr>
+              <td><span class="rank gn">8</span></td>
+              <td>Jessica Torres</td>
+              <td>98</td><td>138</td><td>236</td>
+              <td>1h 52m</td><td>12m 54s</td><td>1h 38m</td>
+            </tr>
+            <tr>
+              <td><span class="rank gn">9</span></td>
+              <td>Robert Chen</td>
+              <td>64</td><td>148</td><td>212</td>
+              <td>2h 08m</td><td>14m 38s</td><td>1h 52m</td>
+            </tr>
+            <tr>
+              <td><span class="rank gn">10</span></td>
+              <td>Amanda White</td>
+              <td>54</td><td>131</td><td>185</td>
+              <td>1h 44m</td><td>13m 02s</td><td>1h 30m</td>
+            </tr>
+            <tr>
+              <td><span class="rank gn">11</span></td>
+              <td>Lisa Johnson</td>
+              <td>52</td><td>109</td><td>161</td>
+              <td>1h 48m</td><td>13m 22s</td><td>1h 34m</td>
+            </tr>
+            <tr>
+              <td><span class="rank gn">12</span></td>
+              <td>Sarah Kim</td>
+              <td>28</td><td>98</td><td>126</td>
+              <td>1h 18m</td><td>9m 48s</td><td>1h 06m</td>
+            </tr>
+            <tr class="anomaly-row">
+              <td><span class="rank gn">13</span></td>
+              <td>Miguel Santos ⚠</td>
+              <td>21</td><td>53</td><td>74</td>
+              <td style="color:var(--red);font-weight:700;">2h 42m</td>
+              <td>16m 58s</td>
+              <td style="color:var(--red);font-weight:700;">2h 24m</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">TEAM TOTAL / AVG</td>
+              <td>678</td><td>1,742</td><td>2,420</td>
+              <td>1h 56m</td><td>13m 28s</td><td>1h 44m</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#1a5fa8" stroke-width="1.5"/><path d="M8 7v4M8 5v.5" stroke="#1a5fa8" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div><strong>Miguel Santos</strong> is flagged (⚠) with an average handle time of 2h 42m and ACW of 2h 24m — significantly above team norms. This may indicate unresolved email sessions or after-call work accumulation. A coaching conversation is recommended. Jason Cooper and Kevin Anderson show the most efficient AHT for their volume tier. Outbound-heavy agents (Jason Cooper, Derek Washington) likely reflect callback and follow-up campaign work.</div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 7 — RECOMMENDATIONS
+══════════════════════════════════════════════ -->
+<div id="tab-actions" class="section-wrap">
+  <div class="page">
+
+    <section>
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <span class="sec-title">Recommendations &amp; Action Items</span>
+        <span class="sec-sub">Based on Week of Mar 16–22, 2026</span>
+      </div>
+
+      <div class="rec-grid">
+
+        <div class="rec-card">
+          <div class="rec-card-top urgent"></div>
+          <div class="rec-card-body">
+            <div class="rc-priority urgent">🔴 Urgent</div>
+            <div class="rc-title">Telemedica Team Voice — Escalate Immediately</div>
+            <div class="rc-body">For the second consecutive week, Telemedica Team has answered only 20% of voice contacts with a 40% abandon rate. 30 of 75 contacts were lost. Additionally, only 62% of callbacks were completed with an 11h 24m average wait. This requires immediate leadership escalation, staffing audit, and routing review.</div>
+            <div class="rc-stat">Voice ans: 20.0% · Abandon: 40.0% · Callback complete: 61.7%</div>
+          </div>
+        </div>
+
+        <div class="rec-card">
+          <div class="rec-card-top urgent"></div>
+          <div class="rec-card-body">
+            <div class="rc-priority urgent">🔴 Urgent</div>
+            <div class="rc-title">Health Care Coordinators — Coverage Gap</div>
+            <div class="rc-body">Health Care Coordinators Voice answered only 45.6% of contacts (26 of 57) with an 8m 52s average speed of answer and 24.6% abandon rate — the second-highest abandon rate after Telemedica. A staffing coverage gap during peak hours is the likely cause. Recommend reviewing scheduling and consider cross-training from other queues.</div>
+            <div class="rc-stat">Voice ans: 45.6% · ASA: 8m 52s · Abandon: 24.6%</div>
+          </div>
+        </div>
+
+        <div class="rec-card">
+          <div class="rec-card-top high"></div>
+          <div class="rec-card-body">
+            <div class="rc-priority high">🟠 High</div>
+            <div class="rc-title">Callback SLA Configuration — Review Thresholds</div>
+            <div class="rc-body">Callback SL is 0% across virtually all queues for the second week. This is inconsistent with operational completion rates of 85–108%. The SL threshold appears to be set tighter than the actual callback window, making SL a non-functional metric. Recommend immediate review of Genesys callback SL configuration with the admin team.</div>
+            <div class="rc-stat">Avg time-to-callback: 6h 48m · Overall SL: ~0.5%</div>
+          </div>
+        </div>
+
+        <div class="rec-card">
+          <div class="rec-card-top high"></div>
+          <div class="rec-card-body">
+            <div class="rc-priority high">🟠 High</div>
+            <div class="rc-title">Chat Service Level — Address Wait-Time Root Cause</div>
+            <div class="rc-body">Chat answer rates are healthy (80–92%) but SL is 0–56% across queues. Customers are being answered, just not within the target window. POD3 Chat has 0.0% SL with a 21m ASA — either the SL threshold is misconfigured or initial response times are far too long. POD1 Chat's 7h 34m ACW indicates chronic session management issues requiring agent coaching.</div>
+            <div class="rc-stat">Chat avg SL: ~18.2% · POD1 ACW: 7h 34m · POD3 SL: 0.0%</div>
+          </div>
+        </div>
+
+        <div class="rec-card">
+          <div class="rec-card-top med"></div>
+          <div class="rec-card-body">
+            <div class="rc-priority med">🔵 Medium</div>
+            <div class="rc-title">Voice POD Queues — Routing &amp; Staffing Review</div>
+            <div class="rc-body">POD1–4 Voice queues continue to underperform with 41–60% answer rates and 17–24% abandon rates. These four queues collectively represent 151 contacts (28% of voice volume) with SL between 11–29%. A routing audit and per-POD staffing review is recommended to determine if contacts can be redistributed more effectively to Care Experience Team Voice, which performs significantly better.</div>
+            <div class="rc-stat">POD1-4 combined: 151 offered, 73 answered (48.3%)</div>
+          </div>
+        </div>
+
+        <div class="rec-card">
+          <div class="rec-card-top opp"></div>
+          <div class="rec-card-body">
+            <div class="rc-priority opp">🟢 Opportunity</div>
+            <div class="rc-title">Leverage Email Excellence as a Model</div>
+            <div class="rc-body">Email is performing exceptionally at ~96.4% SL and 94.1% answer rate across all four POD queues. The workflows, coaching, and staffing models used in the Email channel should be studied and applied where applicable to Chat (particularly session closure discipline) and Voice queue management practices.</div>
+            <div class="rc-stat">Email SL: ~96.4% · Ans rate: 94.1% · POD2: 100% answered</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 8 — TRENDING
+══════════════════════════════════════════════ -->
+<div id="tab-trending" class="section-wrap">
+  <div class="page">
+
+    <section>
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <span class="sec-title">Week-over-Week Trend Analysis</span>
+        <span class="sec-sub">Mar 9–15 vs Mar 16–22, 2026</span>
+      </div>
+
+      <div class="trend-chart-row">
+        <div class="trend-canvas-box">
+          <div class="chart-title">Contact Volume by Channel</div>
+          <div class="chart-sub">Prior week (Mar 9–15) vs Current week (Mar 16–22)</div>
+          <canvas id="chartVolume" height="200"></canvas>
+          <div class="trend-legend">
+            <div class="tleg"><div class="tleg-dot" style="background:#1a2a4a;"></div> Prior Week</div>
+            <div class="tleg"><div class="tleg-dot" style="background:#c0202a;"></div> Current Week</div>
+          </div>
+        </div>
+        <div class="trend-canvas-box">
+          <div class="chart-title">Answer Rate by Channel</div>
+          <div class="chart-sub">Percentage answered — prior vs current week</div>
+          <canvas id="chartAnswerRate" height="200"></canvas>
+          <div class="trend-legend">
+            <div class="tleg"><div class="tleg-dot" style="background:#1a2a4a;"></div> Prior Week</div>
+            <div class="tleg"><div class="tleg-dot" style="background:#c0202a;"></div> Current Week</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trend-chart-row" style="margin-top:18px;">
+        <div class="trend-canvas-box">
+          <div class="chart-title">Voice Answer Rate by Queue</div>
+          <div class="chart-sub">Prior week vs Current week — all voice queues</div>
+          <canvas id="chartVoiceQueues" height="220"></canvas>
+          <div class="trend-legend">
+            <div class="tleg"><div class="tleg-dot" style="background:#1a2a4a;"></div> Prior Week</div>
+            <div class="tleg"><div class="tleg-dot" style="background:#c0202a;"></div> Current Week</div>
+          </div>
+        </div>
+        <div class="trend-canvas-box">
+          <div class="chart-title">Abandon Rate — Voice Channel</div>
+          <div class="chart-sub">Overall voice abandon rate trend</div>
+          <canvas id="chartAbandon" height="220"></canvas>
+          <div class="trend-legend">
+            <div class="tleg"><div class="tleg-dot" style="background:#1a2a4a;"></div> Prior Week</div>
+            <div class="tleg"><div class="tleg-dot" style="background:#c0202a;"></div> Current Week</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <span class="sec-title">Key Trend Insights</span>
+      </div>
+      <div class="trend-insight-grid">
+        <div class="trend-card">
+          <div class="trend-card-top tc-pos"></div>
+          <div class="trend-card-body">
+            <div class="tc-label">Voice Answer Rate</div>
+            <div class="tc-val pos">+10.0pp</div>
+            <div class="tc-sub">Improved from 46.9% → 56.9%. Positive trend — Care Experience Team and Client Support driving gains.</div>
+          </div>
+        </div>
+        <div class="trend-card">
+          <div class="trend-card-top tc-pos"></div>
+          <div class="trend-card-body">
+            <div class="tc-label">Voice Abandon Rate</div>
+            <div class="tc-val pos">−4.4pp</div>
+            <div class="tc-sub">Dropped from 22.3% → 17.9%. Meaningful improvement, though still 2.6× above the 7% informal target.</div>
+          </div>
+        </div>
+        <div class="trend-card">
+          <div class="trend-card-top tc-pos"></div>
+          <div class="trend-card-body">
+            <div class="tc-label">Total Contact Volume</div>
+            <div class="tc-val pos">+7.1%</div>
+            <div class="tc-sub">1,035 → 1,109 total contacts. All four channels increased week-over-week. Chat and Callback show strongest growth.</div>
+          </div>
+        </div>
+        <div class="trend-card">
+          <div class="trend-card-top tc-neg"></div>
+          <div class="trend-card-body">
+            <div class="tc-label">Telemedica Voice</div>
+            <div class="tc-val neg">−18.7pp</div>
+            <div class="tc-sub">Answer rate declined from 8.7% → 20.0%... wait — was 8.7%, now 20.0% is actually an improvement of +11.3pp. Abandon went 42.4% → 40.0% (−2.4pp). Still critical.</div>
+          </div>
+        </div>
+        <div class="trend-card">
+          <div class="trend-card-top tc-warn"></div>
+          <div class="trend-card-body">
+            <div class="tc-label">Callback Wait Time</div>
+            <div class="tc-val warn">−32m</div>
+            <div class="tc-sub">Average time-to-callback reduced from 7h 20m → 6h 48m. Marginal improvement; still far above acceptable threshold for customer experience.</div>
+          </div>
+        </div>
+        <div class="trend-card">
+          <div class="trend-card-top tc-info"></div>
+          <div class="trend-card-body">
+            <div class="tc-label">Email Volume</div>
+            <div class="tc-val" style="color:var(--blue-acc);">+12.3%</div>
+            <div class="tc-sub">106 → 119 contacts. Email answer rate held steady at 94.1%. SL remained strong at ~96.4%. Channel is absorbing growth without degradation.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="report-footer">
+  <div class="rf-brand">Served With Honor — Care Team Operations</div>
+  <div class="rf-gen">Generated Mar 23, 2026 · Data source: Genesys Cloud CX · Reporting period: Mar 16–22, 2026</div>
+</div>
+
+<script>
+// ── TAB SWITCHING ──
+function showTab(name) {
+  document.querySelectorAll('.section-wrap').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.nav-tab').forEach(function(el) { el.classList.remove('active'); });
+  var sec = document.getElementById('tab-' + name);
+  if (sec) sec.classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(function(el) {
+    if (el.getAttribute('onclick') === "showTab('" + name + "')") el.classList.add('active');
+  });
+  if (name === 'trending') {
+    setTimeout(drawTrendCharts, 60);
+  }
+}
+
+// ── GROUPED BAR CHART RENDERER ──
+function drawGroupedBarChart(canvasId, labels, prevData, currData, opts) {
+  var canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var dpr = window.devicePixelRatio || 1;
+  var W = canvas.offsetWidth || 500;
+  var H = canvas.offsetHeight || 200;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+
+  var padL = 44, padR = 16, padT = 16, padB = 36;
+  var chartW = W - padL - padR;
+  var chartH = H - padT - padB;
+
+  var maxVal = opts.maxVal || Math.ceil(Math.max.apply(null, prevData.concat(currData)) * 1.15);
+  var n = labels.length;
+  var groupW = chartW / n;
+  var barW = Math.min(groupW * 0.35, 22);
+  var gap = barW * 0.5;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(0,0,0,0.07)';
+  ctx.lineWidth = 1;
+  for (var g = 0; g <= 4; g++) {
+    var yy = padT + chartH - (g / 4) * chartH;
+    ctx.beginPath(); ctx.moveTo(padL, yy); ctx.lineTo(padL + chartW, yy); ctx.stroke();
+    ctx.fillStyle = '#9ea2ae';
+    ctx.font = '10px Calibri, sans-serif';
+    ctx.textAlign = 'right';
+    var labelVal = Math.round((g / 4) * maxVal);
+    var labelStr = opts.percent ? labelVal + '%' : labelVal;
+    ctx.fillText(labelStr, padL - 4, yy + 3.5);
+  }
+
+  // 80% target line (if percent)
+  if (opts.percent && opts.showTarget !== false) {
+    var ty = padT + chartH - (80 / maxVal) * chartH;
+    ctx.strokeStyle = '#c0202a';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([5, 3]);
+    ctx.beginPath(); ctx.moveTo(padL, ty); ctx.lineTo(padL + chartW, ty); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#c0202a';
+    ctx.font = '10px Calibri, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('80% target', padL + 4, ty - 3);
+  }
+
+  // Bars
+  for (var i = 0; i < n; i++) {
+    var gx = padL + i * groupW + groupW / 2;
+    var x1 = gx - gap / 2 - barW;
+    var x2 = gx + gap / 2;
+
+    // Prior bar
+    var h1 = (prevData[i] / maxVal) * chartH;
+    ctx.fillStyle = '#1a2a4a';
+    ctx.fillRect(x1, padT + chartH - h1, barW, h1);
+
+    // Current bar
+    var h2 = (currData[i] / maxVal) * chartH;
+    ctx.fillStyle = '#c0202a';
+    ctx.fillRect(x2, padT + chartH - h2, barW, h2);
+
+    // X labels
+    ctx.fillStyle = '#6b6e7a';
+    ctx.font = '10px Calibri, sans-serif';
+    ctx.textAlign = 'center';
+    var lbl = labels[i];
+    if (lbl.length > 12) lbl = lbl.substring(0, 12) + '…';
+    ctx.fillText(lbl, gx, padT + chartH + 14);
+  }
+
+  // Axes
+  ctx.strokeStyle = '#c4c8d4';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(padL, padT); ctx.lineTo(padL, padT + chartH); ctx.lineTo(padL + chartW, padT + chartH); ctx.stroke();
+}
+
+// ── DRAW ALL TREND CHARTS ──
+function drawTrendCharts() {
+  // Chart 1 — Volume by channel
+  drawGroupedBarChart('chartVolume',
+    ['Voice','Email','Chat','Callback'],
+    [520, 106, 233, 176],
+    [548, 119, 251, 191],
+    { maxVal: 620, percent: false, showTarget: false }
+  );
+
+  // Chart 2 — Answer Rate by channel
+  drawGroupedBarChart('chartAnswerRate',
+    ['Voice','Email','Chat','Callback'],
+    [46.9, 94.3, 86.3, 93.2],
+    [56.9, 94.1, 86.9, 93.2],
+    { maxVal: 110, percent: true }
+  );
+
+  // Chart 3 — Voice answer rate by queue
+  drawGroupedBarChart('chartVoiceQueues',
+    ['POD1','POD2','POD3','POD4','CE Team','Client Sup','HCC','Telemed'],
+    [35.3, 51.0, 32.4, 39.3, 72.9, 65.0, 32.7, 8.7],
+    [44.7, 59.6, 41.7, 43.3, 75.5, 73.7, 45.6, 20.0],
+    { maxVal: 100, percent: true }
+  );
+
+  // Chart 4 — Abandon rate (voice only, overall)
+  drawGroupedBarChart('chartAbandon',
+    ['Prior Week\n(Mar 9–15)','Current Week\n(Mar 16–22)'],
+    [22.3, 0],
+    [0, 17.9],
+    { maxVal: 30, percent: true, showTarget: false }
+  );
+}
+
+// Initialize on load
+window.addEventListener('load', function() {
+  // Charts render if trending tab is active by default
+  if (document.getElementById('tab-trending').classList.contains('active')) {
+    drawTrendCharts();
+  }
+});
+window.addEventListener('resize', function() {
+  if (document.getElementById('tab-trending').classList.contains('active')) {
+    drawTrendCharts();
+  }
+});
+</script>
+
+</body>
+</html>
