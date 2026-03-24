@@ -1198,7 +1198,7 @@ function rrect(ctx, x, y, w, h, radii) {
 }
 function drawGroupedBarChart(ctx, W, H, cfg) {
   const { labels, prevVals, currVals, colors, maxVal, isRate, title80 } = cfg;
-  const pad = { top: 76, right: 20, bottom: 62, left: 42 };
+  const pad = { top: 76, right: 52, bottom: 62, left: 42 };
   const chartW = W - pad.left - pad.right;
   const chartH = H - pad.top - pad.bottom;
   const n = labels.length;
@@ -1233,15 +1233,11 @@ function drawGroupedBarChart(ctx, W, H, cfg) {
     ctx.strokeStyle = '#c0202a'; ctx.lineWidth = 1.5;
     ctx.moveTo(pad.left, y80); ctx.lineTo(pad.left + chartW, y80); ctx.stroke();
     ctx.setLineDash([]);
-    // Label badge sitting on the line
-    ctx.font = 'bold 10px Segoe UI, sans-serif';
-    const t80 = '80% target';
-    const tW = ctx.measureText(t80).width;
-    const bx = pad.left + 8, bh = 15, bpad = 4;
-    ctx.fillStyle = 'white';
-    ctx.fillRect(bx - bpad, y80 - bh/2, tW + bpad*2, bh);
-    ctx.fillStyle = '#c0202a'; ctx.textAlign = 'left';
-    ctx.fillText(t80, bx, y80 + 4);
+    // Two-line label in right margin, vertically centred on the line
+    ctx.fillStyle = '#c0202a'; ctx.font = 'bold 10px Segoe UI, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('80%',    W - 4, y80 - 3);
+    ctx.fillText('target', W - 4, y80 + 9);
   }
 
   labels.forEach((lbl, i) => {
