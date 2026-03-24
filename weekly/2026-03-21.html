@@ -102,7 +102,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 .chart-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;}
 .chart-box{background:var(--white);border:1px solid var(--border-str);padding:22px 22px 18px;border-radius:12px;}
 .chart-title{font-family:'Aptos Display',Calibri,sans-serif;font-size:18px;font-weight:700;color:var(--navy-deep);margin-bottom:4px;}
-.chart-sub{font-size:14px;color:var(--ink-3);margin-bottom:20px;}
+.chart-sub{font-size:14px;color:var(--ink-3);margin-bottom:6px;}
 .hbar{display:flex;flex-direction:column;gap:13px;}
 .hbar-row{display:flex;align-items:center;gap:10px;}
 .hbar-label{font-size:15px;color:var(--ink-2);text-align:right;width:155px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
@@ -146,9 +146,9 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 .trend-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
 .tc-pos::before{background:var(--green);}.tc-neg::before{background:var(--red);}.tc-warn::before{background:var(--amber);}.tc-info::before{background:var(--blue-acc);}
 .tc-icon{font-size:26px;margin-bottom:10px;}
-.tc-title{font-family:'Aptos Display',Calibri,sans-serif;font-size:16px;font-weight:700;color:var(--navy-deep);margin-bottom:8px;line-height:1.3;}
-.tc-body{font-size:14px;color:var(--ink-2);line-height:1.65;}
-.tc-note{margin-top:10px;padding-top:8px;border-top:1px solid var(--border);font-size:12.5px;color:var(--ink-3);}
+.tc-title{font-family:'Aptos Display',Calibri,sans-serif;font-size:17px;font-weight:700;color:var(--navy-deep);margin-bottom:8px;line-height:1.3;}
+.tc-body{font-size:15px;color:var(--ink-2);line-height:1.65;}
+.tc-note{margin-top:10px;padding-top:8px;border-top:1px solid var(--border);font-size:13.5px;color:var(--ink-3);}
 .kpi-delta{font-size:12.5px;font-weight:700;padding:3px 9px;border-radius:6px;margin-top:6px;display:inline-flex;align-items:center;gap:3px;}
 .kpi-delta.up-good{background:var(--green-lt);color:var(--green);}.kpi-delta.dn-good{background:var(--green-lt);color:var(--green);}
 .kpi-delta.up-bad{background:var(--red-light);color:var(--red);}.kpi-delta.dn-bad{background:var(--red-light);color:var(--red);}
@@ -1243,16 +1243,16 @@ function drawGroupedBarChart(ctx, W, H, cfg) {
     const x1 = cx - barW - barGap/2;
     const x2 = cx + barGap/2;
 
-    // Prev bar (light)
+    // Prev bar (fixed grey)
     const prevH = Math.max((prevVals[i] / max) * chartH, 2);
     const prevY = pad.top + chartH - prevH;
-    ctx.fillStyle = hexToRgba(colors[i], 0.18);
-    ctx.strokeStyle = hexToRgba(colors[i], 0.55);
+    ctx.fillStyle = 'rgba(90,95,110,0.13)';
+    ctx.strokeStyle = 'rgba(90,95,110,0.48)';
     ctx.lineWidth = 1.5;
     rrect(ctx, x1, prevY, barW, prevH, [3,3,0,0]);
     ctx.fill(); ctx.stroke();
     // prev value label
-    ctx.fillStyle = hexToRgba(colors[i], 0.75);
+    ctx.fillStyle = 'rgba(90,95,110,0.72)';
     ctx.font = '10px Segoe UI, sans-serif'; ctx.textAlign = 'center';
     ctx.fillText(isRate ? prevVals[i].toFixed(1)+'%' : prevVals[i], x1+barW/2, prevY - 7);
 
@@ -1281,14 +1281,14 @@ function drawGroupedBarChart(ctx, W, H, cfg) {
     ctx.fillText(lbl, cx, pad.top + chartH + 34);
   });
 
-  // Legend
-  const lY = pad.top - 22;
+  // Legend — closer to title, more space before bars
+  const lY = pad.top - 36;
   ctx.fillStyle = 'rgba(80,80,80,0.15)'; ctx.strokeStyle = 'rgba(80,80,80,0.5)'; ctx.lineWidth = 1.2;
   rrect(ctx, pad.left, lY-8, 14, 9, 2); ctx.fill(); ctx.stroke();
   ctx.fillStyle = '#6b6e7a'; ctx.font = '11px Segoe UI, sans-serif'; ctx.textAlign = 'left';
   ctx.fillText('Mar 8\u201315 (prior week)', pad.left+18, lY);
 
-  ctx.fillStyle = '#1a2a4a'; ctx.strokeStyle = 'transparent';
+  ctx.fillStyle = colors[0]; ctx.strokeStyle = 'transparent';
   rrect(ctx, pad.left+175, lY-8, 14, 9, 2); ctx.fill();
   ctx.fillStyle = '#6b6e7a'; ctx.font = '11px Segoe UI, sans-serif';
   ctx.fillText('Mar 15\u201321 (this week)', pad.left+193, lY);
@@ -1301,7 +1301,7 @@ function drawTrendCharts() {
       labels: ['Voice', 'Chat', 'Callback', 'Email'],
       prevVals: [520, 233, 176, 106],
       currVals: [527, 162, 143, 94],
-      colors: ['#1a2a4a','#1a2a4a','#1a2a4a','#1a2a4a'],
+      colors: ['#1e63ca','#16a34a','#d97706','#7c3aed'],
       isRate: false
     },
     {
@@ -1309,7 +1309,7 @@ function drawTrendCharts() {
       labels: ['Voice', 'Chat', 'Callback', 'Email'],
       prevVals: [46.9, 86.3, 93.2, 94.3],
       currVals: [39.5, 90.1, 97.2, 100.0],
-      colors: ['#1a2a4a','#1a2a4a','#1a2a4a','#1a2a4a'],
+      colors: ['#1e63ca','#16a34a','#d97706','#7c3aed'],
       isRate: true, maxVal: 100, title80: true
     },
     {
@@ -1317,7 +1317,7 @@ function drawTrendCharts() {
       labels: ['CE Team', 'Client Sup', 'HCC', 'Telemedica', 'POD1\u20134 avg'],
       prevVals: [72.9, 65.0, 32.7, 8.7, 30.8],
       currVals: [66.2, 41.4, 58.5, 5.9, 34.8],
-      colors: ['#1a6e44','#1a5fa8','#c47a10','#c0202a','#1a2a4a'],
+      colors: ['#0369a1','#7c3aed','#ea580c','#be123c','#0f766e'],
       isRate: true, maxVal: 100, title80: true
     },
     {
@@ -1325,7 +1325,7 @@ function drawTrendCharts() {
       labels: ['CE Team', 'Client Sup', 'HCC', 'Telemedica', 'POD1\u20134 avg'],
       prevVals: [10.1, 13.0, 30.8, 42.4, 24.0],
       currVals: [16.2, 23.2, 24.4, 36.1, 25.0],
-      colors: ['#1a6e44','#1a5fa8','#c47a10','#c0202a','#1a2a4a'],
+      colors: ['#0369a1','#7c3aed','#ea580c','#be123c','#0f766e'],
       isRate: true, maxVal: null
     }
   ];
