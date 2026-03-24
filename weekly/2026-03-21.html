@@ -1235,7 +1235,7 @@ function drawGroupedBarChart(ctx, W, H, cfg) {
     ctx.setLineDash([]);
     ctx.fillStyle = '#c0202a'; ctx.font = 'bold 10px Segoe UI, sans-serif';
     ctx.textAlign = 'right';
-    ctx.fillText('80% target', pad.left + chartW, y80 - 4);
+    ctx.fillText('80% target', pad.left + chartW + pad.right - 3, y80 - 4);
   }
 
   labels.forEach((lbl, i) => {
