@@ -319,11 +319,15 @@
   <div class="hero">
     <div class="hero-eyebrow">Care Team Analytics</div>
     <h1>Performance <span>Reports</span></h1>
-    <p class="hero-sub">Daily, weekly, and monthly performance reports for the SWH Care Team. Select a report below or browse by period.</p>
+    <p class="hero-sub">Daily, weekly, and monthly performance reports for the SWH Care Team. Select a report below to view the latest data.</p>
   </div>
 
-  <!-- CATEGORY OVERVIEW -->
-  <div class="section-label"><span>Browse by Period</span></div>
+  <!-- MOST RECENT REPORTS -->
+  <div class="section-label"><span>Most Recent Reports</span></div>
+  <div class="report-grid" id="most-recent"></div>
+
+  <!-- BROWSE ARCHIVED REPORTS -->
+  <div class="section-label" style="margin-top:40px"><span>Browse Archived Reports</span></div>
   <div class="category-grid">
     <a href="daily/index.html" class="category-card daily">
       <div class="cat-icon">📅</div>
@@ -344,18 +348,6 @@
       <div class="cat-count" id="monthly-count">Loading...</div>
     </a>
   </div>
-
-  <!-- RECENT DAILY -->
-  <div class="section-label"><span>Recent Daily Reports</span></div>
-  <div class="report-grid" id="recent-daily"></div>
-
-  <!-- RECENT WEEKLY -->
-  <div class="section-label"><span>Recent Weekly Reports</span></div>
-  <div class="report-grid" id="recent-weekly"></div>
-
-  <!-- RECENT MONTHLY -->
-  <div class="section-label"><span>Monthly Reports</span></div>
-  <div class="report-grid" id="recent-monthly"></div>
 
   <!-- FOOTER -->
   <footer>
@@ -393,62 +385,37 @@
     { type: 'monthly', id: '2026-02', path: 'monthly/2026-02.html', label: 'February 2026' },
     // { type: 'daily', id: '2026-03-14', path: 'daily/2026-03-14.html', label: '' },
     { type: 'weekly', id: '2026-03-22', path: 'weekly/2026-03-22.html', label: 'Week of Mar 16–22, 2026' },
+    { type: 'weekly', id: '2026-03-21', path: 'weekly/2026-03-21.html', label: 'Week of Mar 15–21, 2026' },
     { type: 'weekly', id: '2026-03-15', path: 'weekly/2026-03-15.html', label: 'Week of Mar 8–15, 2026' },
   ];
 
   const today = toISODate(new Date());
 
-  const dailyReports = reports.filter(r => r.type === 'daily').sort((a,b) => b.id.localeCompare(a.id)).slice(0, 6);
-  const dailyEl = document.getElementById('recent-daily');
-  if (dailyReports.length === 0) {
-    dailyEl.innerHTML = `<div class="empty-state">No daily reports published yet.<br>Upload <code>daily/YYYY-MM-DD.html</code> and add it to the registry above.</div>`;
-  } else {
-    dailyEl.innerHTML = dailyReports.map(r => `
-      <a href="${r.path}" class="report-card daily">
-        <div class="card-stripe"></div>
-        <div class="card-body">
-          <div class="card-tag">Daily Report</div>
-          <div class="card-title">${friendlyDate(r.id)}</div>
-          <div class="card-date">${r.id}</div>
-        </div>
-        <div class="card-footer">
-          <div class="card-arrow">View Report <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        </div>
-      </a>`).join('');
-  }
-  document.getElementById('daily-count').textContent = `${dailyReports.length} report${dailyReports.length !== 1 ? 's' : ''} available`;
+  // ── COUNT BADGES for archive cards ──
+  const dailyAll   = reports.filter(r => r.type === 'daily').sort((a,b) => b.id.localeCompare(a.id));
+  const weeklyAll  = reports.filter(r => r.type === 'weekly').sort((a,b) => b.id.localeCompare(a.id));
+  const monthlyAll = reports.filter(r => r.type === 'monthly').sort((a,b) => b.id.localeCompare(a.id));
+  document.getElementById('daily-count').textContent   = `${dailyAll.length} report${dailyAll.length   !== 1 ? 's' : ''} available`;
+  document.getElementById('weekly-count').textContent  = `${weeklyAll.length} report${weeklyAll.length  !== 1 ? 's' : ''} available`;
+  document.getElementById('monthly-count').textContent = `${monthlyAll.length} report${monthlyAll.length !== 1 ? 's' : ''} available`;
 
-  const monthlyReports = reports.filter(r => r.type === 'monthly').sort((a,b) => b.id.localeCompare(a.id));
-  const monthlyEl = document.getElementById('recent-monthly');
-  if (monthlyReports.length === 0) {
-    monthlyEl.innerHTML = `<div class="empty-state">No monthly reports yet.</div>`;
-  } else {
-    monthlyEl.innerHTML = monthlyReports.map(r => `
-      <a href="${r.path}" class="report-card monthly">
-        <div class="card-stripe"></div>
-        <div class="card-body">
-          <div class="card-tag">Monthly Report</div>
-          <div class="card-title">${r.label || friendlyMonth(r.id)}</div>
-          <div class="card-date">${r.id}</div>
-        </div>
-        <div class="card-footer">
-          <div class="card-arrow">View Report <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        </div>
-      </a>`).join('');
-  }
-  document.getElementById('monthly-count').textContent = `${monthlyReports.length} report${monthlyReports.length !== 1 ? 's' : ''} available`;
+  // ── MOST RECENT REPORTS — one card per type (latest only) ──
+  const mostRecentEl = document.getElementById('most-recent');
+  const latestByType = [
+    dailyAll[0]   ? { ...dailyAll[0],   typeLabel: 'Daily Report' }   : null,
+    weeklyAll[0]  ? { ...weeklyAll[0],  typeLabel: 'Weekly Report' }  : null,
+    monthlyAll[0] ? { ...monthlyAll[0], typeLabel: 'Monthly Report' } : null,
+  ].filter(Boolean).sort((a,b) => b.id.localeCompare(a.id));
 
-  const weeklyReports = reports.filter(r => r.type === 'weekly').sort((a,b) => b.id.localeCompare(a.id)).slice(0, 6);
-  const weeklyEl = document.getElementById('recent-weekly');
-  if (weeklyReports.length === 0) {
-    weeklyEl.innerHTML = `<div class="empty-state">No weekly reports published yet.<br>Upload <code>weekly/YYYY-MM-DD.html</code> and add it to the registry above.</div>`;
+  if (latestByType.length === 0) {
+    mostRecentEl.innerHTML = `<div class="empty-state">No reports published yet. Add entries to the reports registry above.</div>`;
   } else {
-    weeklyEl.innerHTML = weeklyReports.map(r => `
-      <a href="${r.path}" class="report-card weekly">
+    mostRecentEl.innerHTML = latestByType.map(r => `
+      <a href="${r.path}" class="report-card ${r.type}">
         <div class="card-stripe"></div>
         <div class="card-body">
-          <div class="card-tag">Weekly Report</div>
-          <div class="card-title">${r.label || friendlyDate(r.id)}</div>
+          <div class="card-tag">${r.typeLabel}</div>
+          <div class="card-title">${r.type === 'monthly' ? (r.label || friendlyMonth(r.id)) : (r.label || friendlyDate(r.id))}</div>
           <div class="card-date">${r.id}</div>
         </div>
         <div class="card-footer">
@@ -456,7 +423,7 @@
         </div>
       </a>`).join('');
   }
-  document.getElementById('weekly-count').textContent = `${weeklyReports.length} report${weeklyReports.length !== 1 ? 's' : ''} available`;
+
   document.getElementById('footer-ts').textContent = 'Updated: ' + new Date().toLocaleString('en-US', { dateStyle:'medium', timeStyle:'short' });
 </script>
 </body>
