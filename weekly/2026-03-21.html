@@ -1233,9 +1233,15 @@ function drawGroupedBarChart(ctx, W, H, cfg) {
     ctx.strokeStyle = '#c0202a'; ctx.lineWidth = 1.5;
     ctx.moveTo(pad.left, y80); ctx.lineTo(pad.left + chartW, y80); ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle = '#c0202a'; ctx.font = 'bold 10px Segoe UI, sans-serif';
-    ctx.textAlign = 'right';
-    ctx.fillText('80% target', pad.left + chartW + pad.right - 3, y80 - 4);
+    // Label badge sitting on the line
+    ctx.font = 'bold 10px Segoe UI, sans-serif';
+    const t80 = '80% target';
+    const tW = ctx.measureText(t80).width;
+    const bx = pad.left + 8, bh = 15, bpad = 4;
+    ctx.fillStyle = 'white';
+    ctx.fillRect(bx - bpad, y80 - bh/2, tW + bpad*2, bh);
+    ctx.fillStyle = '#c0202a'; ctx.textAlign = 'left';
+    ctx.fillText(t80, bx, y80 + 4);
   }
 
   labels.forEach((lbl, i) => {
