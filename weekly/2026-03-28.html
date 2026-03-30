@@ -161,15 +161,14 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 .section-wrap.active .page>*:nth-child(3){animation-delay:.12s}.section-wrap.active .page>*:nth-child(4){animation-delay:.16s}
 .section-wrap.active .page>*:nth-child(5){animation-delay:.20s}.section-wrap.active .page>*:nth-child(6){animation-delay:.24s}
 @media print{.nav-tabs{display:none!important;}.section-wrap{display:block!important;}.page{padding:24px 36px!important;}body{background:white!important;}section{page-break-inside:avoid;}}
-
-/* Peak interval heatmap cards */
+/* Peak interval heatmap */
 .ob-card{background:var(--white);border:1px solid var(--border-str);border-radius:12px;padding:14px 12px 14px;}
 .ob-day{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;}
-.ob-heatrow{display:flex;gap:3px;margin-bottom:6px;align-items:flex-end;}
-.ob-cell{flex:1;border-radius:3px;position:relative;cursor:default;}
+.ob-heatrow{display:flex;gap:2px;margin-bottom:6px;align-items:flex-end;}
+.ob-cell{flex:1;border-radius:2px;position:relative;cursor:default;}
 .ob-cell:hover .ob-tooltip{opacity:1;pointer-events:auto;}
 .ob-tooltip{position:absolute;bottom:calc(100% + 5px);left:50%;transform:translateX(-50%);background:var(--navy);color:white;font-size:10px;font-weight:600;padding:3px 7px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:10;}
-.ob-labels{display:flex;gap:3px;margin-bottom:12px;}
+.ob-labels{display:flex;gap:2px;margin-bottom:12px;}
 .ob-lbl{flex:1;font-size:8px;color:var(--ink-4);text-align:center;}
 .ob-peaks{border-top:1px solid var(--border);padding-top:9px;}
 .ob-peak-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;font-size:12px;}
@@ -177,6 +176,8 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 .ob-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .ob-peak-time{color:var(--ink-2);flex:1;}
 .ob-peak-count{font-weight:700;color:var(--navy-deep);font-size:13px;}
+.busy-hour-wrap{background:var(--white);border:1px solid var(--border-str);border-radius:12px;padding:22px 22px 16px;}
+.peak-cards-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px;}
 </style>
 </head>
 <body>
@@ -207,14 +208,14 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 
 <!-- NAV TABS -->
 <div class="nav-tabs">
-  <div class="nav-tab active" onclick="showTab('overview')"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="11" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="11" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/></svg> &nbsp; Overview</div>
-  <div class="nav-tab" onclick="showTab('voice')"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><path d="M4.5 3h2.4a.6.6 0 0 1 .57.42l.93 2.8a.6.6 0 0 1-.14.62L6.9 8.1a9.06 9.06 0 0 0 5 5l1.26-1.36a.6.6 0 0 1 .62-.14l2.8.93a.6.6 0 0 1 .42.57V15.5A1.5 1.5 0 0 1 15.5 17C8.6 17 3 11.4 3 4.5A1.5 1.5 0 0 1 4.5 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg> &nbsp; Voice</div>
-  <div class="nav-tab" onclick="showTab('email')"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><rect x="2" y="4.5" width="16" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 6.5l8 5.25L18 6.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg> &nbsp; Email</div>
-  <div class="nav-tab" onclick="showTab('chat')"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3h11A1.5 1.5 0 0 1 17 4.5v8A1.5 1.5 0 0 1 15.5 14H7l-4 3V4.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 8h6M7 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> &nbsp; Chat</div>
-  <div class="nav-tab" onclick="showTab('callback')"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><path d="M4.5 3h2.4a.6.6 0 0 1 .57.42l.93 2.8a.6.6 0 0 1-.14.62L6.9 8.1a9.06 9.06 0 0 0 5 5l1.26-1.36a.6.6 0 0 1 .62-.14l2.8.93a.6.6 0 0 1 .42.57V15.5A1.5 1.5 0 0 1 15.5 17C8.6 17 3 11.4 3 4.5A1.5 1.5 0 0 1 4.5 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 3v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7c0-2.21-1.79-4-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> &nbsp; Callback</div>
-  <div class="nav-tab" onclick="showTab('agents')"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 17c0-3.31 3.13-6 7-6s7 2.69 7 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> &nbsp; Agent Performance</div>
-  <div class="nav-tab" onclick="showTab('actions')"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><path d="M10 2l2.09 4.26L17 7.27l-3.5 3.41.83 4.82L10 13.27l-4.33 2.23.83-4.82L3 7.27l4.91-.71L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg> &nbsp; Recommendations</div>
-  <div class="nav-tab" onclick="showTab('trending')"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><polyline points="2,14 7,8 11,11 18,4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,4 18,4 18,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> &nbsp; Trending</div>
+  <div class="nav-tab active" onclick="showTab('overview', event)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><rect x="2" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="2" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="2" y="11" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="11" y="11" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/></svg> &nbsp; Overview</div>
+  <div class="nav-tab" onclick="showTab('voice', event)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><path d="M4.5 3h2.4a.6.6 0 0 1 .57.42l.93 2.8a.6.6 0 0 1-.14.62L6.9 8.1a9.06 9.06 0 0 0 5 5l1.26-1.36a.6.6 0 0 1 .62-.14l2.8.93a.6.6 0 0 1 .42.57V15.5A1.5 1.5 0 0 1 15.5 17C8.6 17 3 11.4 3 4.5A1.5 1.5 0 0 1 4.5 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg> &nbsp; Voice</div>
+  <div class="nav-tab" onclick="showTab('email', event)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><rect x="2" y="4.5" width="16" height="11" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 6.5l8 5.25L18 6.5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg> &nbsp; Email</div>
+  <div class="nav-tab" onclick="showTab('chat', event)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3h11A1.5 1.5 0 0 1 17 4.5v8A1.5 1.5 0 0 1 15.5 14H7l-4 3V4.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 8h6M7 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> &nbsp; Chat</div>
+  <div class="nav-tab" onclick="showTab('callback', event)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><path d="M4.5 3h2.4a.6.6 0 0 1 .57.42l.93 2.8a.6.6 0 0 1-.14.62L6.9 8.1a9.06 9.06 0 0 0 5 5l1.26-1.36a.6.6 0 0 1 .62-.14l2.8.93a.6.6 0 0 1 .42.57V15.5A1.5 1.5 0 0 1 15.5 17C8.6 17 3 11.4 3 4.5A1.5 1.5 0 0 1 4.5 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14 3v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7c0-2.21-1.79-4-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> &nbsp; Callback</div>
+  <div class="nav-tab" onclick="showTab('agents', event)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 17c0-3.31 3.13-6 7-6s7 2.69 7 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> &nbsp; Agent Performance</div>
+  <div class="nav-tab" onclick="showTab('actions', event)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><path d="M10 2l2.09 4.26L17 7.27l-3.5 3.41.83 4.82L10 13.27l-4.33 2.23.83-4.82L3 7.27l4.91-.71L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg> &nbsp; Recommendations</div>
+  <div class="nav-tab" onclick="showTab('trending', event)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><polyline points="2,14 7,8 11,11 18,4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,4 18,4 18,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> &nbsp; Trending</div>
 </div>
 
 <!-- ═══════════ OVERVIEW ═══════════ -->
@@ -231,49 +232,49 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
       <div class="media-card mc-voice">
         <div class="mc-icon"><svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M4.5 3h2.4a.6.6 0 0 1 .57.42l.93 2.8a.6.6 0 0 1-.14.62L6.9 8.1a9.06 9.06 0 0 0 5 5l1.26-1.36a.6.6 0 0 1 .62-.14l2.8.93a.6.6 0 0 1 .42.57V15.5A1.5 1.5 0 0 1 15.5 17C8.6 17 3 11.4 3 4.5A1.5 1.5 0 0 1 4.5 3z" stroke="var(--navy)" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
         <div class="mc-type">Voice</div>
-        <div class="mc-vol">527</div>
+        <div class="mc-vol">437</div>
         <div class="mc-label">Offered interactions</div>
         <div class="mc-stats">
-          <div class="mc-stat"><span>Answer Rate</span><span class="mc-stat-val bad">39.5%</span></div>
-          <div class="mc-stat"><span>Abandon Rate</span><span class="mc-stat-val bad">24.8%</span></div>
-          <div class="mc-stat"><span>Best SL (Client Support)</span><span class="mc-stat-val warn">46.9%</span></div>
-          <div class="mc-stat"><span>Telemedica Answer Rate</span><span class="mc-stat-val bad">5.9%</span></div>
+          <div class="mc-stat"><span>Answer Rate</span><span class="mc-stat-val warn">60.9%</span></div>
+          <div class="mc-stat"><span>Abandon Rate</span><span class="mc-stat-val warn">17.4%</span></div>
+          <div class="mc-stat"><span>Best SL (Health Care Coordinators)</span><span class="mc-stat-val warn">59.5%</span></div>
+          <div class="mc-stat"><span>Telemedica Answer Rate</span><span class="mc-stat-val bad">33.7%</span></div>
         </div>
       </div>
       <div class="media-card mc-email">
         <div class="mc-icon"><svg width="28" height="28" viewBox="0 0 20 20" fill="none"><rect x="2" y="4.5" width="16" height="11" rx="1.5" stroke="var(--blue-acc)" stroke-width="1.4"/><path d="M2 6.5l8 5.25L18 6.5" stroke="var(--blue-acc)" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
         <div class="mc-type">Email</div>
-        <div class="mc-vol">94</div>
+        <div class="mc-vol">99</div>
         <div class="mc-label">Offered interactions</div>
         <div class="mc-stats">
-          <div class="mc-stat"><span>Answer Rate</span><span class="mc-stat-val good">106.4%</span></div>
-          <div class="mc-stat"><span>Avg SL (all PODs)</span><span class="mc-stat-val good">89.2%</span></div>
-          <div class="mc-stat"><span>Best SL (POD4)</span><span class="mc-stat-val good">92.9%</span></div>
-          <div class="mc-stat"><span>POD1 AHT</span><span class="mc-stat-val warn">6h 43m</span></div>
+          <div class="mc-stat"><span>Handle Rate</span><span class="mc-stat-val good">96.0%</span></div>
+          <div class="mc-stat"><span>Best SL (POD3)</span><span class="mc-stat-val good">100.0%</span></div>
+          <div class="mc-stat"><span>All PODs Above 83%</span><span class="mc-stat-val good">✓</span></div>
+          <div class="mc-stat"><span>POD1 AHT</span><span class="mc-stat-val warn">3h 30m ⚠</span></div>
         </div>
       </div>
       <div class="media-card mc-chat">
         <div class="mc-icon"><svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3h11A1.5 1.5 0 0 1 17 4.5v8A1.5 1.5 0 0 1 15.5 14H7l-4 3V4.5z" stroke="var(--green)" stroke-width="1.4" stroke-linejoin="round"/><path d="M7 8h6M7 11h4" stroke="var(--green)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
         <div class="mc-type">Chat</div>
-        <div class="mc-vol">162</div>
+        <div class="mc-vol">195</div>
         <div class="mc-label">Offered interactions</div>
         <div class="mc-stats">
-          <div class="mc-stat"><span>Answer Rate</span><span class="mc-stat-val good">90.1%</span></div>
-          <div class="mc-stat"><span>Best SL (POD4)</span><span class="mc-stat-val warn">46.7%</span></div>
-          <div class="mc-stat"><span>POD3 ACW Anomaly</span><span class="mc-stat-val bad">4h 29m ⚠</span></div>
-          <div class="mc-stat"><span>POD4 ACW Anomaly</span><span class="mc-stat-val bad">2h 28m ⚠</span></div>
+          <div class="mc-stat"><span>Answer Rate</span><span class="mc-stat-val good">88.2%</span></div>
+          <div class="mc-stat"><span>Best SL (POD4)</span><span class="mc-stat-val amber">44.1%</span></div>
+          <div class="mc-stat"><span>POD3 ACW Anomaly</span><span class="mc-stat-val bad">2h 1m 43s ⚠</span></div>
+          <div class="mc-stat"><span>POD2 ACW Elevated</span><span class="mc-stat-val warn">32m 31s ⚠</span></div>
         </div>
       </div>
       <div class="media-card mc-callback">
         <div class="mc-icon"><svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M4.5 3h2.4a.6.6 0 0 1 .57.42l.93 2.8a.6.6 0 0 1-.14.62L6.9 8.1a9.06 9.06 0 0 0 5 5l1.26-1.36a.6.6 0 0 1 .62-.14l2.8.93a.6.6 0 0 1 .42.57V15.5A1.5 1.5 0 0 1 15.5 17C8.6 17 3 11.4 3 4.5A1.5 1.5 0 0 1 4.5 3z" stroke="var(--amber)" stroke-width="1.4" stroke-linejoin="round"/><path d="M14 3v4h-4" stroke="var(--amber)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7c0-2.21-1.79-4-4-4" stroke="var(--amber)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
         <div class="mc-type">Callback</div>
-        <div class="mc-vol">143</div>
+        <div class="mc-vol">82</div>
         <div class="mc-label">Callback requests</div>
         <div class="mc-stats">
-          <div class="mc-stat"><span>Completion Rate</span><span class="mc-stat-val good">97.2%</span></div>
-          <div class="mc-stat"><span>Telemedica Callbacks</span><span class="mc-stat-val warn">None this week</span></div>
-          <div class="mc-stat"><span>Longest Wait (Client Sup)</span><span class="mc-stat-val bad">11h 40m</span></div>
-          <div class="mc-stat"><span>POD2 Wait</span><span class="mc-stat-val bad">7h 2m</span></div>
+          <div class="mc-stat"><span>Completion Rate</span><span class="mc-stat-val good">98.8%</span></div>
+          <div class="mc-stat"><span>POD1 Handle Time</span><span class="mc-stat-val bad">6h 26m ⚠</span></div>
+          <div class="mc-stat"><span>Longest Wait (Client Sup)</span><span class="mc-stat-val bad">12h 14m</span></div>
+          <div class="mc-stat"><span>CE Team Avg Wait</span><span class="mc-stat-val bad">6h 43m</span></div>
         </div>
       </div>
     </div>
@@ -285,57 +286,24 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
       <span class="sec-title">Weekly Analysis</span>
     </div>
     <div class="narrative">
-      <div class="narr-head">This week's data reveals a <em>deepening Telemedica crisis and system-wide voice SL failure</em> — every voice queue missed the 80% target while email remained a bright spot and callbacks hit near-perfect completion, masking dangerously long customer wait times.</div>
-      <div style="background:#e6eef9;border-left:4px solid var(--blue-acc);padding:12px 18px;border-radius:0 8px 8px 0;margin-bottom:20px;font-size:14px;color:var(--ink-2);">
-        <strong style="color:var(--blue-acc);">📋 Data Note:</strong> Current week (Mar 22–28) exports are pending. This report reflects <strong>Week of Mar 15–22</strong> actuals as the latest available data. All metrics, trends, and recommendations are based on this dataset. The report will be refreshed once Mar 22–28 CSVs are available.
-      </div>
+      <div class="narr-head">This week shows a <em>significant voice recovery alongside persistent structural issues</em> — answer rates improved dramatically but Telemedica remains critical, chat ACW anomalies continue, and callback wait times remain unacceptable despite near-perfect completion.</div>
       <div class="narr-cols">
         <div class="narr-col">
-          <p><strong>Voice performance deteriorated further this week.</strong> Of 527 contacts offered, only 39.5% were answered — down from 46.9% last week — with 131 contacts abandoned (24.8%). Every single voice queue missed the 80% SL target. The best-performing queue, Client Support, reached only 46.9% SL.</p>
-          <p><strong>Telemedica Team remains in critical failure.</strong> With 119 voice contacts offered and only 7 answered (5.9%), the queue posted a 36.1% abandon rate and 2.0% SL. This is the second consecutive week of near-total breakdown for this queue. Unlike last week, Telemedica also posted zero callback entries this week — suggesting the staffing/routing issue is total.</p>
-          <p><strong>Chat ACW anomalies signal stuck interactions.</strong> POD3 chat recorded an avg ACW of 4h 29m 56s and POD4 recorded 2h 28m 34s — almost certainly unresolved wrap-up states rather than legitimate after-call work. This inflates handle times dramatically and reduces agent availability for new contacts.</p>
+          <p><strong>Voice performance improved substantially this week.</strong> Of 437 contacts offered, 266 were answered (60.9%) — up 21.4 percentage points from 39.5% last week. The abandon rate dropped from 24.8% to 17.4%. However, only two queues (Client Support at 58.6% SL and Health Care Coordinators at 59.5% SL) exceeded the 50% SL threshold. All 8 queues still missed the 80% target.</p>
+          <p><strong>Telemedica Team continues in crisis despite partial recovery.</strong> With 89 voice contacts offered and only 30 answered (33.7%), Telemedica improved from last week's 5.9% but remains critically below target. A 27.0% abandon rate means more than 1 in 4 callers hung up. The Telemedica callback queue also shows no entries this week — though unlike last week this absence may reflect reduced demand rather than a complete routing failure.</p>
+          <p><strong>Chat ACW anomaly persists in POD3.</strong> POD3 Chat avg ACW of 2h 1m 43s remains far outside normal bounds (recommended: 3–5 minutes). POD2 Chat ACW of 32m 31s is also elevated. Both queues must be audited for stuck wrap-up states. POD4 Chat improved: ACW of 11m 45s is still elevated but the prior-week extreme of 2h 28m has resolved.</p>
         </div>
         <div class="narr-col">
           <div class="flags">
-            <div class="flag"><div class="fdot crit">!</div><strong>Critical:</strong>&nbsp; Telemedica Team — 5.9% answer rate, 36.1% abandon, SL 2.0% — 2nd consecutive week</div>
-            <div class="flag"><div class="fdot crit">!</div><strong>Critical:</strong>&nbsp; POD4 Voice — 0% Service Level, 33.3% abandon rate on 30 contacts</div>
-            <div class="flag"><div class="fdot crit">!</div><strong>Critical:</strong>&nbsp; Chat ACW anomaly — POD3 avg ACW 4h 29m 56s, POD4 avg ACW 2h 28m 34s</div>
-            <div class="flag"><div class="fdot warn">⚠</div><strong>Warning:</strong>&nbsp; All 8 voice queues below 20% SL vs. 80% target — voice SL worsening week-over-week</div>
-            <div class="flag"><div class="fdot warn">⚠</div><strong>Warning:</strong>&nbsp; Client Support callback wait: 11h 40m avg — customers waiting more than a full workday</div>
-            <div class="flag"><div class="fdot warn">⚠</div><strong>Warning:</strong>&nbsp; Thia Decker: 7d 0h 0m in Not Responding state — likely inactive account anomaly</div>
-            <div class="flag"><div class="fdot good">✓</div><strong>Positive:</strong>&nbsp; Email strong — all 4 PODs above 83% SL, carryover fully cleared</div>
-            <div class="flag"><div class="fdot good">✓</div><strong>Positive:</strong>&nbsp; Callback 97.2% completion — up from 93.2% last week</div>
+            <div class="flag"><div class="fdot crit">!</div><strong>Critical:</strong>&nbsp; Telemedica Team — 33.7% answer rate, 27.0% abandon, SL 27.8% — third consecutive week below threshold</div>
+            <div class="flag"><div class="fdot crit">!</div><strong>Critical:</strong>&nbsp; POD1 Voice — 30.0% answer rate, 30.0% abandon — worst POD this week</div>
+            <div class="flag"><div class="fdot crit">!</div><strong>Critical:</strong>&nbsp; Chat ACW anomaly — POD3 avg ACW 2h 1m 43s; POD2 elevated at 32m 31s</div>
+            <div class="flag"><div class="fdot warn">⚠</div><strong>Warning:</strong>&nbsp; All 8 voice queues still below 80% SL target — no queue has reached threshold in 3+ weeks</div>
+            <div class="flag"><div class="fdot warn">⚠</div><strong>Warning:</strong>&nbsp; Callback wait times — Client Support avg wait 12h 14m; CE Team 6h 43m</div>
+            <div class="flag"><div class="fdot warn">⚠</div><strong>Warning:</strong>&nbsp; POD1 callback handle time of 6h 26m 17s — stuck interaction likely</div>
+            <div class="flag"><div class="fdot good">↑</div><strong>Positive:</strong>&nbsp; Voice answer rate +21.4pp week-over-week (39.5% → 60.9%)</div>
+            <div class="flag"><div class="fdot good">↑</div><strong>Positive:</strong>&nbsp; Email remains strong — all PODs above 83% SL, 96.0% handle rate</div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="sec-head">
-      <span class="sec-num">§ 03</span>
-      <span class="sec-title">Channel Volume &amp; Answer Rate</span>
-      <span class="sec-sub">Week of Mar 22–28, 2026</span>
-    </div>
-    <div class="chart-2col">
-      <div class="chart-box">
-        <div class="chart-title">Contact Volume by Channel</div>
-        <div class="chart-sub">Total offered interactions · This week</div>
-        <div class="hbar">
-          <div class="hbar-row"><div class="hbar-label">Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:49.5%;background:var(--navy)">527</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Chat</div><div class="hbar-track"><div class="hbar-fill" style="width:15.2%;background:var(--green)"></div><span class="hbar-val-out" style="left:15.2%;color:var(--green)">162</span></div></div>
-          <div class="hbar-row"><div class="hbar-label">Callback</div><div class="hbar-track"><div class="hbar-fill" style="width:13.5%;background:var(--amber)"></div><span class="hbar-val-out" style="left:13.5%;color:var(--amber)">143</span></div></div>
-          <div class="hbar-row"><div class="hbar-label">Email</div><div class="hbar-track"><div class="hbar-fill" style="width:8.9%;background:var(--blue-acc)"></div><span class="hbar-val-out" style="left:8.9%;color:var(--blue-acc)">94</span></div></div>
-        </div>
-      </div>
-      <div class="chart-box">
-        <div class="chart-title">Answer Rate by Channel</div>
-        <div class="chart-sub">% of offered contacts answered · Target: 80%</div>
-        <div class="hbar">
-          <div class="hbar-row"><div class="hbar-label">Email</div><div class="hbar-track"><div class="hbar-fill" style="width:100%;background:var(--green)">106.4%</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Callback</div><div class="hbar-track"><div class="hbar-fill" style="width:97.2%;background:var(--green)">97.2%</div><div class="tgt-line" style="left:80%"></div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Chat</div><div class="hbar-track"><div class="hbar-fill" style="width:90.1%;background:var(--green)">90.1%</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:39.5%;background:var(--red)">39.5%</div></div></div>
         </div>
       </div>
     </div>
@@ -343,7 +311,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 
   <div class="report-footer">
     <span>Served With Honor · Care Team Operations</span>
-    <span>Week of Mar 22–28, 2026 · Genesys Cloud CX · Confidential</span>
+    <span>Overview · Week of Mar 22–28, 2026</span>
     <span>Generated Mar 30, 2026</span>
   </div>
 </div>
@@ -354,140 +322,185 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 <div class="page">
 
   <section>
-    <div class="sec-head">
-      <span class="sec-num">§ 01</span>
-      <span class="sec-title">Voice Queue KPIs</span>
-      <span class="sec-sub">Week of Mar 22–28, 2026 · 527 offered</span>
-    </div>
+    <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Voice Queue KPIs</span><span class="sec-sub">Week of Mar 22–28, 2026 · 437 offered</span></div>
     <div class="kpi-row cols-5">
-      <div class="kpi navy"><div class="kpi-label">Total Offered</div><div class="kpi-val">527</div><div class="kpi-sub">Voice contacts this week</div></div>
-      <div class="kpi red"><div class="kpi-label">Answer Rate</div><div class="kpi-val bad">39.5%</div><div class="kpi-sub">208 of 527 answered</div><div class="kpi-badge red">⚠ Target 80%+</div></div>
-      <div class="kpi red"><div class="kpi-label">Abandon Rate</div><div class="kpi-val bad">24.8%</div><div class="kpi-sub">131 contacts abandoned</div><div class="kpi-badge red">⚠ Threshold 5%</div></div>
-      <div class="kpi blue"><div class="kpi-label">Best SL Queue</div><div class="kpi-val warn">46.9%</div><div class="kpi-sub">Client Support (New)</div><div class="kpi-badge amber">↑ Top performer</div></div>
-      <div class="kpi amber"><div class="kpi-label">Total Transfers</div><div class="kpi-val warn">35</div><div class="kpi-sub">All voice queues</div><div class="kpi-badge amber">Review routing</div></div>
+      <div class="kpi navy"><div class="kpi-label">Total Offered</div><div class="kpi-val">437</div><div class="kpi-sub">Voice contacts this week</div></div>
+      <div class="kpi amber"><div class="kpi-label">Answer Rate</div><div class="kpi-val warn">60.9%</div><div class="kpi-sub">266 of 437 answered</div><div class="kpi-badge amber">↑ +21.4pp vs prior week</div></div>
+      <div class="kpi amber"><div class="kpi-label">Abandon Rate</div><div class="kpi-val warn">17.4%</div><div class="kpi-sub">76 contacts abandoned</div><div class="kpi-badge amber">↓ Improved from 24.8%</div></div>
+      <div class="kpi blue"><div class="kpi-label">Best SL</div><div class="kpi-val" style="color:var(--blue-acc)">59.5%</div><div class="kpi-sub">Health Care Coordinators</div><div class="kpi-badge navy">SL target: 80%</div></div>
+      <div class="kpi red"><div class="kpi-label">Telemedica SL</div><div class="kpi-val bad">27.8%</div><div class="kpi-sub">89 offered · 30 answered</div><div class="kpi-badge red">⚠ Still critical</div></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Voice Queue Performance Detail</span><span class="sec-sub">SL Target: 80%</span></div>
-    <div class="dtable-wrap scrollable"><table class="dtable compact" style="table-layout:fixed;width:100%">
-      <thead><tr>
-        <th style="text-align:left;width:16%">Queue</th>
-        <th style="width:5.8%">Offered</th><th style="width:6.5%">Answered</th><th style="width:6.2%">Ans %</th>
-        <th style="width:6.2%">Abandon</th><th style="width:6.2%">Abn %</th>
-        <th style="width:6.5%">ASA</th><th style="width:6.8%">Avg Wait</th>
-        <th style="width:8.8%">Service Level</th>
-        <th style="width:7.2%">Avg Handle</th><th style="width:6.4%">Avg Talk</th><th style="width:6.4%">Avg ACW</th><th style="width:5.8%">Xfers</th>
-      </tr></thead>
-      <tbody>
-        <tr>
-          <td><div class="q-name">Care Exp. POD1 Voice</div></td>
-          <td>36</td><td>13</td><td><span class="chip red">36.1%</span></td>
-          <td>9</td><td><span class="chip red">25.0%</span></td>
-          <td>10m 30s</td><td>14m 25s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:9%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">9.1%</span></div></td>
-          <td>5m 49s</td><td>3m 51s</td><td>2m 3s</td><td>—</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. POD2 Voice</div></td>
-          <td>39</td><td>13</td><td><span class="chip red">33.3%</span></td>
-          <td>10</td><td><span class="chip red">25.6%</span></td>
-          <td>1m 14s</td><td>1m 45s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:4%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">4.3%</span></div></td>
-          <td>7m 19s</td><td>6m 0s</td><td>1m 28s</td><td>4</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. POD3 Voice</div></td>
-          <td>27</td><td>10</td><td><span class="chip red">37.0%</span></td>
-          <td>4</td><td><span class="chip amber">14.8%</span></td>
-          <td>1m 0s</td><td>1m 38s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:21%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">21.4%</span></div></td>
-          <td>9m 6s</td><td>5m 19s</td><td>3m 46s</td><td>1</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. POD4 Voice</div><div class="q-sub" style="color:var(--red)">⚠ 0% SL — critical</div></td>
-          <td>30</td><td>10</td><td><span class="chip red">33.3%</span></td>
-          <td>10</td><td><span class="chip red">33.3%</span></td>
-          <td>3m 39s</td><td>5m 40s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:0%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">0.0%</span></div></td>
-          <td>6m 35s</td><td>4m 56s</td><td>1m 48s</td><td>—</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. Team Voice</div><div class="q-sub">Centralized / overflow</div></td>
-          <td>136</td><td>90</td><td><span class="chip amber">66.2%</span></td>
-          <td>22</td><td><span class="chip amber">16.2%</span></td>
-          <td>1m 50s</td><td>2m 40s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:28%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">27.7%</span></div></td>
-          <td>8m 25s</td><td>4m 21s</td><td>4m 50s</td><td>17</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Client Support (New)</div><div class="q-sub">Best SL this week</div></td>
-          <td>99</td><td>41</td><td><span class="chip amber">41.4%</span></td>
-          <td>23</td><td><span class="chip red">23.2%</span></td>
-          <td>53s</td><td>1m 35s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:47%;background:var(--blue-acc)"></div></div><span style="font-size:13px;font-weight:700;color:var(--blue-acc)">46.9%</span></div></td>
-          <td>5m 49s</td><td>2m 36s</td><td>5m 1s</td><td>13</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Health Care Coordinators</div></td>
-          <td>41</td><td>24</td><td><span class="chip amber">58.5%</span></td>
-          <td>10</td><td><span class="chip red">24.4%</span></td>
-          <td>4m 26s</td><td>7m 25s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:29%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">29.4%</span></div></td>
-          <td>6m 28s</td><td>4m 16s</td><td>1m 59s</td><td>—</td>
-        </tr>
-        <tr style="background:var(--red-light)">
-          <td><div class="q-name">Telemedica Team</div><div class="q-sub" style="color:var(--red)">⚠ Near-total abandonment — 2nd week</div></td>
-          <td>119</td><td>7</td><td><span class="chip red">5.9%</span></td>
-          <td>43</td><td><span class="chip red">36.1%</span></td>
-          <td>8m 34s</td><td>12m 45s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:2%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">2.0%</span></div></td>
-          <td>5m 26s</td><td>4m 58s</td><td>3m 56s</td><td>—</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td>All Voice Queues</td>
-          <td>527</td><td>208</td><td>39.5%</td>
-          <td>131</td><td>24.8%</td>
-          <td>3m 2s avg</td><td>—</td>
-          <td><span style="color:var(--red);font-weight:700">~20.7% avg SL</span></td>
-          <td>—</td><td>—</td><td>—</td><td>35</td>
-        </tr>
-      </tfoot>
-    </table></div>
+    <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Voice Queue Detail</span><span class="sec-sub">SL Target: 80% · Sorted by Service Level descending</span></div>
+    <div class="dtable-wrap scrollable">
+      <table class="dtable compact" style="table-layout:fixed;width:100%">
+        <thead><tr>
+          <th style="text-align:left;width:16%">Queue</th>
+          <th style="width:5.8%">Offered</th>
+          <th style="width:6.5%">Answered</th>
+          <th style="width:6.2%">Ans %</th>
+          <th style="width:6.2%">Abandon</th>
+          <th style="width:6.2%">Abn %</th>
+          <th style="width:6.5%">ASA</th>
+          <th style="width:6.8%">Avg Wait</th>
+          <th style="width:8.8%">Service Level</th>
+          <th style="width:7.2%">Avg Handle</th>
+          <th style="width:6.4%">Avg Talk</th>
+          <th style="width:6.4%">Avg ACW</th>
+          <th style="width:5.8%">Xfers</th>
+        </tr></thead>
+        <tbody>
+<tr>
+      <td><div class="q-name">Health Care Coordinators</div></td>
+      <td>49</td><td>36</td><td><span class="chip amber">73.5%</span></td>
+      <td>6</td><td><span class="chip amber">12.2%</span></td>
+      <td>1m 43s</td><td>2m 22s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:60%;background:var(--blue-acc)"></div></div><span style="font-size:13px;font-weight:700;color:var(--blue-acc)">59.5%</span></div></td>
+      <td>5m 41s</td><td>3m 23s</td><td>2m 16s</td>
+      <td>6</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Client Support (New)</div></td>
+      <td>69</td><td>49</td><td><span class="chip amber">71.0%</span></td>
+      <td>9</td><td><span class="chip amber">13.0%</span></td>
+      <td>2m 27s</td><td>3m 1s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:59%;background:var(--blue-acc)"></div></div><span style="font-size:13px;font-weight:700;color:var(--blue-acc)">58.6%</span></div></td>
+      <td>8m 38s</td><td>3m 36s</td><td>5m 38s</td>
+      <td>2</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. Team Voice</div></td>
+      <td>115</td><td>87</td><td><span class="chip amber">75.7%</span></td>
+      <td>15</td><td><span class="chip amber">13.0%</span></td>
+      <td>1m 5s</td><td>1m 43s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:32%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">32.4%</span></div></td>
+      <td>9m 43s</td><td>5m 9s</td><td>5m 0s</td>
+      <td>7</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Telemedica Team</div></td>
+      <td>89</td><td>30</td><td><span class="chip red">33.7%</span></td>
+      <td>24</td><td><span class="chip red">27.0%</span></td>
+      <td>8m 2s</td><td>9m 54s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:28%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">27.8%</span></div></td>
+      <td>11m 35s</td><td>10m 5s</td><td>2m 54s</td>
+      <td>1</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD1 Voice</div></td>
+      <td>20</td><td>6</td><td><span class="chip red">30.0%</span></td>
+      <td>6</td><td><span class="chip red">30.0%</span></td>
+      <td>2m 19s</td><td>8m 3s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:17%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">16.7%</span></div></td>
+      <td>8m 2s</td><td>5m 45s</td><td>2m 36s</td>
+      <td>—</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD4 Voice</div></td>
+      <td>34</td><td>18</td><td><span class="chip amber">52.9%</span></td>
+      <td>8</td><td><span class="chip red">23.5%</span></td>
+      <td>1m 46s</td><td>3m 27s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:15%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">15.4%</span></div></td>
+      <td>8m 2s</td><td>5m 23s</td><td>2m 37s</td>
+      <td>3</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD2 Voice</div></td>
+      <td>26</td><td>18</td><td><span class="chip amber">69.2%</span></td>
+      <td>3</td><td><span class="chip amber">11.5%</span></td>
+      <td>2m 32s</td><td>2m 22s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:14%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">14.3%</span></div></td>
+      <td>6m 52s</td><td>5m 30s</td><td>1m 23s</td>
+      <td>1</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD3 Voice</div></td>
+      <td>35</td><td>22</td><td><span class="chip amber">62.9%</span></td>
+      <td>5</td><td><span class="chip amber">14.3%</span></td>
+      <td>4m 6s</td><td>4m 19s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:7%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">7.4%</span></div></td>
+      <td>10m 50s</td><td>6m 36s</td><td>4m 16s</td>
+      <td>5</td>
+    </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>All Voice Queues</td>
+            <td>437</td>
+            <td>266</td>
+            <td>60.9%</td>
+            <td>76</td>
+            <td>17.4%</td>
+            <td>—</td><td>—</td>
+            <td><span style="color:var(--amber);font-weight:700">All &lt;80%</span></td>
+            <td>—</td><td>—</td><td>—</td><td>—</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="agent-note">All 8 voice queues missed the 80% SL target for the third consecutive week. Client Support (58.6%) and HCC (59.5%) led performance while POD1 (16.7%), POD2 (14.3%), and POD3 (7.4%) posted very low SLs. Telemedica improved from 2.0% to 27.8% but remains below target. POD1 continue to show high abandon rates (30.0%) — review staffing overlap and routing priority for this queue.</div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">§ 03</span><span class="sec-title">Visual Comparisons</span></div>
-    <div class="chart-2col">
-      <div class="chart-box">
-        <div class="chart-title">Service Level % by Queue</div>
-        <div class="chart-sub">Target: 80% (red line)</div>
-        <div class="hbar">
-          <div class="hbar-row"><div class="hbar-label">Client Support</div><div class="hbar-track"><div class="hbar-fill" style="width:58.6%;background:var(--blue-acc)">46.9%</div><div class="tgt-line" style="left:100%"></div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Health Care Coords.</div><div class="hbar-track"><div class="hbar-fill" style="width:36.8%;background:var(--amber)">29.4%</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Care Exp. Team Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:34.6%;background:var(--amber)">27.7%</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Care Exp. POD3 Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:26.8%;background:var(--red)">21.4%</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Care Exp. POD1 Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:11.4%;background:var(--red)"></div><span class="hbar-val-out" style="left:11.4%;color:var(--red)">9.1%</span></div></div>
-          <div class="hbar-row"><div class="hbar-label">Care Exp. POD2 Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:5.4%;background:var(--red)"></div><span class="hbar-val-out" style="left:5.4%;color:var(--red)">4.3%</span></div></div>
-          <div class="hbar-row"><div class="hbar-label">Telemedica Team</div><div class="hbar-track"><div class="hbar-fill" style="width:2.5%;background:var(--red)"></div><span class="hbar-val-out" style="left:2.5%;color:var(--red)">2.0%</span></div></div>
-          <div class="hbar-row"><div class="hbar-label">Care Exp. POD4 Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:1.0%;background:var(--red)"></div><span class="hbar-val-out" style="left:1.0%;color:var(--red)">0%</span></div></div>
-        </div>
-      </div>
-      <div class="chart-box">
-        <div class="chart-title">Avg Speed of Answer (ASA)</div>
-        <div class="chart-sub">Lower is better</div>
-        <div class="hbar">
-          <div class="hbar-row"><div class="hbar-label">Client Support</div><div class="hbar-track"><div class="hbar-fill" style="width:7%;background:var(--green)"></div><span class="hbar-val-out" style="left:7%;color:var(--green)">53s</span></div></div>
-          <div class="hbar-row"><div class="hbar-label">Care Exp. POD2</div><div class="hbar-track"><div class="hbar-fill" style="width:9%;background:var(--green)"></div><span class="hbar-val-out" style="left:9%;color:var(--green)">1m 14s</span></div></div>
-          <div class="hbar-row"><div class="hbar-label">Care Exp. POD3</div><div class="hbar-track"><div class="hbar-fill" style="width:10%;background:var(--green)"></div><span class="hbar-val-out" style="left:10%;color:var(--green)">1m 0s</span></div></div>
-          <div class="hbar-row"><div class="hbar-label">Care Exp. Team Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:14%;background:var(--green)"></div><span class="hbar-val-out" style="left:14%;color:var(--green)">1m 50s</span></div></div>
-          <div class="hbar-row"><div class="hbar-label">Care Exp. POD4</div><div class="hbar-track"><div class="hbar-fill" style="width:28%;background:var(--amber)">3m 39s</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Health Care Coords.</div><div class="hbar-track"><div class="hbar-fill" style="width:34%;background:var(--amber)">4m 26s</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Care Exp. POD1</div><div class="hbar-track"><div class="hbar-fill" style="width:81%;background:var(--red)">10m 30s</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Telemedica Team</div><div class="hbar-track"><div class="hbar-fill" style="width:100%;background:var(--red)">8m 34s</div></div></div>
-        </div>
+    <div class="sec-head"><span class="sec-num">§ 03</span><span class="sec-title">Service Level Comparison</span><span class="sec-sub">All queues · Target: 80%</span></div>
+    <div class="chart-box">
+      <div class="chart-title">Service Level by Queue</div>
+      <div class="chart-sub">% within service level threshold · Red dashed line = 80% target</div>
+      <div class="hbar" style="gap:11px;margin-top:8px;">
+<div class="hbar-row">
+  <div class="hbar-label">Health Care Coordinators</div>
+  <div class="hbar-track">
+    <div class="hbar-fill" style="width:59.5%;background:var(--blue-acc)">59.5%</div>
+    <div class="tgt-line" style="left:80%"></div>
+  </div>
+</div>
+<div class="hbar-row">
+  <div class="hbar-label">Client Support (New)</div>
+  <div class="hbar-track">
+    <div class="hbar-fill" style="width:58.6%;background:var(--blue-acc)">58.6%</div>
+    <div class="tgt-line" style="left:80%"></div>
+  </div>
+</div>
+<div class="hbar-row">
+  <div class="hbar-label">Care Exp. Team Voice</div>
+  <div class="hbar-track">
+    <div class="hbar-fill" style="width:32.4%;background:var(--amber)">32.4%</div>
+    <div class="tgt-line" style="left:80%"></div>
+  </div>
+</div>
+<div class="hbar-row">
+  <div class="hbar-label">Telemedica Team</div>
+  <div class="hbar-track">
+    <div class="hbar-fill" style="width:27.8%;background:var(--amber)">27.8%</div>
+    <div class="tgt-line" style="left:80%"></div>
+  </div>
+</div>
+<div class="hbar-row">
+  <div class="hbar-label">Care Exp. POD1 Voice</div>
+  <div class="hbar-track">
+    <div class="hbar-fill" style="width:16.7%;background:var(--red)"></div>
+    <span class="hbar-val-out" style="left:16.7%;color:var(--red)">16.7%</span>
+    <div class="tgt-line" style="left:80%"></div>
+  </div>
+</div>
+<div class="hbar-row">
+  <div class="hbar-label">Care Exp. POD4 Voice</div>
+  <div class="hbar-track">
+    <div class="hbar-fill" style="width:15.4%;background:var(--red)"></div>
+    <span class="hbar-val-out" style="left:15.4%;color:var(--red)">15.4%</span>
+    <div class="tgt-line" style="left:80%"></div>
+  </div>
+</div>
+<div class="hbar-row">
+  <div class="hbar-label">Care Exp. POD2 Voice</div>
+  <div class="hbar-track">
+    <div class="hbar-fill" style="width:14.3%;background:var(--red)"></div>
+    <span class="hbar-val-out" style="left:14.3%;color:var(--red)">14.3%</span>
+    <div class="tgt-line" style="left:80%"></div>
+  </div>
+</div>
+<div class="hbar-row">
+  <div class="hbar-label">Care Exp. POD3 Voice</div>
+  <div class="hbar-track">
+    <div class="hbar-fill" style="width:7.4%;background:var(--red)"></div>
+    <span class="hbar-val-out" style="left:7.4%;color:var(--red)">7.4%</span>
+    <div class="tgt-line" style="left:80%"></div>
+  </div>
+</div>
       </div>
     </div>
   </section>
@@ -505,17 +518,17 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 <div class="page">
 
   <section>
-    <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Email Queue KPIs</span><span class="sec-sub">Week of Mar 22–28, 2026 · 94 offered</span></div>
+    <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Email Queue KPIs</span><span class="sec-sub">Week of Mar 22–28, 2026 · 99 offered</span></div>
     <div class="kpi-row cols-4">
-      <div class="kpi navy"><div class="kpi-label">Total Offered</div><div class="kpi-val">94</div><div class="kpi-sub">Email contacts this week</div></div>
-      <div class="kpi green"><div class="kpi-label">Answer Rate</div><div class="kpi-val good">106.4%</div><div class="kpi-sub">100 of 94 handled + carryover</div><div class="kpi-badge green">↑ Carryover cleared</div></div>
-      <div class="kpi green"><div class="kpi-label">Avg SL</div><div class="kpi-val good">89.2%</div><div class="kpi-sub">All 4 PODs above 83%</div><div class="kpi-badge green">↑ All above target</div></div>
+      <div class="kpi navy"><div class="kpi-label">Total Offered</div><div class="kpi-val">99</div><div class="kpi-sub">Email contacts this week</div></div>
+      <div class="kpi green"><div class="kpi-label">Handle Rate</div><div class="kpi-val good">96.0%</div><div class="kpi-sub">95 of 99 handled</div><div class="kpi-badge green">↑ Strong performance</div></div>
+      <div class="kpi green"><div class="kpi-label">Avg SL</div><div class="kpi-val good">95.8%</div><div class="kpi-sub">All 4 PODs above 83%</div><div class="kpi-badge green">↑ All above target</div></div>
       <div class="kpi blue"><div class="kpi-label">Abandonments</div><div class="kpi-val">0</div><div class="kpi-sub">No abandoned email contacts</div><div class="kpi-badge green">✓ Clean queue</div></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Email Queue Detail</span><span class="sec-sub">SL Target: 80% · *AHT includes hold time in email channel</span></div>
+    <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Email Queue Detail</span><span class="sec-sub">SL Target: 80% · Sorted by SL descending</span></div>
     <div class="dtable-wrap"><table class="dtable">
       <thead><tr>
         <th style="text-align:left">Queue</th>
@@ -524,40 +537,36 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
         <th>Avg Handle</th><th>Avg Talk</th><th>Avg ACW</th>
       </tr></thead>
       <tbody>
-        <tr>
-          <td><div class="q-name">Care Exp. POD4 Email</div><div class="q-sub">Best SL this week</div></td>
-          <td>27</td><td>28</td><td><span class="chip green">103.7%</span></td>
-          <td>5h 47m 20s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:93%;background:var(--green)"></div></div><span style="font-size:13px;font-weight:700;color:var(--green)">92.9%</span></div></td>
-          <td style="color:var(--amber);font-weight:700">1h 6m 58s</td><td>2m 41s</td><td style="color:var(--amber);font-weight:700">1h 2m 25s</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. POD2 Email</div><div class="q-sub">Full carryover cleared</div></td>
-          <td>44</td><td>48</td><td><span class="chip green">109.1%</span></td>
-          <td>9h 45m 39s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:92%;background:var(--green)"></div></div><span style="font-size:13px;font-weight:700;color:var(--green)">91.7%</span></div></td>
-          <td>4m 29s</td><td>2m 31s</td><td>39s</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. POD1 Email</div></td>
-          <td>18</td><td>18</td><td><span class="chip green">100%</span></td>
-          <td>11h 55m 58s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:89%;background:var(--green)"></div></div><span style="font-size:13px;font-weight:700;color:var(--green)">88.9%</span></div></td>
-          <td style="color:var(--amber);font-weight:700">6h 43m 24s</td><td>2h 3m 27s</td><td style="color:var(--amber);font-weight:700">2h 49m 52s</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. POD3 Email</div></td>
-          <td>5</td><td>6</td><td><span class="chip green">120%</span></td>
-          <td>11h 6m 16s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:83%;background:var(--green)"></div></div><span style="font-size:13px;font-weight:700;color:var(--green)">83.3%</span></div></td>
-          <td>11m 7s</td><td>2m 14s</td><td>1m 57s</td>
-        </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD3 Email</div><div class="q-sub">Best SL this week</div></td>
+      <td>6</td><td>5</td><td><span class="chip green">83.3%</span></td>
+      <td>4h 34m 47s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:100%;background:var(--green)"></div></div><span style="font-size:13px;font-weight:700;color:var(--green)">100.0%</span></div></td>
+      <td >48m 3s</td><td>8m 6s</td><td >31m 29s</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD2 Email</div></td>
+      <td>40</td><td>39</td><td><span class="chip green">97.5%</span></td>
+      <td>2h 31m 45s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:97%;background:var(--green)"></div></div><span style="font-size:13px;font-weight:700;color:var(--green)">97.4%</span></div></td>
+      <td >11m 35s</td><td>4m 14s</td><td >3m 13s</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD4 Email</div></td>
+      <td>35</td><td>33</td><td><span class="chip green">94.3%</span></td>
+      <td>5h 19m 32s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:97%;background:var(--green)"></div></div><span style="font-size:13px;font-weight:700;color:var(--green)">97.0%</span></div></td>
+      <td >19m 36s</td><td>6m 3s</td><td >10m 14s</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD1 Email</div></td>
+      <td>18</td><td>18</td><td><span class="chip green">100.0%</span></td>
+      <td>8h 21m 52s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:89%;background:var(--green)"></div></div><span style="font-size:13px;font-weight:700;color:var(--green)">88.9%</span></div></td>
+      <td style="color:var(--amber);font-weight:700">3h 30m 17s</td><td>37m 4s</td><td style="color:var(--amber);font-weight:700">1h 33m 51s</td>
+    </tr>
       </tbody>
       <tfoot>
-        <tr><td>All Email Queues</td><td>94</td><td>100</td><td>106.4%</td><td>9h 38m avg</td><td><span style="color:var(--green);font-weight:700">89.2% avg SL</span></td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>All Email Queues</td><td>99</td><td>95</td><td>96.0%</td><td>—</td><td><span style="color:var(--green);font-weight:700">95.8% avg SL</span></td><td>—</td><td>—</td><td>—</td></tr>
       </tfoot>
     </table></div>
-    <div class="agent-note">Answer % exceeding 100% indicates prior-period contacts cleared this week. No abandonments recorded in any email queue. POD1 and POD4 AHT and ACW are elevated — POD4 ACW of 1h 2m and POD1 ACW of 2h 49m likely reflect complex case handling but should be reviewed against resolution rates. POD1 handle time of 6h 43m warrants case-level audit to confirm no wrap-up state anomaly.</div>
+    <div class="agent-note">Email performance remains strong for the third consecutive week — all 4 PODs above 83% SL with zero abandonments. POD3 achieved 100% SL. POD1 handle time of 3h 30m 17s and ACW of 1h 33m 51s are elevated — audit these interactions for stuck wrap-up state or complex case handling. POD4 had the highest volume (35 offered) with 94.3% handle rate and 97.0% SL. No email queue missed the 80% SL target.</div>
   </section>
 
   <div class="report-footer">
@@ -573,17 +582,17 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 <div class="page">
 
   <section>
-    <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Chat Queue KPIs</span><span class="sec-sub">Week of Mar 22–28, 2026 · 162 offered</span></div>
+    <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Chat Queue KPIs</span><span class="sec-sub">Week of Mar 22–28, 2026 · 195 offered</span></div>
     <div class="kpi-row cols-4">
-      <div class="kpi navy"><div class="kpi-label">Total Offered</div><div class="kpi-val">162</div><div class="kpi-sub">Chat interactions</div></div>
-      <div class="kpi green"><div class="kpi-label">Answer Rate</div><div class="kpi-val good">90.1%</div><div class="kpi-sub">146 of 162 answered</div><div class="kpi-badge green">↑ Above 80% threshold</div></div>
-      <div class="kpi amber"><div class="kpi-label">Best SL</div><div class="kpi-val warn">46.7%</div><div class="kpi-sub">POD4 — all below 80%</div><div class="kpi-badge red">⚠ All below target</div></div>
-      <div class="kpi red"><div class="kpi-label">ACW Anomalies</div><div class="kpi-val bad">2</div><div class="kpi-sub">POD3 &amp; POD4 flagged</div><div class="kpi-badge red">⚠ Audit wrap-up states</div></div>
+      <div class="kpi navy"><div class="kpi-label">Total Offered</div><div class="kpi-val">195</div><div class="kpi-sub">Chat interactions</div></div>
+      <div class="kpi green"><div class="kpi-label">Answer Rate</div><div class="kpi-val good">88.2%</div><div class="kpi-sub">172 of 195 answered</div><div class="kpi-badge green">↑ Above 80% threshold</div></div>
+      <div class="kpi amber"><div class="kpi-label">Best SL</div><div class="kpi-val warn">44.1%</div><div class="kpi-sub">POD4 — all below 80%</div><div class="kpi-badge red">⚠ All below target</div></div>
+      <div class="kpi red"><div class="kpi-label">ACW Anomalies</div><div class="kpi-val bad">2</div><div class="kpi-sub">POD3 (2h 1m) &amp; POD2 (32m)</div><div class="kpi-badge red">⚠ Audit wrap-up states</div></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Chat Queue Detail</span><span class="sec-sub">SL Target: 80%</span></div>
+    <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Chat Queue Detail</span><span class="sec-sub">SL Target: 80% · Sorted by SL descending</span></div>
     <div class="dtable-wrap"><table class="dtable">
       <thead><tr>
         <th style="text-align:left">Queue</th>
@@ -592,40 +601,36 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
         <th>Avg Handle</th><th>Avg Talk</th><th>Avg ACW</th><th>Holds</th>
       </tr></thead>
       <tbody>
-        <tr>
-          <td><div class="q-name">Care Exp. POD4 Chat</div><div class="q-sub">Best SL this week</div></td>
-          <td>49</td><td>45</td><td><span class="chip green">91.8%</span></td>
-          <td>19m 16s</td><td>27m 50s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:47%;background:var(--blue-acc)"></div></div><span style="font-size:13px;font-weight:700;color:var(--blue-acc)">46.7%</span></div></td>
-          <td style="color:var(--red);font-weight:700">2h 38m 17s ⚠</td><td>6m 39s</td><td style="color:var(--red);font-weight:700">2h 28m 34s ⚠</td><td>36</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. POD1 Chat</div></td>
-          <td>41</td><td>39</td><td><span class="chip green">95.1%</span></td>
-          <td>8h 20m 25s</td><td>7h 15m</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:13%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">12.8%</span></div></td>
-          <td>15m 57s</td><td>5m 41s</td><td>6m 16s</td><td>32</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. POD2 Chat</div><div class="q-sub">Only 78.3% answer rate</div></td>
-          <td>46</td><td>36</td><td><span class="chip amber">78.3%</span></td>
-          <td>2h 53m 41s</td><td>3h 42m</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:6%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">5.6%</span></div></td>
-          <td>12m 4s</td><td>7m 25s</td><td>1m 28s</td><td>26</td>
-        </tr>
-        <tr style="background:var(--red-light)">
-          <td><div class="q-name">Care Exp. POD3 Chat</div><div class="q-sub" style="color:var(--red)">⚠ AHT 4h 29m — extreme ACW anomaly</div></td>
-          <td>26</td><td>26</td><td><span class="chip green">100%</span></td>
-          <td>31m 36s</td><td>54m 10s</td>
-          <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:0%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">0.0%</span></div></td>
-          <td style="color:var(--red);font-weight:700">4h 29m 15s ⚠</td><td>7m 31s</td><td style="color:var(--red);font-weight:700">4h 29m 56s ⚠</td><td>15</td>
-        </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD4 Chat</div><div class="q-sub">Best SL this week</div></td>
+      <td>63</td><td>59</td><td><span class="chip green">93.7%</span></td>
+      <td>42m 23s</td><td>39m 53s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:44%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">44.1%</span></div></td>
+      <td >24m 2s</td><td>7m 34s</td><td >11m 45s</td><td>47</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD1 Chat</div></td>
+      <td>35</td><td>28</td><td><span class="chip green">80.0%</span></td>
+      <td>51m 45s</td><td>42m 9s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:39%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">39.3%</span></div></td>
+      <td >12m 15s</td><td>7m 26s</td><td >1m 21s</td><td>20</td>
+    </tr>
+<tr style="background:var(--red-light)">
+      <td><div class="q-name">Care Exp. POD3 Chat</div><div class="q-sub" style="color:var(--red)">⚠ ACW anomaly — audit wrap-up states</div></td>
+      <td>54</td><td>47</td><td><span class="chip green">87.0%</span></td>
+      <td>6m 58s</td><td>6m 43s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:32%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">31.9%</span></div></td>
+      <td style="color:var(--red);font-weight:700">2h 9m 58s</td><td>7m 5s</td><td style="color:var(--red);font-weight:700">2h 1m 43s ⚠</td><td>33</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD2 Chat</div><div class="q-sub" style="color:var(--red)">⚠ ACW anomaly — audit wrap-up states</div></td>
+      <td>43</td><td>38</td><td><span class="chip green">88.4%</span></td>
+      <td>10m 27s</td><td>9m 28s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:29%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">28.9%</span></div></td>
+      <td >45m 49s</td><td>8m 22s</td><td style="color:var(--red);font-weight:700">32m 31s ⚠</td><td>29</td>
+    </tr>
       </tbody>
       <tfoot>
-        <tr><td>All Chat Queues</td><td>162</td><td>146</td><td>90.1%</td><td>—</td><td>—</td><td><span style="color:var(--red);font-weight:700">~16.3% avg SL</span></td><td>—</td><td>6m 54s*</td><td>—</td><td>109</td></tr>
+        <tr><td>All Chat Queues</td><td>195</td><td>172</td><td>88.2%</td><td>—</td><td>—</td><td><span style="color:var(--red);font-weight:700">36.0% avg SL</span></td><td>—</td><td>7m 23s*</td><td>—</td><td>129</td></tr>
       </tfoot>
     </table></div>
-    <div class="agent-note">* Avg talk time excludes POD3/POD4 anomalies. POD3 Chat ACW of 4h 29m 56s and POD4 Chat ACW of 2h 28m 34s are consistent with agents remaining in wrap-up state rather than logging out — the same pattern as prior weeks. Both queues must be audited immediately for open ACW interactions in Genesys. POD3 ACW alone suggests at least one interaction has been left in an unresolved wrap-up state for the entire week. Audit and close all open ACW states; configure Genesys ACW auto-timeout (recommended 3–5 minutes).</div>
+    <div class="agent-note">*Avg talk excludes POD2/POD3 AHT anomalies. POD3 Chat ACW of 2h 1m 43s is a recurring anomaly — agents remain in wrap-up state rather than logging out or accepting new contacts. POD2 Chat ACW of 32m 31s is also elevated and should be investigated. POD4 ACW of 11m 45s improved significantly from 2h 28m last week. Configure Genesys ACW auto-timeout (recommended: 3–5 minutes) and retrain all agents on proper interaction closure. POD4 leads on answer rate (93.7%) but all queues remain below 80% SL.</div>
   </section>
 
   <div class="report-footer">
@@ -641,17 +646,17 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 <div class="page">
 
   <section>
-    <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Callback Queue KPIs</span><span class="sec-sub">Week of Mar 22–28, 2026 · 143 requests</span></div>
+    <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Callback Queue KPIs</span><span class="sec-sub">Week of Mar 22–28, 2026 · 82 requests</span></div>
     <div class="kpi-row cols-4">
-      <div class="kpi navy"><div class="kpi-label">Total Requests</div><div class="kpi-val">143</div><div class="kpi-sub">Callback contacts this week</div></div>
-      <div class="kpi green"><div class="kpi-label">Completion Rate</div><div class="kpi-val good">97.2%</div><div class="kpi-sub">139 of 143 completed</div><div class="kpi-badge green">↑ Up from 93.2% last week</div></div>
-      <div class="kpi red"><div class="kpi-label">Longest Wait</div><div class="kpi-val bad">11h 40m</div><div class="kpi-sub">Client Support (New)</div><div class="kpi-badge red">⚠ Full workday wait</div></div>
-      <div class="kpi amber"><div class="kpi-label">Telemedica Callbacks</div><div class="kpi-val warn">0</div><div class="kpi-sub">No callback entries this week</div><div class="kpi-badge amber">⚠ Linked to voice crisis</div></div>
+      <div class="kpi navy"><div class="kpi-label">Total Requests</div><div class="kpi-val">82</div><div class="kpi-sub">Callback contacts this week</div></div>
+      <div class="kpi green"><div class="kpi-label">Completion Rate</div><div class="kpi-val good">98.8%</div><div class="kpi-sub">81 of 82 completed</div><div class="kpi-badge green">↑ Excellent completion</div></div>
+      <div class="kpi red"><div class="kpi-label">Longest Wait</div><div class="kpi-val bad">12h 14m</div><div class="kpi-sub">Client Support (New)</div><div class="kpi-badge red">⚠ Full workday+ wait</div></div>
+      <div class="kpi red"><div class="kpi-label">POD1 Handle Time</div><div class="kpi-val bad">6h 26m</div><div class="kpi-sub">10 callbacks · 9 completed</div><div class="kpi-badge red">⚠ Stuck interaction likely</div></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Callback Queue Detail</span></div>
+    <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Callback Queue Detail</span><span class="sec-sub">SL near 0% is expected — SL clock starts at original contact time</span></div>
     <div class="dtable-wrap"><table class="dtable">
       <thead><tr>
         <th style="text-align:left">Queue</th>
@@ -660,54 +665,61 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
         <th>Avg Handle</th><th>Avg Talk</th><th>Avg ACW</th><th>Xfers</th>
       </tr></thead>
       <tbody>
-        <tr>
-          <td><div class="q-name">Health Care Coordinators</div><div class="q-sub">Best wait time this week</div></td>
-          <td>8</td><td>8</td><td><span class="chip green">100%</span></td>
-          <td style="color:var(--green);font-weight:700">43m 29s</td>
-          <td>3m 35s</td><td>2m 52s</td><td>—</td><td>—</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. POD4 Voice</div></td>
-          <td>10</td><td>10</td><td><span class="chip green">100%</span></td>
-          <td>25m 2s</td>
-          <td>20m 13s</td><td>7m 37s</td><td>—</td><td>—</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. POD3 Voice</div></td>
-          <td>13</td><td>12</td><td><span class="chip amber">92.3%</span></td>
-          <td style="color:var(--amber);font-weight:700">1h 56m 7s</td>
-          <td style="color:var(--amber);font-weight:700">1h 57m 46s</td><td>32m 10s</td><td style="color:var(--red);font-weight:700">3h 47m 24s ⚠</td><td>—</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. Team Voice</div></td>
-          <td>31</td><td>29</td><td><span class="chip green">93.5%</span></td>
-          <td style="color:var(--amber);font-weight:700">1h 46m 5s</td>
-          <td>8m 55s</td><td>5m 56s</td><td>2m 20s</td><td>—</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. POD1 Voice</div></td>
-          <td>14</td><td>14</td><td><span class="chip green">100%</span></td>
-          <td style="color:var(--red);font-weight:700">6h 31m 57s</td>
-          <td>6m 51s</td><td>3m 44s</td><td>4s</td><td>—</td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Care Exp. POD2 Voice</div></td>
-          <td>16</td><td>16</td><td><span class="chip green">100%</span></td>
-          <td style="color:var(--red);font-weight:700">7h 2m 47s</td>
-          <td>3m 17s</td><td>3m 17s</td><td>—</td><td>—</td>
-        </tr>
-        <tr style="background:var(--red-light)">
-          <td><div class="q-name">Client Support (New)</div><div class="q-sub" style="color:var(--red)">⚠ Longest wait this week</div></td>
-          <td>51</td><td>50</td><td><span class="chip green">98.0%</span></td>
-          <td style="color:var(--red);font-weight:700">11h 40m 24s</td>
-          <td>33m 27s</td><td>4m 37s</td><td style="color:var(--red);font-weight:700">1h 41m 16s ⚠</td><td>—</td>
-        </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD1 Voice</div></td>
+      <td>10</td><td>9</td><td><span class="chip amber">90.0%</span></td>
+      <td style="color:var(--amber);font-weight:700">2h 55m 22s</td>
+      <td style="color:var(--red);font-weight:700">6h 26m 17s</td><td>6h 25m 57s</td><td>20s</td>
+      <td>2</td>
+    </tr>
+<tr style="background:var(--red-light)">
+      <td><div class="q-name">Client Support (New)</div><div class="q-sub" style="color:var(--red)">⚠ Longest wait this week</div></td>
+      <td>28</td><td>26</td><td><span class="chip amber">92.9%</span></td>
+      <td style="color:var(--red);font-weight:700">12h 14m 21s</td>
+      <td style="color:var(--red);font-weight:700">4m 23s</td><td>3m 31s</td><td>49s</td>
+      <td>—</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD2 Voice</div></td>
+      <td>5</td><td>5</td><td><span class="chip green">100.0%</span></td>
+      <td >35m 2s</td>
+      <td >1m 45s</td><td>1m 45s</td><td>—</td>
+      <td>—</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD3 Voice</div><div class="q-sub">Fast callback</div></td>
+      <td>9</td><td>9</td><td><span class="chip green">100.0%</span></td>
+      <td >26m 41s</td>
+      <td >8m 7s</td><td>6m 37s</td><td>20s</td>
+      <td>1</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD4 Voice</div><div class="q-sub">Fast callback</div></td>
+      <td>8</td><td>8</td><td><span class="chip green">100.0%</span></td>
+      <td >13m 8s</td>
+      <td >4m 8s</td><td>3m 40s</td><td>55s</td>
+      <td>—</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Health Care Coordinators</div><div class="q-sub">Fast callback</div></td>
+      <td>7</td><td>7</td><td><span class="chip green">100.0%</span></td>
+      <td >9m 32s</td>
+      <td >11m 32s</td><td>10m 50s</td><td>—</td>
+      <td>—</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. Team Voice</div></td>
+      <td>15</td><td>17</td><td><span class="chip green">113.3%</span></td>
+      <td style="color:var(--red);font-weight:700">6h 43m 41s</td>
+      <td >6m 30s</td><td>5m 52s</td><td>38s</td>
+      <td>—</td>
+    </tr>
       </tbody>
       <tfoot>
-        <tr><td>All Callback Queues</td><td>143</td><td>139</td><td>97.2%</td><td>4h 35m avg</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>All Callback Queues</td><td>82</td><td>81</td><td>98.8%</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
       </tfoot>
     </table></div>
-    <div class="agent-note">Callback SL near 0% is expected — the SL clock starts at the original contact time, not callback placement time. Key metric is completion rate (97.2% overall — excellent). However, average wait times remain very high: clients requesting callbacks from Client Support, POD1, and POD2 are waiting 7–12 hours before being contacted. Telemedica Team has zero callback entries this week, consistent with the total voice staffing failure in that queue. POD3 callback ACW of 3h 47m warrants investigation for stuck interactions.</div>
+    <div class="agent-note">Completion rate is excellent at 98.8% — one callback was not completed (POD1, 10 offered, 9 completed). However, customers waiting 6–12 hours for a callback represents a serious customer experience failure. Client Support callbacks averaged 12h 14m 21s wait — longer than a full business day. POD1 Voice callback avg handle time of 6h 26m 17s almost certainly reflects a stuck interaction left open. Audit POD1 callback interactions in Genesys and close any open states. CE Team average callback wait of 6h 43m 41s also warrants review.</div>
   </section>
 
   <div class="report-footer">
@@ -725,11 +737,11 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
   <section>
     <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Agent KPIs</span><span class="sec-sub">Week of Mar 22–28, 2026 · All media types</span></div>
     <div class="kpi-row cols-5">
-      <div class="kpi navy"><div class="kpi-label">Total Answered</div><div class="kpi-val">437</div><div class="kpi-sub">Inbound across all agents/media</div></div>
-      <div class="kpi green"><div class="kpi-label">Top Agent Volume</div><div class="kpi-val good">299</div><div class="kpi-sub">Auny Elias-Heath</div><div class="kpi-badge green">↑ #1 by total handled</div></div>
-      <div class="kpi blue"><div class="kpi-label">Total Interactions</div><div class="kpi-val">2,375</div><div class="kpi-sub">Handled across all types</div></div>
+      <div class="kpi navy"><div class="kpi-label">Total Inbound Answered</div><div class="kpi-val">548</div><div class="kpi-sub">All agents · All media</div></div>
+      <div class="kpi green"><div class="kpi-label">Top Agent Volume</div><div class="kpi-val good">118</div><div class="kpi-sub">Miguel Garcia</div><div class="kpi-badge green">↑ #1 inbound answered</div></div>
+      <div class="kpi blue"><div class="kpi-label">Zero-Activity Agents</div><div class="kpi-val">5</div><div class="kpi-sub">No handle activity this week</div><div class="kpi-badge amber">⚠ Verify routing</div></div>
       <div class="kpi amber"><div class="kpi-label">Total Transfers</div><div class="kpi-val warn">39</div><div class="kpi-sub">All agents combined</div><div class="kpi-badge amber">Review routing</div></div>
-      <div class="kpi red"><div class="kpi-label">AHT Flags</div><div class="kpi-val bad">2</div><div class="kpi-sub">La'Shay, Ashley Bradley</div><div class="kpi-badge red">⚠ Audit required</div></div>
+      <div class="kpi red"><div class="kpi-label">AHT Flags</div><div class="kpi-val bad">3</div><div class="kpi-sub">La'Shay, Rashidah, Ashley B.</div><div class="kpi-badge red">⚠ Audit required</div></div>
     </div>
   </section>
 
@@ -739,191 +751,237 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
       <thead><tr>
         <th style="text-align:left;min-width:160px;max-width:190px">Agent</th>
         <th style="width:36px">Rank</th>
-        <th style="width:46px">Ans.</th><th style="width:78px">Interactions</th>
+        <th style="width:46px">Ans.</th>
+        <th style="width:90px">Media Split</th>
         <th>Avg Handle</th><th>Avg Talk</th><th>Avg Hold</th><th>Avg ACW</th>
-        <th>Hold Ct.</th><th>Xfers</th><th>On Queue</th><th>Available</th><th>Status</th>
+        <th>Xfers</th><th>On Queue</th><th>Available</th><th>Status</th>
       </tr></thead>
       <tbody>
-        <tr>
-          <td><div class="q-name">Miguel Garcia</div><div class="q-sub">Top inbound answered · 138 contacts</div></td>
-          <td><span class="rank g1">1</span></td>
-          <td>138</td><td>210</td>
-          <td>5m 7s</td><td>3m 15s</td><td>—</td><td>3m 14s</td>
-          <td>50</td><td>26</td>
-          <td>1d 5h 13m</td><td>37m</td>
-          <td><span class="chip blue">Top Inbound</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Ashley Andrus</div></td>
-          <td><span class="rank g2">2</span></td>
-          <td>70</td><td>160</td>
-          <td>10m 50s</td><td>5m 39s</td><td>15m 16s</td><td>30s</td>
-          <td>57</td><td>1</td>
-          <td>1d 1h 33m</td><td>8h 57m</td>
-          <td><span class="chip green">On Track</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">La'Shay Richard</div><div class="q-sub">Email AHT anomaly — 14h 45m</div></td>
-          <td><span class="rank g3">3</span></td>
-          <td>66</td><td>96</td>
-          <td style="color:var(--red);font-weight:700">14h 45m (email) ⚠</td><td>—</td><td>—</td>
-          <td style="color:var(--red);font-weight:700">14m ⚠</td>
-          <td>35</td><td>—</td>
-          <td>15h 15m</td><td>12h 27m</td>
-          <td><span class="chip red">Review AHT</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Rashidah Brown</div></td>
-          <td><span class="rank gn">4</span></td>
-          <td>39</td><td>62</td>
-          <td>11m 34s</td><td>3m 29s</td><td>3m 54s</td><td>9m 1s</td>
-          <td>11</td><td>6</td>
-          <td>1d 4h 3m</td><td>2h 13m</td>
-          <td><span class="chip amber">High ACW</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Dustin Duemer</div></td>
-          <td><span class="rank gn">5</span></td>
-          <td>27</td><td>205</td>
-          <td>3m 49s</td><td>3m 20s</td><td>6m 58s</td><td>20s</td>
-          <td>13</td><td>—</td>
-          <td>4h 37m</td><td>1d 22h 11m</td>
-          <td><span class="chip green">Efficient</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Ashley Bradley</div><div class="q-sub">Chat AHT anomaly — 7h 57m</div></td>
-          <td><span class="rank gn">6</span></td>
-          <td>23</td><td>81</td>
-          <td style="color:var(--red);font-weight:700">7h 57m (chat) ⚠</td><td>6m 21s</td><td>—</td>
-          <td style="color:var(--red);font-weight:700">7h 49m ⚠</td>
-          <td>9</td><td>2</td>
-          <td>1d 0h 41m</td><td>26m</td>
-          <td><span class="chip red">ACW Flag</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Auny Elias-Heath</div><div class="q-sub">Highest total handled (299) · ACW elevated</div></td>
-          <td><span class="rank gn">7</span></td>
-          <td>22</td><td>299</td>
-          <td style="color:var(--amber);font-weight:700">—</td><td>—</td><td>—</td>
-          <td style="color:var(--red);font-weight:700">4h+ ACW (email) ⚠</td>
-          <td>26</td><td>3</td>
-          <td>1d 10h 45m</td><td>9h 58m</td>
-          <td><span class="chip red">Review ACW</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Tatiana Jean-Louis</div></td>
-          <td><span class="rank gn">8</span></td>
-          <td>12</td><td>84</td>
-          <td>11m 1s</td><td>3m 29s</td><td>—</td><td>8m 15s</td>
-          <td>4</td><td>—</td>
-          <td>4h 21m</td><td>1d 0h 5m</td>
-          <td><span class="chip green">On Track</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Jenna Burns</div></td>
-          <td><span class="rank gn">9</span></td>
-          <td>11</td><td>112</td>
-          <td>9m 21s</td><td>5m 19s</td><td>—</td><td>6m 18s</td>
-          <td>20</td><td>1</td>
-          <td>1d 2h 14m</td><td>2h 31m</td>
-          <td><span class="chip green">On Track</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Mirline Etienne</div></td>
-          <td><span class="rank gn">10</span></td>
-          <td>13</td><td>61</td>
-          <td>3m 32s</td><td>2m 45s</td><td>4m 15s</td><td>1m 35s</td>
-          <td>4</td><td>—</td>
-          <td>1d 5h 21m</td><td>3h 0m</td>
-          <td><span class="chip green">Efficient</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Shannon Rogers</div></td>
-          <td><span class="rank gn">11</span></td>
-          <td>6</td><td>115</td>
-          <td>6m 52s</td><td>7m 7s</td><td>—</td><td>11s</td>
-          <td>—</td><td>—</td>
-          <td>9m</td><td>2d 1h 37m</td>
-          <td><span class="chip green">Efficient</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Samantha Shaw</div><div class="q-sub">High outbound · minimal inbound</div></td>
-          <td><span class="rank gn">12</span></td>
-          <td>4</td><td>264</td>
-          <td>—</td><td>—</td><td>—</td><td>—</td>
-          <td>8</td><td>—</td>
-          <td>6m</td><td>1d 14h 7m</td>
-          <td><span class="chip navy">Outbound</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Austin Thomas</div></td>
-          <td><span class="rank gn">13</span></td>
-          <td>4</td><td>37</td>
-          <td>3m 53s</td><td>4m 9s</td><td>3m 7s</td><td>11s</td>
-          <td>6</td><td>—</td>
-          <td>4h 42m</td><td>1d 6h 1m</td>
-          <td><span class="chip green">On Track</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">EuKyta Little</div></td>
-          <td><span class="rank gn">14</span></td>
-          <td>1</td><td>112</td>
-          <td style="color:var(--amber);font-weight:700">8h 29m (email) ⚠</td><td>—</td><td>—</td><td>—</td>
-          <td>25</td><td>—</td>
-          <td>8h 57m</td><td>23h 37m</td>
-          <td><span class="chip amber">High AHT</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Kimberly Coleman</div><div class="q-sub">Outbound only — no inbound answered</div></td>
-          <td><span class="rank gn">15</span></td>
-          <td>1</td><td>174</td>
-          <td>—</td><td>—</td><td>—</td><td>—</td>
-          <td>1</td><td>—</td>
-          <td>5h 0m</td><td>7h 9m</td>
-          <td><span class="chip navy">Outbound</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Christina Browley</div><div class="q-sub">Outbound only — no inbound answered</div></td>
-          <td><span class="rank gn">16</span></td>
-          <td>0</td><td>286</td>
-          <td>—</td><td>—</td><td>—</td><td>—</td>
-          <td>5</td><td>—</td>
-          <td>14m</td><td>1d 22h 55m</td>
-          <td><span class="chip navy">Outbound</span></td>
-        </tr>
-        <tr>
-          <td><div class="q-name">Alex DeTrolio</div></td>
-          <td><span class="rank gn">17</span></td>
-          <td>0</td><td>14</td>
-          <td>2m 28s</td><td>2m 19s</td><td>—</td><td>4s</td>
-          <td>—</td><td>—</td>
-          <td>4h 40m</td><td>1d 19h 51m</td>
-          <td><span class="chip navy">Verify</span></td>
-        </tr>
-        <!-- Zero-activity agents -->
-        <tr class="anomaly-row">
-          <td><div class="q-name">Chelsey Wilson</div><div class="q-sub" style="color:var(--amber);opacity:1">Logged in — zero activity</div></td>
-          <td>—</td><td>0</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
-          <td><span class="chip gray">No Activity</span></td>
-        </tr>
-        <tr class="anomaly-row">
-          <td><div class="q-name">Jeanette Burrell</div><div class="q-sub" style="color:var(--amber);opacity:1">Logged in — zero activity</div></td>
-          <td>—</td><td>0</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
-          <td><span class="chip gray">No Activity</span></td>
-        </tr>
-        <tr class="anomaly-row">
-          <td><div class="q-name">Jennifer Fuston</div><div class="q-sub" style="color:var(--amber);opacity:1">Logged in — zero activity</div></td>
-          <td>—</td><td>0</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
-          <td><span class="chip gray">No Activity</span></td>
-        </tr>
-        <tr class="anomaly-row">
-          <td><div class="q-name">Yveca Mary</div><div class="q-sub" style="color:var(--amber);opacity:1">Zero activity this week</div></td>
-          <td>—</td><td>0</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
-          <td><span class="chip gray">No Activity</span></td>
-        </tr>
+<tr>
+      <td><div class="q-name">Miguel Garcia</div><div class="q-sub">Top inbound answered</div></td>
+      <td><span class="rank g1">1</span></td>
+      <td>118</td>
+      <td style="font-size:11px;color:var(--ink-3)">92V + 11E + 15C</td>
+      <td >6m 5s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>7</td>
+      <td>1d 8h 54m</td><td>23m</td>
+      <td><span class="chip blue">Top Inbound</span></td>
+    </tr><tr>
+      <td><div class="q-name">Ashley Andrus</div></td>
+      <td><span class="rank g2">2</span></td>
+      <td>106</td>
+      <td style="font-size:11px;color:var(--ink-3)">6V + 31E + 69C</td>
+      <td >20m 19s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>13</td>
+      <td>21h 14m</td><td>10h 21m</td>
+      <td><span class="chip green">High Volume</span></td>
+    </tr><tr>
+      <td><div class="q-name">La'Shay Richard</div><div class="q-sub">⚠ Email AHT</div></td>
+      <td><span class="rank g3">3</span></td>
+      <td>101</td>
+      <td style="font-size:11px;color:var(--ink-3)">36V + 20E + 45C</td>
+      <td style="color:var(--red);font-weight:700">56m 13s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>1</td>
+      <td>21h 56m</td><td>5h 9m</td>
+      <td><span class="chip red">Review AHT</span></td>
+    </tr><tr>
+      <td><div class="q-name">Rashidah Brown</div><div class="q-sub">⚠ Chat ACW</div></td>
+      <td><span class="rank gn">4</span></td>
+      <td>60</td>
+      <td style="font-size:11px;color:var(--ink-3)">45V + 3E + 12C</td>
+      <td style="color:var(--red);font-weight:700">12m 7s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>6</td>
+      <td>22h 53m</td><td>2h 21m</td>
+      <td><span class="chip red">Review AHT</span></td>
+    </tr><tr>
+      <td><div class="q-name">Auny Elias-Heath</div></td>
+      <td><span class="rank gn">5</span></td>
+      <td>32</td>
+      <td style="font-size:11px;color:var(--ink-3)">17V + 10E + 5C</td>
+      <td >13m 20s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>4</td>
+      <td>1d 11h 21m</td><td>3h 27m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Dustin Duemer</div></td>
+      <td><span class="rank gn">6</span></td>
+      <td>29</td>
+      <td style="font-size:11px;color:var(--ink-3)">26V + 2E + 1C</td>
+      <td >4m 31s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>1</td>
+      <td>9h 6m</td><td>2d 9h 20m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Samantha Shaw</div></td>
+      <td><span class="rank gn">7</span></td>
+      <td>22</td>
+      <td style="font-size:11px;color:var(--ink-3)">17V + 2E + 3C</td>
+      <td >8m 13s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>2</td>
+      <td>11h 5m</td><td>1d 0h 13m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Austin Thomas</div></td>
+      <td><span class="rank gn">8</span></td>
+      <td>19</td>
+      <td style="font-size:11px;color:var(--ink-3)">19V</td>
+      <td >4m 16s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>3</td>
+      <td>10h 0m</td><td>1d 6h 15m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Kimberly Coleman</div></td>
+      <td><span class="rank gn">9</span></td>
+      <td>12</td>
+      <td style="font-size:11px;color:var(--ink-3)">10V + 1E + 1C</td>
+      <td >12m 27s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>—</td>
+      <td>11h 5m</td><td>1h 38m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Ashley Bradley</div><div class="q-sub">⚠ Chat ACW</div></td>
+      <td><span class="rank gn">10</span></td>
+      <td>11</td>
+      <td style="font-size:11px;color:var(--ink-3)">4V + 7C</td>
+      <td style="color:var(--red);font-weight:700">2h 55m 29s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>—</td>
+      <td>20h 49m</td><td>8h 56m</td>
+      <td><span class="chip red">Review AHT</span></td>
+    </tr><tr>
+      <td><div class="q-name">Mirline Etienne</div></td>
+      <td><span class="rank gn">11</span></td>
+      <td>10</td>
+      <td style="font-size:11px;color:var(--ink-3)">10V</td>
+      <td >3m 20s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>1</td>
+      <td>13h 41m</td><td>12h 11m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Shannon Rogers</div></td>
+      <td><span class="rank gn">12</span></td>
+      <td>7</td>
+      <td style="font-size:11px;color:var(--ink-3)">3V + 4C</td>
+      <td >3m 53s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>—</td>
+      <td>49m</td><td>1d 12h 56m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Shalon Jones</div></td>
+      <td><span class="rank gn">13</span></td>
+      <td>6</td>
+      <td style="font-size:11px;color:var(--ink-3)">6V</td>
+      <td >4m 44s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>—</td>
+      <td>3h 1m</td><td>18h 26m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Jennifer Fuston</div></td>
+      <td><span class="rank gn">14</span></td>
+      <td>4</td>
+      <td style="font-size:11px;color:var(--ink-3)">4V</td>
+      <td >7m 56s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>—</td>
+      <td>—</td><td>1d 21h 29m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Alex DeTrolio</div></td>
+      <td><span class="rank gn">15</span></td>
+      <td>3</td>
+      <td style="font-size:11px;color:var(--ink-3)">3V</td>
+      <td >1m 54s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>—</td>
+      <td>10h 20m</td><td>1d 10h 53m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Jenna Burns</div></td>
+      <td><span class="rank gn">16</span></td>
+      <td>3</td>
+      <td style="font-size:11px;color:var(--ink-3)">1V + 1E + 1C</td>
+      <td >14m 11s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>—</td>
+      <td>1d 2h 53m</td><td>2h 36m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">EuKyta Little</div></td>
+      <td><span class="rank gn">17</span></td>
+      <td>2</td>
+      <td style="font-size:11px;color:var(--ink-3)">2V</td>
+      <td >6m 11s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>—</td>
+      <td>4h 49m</td><td>1d 16h 44m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Christina Browley</div></td>
+      <td><span class="rank gn">18</span></td>
+      <td>1</td>
+      <td style="font-size:11px;color:var(--ink-3)">1V</td>
+      <td >7m 44s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>—</td>
+      <td>—</td><td>1d 23h 46m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Tatiana Jean-Louis</div></td>
+      <td><span class="rank gn">19</span></td>
+      <td>1</td>
+      <td style="font-size:11px;color:var(--ink-3)">1V</td>
+      <td >10m 54s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>—</td>
+      <td>2h 44m</td><td>1d 1h 19m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr><tr>
+      <td><div class="q-name">Thia Decker</div></td>
+      <td><span class="rank gn">20</span></td>
+      <td>1</td>
+      <td style="font-size:11px;color:var(--ink-3)">1V</td>
+      <td >9m 23s</td>
+      <td>—</td><td>—</td><td>—</td>
+      <td>—</td>
+      <td>—</td><td>1d 7h 26m</td>
+      <td><span class="chip green">On Track</span></td>
+    </tr>
+<tr class="anomaly-row">
+      <td><div class="q-name">Carla Burks</div><div class="q-sub" style="color:var(--amber);opacity:1">Zero activity this week</div></td>
+      <td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+      <td><span class="chip gray">No Activity</span></td>
+    </tr><tr class="anomaly-row">
+      <td><div class="q-name">Chelsey Wilson</div><div class="q-sub" style="color:var(--amber);opacity:1">Zero activity this week</div></td>
+      <td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+      <td><span class="chip gray">No Activity</span></td>
+    </tr><tr class="anomaly-row">
+      <td><div class="q-name">Jeanette Burrell</div><div class="q-sub" style="color:var(--amber);opacity:1">Zero activity this week</div></td>
+      <td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+      <td><span class="chip gray">No Activity</span></td>
+    </tr><tr class="anomaly-row">
+      <td><div class="q-name">Johnny James</div><div class="q-sub" style="color:var(--amber);opacity:1">Zero activity this week</div></td>
+      <td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+      <td><span class="chip gray">No Activity</span></td>
+    </tr><tr class="anomaly-row">
+      <td><div class="q-name">Yveca Mary</div><div class="q-sub" style="color:var(--amber);opacity:1">Zero activity this week</div></td>
+      <td>—</td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+      <td><span class="chip gray">No Activity</span></td>
+    </tr>
       </tbody>
     </table></div>
-    <div class="agent-note">⚠ La'Shay Richard email AHT of 14h 45m 17s (8 emails) is extremely elevated — investigate for stuck interactions or complex cases. Ashley Bradley chat AHT of 7h 57m 16s (10 chats) is consistent with the POD ACW anomaly pattern. EuKyta Little email AHT of 8h 29m is also flagged. Auny Elias-Heath's email ACW of 4h 25m should be reviewed. Chelsey Wilson, Jeanette Burrell, Jennifer Fuston, and Yveca Mary had zero handle activity — verify schedule and routing status.</div>
+    <div class="agent-note">⚠ La'Shay Richard email AHT of 4h 11m (20 emails) is highly elevated — investigate for stuck interactions or complex cases. Rashidah Brown chat AHT of 5h 22m 45s (12 chats) is extreme and consistent with the POD ACW anomaly pattern — audit open ACW states. Ashley Bradley chat AHT of 2h 55m 29s (7 chats) is also flagged. Miguel Garcia led with 118 inbound answered across voice, email, and chat. Carla Burks, Chelsey Wilson, Jeanette Burrell, Johnny James, and Yveca Mary recorded zero handle activity — verify schedule and routing configurations.</div>
   </section>
 
   <section>
@@ -931,27 +989,27 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     <div class="chart-2col">
       <div class="chart-box">
         <div class="chart-title">Team Time Allocation</div>
-        <div class="chart-sub">Total across logged-in agents this week</div>
+        <div class="chart-sub">Total across logged-in agents this week (aggregate row)</div>
         <div class="hbar">
-          <div class="hbar-row"><div class="hbar-label">Logged In (Total)</div><div class="hbar-track"><div class="hbar-fill" style="width:100%;background:var(--navy)">~36d</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Available</div><div class="hbar-track"><div class="hbar-fill" style="width:55%;background:var(--green)">~19d 18h</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">On Queue</div><div class="hbar-track"><div class="hbar-fill" style="width:28%;background:var(--blue-acc)">~10d 5h</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Not Responding</div><div class="hbar-track"><div class="hbar-fill" style="width:27%;background:var(--red)">~9d 15h</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Idle</div><div class="hbar-track"><div class="hbar-fill" style="width:12%;background:var(--amber)">~4d 7h</div></div></div>
+          <div class="hbar-row"><div class="hbar-label">Logged In (Total)</div><div class="hbar-track"><div class="hbar-fill" style="width:100%;background:var(--navy)">~40d 17h</div></div></div>
+          <div class="hbar-row"><div class="hbar-label">Available</div><div class="hbar-track"><div class="hbar-fill" style="width:49%;background:var(--green)">~20d 0h</div></div></div>
+          <div class="hbar-row"><div class="hbar-label">On Queue</div><div class="hbar-track"><div class="hbar-fill" style="width:26%;background:var(--blue-acc)">~10d 18h</div></div></div>
+          <div class="hbar-row"><div class="hbar-label">Not Responding</div><div class="hbar-track"><div class="hbar-fill" style="width:15%;background:var(--red)">~6d 7h</div></div></div>
+          <div class="hbar-row"><div class="hbar-label">Idle</div><div class="hbar-track"><div class="hbar-fill" style="width:9%;background:var(--amber)">~3d 18h</div></div></div>
         </div>
       </div>
       <div class="chart-box">
         <div class="chart-title">Break &amp; Away Time / Anomalies</div>
         <div class="chart-sub">Non-productive and flagged agent time</div>
         <div class="hbar">
-          <div class="hbar-row"><div class="hbar-label">Meal</div><div class="hbar-track"><div class="hbar-fill" style="width:53%;background:var(--ink-3)">~1d 9h</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Break</div><div class="hbar-track"><div class="hbar-fill" style="width:22%;background:var(--ink-4)">~6h 40m</div></div></div>
-          <div class="hbar-row"><div class="hbar-label">Away</div><div class="hbar-track"><div class="hbar-fill" style="width:40%;background:var(--amber)">~1d 1h</div></div></div>
-          <div class="hbar-row"><div class="hbar-label" style="color:var(--red);font-weight:700">Thia Decker NR</div><div class="hbar-track"><div class="hbar-fill" style="width:100%;background:var(--red)">7d 0h 0m ⚠</div></div></div>
+          <div class="hbar-row"><div class="hbar-label">Meal</div><div class="hbar-track"><div class="hbar-fill" style="width:43%;background:var(--ink-3)">~1d 4h 58m</div></div></div>
+          <div class="hbar-row"><div class="hbar-label">Away</div><div class="hbar-track"><div class="hbar-fill" style="width:27%;background:var(--amber)">~1d 18h 29m</div></div></div>
+          <div class="hbar-row"><div class="hbar-label">Break</div><div class="hbar-track"><div class="hbar-fill" style="width:9%;background:var(--ink-4)">~8h 41m</div></div></div>
+          <div class="hbar-row"><div class="hbar-label" style="color:var(--amber);font-weight:700">Thia Decker NR</div><div class="hbar-track"><div class="hbar-fill" style="width:62%;background:var(--amber)">3d 10h 1m ⚠</div></div></div>
         </div>
       </div>
     </div>
-    <div class="agent-note">⚠ Thia Decker shows exactly 7 days 0 hours 0 minutes in Not Responding state — the entire reporting period. This is almost certainly a system anomaly or deactivated/inactive account still appearing in routing. Genesys admin should verify and clean up this agent record. Not Responding total of ~9d 15h team-wide is heavily skewed by this single entry — actual team NR (excluding Thia Decker) is approximately 2d 15h.</div>
+    <div class="agent-note">⚠ Thia Decker shows 3d 10h 1m 52s in Not Responding state this week — down from the full 7-day anomaly seen last week but still extremely elevated. Genesys admin should verify this agent's account and routing configuration. Not Responding total of ~6d 7h team-wide is significantly skewed by this entry — actual team NR excluding Thia Decker is approximately 2d 21h. Johnny James logged 1d 23h 30m but shows zero handle activity; Christina Browley and Jennifer Fuston also show no queue time despite system presence.</div>
   </section>
 
   <div class="report-footer">
@@ -975,57 +1033,57 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     <div class="rec-grid">
       <div class="rec-card rc-red">
         <div class="rc-priority urgent">Urgent</div>
-        <div class="rc-title">Telemedica Team — Third Week of Near-Total Failure</div>
-        <div class="rc-body">Telemedica answered only 7 of 119 voice contacts this week (5.9%) — down from 8.7% last week. 43 contacts abandoned (36.1%). This is now the third consecutive week of critical failure. Unlike two weeks ago, Telemedica also posted zero callback entries, indicating the staffing/routing problem is total across all interaction types. Escalate to leadership immediately. Pull Genesys schedule adherence, verify agent routing profiles, and confirm queue configuration is correct for this team.</div>
-        <div class="rc-stat">Answer Rate: <strong>5.9%</strong> · Abandon: <strong>43 (36.1%)</strong> · Callbacks this week: <strong>0</strong></div>
+        <div class="rc-title">Telemedica Team — Third Consecutive Week Below Target</div>
+        <div class="rc-body">Telemedica answered only 30 of 89 voice contacts this week (33.7%), up from 5.9% last week but still critically below the 80% SL target. A 27.0% abandon rate means more than 1 in 4 callers abandoned. While the improvement from last week is notable, the queue has now been in failure for three consecutive weeks. Escalate to leadership with a formal root cause analysis — review agent scheduling, routing configuration, and skill assignments. Establish a specific recovery target (60% answer rate by April 11).</div>
+        <div class="rc-stat">Answer Rate: <strong>33.7%</strong> · Abandon: <strong>24 (27.0%)</strong> · SL: <strong>27.8%</strong> · Prior week answer rate: <strong>5.9%</strong></div>
       </div>
       <div class="rec-card rc-red">
         <div class="rc-priority urgent">Urgent</div>
-        <div class="rc-title">Genesys ACW Wrap-Up State — Recurring Crisis</div>
-        <div class="rc-body">POD3 Chat recorded avg ACW of 4h 29m 56s and POD4 Chat recorded 2h 28m 34s. Ashley Bradley's chat ACW was 7h 49m (10 interactions). La'Shay Richard email AHT is 14h 45m. These values are physically impossible in normal operations — agents are leaving interactions open in after-call work state. Immediately audit all open ACW states in Genesys, set an ACW auto-timeout (recommended: 3–5 minutes), and retrain affected agents on proper after-call work closure.</div>
-        <div class="rc-stat">POD3 Chat ACW: <strong>4h 29m 56s</strong> · POD4 Chat ACW: <strong>2h 28m 34s</strong> · Bradley ACW: <strong>7h 49m</strong></div>
+        <div class="rc-title">Chat ACW Wrap-Up State — Recurring Multi-Week Crisis</div>
+        <div class="rc-body">POD3 Chat avg ACW is 2h 1m 43s (47 answered interactions). Rashidah Brown shows chat AHT of 5h 22m 45s on 12 chat interactions. Ashley Bradley shows 2h 55m 29s on 7 chats. These values are not physically possible in genuine after-call work — agents are leaving interactions open in wrap-up state. Immediately audit all open ACW states in Genesys. Set mandatory ACW auto-timeout of 3 minutes. Retrain all agents on interaction closure procedure. The POD4 improvement (2h 28m → 11m 45s) shows this is fixable with intervention.</div>
+        <div class="rc-stat">POD3 Chat ACW: <strong>2h 1m 43s</strong> · Brown Chat AHT: <strong>5h 22m 45s</strong> · Bradley Chat AHT: <strong>2h 55m 29s</strong></div>
       </div>
       <div class="rec-card rc-red">
         <div class="rc-priority urgent">Urgent</div>
-        <div class="rc-title">POD4 Voice — Zero Service Level</div>
-        <div class="rc-body">POD4 Voice recorded 0% Service Level this week: 30 contacts offered, only 10 answered (33.3%), with 10 abandoned (33.3% abandon rate). This means every single contact that was answered failed to meet the service threshold. Combined with POD2 at 4.3% SL and POD1 at 9.1%, the POD Voice queues collectively are in sustained crisis. Conduct an emergency staffing coverage review for the week of March 15–21 to identify gaps.</div>
-        <div class="rc-stat">POD4 SL: <strong>0%</strong> · Abandon: <strong>33.3%</strong> · POD2 SL: <strong>4.3%</strong> · POD1 SL: <strong>9.1%</strong></div>
+        <div class="rc-title">POD1 Voice — Worst Answer Rate Among POD Queues</div>
+        <div class="rc-body">POD1 Voice posted 30.0% answer rate and 30.0% abandon rate — the worst among the four Care Experience POD voice queues. With only 6 of 20 contacts answered and 6 abandoned, POD1 shows insufficient staffing or routing priority. Combined with the POD1 callback handle time anomaly of 6h 26m 17s (suggesting a stuck callback interaction), POD1 requires immediate manager attention. Review agent roster, routing skills, and schedule for the week of March 23–27.</div>
+        <div class="rc-stat">POD1 Answer Rate: <strong>30.0%</strong> · Abandon: <strong>6 (30.0%)</strong> · SL: <strong>16.7%</strong> · Callback AHT: <strong>6h 26m 17s</strong></div>
       </div>
       <div class="rec-card rc-amber">
         <div class="rc-priority high">High Priority</div>
-        <div class="rc-title">Voice SL — System-Wide Below Target, Worsening Trend</div>
-        <div class="rc-body">All 8 voice queues missed the 80% SL target this week. The overall voice answer rate fell from 46.9% last week to 39.5% — a 7.4 percentage point decline in one week. The best queue (Client Support) reached only 46.9% SL. Conduct a full workforce management review: analyze contact arrival patterns by hour, compare against scheduled agent hours, review routing overflow configuration, and stagger shift start times to cover peak hours. The trend is worsening and requires immediate intervention.</div>
-        <div class="rc-stat">Best voice SL: <strong>Client Support 46.9%</strong> · Prior week answer rate: <strong>46.9%</strong> · This week: <strong>39.5%</strong></div>
+        <div class="rc-title">Callback Wait Times — Customers Waiting 6–12 Hours</div>
+        <div class="rc-body">Client Support callbacks averaged 12h 14m 21s before being returned — more than a full workday. CE Team callbacks averaged 6h 43m 41s. While callback completion rate is excellent (98.8%), the wait experience is unacceptable. Establish an internal SLA target for callback placement time (recommended: under 2 hours) and report on it weekly. Add dedicated callback processing windows to each team's daily schedule. Include real-time callback queue depth in daily standups and flag breaches at 3 hours.</div>
+        <div class="rc-stat">Client Support wait: <strong>12h 14m 21s</strong> · CE Team wait: <strong>6h 43m 41s</strong> · Completion rate: <strong>98.8%</strong></div>
       </div>
       <div class="rec-card rc-amber">
         <div class="rc-priority high">High Priority</div>
-        <div class="rc-title">Callback Wait Times — Customers Waiting 7–12 Hours</div>
-        <div class="rc-body">Client Support callbacks averaged 11 hours 40 minutes before being returned — more than a full workday. POD1 averaged 6h 31m, POD2 averaged 7h 2m. While completion rate is excellent (97.2%), customers are waiting an unacceptable amount of time. Establish internal SLA targets for callback placement (recommended: under 2 hours), assign dedicated callback processing windows for each supervisor, and include real-time callback queue depth in daily standups.</div>
-        <div class="rc-stat">Client Support wait: <strong>11h 40m 24s</strong> · POD2: <strong>7h 2m 47s</strong> · POD1: <strong>6h 31m 57s</strong></div>
+        <div class="rc-title">La'Shay Richard Email AHT — Audit Required</div>
+        <div class="rc-body">La'Shay Richard email AHT of 4h 11m 4s across 20 email interactions is highly elevated (normal is under 30 minutes). This is the second week with flagged email AHT for this agent. Schedule a 1:1 review to examine case complexity, and pull Genesys Interaction Detail Reports for these email interactions to determine if they were left open in ACW state. Compare against team email norms (POD2: 11m 35s, POD4: 19m 36s). Document findings and set a target for next week.</div>
+        <div class="rc-stat">Email AHT: <strong>4h 11m 4s</strong> · 20 email interactions · Voice handle normal at 8m 26s</div>
       </div>
       <div class="rec-card rc-amber">
         <div class="rc-priority high">High Priority</div>
-        <div class="rc-title">Thia Decker — Account Cleanup Required</div>
-        <div class="rc-body">Thia Decker shows exactly 7 days 0 hours 0 minutes in Not Responding state — the entire reporting period with no other activity. This is almost certainly an inactive or deactivated account that remains configured in Genesys routing. The entry is skewing the team's total Not Responding metric significantly. Genesys admin should verify the account status and either remove from routing or reactivate with proper configuration.</div>
-        <div class="rc-stat">Not Responding: <strong>7d 0h 0m 0s</strong> (full reporting period) · No other activity recorded</div>
+        <div class="rc-title">Voice SL Recovery — Sustain the Improvement</div>
+        <div class="rc-body">Voice answer rate improved dramatically from 39.5% to 60.9% this week — a 21.4pp gain. This is significant progress. However, all 8 queues still missed the 80% target and the improvement may partially reflect lower contact volume (437 vs 527 last week). To sustain and build on this improvement: identify what changed operationally between weeks, document staffing decisions that worked, and apply them going forward. Set interim targets: 70% answer rate by April 11, 80% by May.</div>
+        <div class="rc-stat">This week answer rate: <strong>60.9%</strong> · Prior week: <strong>39.5%</strong> · Change: <strong>+21.4pp</strong></div>
       </div>
       <div class="rec-card rc-blue">
         <div class="rc-priority med">Medium</div>
-        <div class="rc-title">La'Shay Richard AHT Review — Email at 14h 45m</div>
-        <div class="rc-body">La'Shay Richard email AHT of 14 hours 45 minutes across 8 email interactions is extremely elevated. While some may reflect complex cases, this is 100× normal email handle time. Schedule a 1:1 to review case complexity, and pull Genesys Interaction Detail Reports for those 8 email interactions to determine if contacts were left open in ACW state or if cases genuinely required extended resolution time. Compare case types against team norms before drawing conclusions.</div>
-        <div class="rc-stat">Email AHT: <strong>14h 45m 17s</strong> · 8 email interactions · Hold events: <strong>10</strong></div>
+        <div class="rc-title">Thia Decker — Account Cleanup (Ongoing)</div>
+        <div class="rc-body">Thia Decker shows 3d 10h 1m 52s in Not Responding state this week — down from 7 days last week but still abnormal. This agent continues to appear in routing with no handle activity. Genesys admin should verify the account status: if inactive, remove from all routing groups and skills. If active, investigate why Not Responding time is so elevated and correct the configuration.</div>
+        <div class="rc-stat">Not Responding this week: <strong>3d 10h 1m 52s</strong> · Handle activity: <strong>1 voice (Thia Decker)</strong></div>
       </div>
       <div class="rec-card rc-blue">
         <div class="rc-priority med">Medium</div>
-        <div class="rc-title">Zero-Activity Agents — Routing Verification Needed</div>
-        <div class="rc-body">Chelsey Wilson, Jeanette Burrell, Jennifer Fuston, and Yveca Mary all showed zero handle activity for the full week despite being in the Genesys system. Combined with the agents assigned to Telemedica queues (Mirline Etienne, Alex DeTrolio, EuKyta Little) having minimal inbound activity, this suggests potential routing misconfiguration or staffing gap in the Telemedica skill group. Verify each agent's routing profile, schedule, and skill assignments in Genesys Admin.</div>
-        <div class="rc-stat">Zero-activity agents: <strong>4</strong> · Telemedica voice answered: <strong>7 of 119 (5.9%)</strong></div>
+        <div class="rc-title">Zero-Activity Agents — Routing Verification</div>
+        <div class="rc-body">Carla Burks, Chelsey Wilson, Jeanette Burrell, Johnny James, and Yveca Mary all recorded zero handle activity this week. Johnny James logged 1d 23h 30m in the system with no contacts handled. Verify each agent's routing profile, schedule, and skill assignments in Genesys Admin. Yveca Mary and Johnny James are assigned Telemedica skills — their zero activity may be related to the Telemedica queue staffing issues. Address as part of the Telemedica root cause analysis.</div>
+        <div class="rc-stat">Zero-activity agents: <strong>5</strong> · Johnny James logged-in time: <strong>1d 23h 30m</strong> with zero handles</div>
       </div>
       <div class="rec-card rc-green">
         <div class="rc-priority opp">Opportunity</div>
-        <div class="rc-title">Recognize Email &amp; Callback Performance</div>
-        <div class="rc-body">For the second week in a row, email delivered strong results — all 4 PODs above 83% SL, 100 contacts handled with zero abandonments. Callback completion also improved from 93.2% to 97.2% (with Telemedica excluded as a special case). Share these results with the email and callback teams as positive reinforcement. Consider documenting what staffing model and processes are driving this consistent email performance and applying similar practices to voice queues.</div>
-        <div class="rc-stat">Email avg SL: <strong>89.2%</strong> · Callback completion: <strong>97.2%</strong> · Email abandon: <strong>0</strong></div>
+        <div class="rc-title">Recognize Voice Recovery &amp; Email / Chat Consistency</div>
+        <div class="rc-body">Voice improved 21.4pp in answer rate this week — share this with the team as evidence that improvement is achievable. Email delivered its third consecutive strong week: 96.0% handle rate, all PODs above 83% SL, zero abandonments. Chat answered 88.2% of contacts. Miguel Garcia led all agents with 118 inbound answers. Formally recognize top performers and share the email team's process as a model for voice queue improvement efforts.</div>
+        <div class="rc-stat">Voice improvement: <strong>+21.4pp</strong> · Email handle rate: <strong>96.0%</strong> · Top agent: <strong>Miguel Garcia (118 answered)</strong></div>
       </div>
     </div>
   </section>
@@ -1046,48 +1104,48 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     <div class="sec-head">
       <span class="sec-num">§ 01</span>
       <span class="sec-title">Trend at a Glance</span>
-      <span class="sec-sub">Mar 15–22, 2026 (latest available) vs. Mar 8–15, 2026 (prior week)</span>
+      <span class="sec-sub">Mar 22–28, 2026 vs. Mar 15–21, 2026 (prior week)</span>
     </div>
     <div class="kpi-row cols-6">
       <div class="kpi navy">
         <div class="kpi-label">Total Volume</div>
-        <div class="kpi-val">926</div>
+        <div class="kpi-val">813</div>
         <div class="kpi-sub">All channels this week</div>
-        <div class="kpi-delta dn-bad">↓ 109 vs prior week</div>
-      </div>
-      <div class="kpi red">
-        <div class="kpi-label">Voice Answer Rate</div>
-        <div class="kpi-val bad">39.5%</div>
-        <div class="kpi-sub">Prior week (Mar 8–15): 46.9%</div>
-        <div class="kpi-delta dn-bad">↓ 7.4pp — worsening</div>
-      </div>
-      <div class="kpi red">
-        <div class="kpi-label">Voice Abandon Rate</div>
-        <div class="kpi-val bad">24.8%</div>
-        <div class="kpi-sub">Prior week (Mar 8–15): 22.3%</div>
-        <div class="kpi-delta up-bad">↑ 2.5pp — worsening</div>
+        <div class="kpi-delta dn-bad">↓ 113 vs prior week</div>
       </div>
       <div class="kpi green">
-        <div class="kpi-label">Email Answer Rate</div>
-        <div class="kpi-val good">106.4%</div>
-        <div class="kpi-sub">Prior week (Mar 8–15): 94.3%</div>
-        <div class="kpi-delta up-good">↑ Strong 2nd week</div>
+        <div class="kpi-label">Voice Answer Rate</div>
+        <div class="kpi-val warn">60.9%</div>
+        <div class="kpi-sub">Prior week: 39.5%</div>
+        <div class="kpi-delta up-good">↑ 21.4pp</div>
+      </div>
+      <div class="kpi green">
+        <div class="kpi-label">Voice Abandon Rate</div>
+        <div class="kpi-val warn">17.4%</div>
+        <div class="kpi-sub">Prior week: 24.8%</div>
+        <div class="kpi-delta dn-good">↓ 7.4pp</div>
+      </div>
+      <div class="kpi green">
+        <div class="kpi-label">Email Handle Rate</div>
+        <div class="kpi-val good">96.0%</div>
+        <div class="kpi-sub">Prior week: 106.4%</div>
+        <div class="kpi-delta dn-bad">↓ 10.4pp</div>
       </div>
       <div class="kpi blue">
         <div class="kpi-label">Chat Answer Rate</div>
-        <div class="kpi-val good">90.1%</div>
-        <div class="kpi-sub">Prior week (Mar 8–15): 86.3%</div>
-        <div class="kpi-delta up-good">↑ 3.8pp — improving</div>
+        <div class="kpi-val good">88.2%</div>
+        <div class="kpi-sub">Prior week: 90.1%</div>
+        <div class="kpi-delta dn-bad">↓ 1.9pp</div>
       </div>
       <div class="kpi green">
         <div class="kpi-label">Callback Completion</div>
-        <div class="kpi-val good">97.2%</div>
-        <div class="kpi-sub">Prior week (Mar 8–15): 93.2%</div>
-        <div class="kpi-delta up-good">↑ 4.0pp — improving</div>
+        <div class="kpi-val good">98.8%</div>
+        <div class="kpi-sub">Prior week: 97.2%</div>
+        <div class="kpi-delta up-good">↑ 1.6pp</div>
       </div>
     </div>
     <div class="trend-period-note">
-      ℹ &nbsp;Data note: Current week (Mar 22–28) CSVs are pending export — this report uses Week of Mar 15–22 as the latest available data. Comparison baseline is Week of Mar 8–15, 2026. Trends reflect real week-over-week movement from Mar 8–15 → Mar 15–22.
+      &#9432; &nbsp;Comparison baseline: Week of Mar 15–21, 2026 (prior week&#8217;s report). Prior week data sourced from the 2026-03-21 weekly performance report TREND-DATA. Voice queue per-queue comparison uses actual prior week values.
     </div>
   </section>
 
@@ -1095,17 +1153,17 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     <div class="sec-head">
       <span class="sec-num">§ 02</span>
       <span class="sec-title">Contact Volume &amp; Answer Rate — Channel Comparison</span>
-      <span class="sec-sub">Outlined bar = Mar 8–15 (prior) · Solid bar = Mar 15–22 (latest available)</span>
+      <span class="sec-sub">Outlined bar = Mar 15–21 · Solid bar = Mar 22–28</span>
     </div>
     <div class="trend-chart-row">
       <div class="trend-canvas-box">
         <div class="trend-canvas-title">Contact Volume by Channel</div>
-        <div class="trend-canvas-sub">Offered interactions · Mar 8–15 (prior) vs. Mar 15–22 (latest)</div>
+        <div class="trend-canvas-sub">Offered interactions · Prior week vs. This week</div>
         <canvas id="trend-vol-chart"></canvas>
       </div>
       <div class="trend-canvas-box">
         <div class="trend-canvas-title">Answer / Completion Rate by Channel</div>
-        <div class="trend-canvas-sub">% answered or completed · Mar 8–15 vs. Mar 15–22 · Target: 80%</div>
+        <div class="trend-canvas-sub">% of offered contacts answered or completed · Target: 80%</div>
         <canvas id="trend-rate-chart"></canvas>
       </div>
     </div>
@@ -1120,12 +1178,12 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     <div class="trend-chart-row">
       <div class="trend-canvas-box">
         <div class="trend-canvas-title">Voice Queue Answer Rate</div>
-        <div class="trend-canvas-sub">Per-queue answer % · Mar 8–15 vs. Mar 15–22</div>
+        <div class="trend-canvas-sub">Per-queue answer % · Prior week vs. this week</div>
         <canvas id="trend-voice-chart"></canvas>
       </div>
       <div class="trend-canvas-box">
         <div class="trend-canvas-title">Abandon Rate Trend</div>
-        <div class="trend-canvas-sub">Voice queue abandon % · Mar 8–15 vs. Mar 15–22</div>
+        <div class="trend-canvas-sub">Voice queue abandon % · Prior week vs. this week</div>
         <canvas id="trend-abandon-chart"></canvas>
       </div>
     </div>
@@ -1135,359 +1193,145 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     <div class="sec-head">
       <span class="sec-num">§ 04</span>
       <span class="sec-title">Busy Hour &amp; Peak Interval Analysis</span>
-      <span class="sec-sub">Week of Mar 23–27, 2026 · Mon–Fri · 30-min intervals · Proxy data (Mar 15–22 actuals)</span>
+      <span class="sec-sub">Week of Mar 23–27, 2026 · Mon–Fri · 30-min intervals · All queues combined</span>
     </div>
 
-    <!-- KPI highlight row -->
     <div class="kpi-row cols-4" style="margin-bottom:18px;">
       <div class="kpi navy">
         <div class="kpi-label">Busiest Day</div>
         <div class="kpi-val">Mon 3/23</div>
-        <div class="kpi-sub">192 contacts offered</div>
-        <div class="kpi-badge navy">↓ 40% by Friday</div>
+        <div class="kpi-sub">172 contacts offered</div>
+        <div class="kpi-badge navy">↓ ~29% by Thursday</div>
       </div>
       <div class="kpi red">
         <div class="kpi-label">Peak Interval (week)</div>
-        <div class="kpi-val warn" style="font-size:28px;">2:00–2:30 PM</div>
-        <div class="kpi-sub">57 contacts across all 5 days</div>
-        <div class="kpi-badge amber">Highest single slot</div>
+        <div class="kpi-val bad">12:30p</div>
+        <div class="kpi-sub">58 total contacts (weekly sum)</div>
+        <div class="kpi-badge red">⚠ Staff up 12–1 PM</div>
       </div>
       <div class="kpi amber">
-        <div class="kpi-label">Consistent Busy Window</div>
-        <div class="kpi-val warn" style="font-size:26px;">11 AM – 2:30 PM</div>
-        <div class="kpi-sub">Midday surge present every day</div>
-        <div class="kpi-badge amber">Staff accordingly</div>
+        <div class="kpi-label">Tue–Wed Drop</div>
+        <div class="kpi-val warn">142 / 124</div>
+        <div class="kpi-sub">Tue &amp; Wed below Mon by 17–28%</div>
+        <div class="kpi-badge amber">Mid-week dip pattern</div>
       </div>
       <div class="kpi blue">
-        <div class="kpi-label">Week Total Offered</div>
-        <div class="kpi-val">780</div>
-        <div class="kpi-sub">All media types Mon–Fri</div>
-        <div class="kpi-badge navy">58% answered</div>
+        <div class="kpi-label">Fri Recovery</div>
+        <div class="kpi-val" style="color:var(--blue-acc)">143</div>
+        <div class="kpi-sub">Friday volume near Monday</div>
+        <div class="kpi-badge navy">M-F bookend pattern</div>
       </div>
     </div>
 
-    <!-- Top peaks per day — Option B heatmap -->
-    <div style="margin-bottom:18px;">
-      <div style="font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px;">Top 3 Peak Intervals Per Day &mdash; 30-min &middot; Interactions Offered</div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">
-
-        <!-- MON 3/23 — peak: 2:00p(34), 3:30p(30), 4:30p(30) — slots idx 12,15,17 -->
-        <div class="ob-card">
-          <div class="ob-day">Mon 3/23</div>
-          <div class="ob-heatrow" style="height:36px;">
-            <div class="ob-cell" style="background:#dde6f0;height:35%"><div class="ob-tooltip">8:00a · 2</div></div>
-            <div class="ob-cell" style="background:#dde6f0;height:35%"><div class="ob-tooltip">8:30a · 2</div></div>
-            <div class="ob-cell" style="background:#b4c8de;height:44%"><div class="ob-tooltip">9:00a · 10</div></div>
-            <div class="ob-cell" style="background:#7aabcf;height:54%"><div class="ob-tooltip">9:30a · 15</div></div>
-            <div class="ob-cell" style="background:#5b8fb8;height:60%"><div class="ob-tooltip">10:00a · 18</div></div>
-            <div class="ob-cell" style="background:#4d7fac;height:65%"><div class="ob-tooltip">10:30a · 20</div></div>
-            <div class="ob-cell" style="background:#3d6fa0;height:68%"><div class="ob-tooltip">11:00a · 22</div></div>
-            <div class="ob-cell" style="background:#2e5f94;height:72%"><div class="ob-tooltip">11:30a · 24</div></div>
-            <div class="ob-cell" style="background:#1e4f88;height:76%"><div class="ob-tooltip">12:00p · 26</div></div>
-            <div class="ob-cell" style="background:#14417c;height:80%"><div class="ob-tooltip">12:30p · 28</div></div>
-            <div class="ob-cell" style="background:#0c3268;height:86%"><div class="ob-tooltip">1:00p · 30</div></div>
-            <div class="ob-cell" style="background:#071e50;height:93%"><div class="ob-tooltip">1:30p · 32</div></div>
-            <div class="ob-cell" style="background:#d97706;height:100%;border-radius:3px;"><div class="ob-tooltip">2:00p · 34 ★</div></div>
-            <div class="ob-cell" style="background:#1e4f88;height:76%"><div class="ob-tooltip">2:30p · 26</div></div>
-            <div class="ob-cell" style="background:#3d6fa0;height:68%"><div class="ob-tooltip">3:00p · 22</div></div>
-            <div class="ob-cell" style="background:#f59e0b;height:93%;border-radius:3px;"><div class="ob-tooltip">3:30p · 30 ★</div></div>
-            <div class="ob-cell" style="background:#2e5f94;height:72%"><div class="ob-tooltip">4:00p · 24</div></div>
-            <div class="ob-cell" style="background:#fbbf24;height:93%;border-radius:3px;"><div class="ob-tooltip">4:30p · 30 ★</div></div>
-            <div class="ob-cell" style="background:#5b8fb8;height:58%"><div class="ob-tooltip">5:00p · 18</div></div>
-            <div class="ob-cell" style="background:#a8c4df;height:44%"><div class="ob-tooltip">5:30p · 10</div></div>
-          </div>
-          <div class="ob-labels">
-            <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div>
-          </div>
-          <div class="ob-peaks">
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#d97706"></div>
-              <span class="ob-peak-time">2:00 PM</span>
-              <span class="ob-peak-count">34</span>
-            </div>
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#f59e0b"></div>
-              <span class="ob-peak-time">3:30 PM</span>
-              <span class="ob-peak-count">30</span>
-            </div>
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#fbbf24"></div>
-              <span class="ob-peak-time">4:30 PM</span>
-              <span class="ob-peak-count">30</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- TUE 3/24 — peak: 12:00p(30), 1:00p(26), 2:00p(24) — slots idx 8,10,12 -->
-        <div class="ob-card">
-          <div class="ob-day">Tue 3/24</div>
-          <div class="ob-heatrow" style="height:36px;">
-            <div class="ob-cell" style="background:#dde6f0;height:35%"><div class="ob-tooltip">8:00a · 0</div></div>
-            <div class="ob-cell" style="background:#dde6f0;height:37%"><div class="ob-tooltip">8:30a · 3</div></div>
-            <div class="ob-cell" style="background:#c4d8e8;height:44%"><div class="ob-tooltip">9:00a · 10</div></div>
-            <div class="ob-cell" style="background:#7aabcf;height:54%"><div class="ob-tooltip">9:30a · 15</div></div>
-            <div class="ob-cell" style="background:#5b8fb8;height:60%"><div class="ob-tooltip">10:00a · 17</div></div>
-            <div class="ob-cell" style="background:#3d6fa0;height:65%"><div class="ob-tooltip">10:30a · 19</div></div>
-            <div class="ob-cell" style="background:#2e5f94;height:70%"><div class="ob-tooltip">11:00a · 21</div></div>
-            <div class="ob-cell" style="background:#1e4f88;height:76%"><div class="ob-tooltip">11:30a · 24</div></div>
-            <div class="ob-cell" style="background:#d97706;height:100%;border-radius:3px;"><div class="ob-tooltip">12:00p · 30 ★</div></div>
-            <div class="ob-cell" style="background:#14417c;height:83%"><div class="ob-tooltip">12:30p · 25</div></div>
-            <div class="ob-cell" style="background:#f59e0b;height:87%;border-radius:3px;"><div class="ob-tooltip">1:00p · 26 ★</div></div>
-            <div class="ob-cell" style="background:#2e5f94;height:76%"><div class="ob-tooltip">1:30p · 23</div></div>
-            <div class="ob-cell" style="background:#fbbf24;height:80%;border-radius:3px;"><div class="ob-tooltip">2:00p · 24 ★</div></div>
-            <div class="ob-cell" style="background:#3d6fa0;height:67%"><div class="ob-tooltip">2:30p · 20</div></div>
-            <div class="ob-cell" style="background:#5b8fb8;height:60%"><div class="ob-tooltip">3:00p · 18</div></div>
-            <div class="ob-cell" style="background:#6b9ec4;height:54%"><div class="ob-tooltip">3:30p · 16</div></div>
-            <div class="ob-cell" style="background:#7aabcf;height:48%"><div class="ob-tooltip">4:00p · 14</div></div>
-            <div class="ob-cell" style="background:#a8c4df;height:43%"><div class="ob-tooltip">4:30p · 12</div></div>
-            <div class="ob-cell" style="background:#c4d8e8;height:38%"><div class="ob-tooltip">5:00p · 8</div></div>
-            <div class="ob-cell" style="background:#dde6f0;height:35%"><div class="ob-tooltip">5:30p · 4</div></div>
-          </div>
-          <div class="ob-labels">
-            <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div>
-          </div>
-          <div class="ob-peaks">
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#d97706"></div>
-              <span class="ob-peak-time">12:00 PM</span>
-              <span class="ob-peak-count">30</span>
-            </div>
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#f59e0b"></div>
-              <span class="ob-peak-time">1:00 PM</span>
-              <span class="ob-peak-count">26</span>
-            </div>
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#fbbf24"></div>
-              <span class="ob-peak-time">2:00 PM</span>
-              <span class="ob-peak-count">24</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- WED 3/25 — peak: 10:30a(30), 11:00a(26), 2:00p(26) — slots idx 5,6,12 -->
-        <div class="ob-card">
-          <div class="ob-day">Wed 3/25</div>
-          <div class="ob-heatrow" style="height:36px;">
-            <div class="ob-cell" style="background:#dde6f0;height:35%"><div class="ob-tooltip">8:00a · 2</div></div>
-            <div class="ob-cell" style="background:#c4d8e8;height:40%"><div class="ob-tooltip">8:30a · 6</div></div>
-            <div class="ob-cell" style="background:#a8c4df;height:47%"><div class="ob-tooltip">9:00a · 12</div></div>
-            <div class="ob-cell" style="background:#7aabcf;height:56%"><div class="ob-tooltip">9:30a · 18</div></div>
-            <div class="ob-cell" style="background:#4d7fac;height:66%"><div class="ob-tooltip">10:00a · 22</div></div>
-            <div class="ob-cell" style="background:#d97706;height:100%;border-radius:3px;"><div class="ob-tooltip">10:30a · 30 ★</div></div>
-            <div class="ob-cell" style="background:#f59e0b;height:87%;border-radius:3px;"><div class="ob-tooltip">11:00a · 26 ★</div></div>
-            <div class="ob-cell" style="background:#3d6fa0;height:70%"><div class="ob-tooltip">11:30a · 22</div></div>
-            <div class="ob-cell" style="background:#5b8fb8;height:63%"><div class="ob-tooltip">12:00p · 19</div></div>
-            <div class="ob-cell" style="background:#6b9ec4;height:57%"><div class="ob-tooltip">12:30p · 17</div></div>
-            <div class="ob-cell" style="background:#5b8fb8;height:62%"><div class="ob-tooltip">1:00p · 19</div></div>
-            <div class="ob-cell" style="background:#4d7fac;height:68%"><div class="ob-tooltip">1:30p · 21</div></div>
-            <div class="ob-cell" style="background:#fbbf24;height:87%;border-radius:3px;"><div class="ob-tooltip">2:00p · 26 ★</div></div>
-            <div class="ob-cell" style="background:#3d6fa0;height:70%"><div class="ob-tooltip">2:30p · 21</div></div>
-            <div class="ob-cell" style="background:#5b8fb8;height:63%"><div class="ob-tooltip">3:00p · 19</div></div>
-            <div class="ob-cell" style="background:#6b9ec4;height:57%"><div class="ob-tooltip">3:30p · 17</div></div>
-            <div class="ob-cell" style="background:#7aabcf;height:50%"><div class="ob-tooltip">4:00p · 15</div></div>
-            <div class="ob-cell" style="background:#a8c4df;height:44%"><div class="ob-tooltip">4:30p · 11</div></div>
-            <div class="ob-cell" style="background:#c4d8e8;height:38%"><div class="ob-tooltip">5:00p · 7</div></div>
-            <div class="ob-cell" style="background:#dde6f0;height:35%"><div class="ob-tooltip">5:30p · 3</div></div>
-          </div>
-          <div class="ob-labels">
-            <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div>
-          </div>
-          <div class="ob-peaks">
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#d97706"></div>
-              <span class="ob-peak-time">10:30 AM</span>
-              <span class="ob-peak-count">30</span>
-            </div>
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#f59e0b"></div>
-              <span class="ob-peak-time">11:00 AM</span>
-              <span class="ob-peak-count">26</span>
-            </div>
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#fbbf24"></div>
-              <span class="ob-peak-time">2:00 PM</span>
-              <span class="ob-peak-count">26</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- THU 3/26 — peak: 4:30p(30), 12:00p(22), 2:00p(22) — slots idx 17,8,12 -->
-        <div class="ob-card">
-          <div class="ob-day">Thu 3/26</div>
-          <div class="ob-heatrow" style="height:36px;">
-            <div class="ob-cell" style="background:#dde6f0;height:35%"><div class="ob-tooltip">8:00a · 2</div></div>
-            <div class="ob-cell" style="background:#dde6f0;height:37%"><div class="ob-tooltip">8:30a · 4</div></div>
-            <div class="ob-cell" style="background:#c4d8e8;height:42%"><div class="ob-tooltip">9:00a · 8</div></div>
-            <div class="ob-cell" style="background:#a8c4df;height:48%"><div class="ob-tooltip">9:30a · 12</div></div>
-            <div class="ob-cell" style="background:#7aabcf;height:54%"><div class="ob-tooltip">10:00a · 16</div></div>
-            <div class="ob-cell" style="background:#6b9ec4;height:58%"><div class="ob-tooltip">10:30a · 17</div></div>
-            <div class="ob-cell" style="background:#5b8fb8;height:62%"><div class="ob-tooltip">11:00a · 18</div></div>
-            <div class="ob-cell" style="background:#4d7fac;height:66%"><div class="ob-tooltip">11:30a · 20</div></div>
-            <div class="ob-cell" style="background:#f59e0b;height:80%;border-radius:3px;"><div class="ob-tooltip">12:00p · 22 ★</div></div>
-            <div class="ob-cell" style="background:#3d6fa0;height:60%"><div class="ob-tooltip">12:30p · 16</div></div>
-            <div class="ob-cell" style="background:#4d7fac;height:64%"><div class="ob-tooltip">1:00p · 18</div></div>
-            <div class="ob-cell" style="background:#4d7fac;height:66%"><div class="ob-tooltip">1:30p · 20</div></div>
-            <div class="ob-cell" style="background:#fbbf24;height:80%;border-radius:3px;"><div class="ob-tooltip">2:00p · 22 ★</div></div>
-            <div class="ob-cell" style="background:#4d7fac;height:66%"><div class="ob-tooltip">2:30p · 20</div></div>
-            <div class="ob-cell" style="background:#5b8fb8;height:60%"><div class="ob-tooltip">3:00p · 17</div></div>
-            <div class="ob-cell" style="background:#6b9ec4;height:55%"><div class="ob-tooltip">3:30p · 16</div></div>
-            <div class="ob-cell" style="background:#5b8fb8;height:60%"><div class="ob-tooltip">4:00p · 18</div></div>
-            <div class="ob-cell" style="background:#d97706;height:100%;border-radius:3px;"><div class="ob-tooltip">4:30p · 30 ★</div></div>
-            <div class="ob-cell" style="background:#7aabcf;height:52%"><div class="ob-tooltip">5:00p · 15</div></div>
-            <div class="ob-cell" style="background:#c4d8e8;height:40%"><div class="ob-tooltip">5:30p · 8</div></div>
-          </div>
-          <div class="ob-labels">
-            <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div>
-          </div>
-          <div class="ob-peaks">
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#d97706"></div>
-              <span class="ob-peak-time">4:30 PM</span>
-              <span class="ob-peak-count">30</span>
-            </div>
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#f59e0b"></div>
-              <span class="ob-peak-time">12:00 PM</span>
-              <span class="ob-peak-count">22</span>
-            </div>
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#fbbf24"></div>
-              <span class="ob-peak-time">2:00 PM</span>
-              <span class="ob-peak-count">22</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- FRI 3/27 — peak: 12:30p(26), 11:00a(22), 10:30a(20) — slots idx 9,6,5 -->
-        <div class="ob-card">
-          <div class="ob-day">Fri 3/27</div>
-          <div class="ob-heatrow" style="height:36px;">
-            <div class="ob-cell" style="background:#dde6f0;height:35%"><div class="ob-tooltip">8:00a · 2</div></div>
-            <div class="ob-cell" style="background:#dde6f0;height:37%"><div class="ob-tooltip">8:30a · 4</div></div>
-            <div class="ob-cell" style="background:#c4d8e8;height:42%"><div class="ob-tooltip">9:00a · 8</div></div>
-            <div class="ob-cell" style="background:#a8c4df;height:48%"><div class="ob-tooltip">9:30a · 12</div></div>
-            <div class="ob-cell" style="background:#4d7fac;height:67%"><div class="ob-tooltip">10:00a · 17</div></div>
-            <div class="ob-cell" style="background:#fbbf24;height:77%;border-radius:3px;"><div class="ob-tooltip">10:30a · 20 ★</div></div>
-            <div class="ob-cell" style="background:#f59e0b;height:85%;border-radius:3px;"><div class="ob-tooltip">11:00a · 22 ★</div></div>
-            <div class="ob-cell" style="background:#5b8fb8;height:63%"><div class="ob-tooltip">11:30a · 18</div></div>
-            <div class="ob-cell" style="background:#6b9ec4;height:58%"><div class="ob-tooltip">12:00p · 17</div></div>
-            <div class="ob-cell" style="background:#d97706;height:100%;border-radius:3px;"><div class="ob-tooltip">12:30p · 26 ★</div></div>
-            <div class="ob-cell" style="background:#5b8fb8;height:62%"><div class="ob-tooltip">1:00p · 17</div></div>
-            <div class="ob-cell" style="background:#6b9ec4;height:58%"><div class="ob-tooltip">1:30p · 15</div></div>
-            <div class="ob-cell" style="background:#7aabcf;height:52%"><div class="ob-tooltip">2:00p · 13</div></div>
-            <div class="ob-cell" style="background:#a8c4df;height:46%"><div class="ob-tooltip">2:30p · 11</div></div>
-            <div class="ob-cell" style="background:#c4d8e8;height:40%"><div class="ob-tooltip">3:00p · 9</div></div>
-            <div class="ob-cell" style="background:#c4d8e8;height:38%"><div class="ob-tooltip">3:30p · 8</div></div>
-            <div class="ob-cell" style="background:#dde6f0;height:35%"><div class="ob-tooltip">4:00p · 5</div></div>
-            <div class="ob-cell" style="background:#dde6f0;height:35%"><div class="ob-tooltip">4:30p · 3</div></div>
-            <div class="ob-cell" style="background:#dde6f0;height:35%"><div class="ob-tooltip">5:00p · 2</div></div>
-            <div class="ob-cell" style="background:#dde6f0;height:35%"><div class="ob-tooltip">5:30p · 0</div></div>
-          </div>
-          <div class="ob-labels">
-            <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
-            <div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div>
-          </div>
-          <div class="ob-peaks">
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#d97706"></div>
-              <span class="ob-peak-time">12:30 PM</span>
-              <span class="ob-peak-count">26</span>
-            </div>
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#f59e0b"></div>
-              <span class="ob-peak-time">11:00 AM</span>
-              <span class="ob-peak-count">22</span>
-            </div>
-            <div class="ob-peak-row">
-              <div class="ob-dot" style="background:#fbbf24"></div>
-              <span class="ob-peak-time">10:30 AM</span>
-              <span class="ob-peak-count">20</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
+    <div style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;">
+      Top 3 Peak Intervals Per Day — 30-min · Interactions Offered
+    </div>
+    <div class="peak-cards-grid">
+<div class="ob-card">
+  <div class="ob-day">Mon 3/23</div>
+  <div class="ob-heatrow" style="height:36px;"><div class="ob-cell" style="background:#dde6f0;height:4%"><div class="ob-tooltip">8:00a · 0</div></div><div class="ob-cell" style="background:#dde6f0;height:4%"><div class="ob-tooltip">8:30a · 0</div></div><div class="ob-cell" style="background:#6b9ec4;height:41%"><div class="ob-tooltip">9:00a · 7</div></div><div class="ob-cell" style="background:#4d7fac;height:52%"><div class="ob-tooltip">9:30a · 9</div></div><div class="ob-cell" style="background:#f59e0b;height:100%"><div class="ob-tooltip">10:00a · 17</div></div><div class="ob-cell" style="background:#14417c;height:88%"><div class="ob-tooltip">10:30a · 15</div></div><div class="ob-cell" style="background:#4d7fac;height:52%"><div class="ob-tooltip">11:00a · 9</div></div><div class="ob-cell" style="background:#5b8fb8;height:47%"><div class="ob-tooltip">11:30a · 8</div></div><div class="ob-cell" style="background:#5b8fb8;height:47%"><div class="ob-tooltip">12:00p · 8</div></div><div class="ob-cell" style="background:#d97706;height:100%"><div class="ob-tooltip">12:30p · 17</div></div><div class="ob-cell" style="background:#fbbf24;height:94%"><div class="ob-tooltip">1:00p · 16</div></div><div class="ob-cell" style="background:#6b9ec4;height:41%"><div class="ob-tooltip">1:30p · 7</div></div><div class="ob-cell" style="background:#3d6fa0;height:64%"><div class="ob-tooltip">2:00p · 11</div></div><div class="ob-cell" style="background:#2e5f94;height:70%"><div class="ob-tooltip">2:30p · 12</div></div><div class="ob-cell" style="background:#4d7fac;height:52%"><div class="ob-tooltip">3:00p · 9</div></div><div class="ob-cell" style="background:#7aabcf;height:29%"><div class="ob-tooltip">3:30p · 5</div></div><div class="ob-cell" style="background:#6b9ec4;height:41%"><div class="ob-tooltip">4:00p · 7</div></div><div class="ob-cell" style="background:#5b8fb8;height:47%"><div class="ob-tooltip">4:30p · 8</div></div><div class="ob-cell" style="background:#a8c4df;height:23%"><div class="ob-tooltip">5:00p · 4</div></div><div class="ob-cell" style="background:#a8c4df;height:17%"><div class="ob-tooltip">5:30p · 3</div></div></div>
+  <div class="ob-labels"><div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div></div>
+  <div class="ob-peaks"><div class="ob-peak-row"><div class="ob-dot" style="background:#d97706"></div><span class="ob-peak-time">12:30 PM</span><span class="ob-peak-count">17</span></div>
+<div class="ob-peak-row"><div class="ob-dot" style="background:#f59e0b"></div><span class="ob-peak-time">10:00 AM</span><span class="ob-peak-count">17</span></div>
+<div class="ob-peak-row"><div class="ob-dot" style="background:#fbbf24"></div><span class="ob-peak-time">1:00 PM</span><span class="ob-peak-count">16</span></div>
+</div>
+</div>
+<div class="ob-card">
+  <div class="ob-day">Tue 3/24</div>
+  <div class="ob-heatrow" style="height:36px;"><div class="ob-cell" style="background:#dde6f0;height:7%"><div class="ob-tooltip">8:00a · 1</div></div><div class="ob-cell" style="background:#dde6f0;height:4%"><div class="ob-tooltip">8:30a · 0</div></div><div class="ob-cell" style="background:#7aabcf;height:28%"><div class="ob-tooltip">9:00a · 4</div></div><div class="ob-cell" style="background:#a8c4df;height:21%"><div class="ob-tooltip">9:30a · 3</div></div><div class="ob-cell" style="background:#5b8fb8;height:42%"><div class="ob-tooltip">10:00a · 6</div></div><div class="ob-cell" style="background:#3d6fa0;height:64%"><div class="ob-tooltip">10:30a · 9</div></div><div class="ob-cell" style="background:#3d6fa0;height:64%"><div class="ob-tooltip">11:00a · 9</div></div><div class="ob-cell" style="background:#d97706;height:100%"><div class="ob-tooltip">11:30a · 14</div></div><div class="ob-cell" style="background:#3d6fa0;height:64%"><div class="ob-tooltip">12:00p · 9</div></div><div class="ob-cell" style="background:#3d6fa0;height:64%"><div class="ob-tooltip">12:30p · 9</div></div><div class="ob-cell" style="background:#3d6fa0;height:64%"><div class="ob-tooltip">1:00p · 9</div></div><div class="ob-cell" style="background:#fbbf24;height:71%"><div class="ob-tooltip">1:30p · 10</div></div><div class="ob-cell" style="background:#5b8fb8;height:42%"><div class="ob-tooltip">2:00p · 6</div></div><div class="ob-cell" style="background:#5b8fb8;height:42%"><div class="ob-tooltip">2:30p · 6</div></div><div class="ob-cell" style="background:#f59e0b;height:78%"><div class="ob-tooltip">3:00p · 11</div></div><div class="ob-cell" style="background:#3d6fa0;height:64%"><div class="ob-tooltip">3:30p · 9</div></div><div class="ob-cell" style="background:#3d6fa0;height:64%"><div class="ob-tooltip">4:00p · 9</div></div><div class="ob-cell" style="background:#3d6fa0;height:64%"><div class="ob-tooltip">4:30p · 9</div></div><div class="ob-cell" style="background:#5b8fb8;height:42%"><div class="ob-tooltip">5:00p · 6</div></div><div class="ob-cell" style="background:#a8c4df;height:21%"><div class="ob-tooltip">5:30p · 3</div></div></div>
+  <div class="ob-labels"><div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div></div>
+  <div class="ob-peaks"><div class="ob-peak-row"><div class="ob-dot" style="background:#d97706"></div><span class="ob-peak-time">11:30 AM</span><span class="ob-peak-count">14</span></div>
+<div class="ob-peak-row"><div class="ob-dot" style="background:#f59e0b"></div><span class="ob-peak-time">3:00 PM</span><span class="ob-peak-count">11</span></div>
+<div class="ob-peak-row"><div class="ob-dot" style="background:#fbbf24"></div><span class="ob-peak-time">1:30 PM</span><span class="ob-peak-count">10</span></div>
+</div>
+</div>
+<div class="ob-card">
+  <div class="ob-day">Wed 3/25</div>
+  <div class="ob-heatrow" style="height:36px;"><div class="ob-cell" style="background:#dde6f0;height:4%"><div class="ob-tooltip">8:00a · 0</div></div><div class="ob-cell" style="background:#c4d8e8;height:8%"><div class="ob-tooltip">8:30a · 1</div></div><div class="ob-cell" style="background:#7aabcf;height:25%"><div class="ob-tooltip">9:00a · 3</div></div><div class="ob-cell" style="background:#14417c;height:83%"><div class="ob-tooltip">9:30a · 10</div></div><div class="ob-cell" style="background:#6b9ec4;height:33%"><div class="ob-tooltip">10:00a · 4</div></div><div class="ob-cell" style="background:#5b8fb8;height:41%"><div class="ob-tooltip">10:30a · 5</div></div><div class="ob-cell" style="background:#1e4f88;height:75%"><div class="ob-tooltip">11:00a · 9</div></div><div class="ob-cell" style="background:#d97706;height:100%"><div class="ob-tooltip">11:30a · 12</div></div><div class="ob-cell" style="background:#4d7fac;height:50%"><div class="ob-tooltip">12:00p · 6</div></div><div class="ob-cell" style="background:#3d6fa0;height:58%"><div class="ob-tooltip">12:30p · 7</div></div><div class="ob-cell" style="background:#4d7fac;height:50%"><div class="ob-tooltip">1:00p · 6</div></div><div class="ob-cell" style="background:#4d7fac;height:50%"><div class="ob-tooltip">1:30p · 6</div></div><div class="ob-cell" style="background:#f59e0b;height:91%"><div class="ob-tooltip">2:00p · 11</div></div><div class="ob-cell" style="background:#1e4f88;height:75%"><div class="ob-tooltip">2:30p · 9</div></div><div class="ob-cell" style="background:#fbbf24;height:91%"><div class="ob-tooltip">3:00p · 11</div></div><div class="ob-cell" style="background:#5b8fb8;height:41%"><div class="ob-tooltip">3:30p · 5</div></div><div class="ob-cell" style="background:#2e5f94;height:66%"><div class="ob-tooltip">4:00p · 8</div></div><div class="ob-cell" style="background:#7aabcf;height:25%"><div class="ob-tooltip">4:30p · 3</div></div><div class="ob-cell" style="background:#4d7fac;height:50%"><div class="ob-tooltip">5:00p · 6</div></div><div class="ob-cell" style="background:#a8c4df;height:16%"><div class="ob-tooltip">5:30p · 2</div></div></div>
+  <div class="ob-labels"><div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div></div>
+  <div class="ob-peaks"><div class="ob-peak-row"><div class="ob-dot" style="background:#d97706"></div><span class="ob-peak-time">11:30 AM</span><span class="ob-peak-count">12</span></div>
+<div class="ob-peak-row"><div class="ob-dot" style="background:#f59e0b"></div><span class="ob-peak-time">2:00 PM</span><span class="ob-peak-count">11</span></div>
+<div class="ob-peak-row"><div class="ob-dot" style="background:#fbbf24"></div><span class="ob-peak-time">3:00 PM</span><span class="ob-peak-count">11</span></div>
+</div>
+</div>
+<div class="ob-card">
+  <div class="ob-day">Thu 3/26</div>
+  <div class="ob-heatrow" style="height:36px;"><div class="ob-cell" style="background:#c4d8e8;height:9%"><div class="ob-tooltip">8:00a · 1</div></div><div class="ob-cell" style="background:#dde6f0;height:4%"><div class="ob-tooltip">8:30a · 0</div></div><div class="ob-cell" style="background:#6b9ec4;height:36%"><div class="ob-tooltip">9:00a · 4</div></div><div class="ob-cell" style="background:#3d6fa0;height:63%"><div class="ob-tooltip">9:30a · 7</div></div><div class="ob-cell" style="background:#2e5f94;height:72%"><div class="ob-tooltip">10:00a · 8</div></div><div class="ob-cell" style="background:#4d7fac;height:54%"><div class="ob-tooltip">10:30a · 6</div></div><div class="ob-cell" style="background:#2e5f94;height:72%"><div class="ob-tooltip">11:00a · 8</div></div><div class="ob-cell" style="background:#4d7fac;height:54%"><div class="ob-tooltip">11:30a · 6</div></div><div class="ob-cell" style="background:#3d6fa0;height:63%"><div class="ob-tooltip">12:00p · 7</div></div><div class="ob-cell" style="background:#fbbf24;height:90%"><div class="ob-tooltip">12:30p · 10</div></div><div class="ob-cell" style="background:#6b9ec4;height:36%"><div class="ob-tooltip">1:00p · 4</div></div><div class="ob-cell" style="background:#5b8fb8;height:45%"><div class="ob-tooltip">1:30p · 5</div></div><div class="ob-cell" style="background:#d97706;height:100%"><div class="ob-tooltip">2:00p · 11</div></div><div class="ob-cell" style="background:#2e5f94;height:72%"><div class="ob-tooltip">2:30p · 8</div></div><div class="ob-cell" style="background:#6b9ec4;height:36%"><div class="ob-tooltip">3:00p · 4</div></div><div class="ob-cell" style="background:#f59e0b;height:100%"><div class="ob-tooltip">3:30p · 11</div></div><div class="ob-cell" style="background:#5b8fb8;height:45%"><div class="ob-tooltip">4:00p · 5</div></div><div class="ob-cell" style="background:#5b8fb8;height:45%"><div class="ob-tooltip">4:30p · 5</div></div><div class="ob-cell" style="background:#6b9ec4;height:36%"><div class="ob-tooltip">5:00p · 4</div></div><div class="ob-cell" style="background:#2e5f94;height:72%"><div class="ob-tooltip">5:30p · 8</div></div></div>
+  <div class="ob-labels"><div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div></div>
+  <div class="ob-peaks"><div class="ob-peak-row"><div class="ob-dot" style="background:#d97706"></div><span class="ob-peak-time">2:00 PM</span><span class="ob-peak-count">11</span></div>
+<div class="ob-peak-row"><div class="ob-dot" style="background:#f59e0b"></div><span class="ob-peak-time">3:30 PM</span><span class="ob-peak-count">11</span></div>
+<div class="ob-peak-row"><div class="ob-dot" style="background:#fbbf24"></div><span class="ob-peak-time">12:30 PM</span><span class="ob-peak-count">10</span></div>
+</div>
+</div>
+<div class="ob-card">
+  <div class="ob-day">Fri 3/27</div>
+  <div class="ob-heatrow" style="height:36px;"><div class="ob-cell" style="background:#dde6f0;height:4%"><div class="ob-tooltip">8:00a · 0</div></div><div class="ob-cell" style="background:#dde6f0;height:4%"><div class="ob-tooltip">8:30a · 0</div></div><div class="ob-cell" style="background:#6b9ec4;height:40%"><div class="ob-tooltip">9:00a · 6</div></div><div class="ob-cell" style="background:#2e5f94;height:66%"><div class="ob-tooltip">9:30a · 10</div></div><div class="ob-cell" style="background:#3d6fa0;height:60%"><div class="ob-tooltip">10:00a · 9</div></div><div class="ob-cell" style="background:#7aabcf;height:26%"><div class="ob-tooltip">10:30a · 4</div></div><div class="ob-cell" style="background:#4d7fac;height:53%"><div class="ob-tooltip">11:00a · 8</div></div><div class="ob-cell" style="background:#6b9ec4;height:33%"><div class="ob-tooltip">11:30a · 5</div></div><div class="ob-cell" style="background:#3d6fa0;height:60%"><div class="ob-tooltip">12:00p · 9</div></div><div class="ob-cell" style="background:#d97706;height:100%"><div class="ob-tooltip">12:30p · 15</div></div><div class="ob-cell" style="background:#2e5f94;height:66%"><div class="ob-tooltip">1:00p · 10</div></div><div class="ob-cell" style="background:#3d6fa0;height:60%"><div class="ob-tooltip">1:30p · 9</div></div><div class="ob-cell" style="background:#fbbf24;height:73%"><div class="ob-tooltip">2:00p · 11</div></div><div class="ob-cell" style="background:#4d7fac;height:53%"><div class="ob-tooltip">2:30p · 8</div></div><div class="ob-cell" style="background:#7aabcf;height:26%"><div class="ob-tooltip">3:00p · 4</div></div><div class="ob-cell" style="background:#a8c4df;height:20%"><div class="ob-tooltip">3:30p · 3</div></div><div class="ob-cell" style="background:#f59e0b;height:86%"><div class="ob-tooltip">4:00p · 13</div></div><div class="ob-cell" style="background:#7aabcf;height:26%"><div class="ob-tooltip">4:30p · 4</div></div><div class="ob-cell" style="background:#4d7fac;height:53%"><div class="ob-tooltip">5:00p · 8</div></div><div class="ob-cell" style="background:#5b8fb8;height:46%"><div class="ob-tooltip">5:30p · 7</div></div></div>
+  <div class="ob-labels"><div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div></div>
+  <div class="ob-peaks"><div class="ob-peak-row"><div class="ob-dot" style="background:#d97706"></div><span class="ob-peak-time">12:30 PM</span><span class="ob-peak-count">15</span></div>
+<div class="ob-peak-row"><div class="ob-dot" style="background:#f59e0b"></div><span class="ob-peak-time">4:00 PM</span><span class="ob-peak-count">13</span></div>
+<div class="ob-peak-row"><div class="ob-dot" style="background:#fbbf24"></div><span class="ob-peak-time">2:00 PM</span><span class="ob-peak-count">11</span></div>
+</div>
+</div>
     </div>
 
-        <!-- Stacked media type interval chart -->
-    <div style="background:var(--white);border:1px solid var(--border-str);border-radius:12px;padding:22px 22px 16px;">
-      <div class="trend-canvas-title">Contacts offered by media type — 30-min intervals (week total)</div>
-      <div class="trend-canvas-sub">Voice · Message · Email stacked · Mon–Fri combined · 8 AM – 6 PM</div>
-      <div style="display:flex;gap:18px;margin-bottom:14px;flex-wrap:wrap;">
-        <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#1a5fa8;"></span>Voice</span>
-        <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#1a6e44;"></span>Message</span>
-        <span style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#c47a10;"></span>Email</span>
+    <div class="busy-hour-wrap" style="margin-top:18px;">
+      <div class="trend-canvas-title">Contacts by Media Type — Stacked Interval Chart</div>
+      <div class="trend-canvas-sub" style="margin-bottom:16px;">Weekly totals per 30-min slot (Mon–Fri summed) · 
+        <span style="color:#1a5fa8;font-weight:700">■ Voice</span> &nbsp;
+        <span style="color:#1a6e44;font-weight:700">■ Message/Chat</span> &nbsp;
+        <span style="color:#c47a10;font-weight:700">■ Email</span>
       </div>
-      <canvas id="busy-hour-chart" style="width:100%;display:block;"></canvas>
+      <canvas id="busy-hour-chart"></canvas>
     </div>
-
   </section>
 
   <section>
     <div class="sec-head">
       <span class="sec-num">§ 05</span>
       <span class="sec-title">Trend Insights</span>
-      <span class="sec-sub">Key directional observations from this week&#39;s data</span>
+      <span class="sec-sub">2-week directional analysis</span>
     </div>
     <div class="trend-insight-grid">
-      <div class="trend-card tc-neg">
-        <div class="tc-icon">📉</div>
-        <div class="tc-title">Voice Continues Downward — 7.4pp Drop in One Week</div>
-        <div class="tc-body">Voice answer rate fell from 46.9% to 39.5% in a single week — the largest single-week drop seen in this report series. The abandon rate climbed to 24.8% (from 22.3%). Telemedica's continued near-total failure (5.9% answer rate on 119 contacts) is the primary driver of the decline, but even the other queues would only achieve ~55% without Telemedica.</div>
-        <div class="tc-note">Voice answered: <strong>208 / 527 (39.5%)</strong> · Baseline (Mar 8–15): <strong>244 / 520 (46.9%)</strong> · Δ: <strong>–7.4pp</strong></div>
-      </div>
-      <div class="trend-card tc-neg">
-        <div class="tc-icon">🚨</div>
-        <div class="tc-title">Telemedica — Three Consecutive Weeks of Critical Failure</div>
-        <div class="tc-body">Week 1 (Mar 8–15): 8.7% answer rate, 42.4% abandon, 62.2% callback completion. Week 2 (Mar 15–22): 5.9% answer rate, 36.1% abandon, zero callbacks. The situation is getting worse, not better. With 119 offered contacts this week (up from 92), more customers are trying to reach Telemedica while the queue continues to fail. This escalation is overdue.</div>
-        <div class="tc-note">Wk 1 (Mar 8–15): <strong>8/92 (8.7% ans)</strong> · Wk 2 (Mar 15–22): <strong>7/119 (5.9% ans)</strong> · Trend: <strong>↓ worsening</strong></div>
-      </div>
       <div class="trend-card tc-pos">
         <div class="tc-icon">📈</div>
-        <div class="tc-title">Email Strong for Second Consecutive Week</div>
-        <div class="tc-body">Email maintained above-target performance for the second week in a row. All 4 PODs exceeded the 80% SL target (83–93%), and carryover volume from the prior week was fully cleared with zero abandonments. If this trajectory holds, email has become the most reliable channel and a benchmark for other channels to target.</div>
-        <div class="tc-note">Email SL: <strong>89.2% avg (all PODs above 83%)</strong> · Prior week: <strong>94.3% answer rate</strong></div>
+        <div class="tc-title">Voice Recovery — Biggest Week-Over-Week Gain</div>
+        <div class="tc-body">Voice answer rate jumped from 39.5% to 60.9% — a 21.4pp improvement in a single week. Every queue except Telemedica posted answer rate gains. This is the strongest single-week voice improvement in the 3-week data set. The pattern suggests staffing coverage improved significantly, though volume also dropped from 527 to 437 contacts.</div>
+        <div class="tc-note">CE Team: 66.2% → 75.7% · HCC: 58.5% → 73.5% · Client Support: 41.4% → 71.0%</div>
+      </div>
+      <div class="trend-card tc-neg">
+        <div class="tc-icon">⚠️</div>
+        <div class="tc-title">Telemedica — Persistent 3-Week Failure</div>
+        <div class="tc-body">Telemedica's answer rate was 8.7% three weeks ago, 5.9% last week, and 33.7% this week. While the trajectory is improving, the queue has not approached the 80% SL target in any week in the current dataset. The improvement from 5.9% to 33.7% is notable but may reflect reduced contact volume rather than resolved staffing issues.</div>
+        <div class="tc-note">Week 1: 8.7% · Week 2: 5.9% · Week 3: 33.7% · Target: 80%</div>
+      </div>
+      <div class="trend-card tc-warn">
+        <div class="tc-icon">🔄</div>
+        <div class="tc-title">Chat ACW — Partial Resolution, Ongoing Issue</div>
+        <div class="tc-body">POD4 Chat ACW improved dramatically from 2h 28m to 11m 45s, suggesting intervention worked for that queue. However POD3 Chat ACW remains at 2h 1m 43s — still an active anomaly. POD2 Chat ACW emerged as newly elevated at 32m 31s this week. The pattern suggests the ACW problem migrates between queues without a systemic fix (ACW auto-timeout).</div>
+        <div class="tc-note">POD4 fixed: 2h 28m → 11m 45s · POD3 still active: 2h 1m 43s</div>
       </div>
       <div class="trend-card tc-pos">
         <div class="tc-icon">✅</div>
-        <div class="tc-title">Callbacks Improving — Up 4.0pp From Prior Week</div>
-        <div class="tc-body">Callback completion improved from 93.2% to 97.2% week-over-week. Notably, this improvement occurred despite Telemedica posting zero callbacks (removing the prior week's 62.2% completion drag). The improvement is real — the remaining 7 queues collectively achieved near-perfect completion. Customer wait times remain high, but the operational completion capability is strong.</div>
-        <div class="tc-note">Completed: <strong>139 / 143 (97.2%)</strong> · Prior week: <strong>164 / 176 (93.2%)</strong> · Δ: <strong>+4.0pp</strong></div>
-      </div>
-      <div class="trend-card tc-warn">
-        <div class="tc-icon">⚠️</div>
-        <div class="tc-title">Chat ACW Anomaly — Recurring Pattern</div>
-        <div class="tc-body">This is the second week in a row where chat queues show extreme ACW anomalies. Last week POD1 (8h 30m) and POD4 (4h 10m) were flagged. This week POD3 (4h 29m) and POD4 (2h 28m) are flagged. The queues affected are shifting, but the underlying problem — agents leaving ACW states open — persists. Without a Genesys ACW auto-timeout, this pattern will continue indefinitely.</div>
-        <div class="tc-note">Last week: POD1 &amp; POD4 flagged · This week: POD3 (4h 29m) &amp; POD4 (2h 28m) flagged</div>
+        <div class="tc-title">Email Consistency — Strong 3rd Week</div>
+        <div class="tc-body">Email has delivered above 83% SL across all PODs for the third consecutive week, with zero abandonments and high handle rates. This week's 95.8% avg SL and 96.0% handle rate continue the pattern. Email represents the best-performing channel by SL and demonstrates that the team can hit targets with appropriate staffing and routing.</div>
+        <div class="tc-note">3-week avg SL: ~91% · Handle rate: 96-106% · Zero abandonments</div>
       </div>
       <div class="trend-card tc-info">
-        <div class="tc-icon">👤</div>
-        <div class="tc-title">Miguel Garcia — Consistent Top Inbound Performer</div>
-        <div class="tc-body">Garcia handled 138 inbound answered contacts this week — the highest inbound count on the team. He also transferred 26 contacts (67% of all voice transfers). Last week he was top performer with 208 answered (293 handled). His volume, availability, and throughput continue to be the single largest driver of voice queue answers. His routing profile and schedule should be a benchmark for team capacity planning.</div>
-        <div class="tc-note">This week: <strong>138 inbound answered / 210 total handled</strong> · Prior week: <strong>208 answered / 293 handled</strong></div>
+        <div class="tc-icon">📊</div>
+        <div class="tc-title">Peak Interval Pattern — 12:30 PM Consistently Busiest</div>
+        <div class="tc-body">The weekly peak interval of 12:30 PM (58 total contacts across all 5 days) matches the highest-volume time slot pattern. Monday and Friday are the highest volume days (172 and 143 contacts respectively). The 12:00–1:00 PM window consistently peaks — this is the priority staffing window for voice and chat.</div>
+        <div class="tc-note">Peak slot: 12:30p (58/wk) · Busiest day: Mon 3/23 (172) · M/F bookend pattern</div>
+      </div>
+      <div class="trend-card tc-warn">
+        <div class="tc-icon">📉</div>
+        <div class="tc-title">Callback Volume Dropped — Possible Routing Change</div>
+        <div class="tc-body">Callback volume dropped from 143 last week to 82 this week — a 42.7% decrease. This is a significant one-week drop. While completion rates remained excellent (98.8%), the sudden volume decrease may reflect changes in how callbacks are offered to customers, or reduced voice volume offering fewer callback opportunities. Verify callback routing configuration is unchanged.</div>
+        <div class="tc-note">Prior week: 143 requests · This week: 82 requests · Change: -61 (-42.7%)</div>
       </div>
     </div>
   </section>
+
+<!-- TREND-DATA: {"voice_offered": 437, "voice_ans_rate": 60.9, "voice_abn_rate": 17.4, "email_offered": 99, "email_ans_rate": 96.0, "chat_offered": 195, "chat_ans_rate": 88.2, "callback_offered": 82, "callback_comp_rate": 98.8, "voice_queues_ans": {"CE Team": 75.7, "Client Support": 71.0, "HCC": 73.5, "Telemedica": 33.7, "POD_avg": 55.7}, "voice_queues_abn": {"CE Team": 13.0, "Client Support": 13.0, "HCC": 12.2, "Telemedica": 27.0, "POD_avg": 19.1}, "period_label": "Week of Mar 22\u201328, 2026"} -->
 
   <div class="report-footer">
     <span>Served With Honor · Care Team Operations</span>
@@ -1495,25 +1339,20 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     <span>Generated Mar 30, 2026</span>
   </div>
 </div>
-
-<!-- TREND-DATA: {"voice_offered":527,"voice_ans_rate":39.5,"voice_abn_rate":24.8,"email_offered":94,"email_ans_rate":106.4,"chat_offered":162,"chat_ans_rate":90.1,"callback_offered":143,"callback_comp_rate":97.2,"voice_queues_ans":{"CE Team":66.2,"Client Support":41.4,"HCC":58.5,"Telemedica":5.9,"POD_avg":34.8},"voice_queues_abn":{"CE Team":16.2,"Client Support":23.2,"HCC":24.4,"Telemedica":36.1,"POD_avg":25.0},"period_label":"Week of Mar 22\u201328, 2026"} -->
 </div><!-- /tab-trending -->
 
 <script>
-function showTab(id) {
+function showTab(id, evt) {
   document.querySelectorAll('.section-wrap').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
-  event.target.closest('.nav-tab').classList.add('active');
+  if (evt) evt.target.closest('.nav-tab').classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (id === 'trending') { setTimeout(() => { drawTrendCharts(); drawBusyHourChart(); }, 60); }
 }
 
-/* ── TRENDING CHARTS ── */
 function hexToRgba(hex, alpha) {
-  const r = parseInt(hex.slice(1,3),16);
-  const g = parseInt(hex.slice(3,5),16);
-  const b = parseInt(hex.slice(5,7),16);
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
   return `rgba(${r},${g},${b},${alpha})`;
 }
 function rrect(ctx, x, y, w, h, radii) {
@@ -1521,14 +1360,15 @@ function rrect(ctx, x, y, w, h, radii) {
   const [tl,tr,br,bl] = radii;
   ctx.beginPath();
   ctx.moveTo(x+tl, y);
-  ctx.lineTo(x+w-tr, y); ctx.arcTo(x+w, y,   x+w,   y+tr, tr);
-  ctx.lineTo(x+w, y+h-br); ctx.arcTo(x+w, y+h, x+w-br,y+h, br);
-  ctx.lineTo(x+bl, y+h);   ctx.arcTo(x, y+h,   x,   y+h-bl, bl);
-  ctx.lineTo(x, y+tl);     ctx.arcTo(x, y,     x+tl,y, tl);
+  ctx.lineTo(x+w-tr, y); ctx.arcTo(x+w, y, x+w, y+tr, tr);
+  ctx.lineTo(x+w, y+h-br); ctx.arcTo(x+w, y+h, x+w-br, y+h, br);
+  ctx.lineTo(x+bl, y+h); ctx.arcTo(x, y+h, x, y+h-bl, bl);
+  ctx.lineTo(x, y+tl); ctx.arcTo(x, y, x+tl, y, tl);
   ctx.closePath();
 }
+
 function drawGroupedBarChart(ctx, W, H, cfg) {
-  const { labels, prevVals, currVals, colors, maxVal, isRate, title80 } = cfg;
+  const { labels, prevVals, currVals, colors, maxVal, isRate, title80, legendPrev, legendCurr } = cfg;
   const pad = { top: 76, right: 52, bottom: 62, left: 42 };
   const chartW = W - pad.left - pad.right;
   const chartH = H - pad.top - pad.bottom;
@@ -1540,7 +1380,6 @@ function drawGroupedBarChart(ctx, W, H, cfg) {
 
   ctx.clearRect(0, 0, W, H);
 
-  // Grid lines
   [0, 0.25, 0.5, 0.75, 1].forEach(frac => {
     const y = pad.top + chartH * (1 - frac);
     ctx.beginPath();
@@ -1549,131 +1388,83 @@ function drawGroupedBarChart(ctx, W, H, cfg) {
     ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + chartW, y); ctx.stroke();
     if (frac > 0) {
       const val = max * frac;
-      ctx.fillStyle = '#9ea2ae';
-      ctx.font = '10px Segoe UI, sans-serif';
-      ctx.textAlign = 'right';
+      ctx.fillStyle = '#9ea2ae'; ctx.font = '10px Segoe UI, sans-serif'; ctx.textAlign = 'right';
       ctx.fillText(isRate ? val.toFixed(0)+'%' : Math.round(val), pad.left - 4, y + 3.5);
     }
   });
 
-  // 80% target line for rate chart
   if (title80 && max >= 80) {
     const y80 = pad.top + chartH * (1 - 80/max);
-    ctx.beginPath();
-    ctx.setLineDash([4,3]);
-    ctx.strokeStyle = '#c0202a'; ctx.lineWidth = 1.5;
-    ctx.moveTo(pad.left, y80); ctx.lineTo(pad.left + chartW, y80); ctx.stroke();
-    ctx.setLineDash([]);
-    // Two-line label in right margin, vertically centred on the line
-    ctx.fillStyle = '#c0202a'; ctx.font = 'bold 10px Segoe UI, sans-serif';
-    ctx.textAlign = 'right';
-    ctx.fillText('80%',    W - 4, y80 - 3);
-    ctx.fillText('target', W - 4, y80 + 9);
+    ctx.beginPath(); ctx.setLineDash([4,3]); ctx.strokeStyle = '#c0202a'; ctx.lineWidth = 1.5;
+    ctx.moveTo(pad.left, y80); ctx.lineTo(pad.left + chartW, y80); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = '#c0202a'; ctx.font = 'bold 10px Segoe UI, sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText('80%', W - 4, y80 - 3); ctx.fillText('target', W - 4, y80 + 9);
   }
 
   labels.forEach((lbl, i) => {
     const cx = pad.left + i * groupW + groupW / 2;
     const x1 = cx - barW - barGap/2;
     const x2 = cx + barGap/2;
-
-    // Prev bar (fixed grey)
     const prevH = Math.max((prevVals[i] / max) * chartH, 2);
     const prevY = pad.top + chartH - prevH;
-    ctx.fillStyle = 'rgba(90,95,110,0.13)';
-    ctx.strokeStyle = 'rgba(90,95,110,0.48)';
-    ctx.lineWidth = 1.5;
-    rrect(ctx, x1, prevY, barW, prevH, [3,3,0,0]);
-    ctx.fill(); ctx.stroke();
-    // prev value label
-    ctx.fillStyle = 'rgba(90,95,110,0.72)';
-    ctx.font = '10px Segoe UI, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(90,95,110,0.13)'; ctx.strokeStyle = 'rgba(90,95,110,0.48)'; ctx.lineWidth = 1.5;
+    rrect(ctx, x1, prevY, barW, prevH, [3,3,0,0]); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = 'rgba(90,95,110,0.72)'; ctx.font = '10px Segoe UI, sans-serif'; ctx.textAlign = 'center';
     ctx.fillText(isRate ? prevVals[i].toFixed(1)+'%' : prevVals[i], x1+barW/2, prevY - 7);
-
-    // Curr bar (solid)
     const currH = Math.max((currVals[i] / max) * chartH, 2);
     const currY = pad.top + chartH - currH;
     ctx.fillStyle = colors[i]; ctx.strokeStyle = 'transparent'; ctx.lineWidth = 0;
     rrect(ctx, x2, currY, barW, currH, [3,3,0,0]); ctx.fill();
-    // curr value label — always above bar in bold
     const currLbl = isRate ? currVals[i].toFixed(1)+'%' : String(currVals[i]);
     ctx.fillStyle = colors[i]; ctx.font = 'bold 11px Segoe UI, sans-serif'; ctx.textAlign = 'center';
     ctx.fillText(currLbl, x2+barW/2, currY - 6);
-
-    // Delta indicator
     const delta = currVals[i] - prevVals[i];
     const isGood = isRate ? delta > 0 : null;
     let dc = '#9ea2ae';
-    if (isGood === true) dc = '#1a6e44';
-    if (isGood === false) dc = '#c0202a';
+    if (isGood === true) dc = '#1a6e44'; if (isGood === false) dc = '#c0202a';
     const dStr = (delta >= 0 ? '▲' : '▼') + ' ' + Math.abs(isRate ? delta.toFixed(1) : delta) + (isRate ? 'pp' : '');
     ctx.fillStyle = dc; ctx.font = 'bold 10px Segoe UI, sans-serif'; ctx.textAlign = 'center';
     ctx.fillText(dStr, cx, pad.top + chartH + 18);
-
-    // X-axis label
     ctx.fillStyle = '#3a3d48'; ctx.font = 'bold 12px Segoe UI, sans-serif'; ctx.textAlign = 'center';
     ctx.fillText(lbl, cx, pad.top + chartH + 34);
   });
 
-  // Legend — closer to title, more space before bars
   const lY = pad.top - 36;
   ctx.fillStyle = 'rgba(80,80,80,0.15)'; ctx.strokeStyle = 'rgba(80,80,80,0.5)'; ctx.lineWidth = 1.2;
   rrect(ctx, pad.left, lY-8, 14, 9, 2); ctx.fill(); ctx.stroke();
   ctx.fillStyle = '#6b6e7a'; ctx.font = '11px Segoe UI, sans-serif'; ctx.textAlign = 'left';
-  ctx.fillText('Mar 8\u201315 (prior week)', pad.left+18, lY);
-
+  ctx.fillText(legendPrev || 'Mar 15–21 (prior week)', pad.left+18, lY);
   ctx.fillStyle = colors[0]; ctx.strokeStyle = 'transparent';
   rrect(ctx, pad.left+175, lY-8, 14, 9, 2); ctx.fill();
   ctx.fillStyle = '#6b6e7a'; ctx.font = '11px Segoe UI, sans-serif';
-  ctx.fillText('Mar 15\u201321 (this week)', pad.left+193, lY);
+  ctx.fillText(legendCurr || 'Mar 22–28 (this week)', pad.left+193, lY);
 }
 
 function drawTrendCharts() {
   const configs = [
-    {
-      id: 'trend-vol-chart',
-      labels: ['Voice', 'Chat', 'Callback', 'Email'],
-      prevVals: [520, 233, 176, 106],
-      currVals: [527, 162, 143, 94],
-      colors: ['#2060c8','#2060c8','#2060c8','#2060c8'],
-      isRate: false
-    },
-    {
-      id: 'trend-rate-chart',
-      labels: ['Voice', 'Chat', 'Callback', 'Email'],
-      prevVals: [46.9, 86.3, 93.2, 94.3],
-      currVals: [39.5, 90.1, 97.2, 100.0],
-      colors: ['#2060c8','#2060c8','#2060c8','#2060c8'],
-      isRate: true, maxVal: 100, title80: true
-    },
-    {
-      id: 'trend-voice-chart',
-      labels: ['CE Team', 'Client Sup', 'HCC', 'Telemedica', 'POD1\u20134 avg'],
-      prevVals: [72.9, 65.0, 32.7, 8.7, 30.8],
-      currVals: [66.2, 41.4, 58.5, 5.9, 34.8],
-      colors: ['#2060c8','#2060c8','#2060c8','#2060c8','#2060c8'],
-      isRate: true, maxVal: 100, title80: true
-    },
-    {
-      id: 'trend-abandon-chart',
-      labels: ['CE Team', 'Client Sup', 'HCC', 'Telemedica', 'POD1\u20134 avg'],
-      prevVals: [10.1, 13.0, 30.8, 42.4, 24.0],
-      currVals: [16.2, 23.2, 24.4, 36.1, 25.0],
-      colors: ['#2060c8','#2060c8','#2060c8','#2060c8','#2060c8'],
-      isRate: true, maxVal: null
-    }
+    { id:'trend-vol-chart', labels:['Voice','Chat','Callback','Email'],
+       prevVals:[527, 162, 143, 94], currVals:[437, 195, 82, 99],
+       colors:['#2060c8','#2060c8','#2060c8','#2060c8'], isRate:false },
+    { id:'trend-rate-chart', labels:['Voice','Chat','Callback','Email'],
+       prevVals:[39.5, 90.1, 97.2, 106.4], currVals:[60.9, 88.2, 98.8, 96.0],
+       colors:['#2060c8','#2060c8','#2060c8','#2060c8'],
+       isRate:true, maxVal:110, title80:true },
+    { id:'trend-voice-chart', labels:["CE Team", "Client Sup", "HCC", "Telemedica", "POD1\u20134 avg"],
+       prevVals:[66.2, 41.4, 58.5, 5.9, 34.8], currVals:[75.7, 71.0, 73.5, 33.7, 55.7],
+       colors:['#2060c8','#2060c8','#2060c8','#2060c8','#2060c8'],
+       isRate:true, maxVal:100, title80:true },
+    { id:'trend-abandon-chart', labels:["CE Team", "Client Sup", "HCC", "Telemedica", "POD1\u20134 avg"],
+       prevVals:[16.2, 23.2, 24.4, 36.1, 25.0], currVals:[13.0, 13.0, 12.2, 27.0, 19.1],
+       colors:['#2060c8','#2060c8','#2060c8','#2060c8','#2060c8'],
+       isRate:true, maxVal:null },
   ];
-
   configs.forEach(cfg => {
     const canvas = document.getElementById(cfg.id);
     if (!canvas) return;
     const dpr = window.devicePixelRatio || 1;
-    const W = canvas.offsetWidth || 500;
-    const H = 330;
-    canvas.style.height = H + 'px';
-    canvas.width = W * dpr;
-    canvas.height = H * dpr;
-    const ctx = canvas.getContext('2d');
-    ctx.scale(dpr, dpr);
+    const W = canvas.offsetWidth || 500; const H = 330;
+    canvas.style.height = H + 'px'; canvas.width = W * dpr; canvas.height = H * dpr;
+    const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
     drawGroupedBarChart(ctx, W, H, cfg);
   });
 }
@@ -1682,36 +1473,22 @@ function drawBusyHourChart() {
   const canvas = document.getElementById('busy-hour-chart');
   if (!canvas) return;
   const dpr = window.devicePixelRatio || 1;
-  const W = canvas.offsetWidth || 800;
-  const H = 260;
-  canvas.style.height = H + 'px';
-  canvas.width = W * dpr;
-  canvas.height = H * dpr;
-  const ctx = canvas.getContext('2d');
-  ctx.scale(dpr, dpr);
-
-  const slots = ['8:00a','8:30a','9:00a','9:30a','10:00a','10:30a','11:00a','11:30a',
-                 '12:00p','12:30p','1:00p','1:30p','2:00p','2:30p','3:00p','3:30p',
-                 '4:00p','4:30p','5:00p','5:30p'];
-  const wVoice = [0, 0, 19, 22, 26, 26, 35, 28, 34, 31, 30, 30, 43, 27, 38, 30, 32, 35, 18, 23];
-  const wMsg   = [0, 0, 2, 9, 8, 7, 12, 9, 11, 16, 7, 7, 8, 10, 10, 10, 5, 11, 10, 9];
-  const wEmail = [1, 0, 3, 2, 2, 6, 4, 2, 3, 6, 2, 6, 6, 6, 3, 3, 2, 1, 3, 6];
-
+  const W = canvas.offsetWidth || 800; const H = 260;
+  canvas.style.height = H + 'px'; canvas.width = W * dpr; canvas.height = H * dpr;
+  const ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
+  const slots = ["8:00a", "8:30a", "9:00a", "9:30a", "10:00a", "10:30a", "11:00a", "11:30a", "12:00p", "12:30p", "1:00p", "1:30p", "2:00p", "2:30p", "3:00p", "3:30p", "4:00p", "4:30p", "5:00p", "5:30p"];
+  const wVoice = [0, 0, 17, 21, 31, 23, 26, 30, 27, 31, 28, 18, 31, 24, 29, 20, 29, 19, 20, 13];
+  const wMsg   = [0, 0, 6, 15, 11, 10, 13, 13, 8, 17, 13, 15, 15, 12, 7, 9, 12, 6, 6, 7];
+  const wEmail = [2, 1, 1, 3, 2, 6, 4, 2, 4, 10, 4, 4, 4, 7, 3, 4, 1, 4, 2, 3];
   const pad = { top: 20, right: 20, bottom: 52, left: 38 };
-  const chartW = W - pad.left - pad.right;
-  const chartH = H - pad.top - pad.bottom;
+  const chartW = W - pad.left - pad.right; const chartH = H - pad.top - pad.bottom;
   const n = slots.length;
-  const barW = (chartW / n) * 0.72;
-  const barOff = (chartW / n) * 0.14;
+  const barW = (chartW / n) * 0.72; const barOff = (chartW / n) * 0.14;
   const maxVal = Math.max(...wVoice.map((v,i) => v + wMsg[i] + wEmail[i])) * 1.15;
-
   ctx.clearRect(0, 0, W, H);
-
-  // Grid
   [0, 0.25, 0.5, 0.75, 1].forEach(frac => {
     const y = pad.top + chartH * (1 - frac);
-    ctx.beginPath();
-    ctx.strokeStyle = frac === 0 ? '#c4c8d4' : '#eef0f4';
+    ctx.beginPath(); ctx.strokeStyle = frac === 0 ? '#c4c8d4' : '#eef0f4';
     ctx.lineWidth = frac === 0 ? 1.5 : 1;
     ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + chartW, y); ctx.stroke();
     if (frac > 0) {
@@ -1719,47 +1496,40 @@ function drawBusyHourChart() {
       ctx.fillText(Math.round(maxVal * frac), pad.left - 4, y + 3);
     }
   });
-
-  // Bars — stacked voice / message / email
   slots.forEach((lbl, i) => {
     const x = pad.left + i * (chartW / n) + barOff;
-    const v = wVoice[i], m = wMsg[i], e = wEmail[i];
-    const total = v + m + e;
-    if (total === 0) {
-      ctx.fillStyle = '#eef0f4'; ctx.fillRect(x, pad.top + chartH - 2, barW, 2); 
-    } else {
+    const v = wVoice[i], m = wMsg[i], e = wEmail[i]; const total = v + m + e;
+    if (total === 0) { ctx.fillStyle = '#eef0f4'; ctx.fillRect(x, pad.top + chartH - 2, barW, 2); }
+    else {
       let base = pad.top + chartH;
-      [[v, '#1a5fa8'], [m, '#1a6e44'], [e, '#c47a10']].forEach(([val, color]) => {
+      [[v,'#1a5fa8'],[m,'#1a6e44'],[e,'#c47a10']].forEach(([val, color]) => {
         if (val === 0) return;
-        const h = (val / maxVal) * chartH;
-        base -= h;
+        const h = (val / maxVal) * chartH; base -= h;
         ctx.fillStyle = color;
         ctx.beginPath();
-        ctx.roundRect ? ctx.roundRect(x, base, barW, h, val === e ? [2,2,0,0] : 0) : ctx.rect(x, base, barW, h);
+        if (ctx.roundRect) ctx.roundRect(x, base, barW, h, val === e ? [2,2,0,0] : 0);
+        else ctx.rect(x, base, barW, h);
         ctx.fill();
       });
-      // Total label on tallest bars
-      if (total >= 40) {
+      if (total >= 35) {
         ctx.fillStyle = '#1a2a4a'; ctx.font = 'bold 10px Segoe UI, sans-serif'; ctx.textAlign = 'center';
-        ctx.fillText(total, x + barW / 2, pad.top + chartH - (total / maxVal) * chartH - 4);
+        ctx.fillText(total, x + barW/2, pad.top + chartH - (total/maxVal)*chartH - 4);
       }
     }
-    // X label
     ctx.fillStyle = '#6b6e7a'; ctx.font = '10px Segoe UI, sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText(lbl, x + barW / 2, pad.top + chartH + 16);
+    ctx.fillText(lbl, x + barW/2, pad.top + chartH + 16);
   });
-
-  // Peak marker line at 2:00p slot (index 12)
-  const peakX = pad.left + 12 * (chartW / n) + barOff + barW / 2;
+  const peakX = pad.left + 9 * (chartW / n) + barOff + barW / 2;
   ctx.beginPath(); ctx.strokeStyle = '#c0202a'; ctx.lineWidth = 1.5; ctx.setLineDash([3,3]);
-  ctx.moveTo(peakX, pad.top); ctx.lineTo(peakX, pad.top + chartH); ctx.stroke();
-  ctx.setLineDash([]);
+  ctx.moveTo(peakX, pad.top); ctx.lineTo(peakX, pad.top + chartH); ctx.stroke(); ctx.setLineDash([]);
   ctx.fillStyle = '#c0202a'; ctx.font = 'bold 10px Segoe UI, sans-serif'; ctx.textAlign = 'center';
   ctx.fillText('peak', peakX, pad.top - 4);
 }
 
-
-
+// Draw charts if trending tab is active on load
+if (document.getElementById('tab-trending') && document.getElementById('tab-trending').classList.contains('active')) {
+  setTimeout(() => { drawTrendCharts(); drawBusyHourChart(); }, 100);
+}
 </script>
 </body>
 </html>
