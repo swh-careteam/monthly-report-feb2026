@@ -1,1 +1,877 @@
-<p>test</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Served With Honor — Monthly Performance Report · March 2026</title>
+<style>
+@font-face{font-family:'Aptos';src:local('Aptos'),local('Aptos-Regular');font-weight:400;}
+@font-face{font-family:'Aptos';src:local('Aptos Bold'),local('Aptos-Bold');font-weight:700;}
+@font-face{font-family:'Aptos Display';src:local('Aptos Display'),local('Aptos-Display');font-weight:400;}
+@font-face{font-family:'Aptos Display';src:local('Aptos Display Bold'),local('Aptos-Display-Bold');font-weight:700;}
+:root{--navy:#1a2a4a;--navy-deep:#0f1c33;--navy-mid:#243559;--red:#c0202a;--red-light:#fbeaea;--red-mid:#a01820;--silver:#d6dae2;--silver-lt:#eef0f4;--white:#ffffff;--bg:#f4f5f8;--ink:#1a1c22;--ink-2:#3a3d48;--ink-3:#6b6e7a;--ink-4:#9ea2ae;--border:#dde0e8;--border-str:#c4c8d4;--amber:#c47a10;--amber-lt:#fef4e0;--green:#1a6e44;--green-lt:#e3f4ec;--blue-acc:#1a5fa8;--blue-lt:#e6eef9;--stripe:rgba(26,42,74,0.025);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Aptos',Calibri,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+.header{background:var(--white);border-bottom:1px solid var(--border);}
+.header-inner{display:flex;align-items:center;padding:0 56px;height:80px;}
+.header-logo{display:flex;align-items:center;padding-right:36px;border-right:1px solid var(--border);height:100%;}
+.header-logo-text{font-family:'Aptos Display',Calibri,sans-serif;font-size:20px;font-weight:700;color:var(--navy-deep);letter-spacing:-.01em;}
+.header-logo-sub{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-top:2px;}
+.header-divider-block{flex:1;padding:0 36px;display:flex;flex-direction:column;justify-content:center;}
+.header-title{font-family:'Aptos Display',Calibri,sans-serif;font-size:18px;font-weight:700;color:var(--navy-deep);}
+.header-eyebrow{font-size:13px;color:var(--ink-3);margin-top:2px;}
+.header-right{display:flex;align-items:center;gap:20px;padding-left:36px;border-left:1px solid var(--border);height:100%;}
+.hub-btn{display:inline-flex;align-items:center;gap:4px;padding:7px 13px;border:1.5px solid var(--border-str);border-radius:8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);text-decoration:none;white-space:nowrap;}
+.hub-btn:hover{border-color:var(--navy);color:var(--navy);}
+.hdr-period{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-4);margin-bottom:3px;}
+.hdr-date{font-family:'Aptos Display',Calibri,sans-serif;font-size:19px;font-weight:700;color:var(--navy-deep);line-height:1.1;}
+.hdr-gen{margin-top:3px;font-size:12px;color:var(--ink-4);}
+.nav-tabs{background:var(--navy-deep);display:flex;padding:0 56px;border-radius:0 0 12px 12px;overflow-x:auto;}
+.nav-tab{padding:13px 22px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);cursor:pointer;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;user-select:none;display:inline-flex;align-items:center;gap:7px;}
+.nav-tab:hover{color:rgba(255,255,255,.8);}
+.nav-tab.active{color:white;border-bottom-color:var(--red);}
+.section-wrap{display:none;}.section-wrap.active{display:block;}
+.page{max-width:1340px;margin:0 auto;padding:40px 56px 72px;}
+section{margin-top:44px;}section:first-child{margin-top:0;}
+.sec-head{display:flex;align-items:baseline;gap:14px;padding-bottom:10px;margin-bottom:18px;border-bottom:2px solid var(--navy);}
+.sec-num{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red);flex-shrink:0;}
+.sec-title{font-family:'Aptos Display',Calibri,sans-serif;font-size:21px;font-weight:700;color:var(--navy-deep);}
+.sec-sub{margin-left:auto;font-size:13px;color:var(--ink-3);font-style:italic;}
+.kpi-row{display:grid;gap:2px;background:var(--border-str);border:1px solid var(--border-str);border-radius:12px;overflow:hidden;}
+.kpi-row.cols-5{grid-template-columns:repeat(5,1fr);}.kpi-row.cols-4{grid-template-columns:repeat(4,1fr);}.kpi-row.cols-6{grid-template-columns:repeat(6,1fr);}.kpi-row.cols-3{grid-template-columns:repeat(3,1fr);}
+.kpi{background:var(--white);padding:20px 18px 16px;position:relative;}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.kpi.navy::before{background:var(--navy);}.kpi.red::before{background:var(--red);}.kpi.amber::before{background:var(--amber);}.kpi.green::before{background:var(--green);}.kpi.blue::before{background:var(--blue-acc);}
+.kpi-label{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px;}
+.kpi-val{font-family:'Aptos Display',Calibri,sans-serif;font-size:36px;font-weight:700;line-height:1;color:var(--navy-deep);letter-spacing:-.02em;}
+.kpi-val.bad{color:var(--red);}.kpi-val.warn{color:var(--amber);}.kpi-val.good{color:var(--green);}
+.kpi-sub{font-size:13px;color:var(--ink-3);margin-top:6px;}
+.kpi-badge{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:6px;margin-top:5px;}
+.kpi-badge.red{background:var(--red-light);color:var(--red);}.kpi-badge.amber{background:var(--amber-lt);color:var(--amber);}.kpi-badge.green{background:var(--green-lt);color:var(--green);}.kpi-badge.navy{background:var(--silver-lt);color:var(--navy);}
+.narrative{background:var(--navy-deep);padding:28px 36px 32px;border-radius:12px;}
+.narr-head{font-family:'Aptos Display',Calibri,sans-serif;font-size:23px;font-weight:700;color:var(--white);margin-bottom:20px;line-height:1.4;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.1);}
+.narr-head em{color:#e8626a;font-style:italic;}
+.narr-cols{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+.narr-col p{font-size:16px;color:rgba(255,255,255,.68);line-height:1.75;margin-bottom:10px;}
+.narr-col p strong{color:rgba(255,255,255,.92);font-weight:700;}
+.flags{display:flex;flex-direction:column;}
+.flag{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.065);font-size:15.5px;color:rgba(255,255,255,.65);line-height:1.5;}
+.flag:last-child{border-bottom:none;}
+.fdot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:2px;}
+.fdot.crit{background:var(--red);color:white;}.fdot.warn{background:var(--amber);color:white;}.fdot.good{background:var(--green);color:white;}.fdot.info{background:var(--blue-acc);color:white;}
+.flag strong{color:rgba(255,255,255,.9);}
+.dtable-wrap{border-radius:12px;overflow:hidden;border:1px solid var(--border-str);}
+.dtable-wrap.scrollable{overflow-x:auto;}
+.dtable{width:100%;border-collapse:collapse;background:var(--white);}
+.dtable thead tr{background:var(--navy);}
+.dtable thead th{padding:10px 13px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-align:center;white-space:nowrap;}
+.dtable thead th:first-child{text-align:left;}
+.dtable tbody tr{border-bottom:1px solid var(--border);}
+.dtable tbody tr:nth-child(even){background:var(--stripe);}
+.dtable tbody tr:hover{background:var(--silver-lt);}
+.dtable tbody td{padding:12px 14px;text-align:center;font-size:14px;color:var(--ink-2);white-space:nowrap;vertical-align:middle;}
+.dtable tbody td:first-child{text-align:left;}
+.dtable tfoot td{padding:12px 14px;text-align:center;font-size:14px;font-weight:700;background:var(--silver-lt);border-top:2px solid var(--navy);color:var(--navy-deep);}
+.dtable tfoot td:first-child{text-align:left;}
+.dtable.compact thead th{padding:9px 7px;font-size:10.5px;letter-spacing:.04em;}
+.dtable.compact tbody td{padding:9px 7px;font-size:12.5px;}
+.dtable.compact tbody td:first-child{white-space:normal;}
+.dtable.compact tfoot td{padding:9px 7px;font-size:12.5px;}
+.q-name{font-weight:700;font-size:14px;color:var(--navy-deep);}.q-sub{font-size:12px;color:var(--ink-4);margin-top:1px;}
+.chip{display:inline-block;padding:3px 9px;font-size:12px;font-weight:700;border-radius:6px;}
+.chip.red{background:var(--red-light);color:var(--red);}.chip.amber{background:var(--amber-lt);color:var(--amber);}.chip.green{background:var(--green-lt);color:var(--green);}.chip.blue{background:var(--blue-lt);color:var(--blue-acc);}.chip.navy{background:var(--silver-lt);color:var(--navy);}.chip.gray{background:#eee;color:var(--ink-3);}
+.sl-wrap{display:flex;align-items:center;gap:7px;justify-content:center;}
+.sl-bar{width:52px;height:6px;background:var(--border);border-radius:6px;overflow:hidden;flex-shrink:0;}
+.sl-fill{height:100%;border-radius:6px;}
+.chart-2col{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.chart-box{background:var(--white);border:1px solid var(--border-str);padding:22px 22px 18px;border-radius:12px;}
+.chart-title{font-family:'Aptos Display',Calibri,sans-serif;font-size:18px;font-weight:700;color:var(--navy-deep);margin-bottom:4px;}
+.chart-sub{font-size:14px;color:var(--ink-3);margin-bottom:16px;}
+.hbar-col-head{display:flex;align-items:center;gap:10px;margin-bottom:4px;}.hbar-col-head-label{width:155px;flex-shrink:0;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);text-align:right;}.hbar-col-head-val{flex:1;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-4);padding-left:4px;}.hbar{display:flex;flex-direction:column;gap:13px;}
+.hbar-row{display:flex;align-items:center;gap:10px;}
+.hbar-label{font-size:15px;color:var(--ink-2);text-align:right;width:155px;flex-shrink:0;}
+.hbar-track{flex:1;height:22px;background:var(--silver-lt);position:relative;border-radius:6px;;overflow:hidden}
+.hbar-fill{position:absolute;left:0;top:0;height:100%;min-width:3px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;overflow:hidden;}.hbar-val-in{color:#fff;font-size:13px;font-weight:700;white-space:nowrap;}
+
+.tgt-line{position:absolute;top:0;bottom:0;width:0;border-left:2px dashed var(--red);z-index:2;}
+.hbar .hbar-row:first-child .tgt-line::after{content:'80%';position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--red);font-weight:700;white-space:nowrap;}
+.media-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.media-card{background:var(--white);padding:22px 20px 18px;position:relative;border-radius:12px;border:1px solid var(--border-str);overflow:hidden;}
+.media-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.mc-voice::before{background:var(--navy);}.mc-email::before{background:var(--blue-acc);}.mc-chat::before{background:var(--green);}.mc-callback::before{background:var(--amber);}
+.mc-icon{height:32px;display:flex;align-items:center;margin-bottom:10px;}.mc-type{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;}
+.mc-vol{font-family:'Aptos Display',Calibri,sans-serif;font-size:40px;font-weight:700;color:var(--navy-deep);line-height:1;margin-bottom:4px;}
+.mc-label{font-size:13px;color:var(--ink-3);margin-bottom:12px;}
+.mc-stats{display:flex;flex-direction:column;gap:5px;}
+.mc-stat{display:flex;justify-content:space-between;font-size:13.5px;color:var(--ink-2);padding:4px 0;border-top:1px solid var(--border);}
+.mc-stat-val{font-weight:700;}.mc-stat-val.bad{color:var(--red);}.mc-stat-val.warn{color:var(--amber);}.mc-stat-val.good{color:var(--green);}
+.rank{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-size:12px;font-weight:700;}
+.rank.g1{background:#f5e6b2;color:#7a5800;}.rank.g2{background:#e6e8ec;color:#444;}.rank.g3{background:#f0ddd0;color:#6a3a18;}.rank.gn{background:var(--silver-lt);color:var(--ink-3);}
+.anomaly-row td{opacity:.45;}.anomaly-row td:first-child{opacity:1;}
+.agent-note{margin-top:8px;font-size:13px;color:var(--ink-3);font-style:italic;padding:6px 4px;border-top:1px solid var(--border);}
+.rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.rec-card{background:var(--white);padding:20px 20px 18px;position:relative;border-radius:12px;border:1px solid var(--border-str);overflow:hidden;}
+.rec-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.rc-red::before{background:var(--red);}.rc-amber::before{background:var(--amber);}.rc-blue::before{background:var(--blue-acc);}.rc-green::before{background:var(--green);}.rc-navy::before{background:var(--navy);}
+.rc-priority{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;display:inline-block;margin-bottom:9px;border-radius:6px;}
+.rc-priority.urgent{background:var(--red-light);color:var(--red);}.rc-priority.high{background:var(--amber-lt);color:var(--amber);}.rc-priority.med{background:var(--blue-lt);color:var(--blue-acc);}.rc-priority.opp{background:var(--green-lt);color:var(--green);}
+.rc-title{font-family:'Aptos Display',Calibri,sans-serif;font-size:17px;font-weight:700;color:var(--navy-deep);margin-bottom:8px;line-height:1.3;}
+.rc-body{font-size:14px;color:var(--ink-2);line-height:1.65;}
+.rc-stat{margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:13px;color:var(--ink-3);}
+.rc-stat strong{color:var(--ink);font-weight:700;}
+.trend-chart-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.trend-canvas-box{background:var(--white);border:1px solid var(--border-str);border-radius:12px;padding:22px 22px 16px;}
+.trend-canvas-title{font-family:'Aptos Display',Calibri,sans-serif;font-size:18px;font-weight:700;color:var(--navy-deep);margin-bottom:4px;}
+.trend-canvas-sub{font-size:14px;color:var(--ink-3);margin-bottom:16px;}
+.trend-canvas-box canvas{width:100%;display:block;}
+.trend-insight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.trend-card{background:var(--white);border:1px solid var(--border-str);border-radius:12px;padding:20px;position:relative;overflow:hidden;}
+.trend-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.tc-pos::before{background:var(--green);}.tc-neg::before{background:var(--red);}.tc-warn::before{background:var(--amber);}.tc-info::before{background:var(--blue-acc);}
+.tc-icon{font-size:26px;margin-bottom:10px;}
+.tc-title{font-family:'Aptos Display',Calibri,sans-serif;font-size:17px;font-weight:700;color:var(--navy-deep);margin-bottom:8px;line-height:1.3;}
+.tc-body{font-size:15px;color:var(--ink-2);line-height:1.65;}
+.tc-note{margin-top:10px;padding-top:8px;border-top:1px solid var(--border);font-size:13.5px;color:var(--ink-3);}
+.kpi-delta{font-size:12.5px;font-weight:700;padding:3px 9px;border-radius:6px;margin-top:6px;display:inline-flex;align-items:center;gap:3px;}
+.kpi-delta.up-good{background:var(--green-lt);color:var(--green);}.kpi-delta.dn-good{background:var(--green-lt);color:var(--green);}
+.kpi-delta.up-bad{background:var(--red-light);color:var(--red);}.kpi-delta.dn-bad{background:var(--red-light);color:var(--red);}
+.kpi-delta.neutral{background:var(--silver-lt);color:var(--ink-3);}.kpi-delta.warn{background:var(--amber-lt);color:var(--amber);}
+.trend-period-note{margin-top:10px;font-size:13px;color:var(--ink-3);font-style:italic;padding:8px 14px;background:var(--silver-lt);border-radius:8px;border-left:3px solid var(--blue-acc);display:inline-block;width:100%;}
+.scorecard-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;border:1px solid var(--border-str);}
+.scorecard-table thead tr{background:var(--navy);}
+.scorecard-table thead th{padding:10px 12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-align:center;}
+.scorecard-table thead th:first-child{text-align:left;}
+.scorecard-table tbody tr{border-bottom:1px solid var(--border);background:var(--white);}
+.scorecard-table tbody tr:nth-child(even){background:var(--stripe);}
+.scorecard-table tbody td{padding:10px 12px;text-align:center;font-size:13px;}
+.scorecard-table tbody td:first-child{text-align:left;font-weight:700;color:var(--navy-deep);}
+.scorecard-table tfoot td{padding:10px 12px;font-weight:700;text-align:center;background:var(--silver-lt);border-top:2px solid var(--navy);font-size:13px;}
+.coaching-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;border:1px solid var(--border-str);}
+.coaching-table thead tr{background:var(--navy);}
+.coaching-table thead th{padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-align:left;}
+.coaching-table tbody tr{border-bottom:1px solid var(--border);background:var(--white);}
+.coaching-table tbody tr:nth-child(even){background:var(--stripe);}
+.coaching-table tbody td{padding:10px 14px;font-size:13px;color:var(--ink-2);}
+.coaching-table tbody td:first-child{font-weight:700;color:var(--navy-deep);}
+.week-breakdown-table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden;border:1px solid var(--border-str);margin-bottom:18px;}
+.week-breakdown-table thead tr{background:var(--navy);}
+.week-breakdown-table thead th{padding:10px 13px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);text-align:center;}
+.week-breakdown-table thead th:first-child{text-align:left;}
+.week-breakdown-table tbody tr{border-bottom:1px solid var(--border);background:var(--white);}
+.week-breakdown-table tbody tr:nth-child(even){background:var(--stripe);}
+.week-breakdown-table tbody td{padding:11px 13px;text-align:center;font-size:13.5px;}
+.week-breakdown-table tbody td:first-child{text-align:left;font-weight:700;color:var(--navy-deep);}
+.week-breakdown-table tfoot td{padding:11px 13px;text-align:center;font-weight:700;background:var(--silver-lt);border-top:2px solid var(--navy);font-size:13.5px;}
+.busy-day-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;}
+.busy-day-card{background:var(--white);border:1px solid var(--border-str);border-radius:10px;padding:14px 12px;text-align:center;}
+.busy-day-card.top1{border-color:var(--red);}.busy-day-card.top2{border-color:var(--amber);}.busy-day-card.top3{border-color:var(--amber);}
+.busy-day-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;}
+.busy-day-val{font-family:'Aptos Display',Calibri,sans-serif;font-size:30px;font-weight:700;color:var(--navy-deep);line-height:1;}
+.busy-day-sub{font-size:12px;color:var(--ink-3);margin-top:4px;}
+.busy-hour-wrap{background:var(--white);border:1px solid var(--border-str);border-radius:12px;padding:22px 22px 16px;}
+.report-footer{margin-top:48px;padding-top:16px;border-top:2px solid var(--navy);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--ink-4);letter-spacing:.05em;text-transform:uppercase;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.section-wrap.active .page>*{animation:fadeUp .4s ease both;}
+@media print{.nav-tabs{display:none!important;}.section-wrap{display:block!important;}.page{padding:24px 36px!important;}body{background:white!important;}}
+</style></head><body>
+<div class="header"><div class="header-inner">
+  <div class="header-logo"><div><div class="header-logo-text">Served With Honor</div><div class="header-logo-sub">Care Team Operations</div></div></div>
+  <div class="header-divider-block"><div class="header-title">Monthly Performance Report</div><div class="header-eyebrow">Care Team Operations &nbsp;&middot;&nbsp; Genesys Cloud CX &nbsp;&middot;&nbsp; Voice &middot; Email &middot; Chat &middot; Callback</div></div>
+  <div class="header-right">
+    <a class="hub-btn" href="https://swh-careteam.github.io/performance-reports/">&#8249; Reporting Hub</a>
+    <div><div class="hdr-period">Reporting Period</div><div class="hdr-date">March 2026</div><div class="hdr-gen">Generated April 6, 2026</div></div>
+  </div>
+</div></div>
+<div class="nav-tabs">
+  <div class="nav-tab active" onclick="showTab('overview',this)"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg> Overview</div>
+  <div class="nav-tab" onclick="showTab('voice',this)"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M3.5 2A1.5 1.5 0 002 3.5v1A9.5 9.5 0 0011.5 14h1a1.5 1.5 0 001.5-1.5v-1.25a.75.75 0 00-.553-.724l-2.5-.625a.75.75 0 00-.805.32l-.688 1.032a7 7 0 01-3.207-3.207l1.032-.688a.75.75 0 00.32-.805l-.625-2.5A.75.75 0 004.75 2H3.5z"/></svg> Voice</div>
+  <div class="nav-tab" onclick="showTab('email',this)"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2 4a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4zm2.5.5v.793l3.5 2.625 3.5-2.625V4.5h-7zm7 2.457L8 9.543 4.5 6.957V11.5h7V6.957z"/></svg> Email</div>
+  <div class="nav-tab" onclick="showTab('chat',this)"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2 3a1 1 0 011-1h10a1 1 0 011 1v7a1 1 0 01-1 1H6l-3 3V11H3a1 1 0 01-1-1V3z"/></svg> Chat</div>
+  <div class="nav-tab" onclick="showTab('callback',this)"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M3.5 2A1.5 1.5 0 002 3.5v1A9.5 9.5 0 0011.5 14h1a1.5 1.5 0 001.5-1.5v-1.25a.75.75 0 00-.553-.724l-2.5-.625a.75.75 0 00-.805.32l-.688 1.032a7 7 0 01-3.207-3.207l1.032-.688a.75.75 0 00.32-.805l-.625-2.5A.75.75 0 004.75 2H3.5z"/></svg> Callback</div>
+  <div class="nav-tab" onclick="showTab('agents',this)"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="5" r="2.5"/><path d="M2.5 13c0-2.485 2.462-4.5 5.5-4.5s5.5 2.015 5.5 4.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg> Agent Performance</div>
+  <div class="nav-tab" onclick="showTab('actions',this)"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.5 3.5L13 5.5l-2.5 2.5.5 3.5L8 9.75 5 11.5l.5-3.5L3 5.5l3.5-1L8 1z"/></svg> Recommendations</div>
+  <div class="nav-tab" onclick="showTab('trending',this)"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,12 5,7 8,9 12,4 15,6"/></svg> Trending</div>
+</div>
+<div class="section-wrap active" id="tab-overview"><div class="page">
+<section>
+  <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">All-Channel Executive Summary</span><span class="sec-sub">March 1 – 31, 2026 &middot; All queues</span></div>
+  <div class="media-cards">
+    <div class="media-card mc-voice">
+      <div class="mc-icon"><svg width="28" height="28" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 3h2.4a.6.6 0 0 1 .57.42l.93 2.8a.6.6 0 0 1-.14.62L6.9 8.1a9.06 9.06 0 0 0 5 5l1.26-1.36a.6.6 0 0 1 .62-.14l2.8.93a.6.6 0 0 1 .42.57V15.5A1.5 1.5 0 0 1 15.5 17C8.6 17 3 11.4 3 4.5A1.5 1.5 0 0 1 4.5 3z" stroke="var(--navy)" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+      <div class="mc-type">Voice</div>
+      <div class="mc-vol">2,477</div>
+      <div class="mc-label">Offered interactions</div>
+      <div class="mc-stats">
+        <div class="mc-stat"><span>Answer Rate</span><span class="mc-stat-val bad">46.8%</span></div>
+        <div class="mc-stat"><span>Abandon Rate</span><span class="mc-stat-val bad">20.6%</span></div>
+        <div class="mc-stat"><span>Best SL Queue</span><span class="mc-stat-val">Direct Routing 59.1%<br><span style="font-size:11px;font-weight:400;color:var(--ink-4)">Agent DID Calls</span></span></div>
+        <div class="mc-stat"><span>Telemedica Ans Rate</span><span class="mc-stat-val bad">18.2%</span></div>
+      </div>
+    </div>
+    <div class="media-card mc-email">
+      <div class="mc-icon"><svg width="28" height="28" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="4.5" width="16" height="11" rx="1.5" stroke="var(--blue-acc)" stroke-width="1.4"/><path d="M2 6.5l8 5.25L18 6.5" stroke="var(--blue-acc)" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+      <div class="mc-type">Email</div>
+      <div class="mc-vol">468</div>
+      <div class="mc-label">Offered interactions</div>
+      <div class="mc-stats">
+        <div class="mc-stat"><span>Handle Rate</span><span class="mc-stat-val good">98.7%</span></div>
+        <div class="mc-stat"><span>Best SL Queue</span><span class="mc-stat-val good">POD4 94.2%</span></div>
+        <div class="mc-stat"><span>Worst AHT Queue</span><span class="mc-stat-val bad">POD1 8h 10m</span></div>
+        <div class="mc-stat"><span>All PODs &ge;80% SL</span><span class="mc-stat-val good">Yes &#10003;</span></div>
+      </div>
+    </div>
+    <div class="media-card mc-chat">
+      <div class="mc-icon"><svg width="28" height="28" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 4.5A1.5 1.5 0 0 1 4.5 3h11A1.5 1.5 0 0 1 17 4.5v8A1.5 1.5 0 0 1 15.5 14H7l-4 3V4.5z" stroke="var(--green)" stroke-width="1.4" stroke-linejoin="round"/><path d="M7 8h6M7 11h4" stroke="var(--green)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+      <div class="mc-type">Chat</div>
+      <div class="mc-vol">947</div>
+      <div class="mc-label">Offered interactions</div>
+      <div class="mc-stats">
+        <div class="mc-stat"><span>Answer Rate</span><span class="mc-stat-val good">86.9%</span></div>
+        <div class="mc-stat"><span>Best SL Queue</span><span class="mc-stat-val warn">POD4 43.5%</span></div>
+        <div class="mc-stat"><span>Worst ACW Queue</span><span class="mc-stat-val bad">POD3 4h 39m</span></div>
+        <div class="mc-stat"><span>Total Abandoned</span><span class="mc-stat-val">124</span></div>
+      </div>
+    </div>
+    <div class="media-card mc-callback">
+      <div class="mc-icon"><svg width="28" height="28" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 3h2.4a.6.6 0 0 1 .57.42l.93 2.8a.6.6 0 0 1-.14.62L6.9 8.1a9.06 9.06 0 0 0 5 5l1.26-1.36a.6.6 0 0 1 .62-.14l2.8.93a.6.6 0 0 1 .42.57V15.5A1.5 1.5 0 0 1 15.5 17C8.6 17 3 11.4 3 4.5A1.5 1.5 0 0 1 4.5 3z" stroke="var(--amber)" stroke-width="1.4" stroke-linejoin="round"/><path d="M14 3v4h-4" stroke="var(--amber)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7c0-2.21-1.79-4-4-4" stroke="var(--amber)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+      <div class="mc-type">Callback</div>
+      <div class="mc-vol">593</div>
+      <div class="mc-label">Callback requests</div>
+      <div class="mc-stats">
+        <div class="mc-stat"><span>Completion Rate</span><span class="mc-stat-val good">100.5%</span></div>
+        <div class="mc-stat"><span>Avg Wait (all queues)</span><span class="mc-stat-val bad">1h 31m</span></div>
+        <div class="mc-stat"><span>Longest Wait</span><span class="mc-stat-val bad">Client Sup. 10h 45m</span></div>
+        <div class="mc-stat"><span>Queues &gt;2h Avg Wait</span><span class="mc-stat-val bad">6 of 7</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Monthly Analysis</span></div>
+  <div class="narrative">
+    <div class="narr-head">March 2026 was defined by <em>critical voice SL failures across all POD queues</em> and severe callback wait times, offset only by strong email handling and above-threshold chat answer rates.</div>
+    <div class="narr-cols">
+      <div class="narr-col">
+        <p><strong>Voice performance remained severely below target across all nine queues.</strong> The team answered only 1,159 of 2,477 voice contacts (46.8%), with an abandon rate of 20.6%. Not a single voice queue reached the 80% SL target. The best-performing queue was Direct Routing - Care Team at 59.1% SL, primarily due to its very short ASA (11 seconds) from direct routing mechanics. The four Care Experience POD Voice queues ranged from 7.1% (POD2) to 14.9% (POD1) SL — a consistent failure pattern seen across all three weeks with weekly reports.</p>
+        <p><strong>Telemedica Team answered only 18.2% of its 330 offered contacts</strong>, abandoning 114 calls (34.5% abandon rate) and achieving just 13.8% SL. With an average speed of answer of 8 minutes 7 seconds, this queue continues to be the most critically understaffed. Callback wait times compound this issue: six of seven callback queues averaged over 2 hours, with Client Support callbacks averaging 10 hours 45 minutes — more than a full workday before return contact.</p>
+        <p><strong>On the agent side, Miguel Garcia dominated throughput</strong> with 710 total answered contacts (415 voice, 133 email, 162 chat) — nearly double the next-highest agent, La&apos;Shay Richard at 344. However, several agents flagged for extreme AHT anomalies: Shalon Jones logged an email AHT of 1 day 19 hours 45 minutes on just 6 interactions, and Tatiana Jean-Louis recorded 1 day 6 hours in chat ACW. Thia Decker&apos;s &ldquo;Not Responding&rdquo; status totaled 12 days 3 hours, which almost certainly represents a system or routing error requiring investigation.</p>
+      </div>
+      <div class="narr-col">
+        <div class="flags">
+          <div class="flag"><div class="fdot crit">!</div><div><strong>Telemedica SL 13.8%</strong> — 330 calls offered, only 60 answered, 114 abandoned. Persistent across all 3 weeks of monthly reports.</div></div>
+          <div class="flag"><div class="fdot crit">!</div><div><strong>Client Support callback avg wait 10h 45m</strong> — 184 requests, worst single-queue wait of the month. POD1 callbacks at 8h 31m average.</div></div>
+          <div class="flag"><div class="fdot crit">!</div><div><strong>All 4 POD Voice queues below 15% SL</strong> — POD2 at 7.1%, POD3 at 8.3%, POD4 at 12.2%, POD1 at 14.9%. No queue reached target all month.</div></div>
+          <div class="flag"><div class="fdot crit">!</div><div><strong>Chat ACW extreme across all queues</strong> — POD3 chat ACW averaged 4h 39m; POD1 2h 19m; all 4 queues far exceed the 15-minute threshold.</div></div>
+          <div class="flag"><div class="fdot warn">&#9650;</div><div><strong>Thia Decker: 12d 3h Not Responding</strong> — likely system/routing anomaly. Requires immediate IT/WFM investigation.</div></div>
+          <div class="flag"><div class="fdot warn">&#9650;</div><div><strong>Email POD1 AHT 8h 10m</strong> — 81 contacts, avg handle time 8 hours is 20x the team&apos;s other email queues. Data integrity review needed.</div></div>
+          <div class="flag"><div class="fdot good">&#10003;</div><div><strong>Email handle rate 98.7%</strong> — 462 of 468 contacts handled; all 4 PODs exceeded 80% SL with POD4 at 94.2%.</div></div>
+          <div class="flag"><div class="fdot good">&#10003;</div><div><strong>Chat answer rate 86.9%</strong> — 823 of 947 chat contacts answered, above the 80% threshold; POD3 and POD4 at 90%+.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">§ 03</span><span class="sec-title">Channel Volume &amp; Answer Rate</span></div>
+  <div class="chart-2col">
+    <div class="chart-box">
+      <div class="chart-title">Offered Volume by Channel</div>
+      <div class="chart-sub">March 2026 · All queues combined</div>
+      <div class="hbar">
+        <div class="hbar-row"><div class="hbar-label">Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:100%;background:var(--navy)"><span class="hbar-val-in">2,477</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Chat</div><div class="hbar-track"><div class="hbar-fill" style="width:38%;background:var(--green)"><span class="hbar-val-in">947</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Callback</div><div class="hbar-track"><div class="hbar-fill" style="width:24%;background:var(--amber)"><span class="hbar-val-in">593</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Email</div><div class="hbar-track"><div class="hbar-fill" style="width:19%;background:var(--blue-acc)"><span class="hbar-val-in">468</span></div></div></div>
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Answer / Completion Rate by Channel</div>
+      <div class="chart-sub">vs. 80% target &mdash; March 2026</div>
+      <div class="hbar" style="position:relative">
+        <div class="hbar-row"><div class="hbar-label">Email Handle</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:98.7%;background:var(--green)"><span class="hbar-val-in">98.7%</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Callback Comp.</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:100%;background:var(--green)"><span class="hbar-val-in">100.5%</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Chat Ans.</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:86.9%;background:var(--green)"><span class="hbar-val-in">86.9%</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Voice Ans.</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:46.8%;background:var(--red)"><span class="hbar-val-in">46.8%</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="report-footer"><span>Served With Honor &mdash; Care Team Operations</span><span>March 2026 Monthly Report</span><span>Genesys Cloud CX Export</span></div>
+</div></div>
+<div class="section-wrap" id="tab-voice"><div class="page">
+<section>
+  <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Voice Queue KPIs</span><span class="sec-sub">March 2026 &middot; All voice queues</span></div>
+  <div class="kpi-row cols-5">
+    <div class="kpi navy"><div class="kpi-label">Total Offered</div><div class="kpi-val">2,477</div><div class="kpi-sub">Across 9 voice queues</div></div>
+    <div class="kpi red"><div class="kpi-label">Answer Rate</div><div class="kpi-val bad">46.8%</div><div class="kpi-sub">1,159 of 2,477 answered</div><div class="kpi-badge red">&#9660; 33pp below target</div></div>
+    <div class="kpi red"><div class="kpi-label">Abandon Rate</div><div class="kpi-val bad">20.6%</div><div class="kpi-sub">510 abandoned</div><div class="kpi-badge red">&#9650; Above 20% threshold</div></div>
+    <div class="kpi blue"><div class="kpi-label">Best SL Queue</div><div class="kpi-val warn" style="font-size:28px">59.1%</div><div class="kpi-sub">Direct Routing - Care Team<br><span style="font-size:11px;color:var(--ink-4)">Agent DID Calls</span></div></div>
+    <div class="kpi red"><div class="kpi-label">Telemedica SL</div><div class="kpi-val bad">13.8%</div><div class="kpi-sub">60 ans / 330 offered</div><div class="kpi-badge red">Critical</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Voice Queue Detail</span><span class="sec-sub">Sorted by Service Level % descending</span></div>
+  <div class="dtable-wrap scrollable">
+  <table class="dtable compact">
+    <thead><tr>
+      <th style="text-align:left">Queue</th><th>Offered</th><th>Answered</th><th>Ans %</th><th>Abandoned</th><th>Abn %</th><th>ASA</th><th>Avg Wait</th><th>Service Level</th><th>Avg Handle</th><th>Avg Talk</th><th>Avg ACW</th><th>Xfers</th>
+    </tr></thead>
+    <tbody>
+      <tr><td><div class="q-name">Direct Routing - Care Team</div><div class="q-sub">Agent DID Calls</div></td><td>242</td><td>59</td><td><span class="chip amber">24.4%</span></td><td>34</td><td><span class="chip green">14.0%</span></td><td>0m 11s</td><td>0m 19s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:59%;background:var(--amber)"></div></div><span>59.1%</span></div></td><td>10m 01s</td><td>7m 45s</td><td>2m 14s</td><td>4</td></tr>
+      <tr><td><div class="q-name">Client Support (New)</div></td><td>416</td><td>233</td><td><span class="chip amber">56.0%</span></td><td>68</td><td><span class="chip green">16.3%</span></td><td>2m 06s</td><td>3m 09s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:50%;background:var(--amber)"></div></div><span>49.8%</span></div></td><td>7m 00s</td><td>3m 03s</td><td>5m 21s</td><td>71</td></tr>
+      <tr><td><div class="q-name">Health Care Coordinators</div></td><td>219</td><td>110</td><td><span class="chip amber">50.2%</span></td><td>51</td><td><span class="chip amber">23.3%</span></td><td>6m 14s</td><td>6m 46s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:32%;background:var(--red)"></div></div><span>31.7%</span></div></td><td>6m 06s</td><td>3m 38s</td><td>2m 53s</td><td>11</td></tr>
+      <tr><td><div class="q-name">Care Experience Team Voice</div></td><td>588</td><td>409</td><td><span class="chip amber">69.6%</span></td><td>80</td><td><span class="chip green">13.6%</span></td><td>1m 35s</td><td>2m 20s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:32%;background:var(--red)"></div></div><span>32.3%</span></div></td><td>9m 13s</td><td>5m 01s</td><td>4m 57s</td><td>51</td></tr>
+      <tr><td><div class="q-name">Care Experience POD1 Voice</div></td><td>159</td><td>53</td><td><span class="chip red">33.3%</span></td><td>48</td><td><span class="chip red">30.2%</span></td><td>5m 07s</td><td>7m 05s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:15%;background:var(--red)"></div></div><span>14.9%</span></div></td><td>7m 02s</td><td>4m 50s</td><td>2m 27s</td><td>0</td></tr>
+      <tr><td><div class="q-name">Care Experience POD4 Voice</div></td><td>142</td><td>62</td><td><span class="chip red">43.7%</span></td><td>36</td><td><span class="chip red">25.4%</span></td><td>3m 00s</td><td>4m 30s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:12%;background:var(--red)"></div></div><span>12.2%</span></div></td><td>7m 50s</td><td>5m 26s</td><td>2m 33s</td><td>3</td></tr>
+      <tr style="background:var(--red-light)"><td><div class="q-name" style="color:var(--red)">Telemedica Team</div><div class="q-sub" style="color:var(--red)">&#9888; Highlighted — critical SL</div></td><td>330</td><td>60</td><td><span class="chip red">18.2%</span></td><td>114</td><td><span class="chip red">34.5%</span></td><td>8m 07s</td><td>11m 13s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:14%;background:var(--red)"></div></div><span>13.8%</span></div></td><td>8m 01s</td><td>7m 04s</td><td>2m 45s</td><td>1</td></tr>
+      <tr><td><div class="q-name">Care Experience POD3 Voice</div></td><td>145</td><td>64</td><td><span class="chip red">44.1%</span></td><td>32</td><td><span class="chip amber">22.1%</span></td><td>3m 53s</td><td>5m 19s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:8%;background:var(--red)"></div></div><span>8.3%</span></div></td><td>10m 11s</td><td>6m 27s</td><td>3m 53s</td><td>12</td></tr>
+      <tr><td><div class="q-name">Care Experience POD2 Voice</div></td><td>236</td><td>109</td><td><span class="chip red">46.2%</span></td><td>47</td><td><span class="chip amber">19.9%</span></td><td>5m 13s</td><td>6m 16s</td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:7%;background:var(--red)"></div></div><span>7.1%</span></div></td><td>7m 54s</td><td>5m 51s</td><td>2m 19s</td><td>38</td></tr>
+    </tbody>
+    <tfoot><tr><td>TOTAL / AVG</td><td>2,477</td><td>1,159</td><td><span class="chip red">46.8%</span></td><td>510</td><td><span class="chip red">20.6%</span></td><td>—</td><td>—</td><td>38.2%</td><td>—</td><td>—</td><td>—</td><td>191</td></tr></tfoot>
+  </table>
+  </div>
+  <div class="agent-note">Target: 80% SL. No voice queue reached target in March 2026. Direct Routing SL reflects fast-routing mechanics, not agent capacity. Telemedica SL (13.8%) flagged as critical — see Recommendations tab.</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">§ 03</span><span class="sec-title">Service Level Comparison</span></div>
+  <div class="chart-box">
+    <div class="chart-title">Voice Queue Service Level %</div>
+    <div class="chart-sub">March 2026 &middot; Target: 80% (red line)</div>
+    <div class="hbar">
+      <div class="hbar-col-head"><div class="hbar-col-head-label">Queue</div><div class="hbar-col-head-val">SL</div></div>
+      <div class="hbar-row"><div class="hbar-label">Direct Routing<br><span style="font-size:11px;color:var(--ink-4);font-weight:400">Agent DID Calls</span></div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:59.1%;background:var(--amber)"><span class="hbar-val-in">59.1%</span></div></div></div>
+      <div class="hbar-row"><div class="hbar-label">Client Support</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:49.8%;background:var(--amber)"><span class="hbar-val-in">49.8%</span></div></div></div>
+      <div class="hbar-row"><div class="hbar-label">CE Team Voice</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:32.3%;background:var(--red)"><span class="hbar-val-in">32.3%</span></div></div></div>
+      <div class="hbar-row"><div class="hbar-label">Hlth Care Coord.</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:31.7%;background:var(--red)"><span class="hbar-val-in">31.7%</span></div></div></div>
+      <div class="hbar-row"><div class="hbar-label">CE POD1 Voice</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:14.9%;background:var(--red)"><span class="hbar-val-in">14.9%</span></div></div></div>
+      <div class="hbar-row"><div class="hbar-label">Telemedica Team</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:13.8%;background:var(--red)"><span class="hbar-val-in">13.8%</span></div></div></div>
+      <div class="hbar-row"><div class="hbar-label">CE POD4 Voice</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:12.2%;background:var(--red)"><span class="hbar-val-in">12.2%</span></div></div></div>
+      <div class="hbar-row"><div class="hbar-label">CE POD3 Voice</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:8.3%;background:var(--red)"><span class="hbar-val-in">8.3%</span></div></div></div>
+      <div class="hbar-row"><div class="hbar-label">CE POD2 Voice</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:7.1%;background:var(--red)"><span class="hbar-val-in">7.1%</span></div></div></div>
+    </div>
+  </div>
+</section>
+<div class="report-footer"><span>Served With Honor &mdash; Care Team Operations</span><span>Voice Tab &middot; March 2026</span><span>Genesys Cloud CX</span></div>
+</div></div>
+<div class="section-wrap" id="tab-email"><div class="page">
+<section>
+  <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Email Queue KPIs</span><span class="sec-sub">March 2026 &middot; POD email queues</span></div>
+  <div class="kpi-row cols-5">
+    <div class="kpi navy"><div class="kpi-label">Total Offered</div><div class="kpi-val">468</div><div class="kpi-sub">Across 4 email queues</div></div>
+    <div class="kpi green"><div class="kpi-label">Handle Rate</div><div class="kpi-val good">98.7%</div><div class="kpi-sub">462 of 468 handled</div><div class="kpi-badge green">Above 90% target</div></div>
+    <div class="kpi blue"><div class="kpi-label">Best SL Queue</div><div class="kpi-val good" style="font-size:28px">94.2%</div><div class="kpi-sub">Care Exp POD4 Email</div></div>
+    <div class="kpi red"><div class="kpi-label">Worst AHT Queue</div><div class="kpi-val bad" style="font-size:28px">8h 10m</div><div class="kpi-sub">POD1 Email &mdash; data review needed</div><div class="kpi-badge red">Critical</div></div>
+    <div class="kpi green"><div class="kpi-label">All PODs &ge;80% SL</div><div class="kpi-val good" style="font-size:28px">Yes</div><div class="kpi-sub">POD1: 91.3% &middot; POD4: 94.2%</div></div>
+  </div>
+</section>
+<section>
+  <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Email Queue Detail</span></div>
+  <div class="dtable-wrap">
+  <table class="dtable">
+    <thead><tr><th style="text-align:left">Queue</th><th>Offered</th><th>Handled</th><th>Handle %</th><th>SL %</th><th>Avg Wait / ASA</th><th>Avg Handle Time</th><th>Avg ACW</th></tr></thead>
+    <tbody>
+      <tr><td><div class="q-name">Care Experience POD4 Email</div></td><td>124</td><td>121</td><td><span class="chip green">97.6%</span></td><td><span class="chip green">94.2%</span></td><td>5h 41m</td><td><span class="chip amber">1h 49m</span></td><td><span class="chip red">1h 30m</span></td></tr>
+      <tr><td><div class="q-name">Care Experience POD2 Email</div></td><td>203</td><td>201</td><td><span class="chip green">99.0%</span></td><td><span class="chip green">93.0%</span></td><td>7h 45m</td><td><span class="chip green">24m 51s</span></td><td><span class="chip green">8m 18s</span></td></tr>
+      <tr><td><div class="q-name">Care Experience POD3 Email</div></td><td>60</td><td>60</td><td><span class="chip green">100%</span></td><td><span class="chip green">91.7%</span></td><td>6h 48m</td><td><span class="chip amber">1h 28m</span></td><td><span class="chip green">8m 24s</span></td></tr>
+      <tr><td><div class="q-name">Care Experience POD1 Email</div></td><td>81</td><td>80</td><td><span class="chip green">98.8%</span></td><td><span class="chip green">91.3%</span></td><td>9h 47m</td><td><span class="chip red">8h 10m</span></td><td><span class="chip red">5h 42m</span></td></tr>
+    </tbody>
+    <tfoot><tr><td>TOTAL / AVG</td><td>468</td><td>462</td><td><span class="chip green">98.7%</span></td><td><span class="chip green">92.6% avg</span></td><td>—</td><td>—</td><td>—</td></tr></tfoot>
+  </table>
+  </div>
+  <div class="agent-note">POD1 Email AHT of 8h 10m and ACW of 5h 42m are anomalous — likely reflect a small number of long-running interactions skewing the average. Cross-reference with individual agent AHT data on the Agent Performance tab. POD4 ACW of 1h 30m should also be reviewed. All four queues exceeded the 80% SL target.</div>
+</section>
+<div class="report-footer"><span>Served With Honor &mdash; Care Team Operations</span><span>Email Tab &middot; March 2026</span><span>Genesys Cloud CX</span></div>
+</div></div>
+<div class="section-wrap" id="tab-chat"><div class="page">
+<section>
+  <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Chat Queue KPIs</span><span class="sec-sub">March 2026 &middot; POD message/chat queues</span></div>
+  <div class="kpi-row cols-5">
+    <div class="kpi navy"><div class="kpi-label">Total Offered</div><div class="kpi-val">947</div><div class="kpi-sub">Across 4 chat queues</div></div>
+    <div class="kpi green"><div class="kpi-label">Answer Rate</div><div class="kpi-val good">86.9%</div><div class="kpi-sub">823 of 947 answered</div><div class="kpi-badge green">Above 80% target</div></div>
+    <div class="kpi amber"><div class="kpi-label">Best SL Queue</div><div class="kpi-val warn" style="font-size:28px">43.5%</div><div class="kpi-sub">Care Exp POD4 Chat</div><div class="kpi-badge amber">Below 80% target</div></div>
+    <div class="kpi red"><div class="kpi-label">Worst ACW Queue</div><div class="kpi-val bad" style="font-size:28px">4h 39m</div><div class="kpi-sub">POD3 Chat &mdash; critical flag</div></div>
+    <div class="kpi navy"><div class="kpi-label">Total Abandoned</div><div class="kpi-val">124</div><div class="kpi-sub">13.1% abandon rate</div></div>
+  </div>
+</section>
+<section>
+  <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Chat Queue Detail</span></div>
+  <div class="dtable-wrap">
+  <table class="dtable">
+    <thead><tr><th style="text-align:left">Queue</th><th>Offered</th><th>Answered</th><th>Ans %</th><th>Abandoned</th><th>Abn %</th><th>SL %</th><th>Avg Handle Time</th><th>Avg ACW</th></tr></thead>
+    <tbody>
+      <tr><td><div class="q-name">Care Experience POD4 Chat</div></td><td>290</td><td>260</td><td><span class="chip green">89.7%</span></td><td>30</td><td><span class="chip green">10.3%</span></td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:44%;background:var(--amber)"></div></div>43.5%</div></td><td><span class="chip amber">1h 45m</span></td><td><span class="chip red">1h 33m</span></td></tr>
+      <tr><td><div class="q-name">Care Experience POD3 Chat</div></td><td>204</td><td>185</td><td><span class="chip green">90.7%</span></td><td>19</td><td><span class="chip green">9.3%</span></td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:17%;background:var(--red)"></div></div>17.3%</div></td><td><span class="chip red">4h 48m</span></td><td><span class="chip red">4h 39m</span></td></tr>
+      <tr><td><div class="q-name">Care Experience POD1 Chat</div></td><td>214</td><td>181</td><td><span class="chip green">84.6%</span></td><td>33</td><td><span class="chip green">15.4%</span></td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:23%;background:var(--red)"></div></div>23.2%</div></td><td><span class="chip red">2h 30m</span></td><td><span class="chip red">2h 19m</span></td></tr>
+      <tr><td><div class="q-name">Care Experience POD2 Chat</div></td><td>239</td><td>197</td><td><span class="chip green">82.4%</span></td><td>42</td><td><span class="chip green">17.6%</span></td><td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:14%;background:var(--red)"></div></div>14.2%</div></td><td><span class="chip red">1h 15m</span></td><td><span class="chip red">1h 03m</span></td></tr>
+    </tbody>
+    <tfoot><tr><td>TOTAL / AVG</td><td>947</td><td>823</td><td><span class="chip green">86.9%</span></td><td>124</td><td>13.1%</td><td>—</td><td>—</td><td>—</td></tr></tfoot>
+  </table>
+  </div>
+  <div class="agent-note">&#9888; All 4 chat queues exceed the 15-minute ACW threshold by a large margin. POD3 avg ACW of 4h 39m is a critical anomaly — likely reflecting unresolved long-duration sessions or agents leaving interactions open. Chat SL is below target across all queues despite strong answer rates. See Agent Performance tab for agent-level chat ACW breakdown.</div>
+</section>
+<div class="report-footer"><span>Served With Honor &mdash; Care Team Operations</span><span>Chat Tab &middot; March 2026</span><span>Genesys Cloud CX</span></div>
+</div></div>
+<div class="section-wrap" id="tab-callback"><div class="page">
+<section>
+  <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Callback Queue KPIs</span><span class="sec-sub">March 2026 &middot; All callback queues</span></div>
+  <div class="kpi-row cols-5">
+    <div class="kpi navy"><div class="kpi-label">Total Requests</div><div class="kpi-val">593</div><div class="kpi-sub">Across 7 queues</div></div>
+    <div class="kpi green"><div class="kpi-label">Completion Rate</div><div class="kpi-val good">100.5%</div><div class="kpi-sub">596 completed (incl. backlog)</div><div class="kpi-badge green">All callbacks resolved</div></div>
+    <div class="kpi red"><div class="kpi-label">Avg Wait — All Queues</div><div class="kpi-val bad" style="font-size:28px">1h 31m</div><div class="kpi-sub">Overall average wait time</div></div>
+    <div class="kpi red"><div class="kpi-label">Longest Single Wait</div><div class="kpi-val bad" style="font-size:24px">10h 45m</div><div class="kpi-sub">Client Support (New)</div><div class="kpi-badge red">Critical</div></div>
+    <div class="kpi red"><div class="kpi-label">Queues Avg Wait &gt;2h</div><div class="kpi-val bad">6 / 7</div><div class="kpi-sub">Only HCC below 2h threshold</div></div>
+  </div>
+</section>
+<section>
+  <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Callback Queue Detail</span></div>
+  <div class="dtable-wrap">
+  <table class="dtable">
+    <thead><tr><th style="text-align:left">Queue</th><th>Requests</th><th>Completed</th><th>Comp %</th><th>Avg Wait</th><th>Max Wait</th><th>Avg Handle</th></tr></thead>
+    <tbody>
+      <tr><td><div class="q-name" style="color:var(--red)">Client Support (New)</div><div class="q-sub" style="color:var(--red)">&#9888; Critical — avg wait &gt;4h</div></td><td>184</td><td>189</td><td><span class="chip green">102.7%*</span></td><td><span class="chip red">10h 45m</span></td><td>10h 45m</td><td>13m 03s</td></tr>
+      <tr><td><div class="q-name" style="color:var(--red)">Care Experience POD1 Voice</div><div class="q-sub" style="color:var(--red)">&#9888; Critical — avg wait &gt;4h</div></td><td>61</td><td>63</td><td><span class="chip green">103.3%*</span></td><td><span class="chip red">8h 31m</span></td><td>8h 39m</td><td>3h 29m</td></tr>
+      <tr><td><div class="q-name" style="color:var(--red)">Care Experience POD2 Voice</div><div class="q-sub" style="color:var(--red)">&#9888; Critical — avg wait &gt;4h</div></td><td>80</td><td>79</td><td><span class="chip green">98.8%</span></td><td><span class="chip red">4h 10m</span></td><td>4h 14m</td><td>4m 08s</td></tr>
+      <tr><td><div class="q-name">Care Experience Team Voice</div></td><td>115</td><td>114</td><td><span class="chip green">99.1%</span></td><td><span class="chip red">3h 44m</span></td><td>3h 48m</td><td>41m 45s</td></tr>
+      <tr><td><div class="q-name">Care Experience POD4 Voice</div></td><td>44</td><td>44</td><td><span class="chip green">100%</span></td><td><span class="chip amber">2h 45m</span></td><td>2h 45m</td><td>35m 54s</td></tr>
+      <tr><td><div class="q-name">Care Experience POD3 Voice</div></td><td>50</td><td>48</td><td><span class="chip amber">96.0%</span></td><td><span class="chip amber">2h 42m</span></td><td>2h 47m</td><td>1h 39m</td></tr>
+      <tr><td><div class="q-name">Health Care Coordinators</div></td><td>59</td><td>59</td><td><span class="chip green">100%</span></td><td><span class="chip green">1h 34m</span></td><td>1h 34m</td><td>9m 37s</td></tr>
+    </tbody>
+    <tfoot><tr><td>TOTAL</td><td>593</td><td>596</td><td><span class="chip green">100.5%</span></td><td>1h 31m avg</td><td>10h 45m</td><td>—</td></tr></tfoot>
+  </table>
+  </div>
+  <div class="agent-note">*Completion rates &gt;100% reflect callbacks placed in prior periods being completed in March. POD3 Voice callback handle time of 1h 39m average is anomalous and warrants review. Zero queues met an internal 2-hour SLA for callback placement; only Health Care Coordinators averaged under 2 hours.</div>
+</section>
+<div class="report-footer"><span>Served With Honor &mdash; Care Team Operations</span><span>Callback Tab &middot; March 2026</span><span>Genesys Cloud CX</span></div>
+</div></div>
+<div class="section-wrap" id="tab-agents"><div class="page">
+<section>
+  <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Agent KPIs</span><span class="sec-sub">March 2026 &middot; All agents</span></div>
+  <div class="kpi-row cols-5">
+    <div class="kpi navy"><div class="kpi-label">Active Agents</div><div class="kpi-val">21</div><div class="kpi-sub">Of 25 total in system</div></div>
+    <div class="kpi green"><div class="kpi-label">Top Performer</div><div class="kpi-val good" style="font-size:22px">Miguel Garcia</div><div class="kpi-sub">710 total answered</div><div class="kpi-badge green">415V + 133E + 162C</div></div>
+    <div class="kpi navy"><div class="kpi-label">Total Handled</div><div class="kpi-val">10,335</div><div class="kpi-sub">All media types combined</div></div>
+    <div class="kpi amber"><div class="kpi-label">Team Avg Handle</div><div class="kpi-val warn" style="font-size:28px">1h 08m</div><div class="kpi-sub">Skewed by email/chat anomalies</div></div>
+    <div class="kpi red"><div class="kpi-label">Zero-Activity Agents</div><div class="kpi-val bad">4</div><div class="kpi-sub">Yveca Mary, Jeanette Burrell, Carla Burks, Chelsey Wilson</div></div>
+  </div>
+</section>
+<section>
+  <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Individual Agent Performance</span><span class="sec-sub">Sorted by total answered desc &middot; V=Voice E=Email C=Chat</span></div>
+  <div class="dtable-wrap scrollable">
+  <table class="dtable compact">
+    <thead><tr>
+      <th style="text-align:left">Agent</th><th>Rank</th><th>Total Ans.</th><th>Media Mix</th><th>Voice AHT</th><th>Email AHT</th><th>Chat AHT</th><th>Chat ACW</th><th>Xfers</th><th>On Queue</th><th>Not Resp.</th><th>Status</th>
+    </tr></thead>
+    <tbody>
+      <tr><td><div class="q-name">Miguel Garcia</div></td><td><span class="rank g1">1</span></td><td><strong>710</strong></td><td><span class="chip navy">415V+133E+162C</span></td><td>5m 54s</td><td><span class="chip green">4m 36s</span></td><td>11m 25s</td><td><span class="chip green">20s</span></td><td>128</td><td>6d 1h</td><td>1h 54m</td><td><span class="chip green">Active</span></td></tr>
+      <tr><td><div class="q-name">La&apos;Shay Richard</div></td><td><span class="rank g2">2</span></td><td><strong>344</strong></td><td><span class="chip navy">129V+51E+164C</span></td><td>7m 16s</td><td><span class="chip red">8h 41m</span></td><td><span class="chip red">1h 41m</span></td><td><span class="chip red">1h 28m</span></td><td>1</td><td>3d 7h</td><td>9h 17m</td><td><span class="chip amber">Review</span></td></tr>
+      <tr><td><div class="q-name">Rashidah Brown</div></td><td><span class="rank g3">3</span></td><td><strong>232</strong></td><td><span class="chip navy">154V+20E+58C</span></td><td>11m 43s</td><td><span class="chip green">26m 27s</span></td><td><span class="chip red">7h 30m</span></td><td><span class="chip red">7h 20m</span></td><td>34</td><td>3d 23h</td><td>9m 50s</td><td><span class="chip amber">Review</span></td></tr>
+      <tr><td><div class="q-name">Auny Elias-Heath</div></td><td><span class="rank gn">4</span></td><td><strong>128</strong></td><td><span class="chip navy">73V+22E+33C</span></td><td>12m 26s</td><td><span class="chip red">5h 41m</span></td><td><span class="chip red">10h 8m</span></td><td><span class="chip red">9h 59m</span></td><td>9</td><td>6d 15h</td><td>11h 50m</td><td><span class="chip red">Flag</span></td></tr>
+      <tr><td><div class="q-name">Dustin Duemer</div></td><td><span class="rank gn">5</span></td><td><strong>113</strong></td><td><span class="chip navy">71V+20E+22C</span></td><td>4m 20s</td><td><span class="chip green">1m 49s</span></td><td>11m 24s</td><td><span class="chip green">45s</span></td><td>1</td><td>1d 3h</td><td>12h 54m</td><td><span class="chip amber">Review</span></td></tr>
+      <tr><td><div class="q-name">Austin Thomas</div></td><td><span class="rank gn">6</span></td><td><strong>107</strong></td><td><span class="chip navy">86V+5E+16C</span></td><td>5m 20s</td><td><span class="chip green">3m 33s</span></td><td>11m 49s</td><td><span class="chip green">2m 40s</span></td><td>6</td><td>1d 22h</td><td>7m 33s</td><td><span class="chip green">Active</span></td></tr>
+      <tr><td><div class="q-name">Ashley Bradley</div></td><td><span class="rank gn">7</span></td><td><strong>105</strong></td><td><span class="chip navy">42V+22E+41C</span></td><td>8m 18s</td><td><span class="chip green">11m 18s</span></td><td><span class="chip red">6h 0m</span></td><td><span class="chip red">5h 50m</span></td><td>2</td><td>4d 7h</td><td>1d 1h</td><td><span class="chip red">Flag</span></td></tr>
+      <tr><td><div class="q-name">Jenna Burns</div></td><td><span class="rank gn">8</span></td><td><strong>59</strong></td><td><span class="chip navy">4V+8E+47C</span></td><td>11m 47s</td><td><span class="chip green">18m 05s</span></td><td>6m 53s</td><td><span class="chip green">51s</span></td><td>1</td><td>5d 7h</td><td>1d 19h</td><td><span class="chip amber">Review</span></td></tr>
+      <tr><td><div class="q-name">Samantha Shaw</div></td><td><span class="rank gn">9</span></td><td><strong>55</strong></td><td><span class="chip navy">41V+6E+8C</span></td><td>8m 10s</td><td><span class="chip green">3m 10s</span></td><td><span class="chip red">5h 30m</span></td><td><span class="chip red">5h 26m</span></td><td>2</td><td>21h 2m</td><td>5h 23m</td><td><span class="chip amber">Review</span></td></tr>
+      <tr><td><div class="q-name">Kimberly Coleman</div></td><td><span class="rank gn">10</span></td><td><strong>43</strong></td><td><span class="chip navy">29V+3E+11C</span></td><td>9m 20s</td><td><span class="chip green">3m 17s</span></td><td><span class="chip amber">25m 27s</span></td><td><span class="chip amber">15m 52s</span></td><td>0</td><td>1d 11h</td><td>4h 5m</td><td><span class="chip green">Active</span></td></tr>
+      <tr><td><div class="q-name">Mirline Etienne</div></td><td><span class="rank gn">11</span></td><td><strong>42</strong></td><td><span class="chip navy">42V</span></td><td>3m 51s</td><td>—</td><td>—</td><td>—</td><td>3</td><td>3d 4h</td><td>2d 6h</td><td><span class="chip red">Flag</span></td></tr>
+      <tr><td><div class="q-name">Maddy Dugan</div></td><td><span class="rank gn">12</span></td><td><strong>38</strong></td><td><span class="chip navy">38V</span></td><td>4m 38s</td><td>—</td><td>—</td><td>—</td><td>5</td><td>2d 2h</td><td>2h 40m</td><td><span class="chip green">Active</span></td></tr>
+      <tr><td><div class="q-name">Tatiana Jean-Louis</div></td><td><span class="rank gn">13</span></td><td><strong>33</strong></td><td><span class="chip navy">18V+8E+7C</span></td><td>11m 42s</td><td><span class="chip red">4h 28m</span></td><td><span class="chip red">1d 6h</span></td><td><span class="chip red">1d 6h</span></td><td>0</td><td>1d 1h</td><td>21h 53m</td><td><span class="chip red">Flag</span></td></tr>
+      <tr><td><div class="q-name">Shannon Rogers</div></td><td><span class="rank gn">14</span></td><td><strong>20</strong></td><td><span class="chip navy">11V+4E+5C</span></td><td>6m 34s</td><td><span class="chip green">2m 39s</span></td><td>4m 18s</td><td><span class="chip green">7s</span></td><td>0</td><td>1h 56m</td><td>15h 44m</td><td><span class="chip amber">Review</span></td></tr>
+      <tr><td><div class="q-name">Shalon Jones</div></td><td><span class="rank gn">15</span></td><td><strong>18</strong></td><td><span class="chip navy">12V+6E</span></td><td>3m 54s</td><td><span class="chip red">1d 19h</span></td><td>—</td><td>—</td><td>0</td><td>12h 50m</td><td>9h 34m</td><td><span class="chip red">Flag</span></td></tr>
+      <tr><td><div class="q-name">Jennifer Fuston</div></td><td><span class="rank gn">16</span></td><td><strong>25</strong></td><td><span class="chip navy">25V</span></td><td>8m 08s</td><td>—</td><td>—</td><td>—</td><td>0</td><td>—</td><td>18h 20m</td><td><span class="chip amber">Review</span></td></tr>
+      <tr><td><div class="q-name">Christina Browley</div></td><td><span class="rank gn">17</span></td><td><strong>10</strong></td><td><span class="chip navy">4V+4E+2C</span></td><td>7m 48s</td><td><span class="chip green">1m 22s</span></td><td>13m 23s</td><td><span class="chip green">9s</span></td><td>0</td><td>5h 40m</td><td>1h 13m</td><td><span class="chip green">Active</span></td></tr>
+      <tr><td><div class="q-name">EuKyta Little</div></td><td><span class="rank gn">18</span></td><td><strong>8</strong></td><td><span class="chip navy">6V+2C</span></td><td>4m 30s</td><td><span class="chip red">16h 4m</span></td><td>14m 02s</td><td>6m 20s</td><td>0</td><td>2d 6h</td><td>14h 25m</td><td><span class="chip red">Flag</span></td></tr>
+      <tr><td><div class="q-name">Thia Decker</div></td><td><span class="rank gn">19</span></td><td><strong>9</strong></td><td><span class="chip navy">7V+2E</span></td><td>12m 03s</td><td><span class="chip green">6m 24s</span></td><td>—</td><td>—</td><td>0</td><td>15h 26m</td><td><span style="color:var(--red);font-weight:700">12d 3h</span></td><td><span class="chip red">Flag</span></td></tr>
+      <tr><td><div class="q-name">Alex DeTrolio</div></td><td><span class="rank gn">20</span></td><td><strong>5</strong></td><td><span class="chip navy">5V</span></td><td>2m 51s</td><td>—</td><td>—</td><td>—</td><td>0</td><td>1d 4h</td><td>12h 33m</td><td><span class="chip amber">Review</span></td></tr>
+      <tr><td><div class="q-name">Brian Hornaday</div></td><td><span class="rank gn">21</span></td><td><strong>1</strong></td><td><span class="chip navy">1C</span></td><td>—</td><td>—</td><td>6m 04s</td><td>38s</td><td>0</td><td>21m</td><td>41s</td><td><span class="chip gray">Minimal</span></td></tr>
+      <tr class="anomaly-row"><td><div class="q-name">Chelsey Wilson</div><div class="q-sub" style="color:var(--red);opacity:1">&#9888; Chat handle 8d 2h — stuck session anomaly</div></td><td><span class="rank gn">—</span></td><td>0</td><td>—</td><td>—</td><td>—</td><td><span class="chip red">8d 2h</span></td><td><span class="chip red">8d 2h</span></td><td>0</td><td>13m</td><td>—</td><td><span class="chip red">Anomaly</span></td></tr>
+      <tr class="anomaly-row"><td><div class="q-name">Carla Burks</div><div class="q-sub">Outbound only — 0 inbound answered</div></td><td><span class="rank gn">—</span></td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>0</td><td>11m</td><td>—</td><td><span class="chip gray">Outbound</span></td></tr>
+      <tr class="anomaly-row"><td><div class="q-name">Jeanette Burrell</div><div class="q-sub">Logged in 3h 20m — no handle activity</div></td><td><span class="rank gn">—</span></td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>0</td><td>—</td><td>—</td><td><span class="chip gray">Zero</span></td></tr>
+      <tr class="anomaly-row"><td><div class="q-name">Yveca Mary</div><div class="q-sub">No login or handle activity this month</div></td><td><span class="rank gn">—</span></td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>0</td><td>—</td><td>—</td><td><span class="chip gray">Absent</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="agent-note">Agents flagged "Review" have Not Responding time exceeding 8 hours. Agents flagged "Flag" have extreme AHT/ACW anomalies or structural issues requiring manager coaching. Thia Decker's 12-day Not Responding is almost certainly a system/routing artifact — escalate to IT. Chelsey Wilson's 8-day chat handle time is an unclosed session, not a real interaction.</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">§ 03</span><span class="sec-title">Agent Status Time Summary</span></div>
+  <div class="chart-2col">
+    <div class="chart-box">
+      <div class="chart-title">Team Status Allocation</div>
+      <div class="chart-sub">March 2026 &middot; Aggregate across all agents</div>
+      <div class="hbar">
+        <div class="hbar-row"><div class="hbar-label">Available</div><div class="hbar-track"><div class="hbar-fill" style="width:48%;background:var(--green)"><span class="hbar-val-in">79d 11h</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">On Queue</div><div class="hbar-track"><div class="hbar-fill" style="width:28%;background:var(--navy)"><span class="hbar-val-in">46d 5h</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Not Responding</div><div class="hbar-track"><div class="hbar-fill" style="width:14%;background:var(--red)"><span class="hbar-val-in">23d 5h</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Meal</div><div class="hbar-track"><div class="hbar-fill" style="width:3%;background:var(--amber)"><span class="hbar-val-in">4d 16h</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Away</div><div class="hbar-track"><div class="hbar-fill" style="width:2%;background:var(--amber)"><span class="hbar-val-in">3d 13h</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Break</div><div class="hbar-track"><div class="hbar-fill" style="width:1%;background:var(--silver)"><span class="hbar-val-in">2d 2h</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Idle</div><div class="hbar-track"><div class="hbar-fill" style="width:8%;background:var(--ink-4)"><span class="hbar-val-in">12d 13h</span></div></div></div>
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Not Responding Anomalies (&gt;8h)</div>
+      <div class="chart-sub">Agents with excessive Not Responding time</div>
+      <div class="hbar">
+        <div class="hbar-row"><div class="hbar-label">Thia Decker</div><div class="hbar-track"><div class="hbar-fill" style="width:100%;background:var(--red)"><span class="hbar-val-in">12d 3h</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Mirline Etienne</div><div class="hbar-track"><div class="hbar-fill" style="width:18%;background:var(--red)"><span class="hbar-val-in">2d 6h</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Jenna Burns</div><div class="hbar-track"><div class="hbar-fill" style="width:16%;background:var(--red)"><span class="hbar-val-in">1d 19h</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Ashley Bradley</div><div class="hbar-track"><div class="hbar-fill" style="width:9%;background:var(--amber)"><span class="hbar-val-in">1d 1h</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Shannon Rogers</div><div class="hbar-track"><div class="hbar-fill" style="width:6%;background:var(--amber)"><span class="hbar-val-in">15h 44m</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">EuKyta Little</div><div class="hbar-track"><div class="hbar-fill" style="width:6%;background:var(--amber)"><span class="hbar-val-in">14h 25m</span></div></div></div>
+        <div class="hbar-row"><div class="hbar-label">Alex DeTrolio</div><div class="hbar-track"><div class="hbar-fill" style="width:5%;background:var(--amber)"><span class="hbar-val-in">12h 33m</span></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="agent-note">Not Responding time &gt;8h is flagged as a potential coaching or system issue. Thia Decker&apos;s value of 12 days 3 hours exceeds even the entire month duration for a part-time agent and is almost certainly a routing/system artifact. Mirline Etienne (2d 6h) and Jenna Burns (1d 19h) require manager review.</div>
+</section>
+<div class="report-footer"><span>Served With Honor &mdash; Care Team Operations</span><span>Agent Performance Tab &middot; March 2026</span><span>Genesys Cloud CX</span></div>
+</div></div>
+<div class="section-wrap" id="tab-actions"><div class="page">
+<section>
+  <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Manager Action Items</span><span class="sec-sub">Based on March 2026 data</span></div>
+  <div class="rec-grid">
+    <div class="rec-card rc-red"><span class="rc-priority urgent">Urgent</span>
+      <div class="rc-title">Telemedica Team: Emergency Staffing Review</div>
+      <div class="rc-body">Telemedica answered only 60 of 330 offered calls (18.2% answer rate, 34.5% abandon rate) with an SL of just 13.8% in March. This pattern persisted across all 3 weekly reports (8.7%, 5.9%, 33.7% weekly SL). The queue had the longest ASA at 8m 7s and the highest abandon volume (114). Conduct an immediate workforce analysis: review scheduled vs. logged-in agent hours, examine the Telemedica CS/VA skill assignments, and determine if agent Alex DeTrolio (the only agent showing Telemedica skills with any activity) is the sole agent handling this queue.</div>
+      <div class="rc-stat"><strong>Data:</strong> 330 offered &middot; 60 answered &middot; 114 abandoned &middot; SL 13.8% &middot; All 3 weeks below 34%</div>
+    </div>
+    <div class="rec-card rc-red"><span class="rc-priority urgent">Urgent</span>
+      <div class="rc-title">Callback Wait Times Require Immediate SLA Policy</div>
+      <div class="rc-body">Six of seven callback queues averaged over 2 hours of wait time before callback placement. Client Support averaged 10h 45m and POD1 averaged 8h 31m — callers waiting over a full workday for a callback is a serious service failure. Establish and enforce an internal callback SLA target (recommended: 2 hours maximum). Assign dedicated daily callback processing windows for each queue supervisor, add callback queue depth to the daily standup dashboard, and consider same-day callback guarantees in agent scripting.</div>
+      <div class="rc-stat"><strong>Data:</strong> Client Support 10h 45m &middot; POD1 8h 31m &middot; POD2 4h 10m &middot; CE Team 3h 44m &middot; 6/7 queues above 2h</div>
+    </div>
+    <div class="rec-card rc-red"><span class="rc-priority urgent">Urgent</span>
+      <div class="rc-title">Chat ACW Crisis — All 4 POD Queues Flagged</div>
+      <div class="rc-body">Every chat queue exceeded the 15-minute ACW threshold by a wide margin. POD3 Chat averaged 4h 39m of ACW per interaction — nearly 19 times the threshold. Individual agent data shows Ashley Bradley at 5h 50m chat ACW, Auny Elias-Heath at 9h 59m, Rashidah Brown at 7h 20m, and Tatiana Jean-Louis at 1 day 6 hours. This suggests agents are consistently leaving chat interactions open in ACW state rather than closing them. Audit whether the chat wrap-up workflow is functioning correctly and whether agents understand how to properly disposition chat contacts.</div>
+      <div class="rc-stat"><strong>Data:</strong> POD3 ACW 4h 39m &middot; POD1 2h 19m &middot; POD4 1h 33m &middot; POD2 1h 03m &middot; Target: &lt;15m</div>
+    </div>
+    <div class="rec-card rc-amber"><span class="rc-priority high">High Priority</span>
+      <div class="rc-title">CE POD Voice Queues: Routing and Staffing Overhaul</div>
+      <div class="rc-body">All four Care Experience POD Voice queues failed to meet the 80% SL target in March, ranging from 7.1% (POD2) to 14.9% (POD1). Combined they received 682 calls and answered only 288 (42.2%). Meanwhile, Care Experience Team Voice handled 588 calls at 69.6% — suggesting the team-level queue is absorbing overflow effectively but the POD-specific routing is fundamentally broken. Review the routing strategy: consider whether POD voice queues should overflow to CE Team Voice sooner, or whether agents assigned to POD queues are also picking up chat/email at the same time.</div>
+      <div class="rc-stat"><strong>Data:</strong> POD2 SL 7.1% &middot; POD3 8.3% &middot; POD4 12.2% &middot; POD1 14.9% &middot; Combined: 42.2% answer rate</div>
+    </div>
+    <div class="rec-card rc-amber"><span class="rc-priority high">High Priority</span>
+      <div class="rc-title">Thia Decker: System Audit — 12-Day Not Responding</div>
+      <div class="rc-body">Thia Decker's Not Responding status totaled 12 days and 3 hours in March — exceeding the entire work month by multiple days. This is almost certainly a Genesys routing artifact (e.g., a session left open from a prior month, a persistent routing group membership causing incorrect status assignment, or a system bug). This data is skewing team-level Not Responding totals. Escalate to IT and Genesys platform admin for a session audit. Confirm Thia's actual schedule and login records independently.</div>
+      <div class="rc-stat"><strong>Data:</strong> Not Responding: 12d 3h 32m &middot; Logged In: 6d 10h &middot; Handled: 9 inbound contacts</div>
+    </div>
+    <div class="rec-card rc-amber"><span class="rc-priority high">High Priority</span>
+      <div class="rc-title">Agent Email AHT Coaching: La&apos;Shay Richard &amp; EuKyta Little</div>
+      <div class="rc-body">La&apos;Shay Richard's email AHT was 8h 41m across 51 handled interactions, with ACW of 1h 28m. EuKyta Little's email AHT was 16h 4m (though on 0 inbound answered — all volume appears outbound). Shalon Jones logged 1 day 19 hours email AHT on just 6 interactions. While some email complexity is expected, these figures are 10–40x the team's better-performing email agents (e.g., Dustin Duemer at 1m 49s, Miguel Garcia at 4m 36s). Schedule individual AHT coaching sessions. Review case types handled — if complexity is genuinely elevated, flag for routing restructuring.</div>
+      <div class="rc-stat"><strong>Data:</strong> La&apos;Shay: 8h 41m email AHT &middot; EuKyta: 16h 4m &middot; Shalon: 1d 19h 45m (6 contacts)</div>
+    </div>
+    <div class="rec-card rc-blue"><span class="rc-priority med">Medium</span>
+      <div class="rc-title">POD1 Email AHT Data Integrity Review</div>
+      <div class="rc-body">Care Experience POD1 Email reported an average handle time of 8 hours 10 minutes and ACW of 5 hours 42 minutes across 81 contacts. This is anomalous compared to POD2 (24m 51s) and the other PODs. Before drawing operational conclusions, verify whether the data reflects real interactions or a Genesys export artifact. Cross-reference with CRM records for the specific contacts routed to POD1 Email in March. If confirmed as real, La&apos;Shay Richard (who handles POD1-area email) is the primary contributor based on individual AHT data.</div>
+      <div class="rc-stat"><strong>Data:</strong> POD1 AHT: 8h 10m vs. POD2 AHT: 24m 51s &middot; POD3: 1h 28m &middot; POD4: 1h 49m</div>
+    </div>
+    <div class="rec-card rc-blue"><span class="rc-priority med">Medium</span>
+      <div class="rc-title">Zero-Activity Agent Review</div>
+      <div class="rc-body">Four agents showed no inbound answered contacts in March: Yveca Mary (no login activity at all), Jeanette Burrell (logged in 3h 20m but no handle activity), Carla Burks (7d 4h logged in, outbound only, 0 inbound), and Chelsey Wilson (minimal — 1 stuck chat session). If these agents are on scheduled leave, their records should be annotated accordingly. If they are available agents who were not receiving contacts, review their queue membership and routing configuration to ensure they are properly assigned to active queues.</div>
+      <div class="rc-stat"><strong>Data:</strong> Yveca Mary: 0 logins &middot; Jeanette Burrell: 0 handle &middot; Carla Burks: 0 inbound &middot; Chelsey Wilson: stuck session</div>
+    </div>
+    <div class="rec-card rc-green"><span class="rc-priority opp">Opportunity</span>
+      <div class="rc-title">Miguel Garcia Model: Identify Replicable Practices</div>
+      <div class="rc-body">Miguel Garcia handled 710 contacts across all three channels in March — nearly double any other agent — while maintaining a low voice AHT of 5m 54s, email AHT of 4m 36s, and chat ACW of just 20 seconds. His performance across all media types is exceptional. Interview Miguel to document his workflow, CRM habits, and ACW practices. Share findings as a best-practice guide with agents who are struggling with AHT or ACW, particularly in chat and email. Consider a peer coaching pairing program for March&apos;s lowest performers.</div>
+      <div class="rc-stat"><strong>Data:</strong> 710 total answered &middot; Voice AHT 5m 54s &middot; Email AHT 4m 36s &middot; Chat ACW 20s</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Monthly Goal Attainment Scorecard</span><span class="sec-sub">Voice SL % per queue &middot; &#10003; = &ge;80% &middot; &#10007; = &lt;80% &middot; 3 weeks of data available</span></div>
+  <table class="scorecard-table">
+    <thead><tr><th style="text-align:left">Queue</th><th>Week 1 (Mar 8–14)</th><th>Week 2 (Mar 15–21)</th><th>Week 3 (Mar 22–28)</th><th>Week 4</th><th>Weeks Hit</th><th>Attainment</th></tr></thead>
+    <tbody>
+      <tr><td>CE Team Voice</td><td><span class="chip red">&#10007; 72.9%</span></td><td><span class="chip red">&#10007; 66.2%</span></td><td><span class="chip red">&#10007; 75.7%</span></td><td><span class="chip gray">N/A</span></td><td>0 / 3</td><td><span class="chip red">0%</span></td></tr>
+      <tr><td>Client Support (New)</td><td><span class="chip red">&#10007; 65.0%</span></td><td><span class="chip red">&#10007; 41.4%</span></td><td><span class="chip red">&#10007; 71.0%</span></td><td><span class="chip gray">N/A</span></td><td>0 / 3</td><td><span class="chip red">0%</span></td></tr>
+      <tr><td>Health Care Coordinators</td><td><span class="chip red">&#10007; 32.7%</span></td><td><span class="chip red">&#10007; 58.5%</span></td><td><span class="chip red">&#10007; 73.5%</span></td><td><span class="chip gray">N/A</span></td><td>0 / 3</td><td><span class="chip red">0%</span></td></tr>
+      <tr><td>Telemedica Team</td><td><span class="chip red">&#10007; 8.7%</span></td><td><span class="chip red">&#10007; 5.9%</span></td><td><span class="chip red">&#10007; 33.7%</span></td><td><span class="chip gray">N/A</span></td><td>0 / 3</td><td><span class="chip red">0%</span></td></tr>
+      <tr><td>CE POD Avg (Voice)</td><td><span class="chip red">&#10007; 30.8%</span></td><td><span class="chip red">&#10007; 34.8%</span></td><td><span class="chip red">&#10007; 55.7%</span></td><td><span class="chip gray">N/A</span></td><td>0 / 3</td><td><span class="chip red">0%</span></td></tr>
+    </tbody>
+    <tfoot><tr><td>Team Overall</td><td><span class="chip red">&#10007; 0/5</span></td><td><span class="chip red">&#10007; 0/5</span></td><td><span class="chip red">&#10007; 0/5</span></td><td>—</td><td>0 / 15</td><td><span class="chip red">0%</span></td></tr></tfoot>
+  </table>
+  <div class="agent-note">Week 4 data not available (no weekly report filed for Mar 29–Apr 4 period). Monthly report covers full March data. No voice queue achieved the 80% SL target in any week of March 2026. Health Care Coordinators showed the strongest positive trend (32.7% → 73.5%) over three weeks.</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">§ 03</span><span class="sec-title">Recurring Issues This Month</span></div>
+  <div class="narrative">
+    <div class="narr-head">The following issues appeared in <em>all three weekly reports</em> filed in March 2026.</div>
+    <div class="flags">
+      <div class="flag"><div class="fdot crit">!</div><div><strong>Telemedica SL below 35%</strong> — Observed in Week 1 (8.7%), Week 2 (5.9%), Week 3 (33.7%). Monthly total: 13.8%. Has been flagged in every weekly report this month.</div></div>
+      <div class="flag"><div class="fdot crit">!</div><div><strong>All CE POD Voice queues below 80% SL</strong> — POD weekly averages ranged 30.8%–55.7% across all three weeks. No individual POD queue reached 80% in any week.</div></div>
+      <div class="flag"><div class="fdot crit">!</div><div><strong>Client Support callbacks exceeding 2-hour wait</strong> — Appeared in all weeks with callback data. Monthly average: 10h 45m. This has been a persistent unresolved issue.</div></div>
+      <div class="flag"><div class="fdot warn">&#9650;</div><div><strong>Shalon Jones extreme email AHT</strong> — Weekly report Week 1 flagged a 2-day 22-hour AHT anomaly. March monthly confirms 1d 19h 45m AHT on 6 contacts. Coaching not yet confirmed.</div></div>
+      <div class="flag"><div class="fdot warn">&#9650;</div><div><strong>Chat ACW broadly elevated</strong> — All chat queues showed ACW well above 15 minutes in weekly reports. Monthly confirms all 4 POD chat queues at 1h+ ACW. Root cause not addressed.</div></div>
+      <div class="flag"><div class="fdot good">&#10003;</div><div><strong>Email handle rate consistently strong</strong> — All three weekly reports showed email answer/handle rates near or above 90%. Monthly confirms 98.7% overall handle rate with all PODs above SL.</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">§ 04</span><span class="sec-title">Agent Coaching Shortlist</span></div>
+  <table class="coaching-table">
+    <thead><tr><th>Agent</th><th>Issue Type</th><th>Detail</th><th>Recommended Action</th></tr></thead>
+    <tbody>
+      <tr><td>Shalon Jones</td><td><span class="chip red">Email AHT</span></td><td>1d 19h 45m avg AHT on 6 email contacts</td><td>1:1 session; review specific case records; determine if case complexity is genuine or workflow issue</td></tr>
+      <tr><td>Tatiana Jean-Louis</td><td><span class="chip red">Chat AHT/ACW</span></td><td>Chat AHT 1d 6h 12m; ACW 1d 6h 2m (7 contacts)</td><td>Review open chat sessions from March; verify contacts were properly closed; audit chat workflow</td></tr>
+      <tr><td>Chelsey Wilson</td><td><span class="chip red">Stuck Session</span></td><td>Chat AHT 8d 2h — 1 unclosed session from prior period</td><td>IT ticket to force-close session; agent education on chat disposition process</td></tr>
+      <tr><td>EuKyta Little</td><td><span class="chip red">Email AHT</span></td><td>Email AHT 16h 4m (0 inbound, all outbound volume)</td><td>Review outbound email workflow; if outbound interactions are complex, assess workload balance</td></tr>
+      <tr><td>Auny Elias-Heath</td><td><span class="chip red">Chat AHT/ACW</span></td><td>Chat AHT 10h 8m; ACW 9h 59m (33 contacts)</td><td>Audit open/aged chat interactions; coach on ACW completion process; check queue routing</td></tr>
+      <tr><td>La&apos;Shay Richard</td><td><span class="chip red">Email AHT</span></td><td>Email AHT 8h 41m (51 contacts); Chat ACW 1h 28m</td><td>Review email case complexity; compare with POD2 agents handling same queue; coaching on CRM efficiency</td></tr>
+      <tr><td>Rashidah Brown</td><td><span class="chip amber">Chat ACW</span></td><td>Chat ACW 7h 20m (58 contacts)</td><td>Coach on chat ACW process; verify Genesys wrap-up disposition is configured correctly</td></tr>
+      <tr><td>Ashley Bradley</td><td><span class="chip amber">Chat ACW</span></td><td>Chat ACW 5h 50m (41 contacts)</td><td>Coach on chat ACW process; review if agent is handling ACW work during next contact</td></tr>
+      <tr><td>Thia Decker</td><td><span class="chip red">Not Responding</span></td><td>12d 3h 32m Not Responding status</td><td>IT/platform audit first; if confirmed as system artifact, clear record; if behavioral, PIP discussion</td></tr>
+      <tr><td>Mirline Etienne</td><td><span class="chip amber">Not Responding</span></td><td>2d 6h 10m Not Responding (9th highest volume agent)</td><td>Review daily login/logout pattern; discuss availability expectations; verify routing group membership</td></tr>
+    </tbody>
+  </table>
+</section>
+<div class="report-footer"><span>Served With Honor &mdash; Care Team Operations</span><span>Recommendations Tab &middot; March 2026</span><span>Genesys Cloud CX</span></div>
+</div></div>
+<div class="section-wrap" id="tab-trending"><div class="page">
+<section>
+  <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Trend at a Glance &mdash; Month Over Month</span><span class="sec-sub">March 2026 vs. February 2026</span></div>
+  <div class="kpi-row cols-6">
+    <div class="kpi navy"><div class="kpi-label">Total Volume</div><div class="kpi-val">4,485</div><div class="kpi-sub">Mar &middot; Feb was 4,777</div><div class="kpi-delta dn-bad">&#9660; &minus;292 contacts</div></div>
+    <div class="kpi red"><div class="kpi-label">Voice Answer Rate</div><div class="kpi-val bad">46.8%</div><div class="kpi-sub">Mar &middot; Feb was 51.0%</div><div class="kpi-delta dn-bad">&#9660; &minus;4.2pp vs Feb</div></div>
+    <div class="kpi red"><div class="kpi-label">Voice Abandon Rate</div><div class="kpi-val bad">20.6%</div><div class="kpi-sub">Mar &middot; Feb was 20.8%</div><div class="kpi-delta dn-good">&#9660; &minus;0.2pp (improved)</div></div>
+    <div class="kpi green"><div class="kpi-label">Email Handle Rate</div><div class="kpi-val good">98.7%</div><div class="kpi-sub">Mar &middot; Feb was 119.4%*</div><div class="kpi-delta warn">&#9660; Feb incl. backlog</div></div>
+    <div class="kpi green"><div class="kpi-label">Chat Answer Rate</div><div class="kpi-val good">86.9%</div><div class="kpi-sub">Mar &middot; Feb was 85.1%</div><div class="kpi-delta up-good">&#9650; +1.8pp vs Feb</div></div>
+    <div class="kpi green"><div class="kpi-label">Callback Completion</div><div class="kpi-val good">100.5%</div><div class="kpi-sub">Mar &middot; Feb was 98.9%</div><div class="kpi-delta up-good">&#9650; +1.6pp vs Feb</div></div>
+  </div>
+  <div class="trend-period-note">&#8505; Comparison source: February 2026 Monthly Report (Feb2026/2026-02.html). Feb voice offered: 2,304 &middot; chat offered: 1,295 &middot; callback requests: 704. *Feb email handle rate of 119.4% reflects backlog clearance from January (566 handled / 474 offered); not directly comparable to March&apos;s 98.7%.</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Month-over-Month Channel Charts</span></div>
+  <div class="trend-chart-row">
+    <div class="trend-canvas-box">
+      <div class="trend-canvas-title">Channel Volume</div>
+      <div class="trend-canvas-sub">February vs. March 2026</div>
+      <canvas id="mo-vol-chart" width="600" height="260"></canvas>
+    </div>
+    <div class="trend-canvas-box">
+      <div class="trend-canvas-title">Channel Answer / Handle / Completion Rate</div>
+      <div class="trend-canvas-sub">February vs. March 2026 &middot; dashed line = 80% SLA target</div>
+      <canvas id="mo-rate-chart" width="600" height="260"></canvas>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">§ 03</span><span class="sec-title">Weekly Performance Breakdown</span><span class="sec-sub">3 weekly reports available for March 2026</span></div>
+  <table class="week-breakdown-table">
+    <thead><tr><th style="text-align:left">Week</th><th>Voice Offered</th><th>Voice Ans%</th><th>Email Handle%</th><th>Chat Ans%</th><th>Callback Comp%</th><th>Total Volume</th></tr></thead>
+    <tbody>
+      <tr><td>Week 1 &mdash; Mar 8&ndash;14</td><td>520</td><td><span class="chip red">46.9%</span></td><td><span class="chip green">94.3%</span></td><td><span class="chip green">86.3%</span></td><td><span class="chip amber">93.2%</span></td><td>1,035</td></tr>
+      <tr><td>Week 2 &mdash; Mar 15&ndash;21</td><td>527</td><td><span class="chip red">39.5%</span></td><td><span class="chip green">106.4%*</span></td><td><span class="chip green">90.1%</span></td><td><span class="chip green">97.2%</span></td><td>926</td></tr>
+      <tr><td>Week 3 &mdash; Mar 22&ndash;28</td><td>543</td><td><span class="chip red">55.1%</span></td><td><span class="chip green">96.0%</span></td><td><span class="chip green">88.2%</span></td><td><span class="chip green">98.8%</span></td><td>919</td></tr>
+    </tbody>
+    <tfoot><tr><td>Monthly Total / Avg</td><td>2,477</td><td><span class="chip red">46.8%</span></td><td><span class="chip green">98.7%</span></td><td><span class="chip green">86.9%</span></td><td><span class="chip green">100.5%</span></td><td>4,485</td></tr></tfoot>
+  </table>
+  <div class="agent-note">*Week 2 email handle rate &gt;100% reflects completion of contacts queued in prior periods. No Week 4 report was filed (Mar 29&ndash;Apr 4). Monthly total includes full month actuals which may exceed 3-week sum due to the partial first week (Mar 1&ndash;7) not captured in weekly reports.</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">§ 04</span><span class="sec-title">Busiest Days of the Month</span><span class="sec-sub">From Weeks 2–3 heatmap data (Weeks 1 &amp; 4 data not available)</span></div>
+  <div class="busy-day-grid">
+    <div class="busy-day-card top1"><div class="busy-day-label">&#127942; Busiest</div><div class="busy-day-val">423</div><div class="busy-day-sub">Mon Mar 16</div></div>
+    <div class="busy-day-card top2"><div class="busy-day-label">#2</div><div class="busy-day-val">333</div><div class="busy-day-sub">Wed Mar 18</div></div>
+    <div class="busy-day-card top3"><div class="busy-day-label">#3</div><div class="busy-day-val">329</div><div class="busy-day-sub">Tue Mar 17</div></div>
+    <div class="busy-day-card top3"><div class="busy-day-label">#4</div><div class="busy-day-val">319</div><div class="busy-day-sub">Thu Mar 19</div></div>
+    <div class="busy-day-card"><div class="busy-day-label">#5</div><div class="busy-day-val">229</div><div class="busy-day-sub">Fri Mar 20</div></div>
+  </div>
+  <div style="margin-bottom:12px;font-size:13px;color:var(--ink-3);">&#8505;&nbsp; Peak interval: <strong>12:30 PM &mdash; 170 contacts</strong> aggregated across available weeks &middot; Second peak: <strong>2:00 PM &mdash; 169 contacts</strong></div>
+  <div class="busy-hour-wrap">
+    <div class="chart-title">Monthly Busy-Hour Profile</div>
+    <div class="chart-sub" style="margin-bottom:16px">30-minute intervals 8 AM&ndash;6 PM &middot; Aggregated from Weeks 2&ndash;3 heatmap data &middot; All channels combined</div>
+    <canvas id="monthly-busy-chart" width="900" height="280"></canvas>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">§ 05</span><span class="sec-title">Monthly Trend Insights</span></div>
+  <div class="trend-insight-grid">
+    <div class="trend-card tc-pos">
+      <div class="tc-icon">&#9989;</div>
+      <div class="tc-title">Email &amp; Callback Delivery: Strong</div>
+      <div class="tc-body">Email handle rate of 98.7% with all four POD queues above the 80% SL threshold is the team&apos;s clearest positive. Callback completion of 100.5% (596 callbacks placed on 593 requests) shows the team is clearing the full queue. These channels are operationally sound from a volume delivery standpoint.</div>
+      <div class="tc-note">Email: 98.7% handle &middot; All PODs SL 91–94% &middot; Callbacks: 596/593 completed</div>
+    </div>
+    <div class="trend-card tc-neg">
+      <div class="tc-icon">&#128680;</div>
+      <div class="tc-title">Voice SL: Systemic Failure All Month</div>
+      <div class="tc-body">Zero voice queues reached the 80% SL target in any week of March. The weekly trend showed slight improvement (Week 2 worst at 39.5% overall, Week 3 best at 55.1%), but the gap to target remains enormous. Telemedica in particular moved only from 5.9% to 33.7% across weeks — critical but with the most room for urgent intervention.</div>
+      <div class="tc-note">Monthly voice Ans%: 46.8% &middot; No queue hit 80% SL in any of 3 weekly reports</div>
+    </div>
+    <div class="trend-card tc-warn">
+      <div class="tc-icon">&#9888;</div>
+      <div class="tc-title">Chat ACW: Worsening Pattern</div>
+      <div class="tc-body">Chat ACW exceeded 15 minutes across all four queues every week of the month. At the agent level, several individuals are accumulating ACW measured in hours or days. This suggests the issue is not random — it reflects either a systemic process failure (agents not knowing how to close chat properly) or an agent behavior issue that has not been corrected despite appearing in weekly reports.</div>
+      <div class="tc-note">POD3 Chat ACW: 4h 39m &middot; POD1: 2h 19m &middot; Target: &lt;15m</div>
+    </div>
+    <div class="trend-card tc-info">
+      <div class="tc-icon">&#128100;</div>
+      <div class="tc-title">Agent Performance: High Concentration</div>
+      <div class="tc-body">Miguel Garcia alone accounted for 710 of the team&apos;s inbound answered contacts — approximately 33% of all inbound volume across all agents. The top 3 agents (Garcia, La&apos;Shay Richard, Rashidah Brown) collectively handled over 1,280 contacts. This level of concentration creates risk: if any top-3 agent is absent, queue performance will deteriorate significantly. Cross-training and workload distribution deserve attention.</div>
+      <div class="tc-note">Top 3 agents: 1,286 of ~3,892 total contacts &middot; 33% of volume from 1 agent</div>
+    </div>
+    <div class="trend-card tc-warn">
+      <div class="tc-icon">&#128336;</div>
+      <div class="tc-title">Callback Waits: Structural, Not Episodic</div>
+      <div class="tc-body">With 6 of 7 callback queues averaging over 2 hours wait, and Client Support at 10h 45m, this is not a one-day spike — it&apos;s a structural capacity problem. The weekly reports flagged callback waits in all three weeks. The completion rate is high (callbacks do get returned), but the 10-hour wait time makes the callback option effectively non-functional for callers expecting same-day return contact.</div>
+      <div class="tc-note">6/7 queues &gt;2h avg wait &middot; Client Support avg: 10h 45m all month</div>
+    </div>
+    <div class="trend-card tc-info">
+      <div class="tc-icon">&#128203;</div>
+      <div class="tc-title">Forward Look: April 2026 Priorities</div>
+      <div class="tc-body">Three areas require progress before the April report: (1) Telemedica staffing resolution or routing change — the 13.8% monthly SL is unsustainable; (2) Chat ACW root-cause fix — whether system configuration or agent coaching; (3) Callback SLA policy formalization — internal targets must be established and measured weekly. Health Care Coordinators showed the strongest positive trend (32.7% → 73.5% SL across weeks) and may reach target in April with consistent staffing.</div>
+      <div class="tc-note">HCC SL trend: 32.7% → 58.5% → 73.5% over 3 weeks &middot; Closest to target</div>
+    </div>
+  </div>
+</section>
+
+<!-- TREND-DATA: {"month": "March 2026", "voice_offered": 2477, "voice_ans_rate": 46.8, "voice_abn_rate": 20.6, "email_offered": 468, "email_ans_rate": 98.7, "chat_offered": 947, "chat_ans_rate": 86.9, "callback_offered": 593, "callback_comp_rate": 100.5, "period_label": "March 2026"} -->
+
+<div class="report-footer"><span>Served With Honor &mdash; Care Team Operations</span><span>Trending Tab &middot; March 2026</span><span>Genesys Cloud CX</span></div>
+</div></div>
+<script>
+function showTab(id, el) {
+  document.querySelectorAll('.section-wrap').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  el.classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'trending') setTimeout(drawMonthlyCharts, 60);
+}
+
+const MONTHLY_INTERVAL_DATA = {
+  labels: ['8:00a','8:30a','9:00a','9:30a','10:00a','10:30a','11:00a','11:30a','12:00p','12:30p','1:00p','1:30p','2:00p','2:30p','3:00p','3:30p','4:00p','4:30p','5:00p','5:30p'],
+  voice: [5,10,36,55,67,72,76,76,76,85,77,74,84,70,62,60,59,57,39,24],
+  chat:  [3,6,24,37,45,49,51,51,51,57,52,50,57,47,42,40,40,39,26,16],
+  email: [2,4,12,19,22,24,25,26,26,28,26,24,28,24,20,20,19,19,13,8]
+};
+
+function drawMonthlyCharts() {
+  drawVolChart();
+  drawRateChart();
+  drawBusyHourChart();
+}
+
+function drawVolChart() {
+  var c = document.getElementById('mo-vol-chart');
+  if (!c) return;
+  var ctx = c.getContext('2d');
+  var W = c.width, H = c.height;
+  ctx.clearRect(0,0,W,H);
+  var labels = ['Voice','Email','Chat','Callback'];
+  var feb = [2304, 474, 1295, 704];
+  var mar = [2477, 468, 947, 593];
+  var colors = ['#1a2a4a','#1a5fa8','#1a6e44','#c47a10'];
+  var colorsL = ['rgba(26,42,74,0.3)','rgba(26,95,168,0.3)','rgba(26,110,68,0.3)','rgba(196,122,16,0.3)'];
+  var pad = {l:50,r:20,t:30,b:36};
+  var grpW = (W-pad.l-pad.r)/labels.length;
+  var bw = grpW*0.28, maxV = 2600;
+  // legend
+  ctx.fillStyle=colorsL[0]; ctx.fillRect(pad.l,8,11,11);
+  ctx.fillStyle='#6b6e7a'; ctx.font='11px Calibri'; ctx.textAlign='left';
+  ctx.fillText('Feb 2026',pad.l+15,18);
+  ctx.fillStyle=colors[0]; ctx.fillRect(pad.l+90,8,11,11);
+  ctx.fillStyle='#3a3d48'; ctx.fillText('Mar 2026',pad.l+105,18);
+  labels.forEach(function(l,i){
+    var cx=pad.l+(i+0.5)*grpW;
+    var bh_f=(feb[i]/maxV)*(H-pad.t-pad.b);
+    var bh_m=(mar[i]/maxV)*(H-pad.t-pad.b);
+    var base=H-pad.b;
+    ctx.fillStyle=colorsL[i]; ctx.fillRect(cx-bw-2,base-bh_f,bw,bh_f);
+    ctx.fillStyle=colors[i];  ctx.fillRect(cx+2,base-bh_m,bw,bh_m);
+    ctx.fillStyle='#9ea2ae'; ctx.font='12px Calibri'; ctx.textAlign='center';
+    ctx.fillText(l,cx,H-pad.b+14);
+    ctx.fillStyle='#6b6e7a'; ctx.font='11px Calibri';
+    ctx.fillText(feb[i].toLocaleString(),cx-bw/2-2,base-bh_f-5);
+    ctx.fillStyle='#1a1c22'; ctx.font='bold 12px Calibri';
+    ctx.fillText(mar[i].toLocaleString(),cx+bw/2+2,base-bh_m-5);
+  });
+}
+
+function drawRateChart() {
+  var c = document.getElementById('mo-rate-chart');
+  if (!c) return;
+  var ctx = c.getContext('2d');
+  var W = c.width, H = c.height;
+  ctx.clearRect(0,0,W,H);
+  var labels = ['Voice Ans%','Voice Abn%','Email Handle%','Chat Ans%','CB Comp%'];
+  var feb = [51.0, 20.8, 119.4, 85.1, 98.9];
+  var mar = [46.8, 20.6, 98.7, 86.9, 100.5];
+  var colors = ['#c0202a','#c47a10','#1a6e44','#1a6e44','#1a6e44'];
+  var colorsL = ['rgba(192,32,42,0.3)','rgba(196,122,16,0.3)','rgba(26,110,68,0.3)','rgba(26,110,68,0.3)','rgba(26,110,68,0.3)'];
+  var pad = {l:50,r:52,t:30,b:36};
+  var grpW = (W-pad.l-pad.r)/labels.length, bw=grpW*0.28, maxV=125;
+  // 80% SLA line
+  var t80y = H-pad.b-(80/maxV)*(H-pad.t-pad.b);
+  ctx.strokeStyle='#c0202a'; ctx.lineWidth=1.5; ctx.setLineDash([5,4]);
+  ctx.beginPath(); ctx.moveTo(pad.l,t80y); ctx.lineTo(W-pad.r,t80y); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle='#c0202a'; ctx.font='bold 10px Calibri'; ctx.textAlign='left';
+  ctx.fillText('80% SLA',W-pad.r+3,t80y+4);
+  // legend
+  ctx.fillStyle=colorsL[0]; ctx.fillRect(pad.l,8,11,11);
+  ctx.fillStyle='#6b6e7a'; ctx.font='11px Calibri'; ctx.textAlign='left';
+  ctx.fillText('Feb 2026',pad.l+15,18);
+  ctx.fillStyle=colors[0]; ctx.fillRect(pad.l+90,8,11,11);
+  ctx.fillStyle='#3a3d48'; ctx.fillText('Mar 2026',pad.l+105,18);
+  labels.forEach(function(l,i){
+    var cx=pad.l+(i+0.5)*grpW;
+    var base=H-pad.b;
+    var bh_f=(feb[i]/maxV)*(H-pad.t-pad.b);
+    var bh_m=(mar[i]/maxV)*(H-pad.t-pad.b);
+    ctx.fillStyle=colorsL[i]; ctx.fillRect(cx-bw-2,base-bh_f,bw,bh_f);
+    ctx.fillStyle=colors[i];  ctx.fillRect(cx+2,base-bh_m,bw,bh_m);
+    ctx.fillStyle='#9ea2ae'; ctx.font='10px Calibri'; ctx.textAlign='center';
+    ctx.fillText(l.replace('%',''),cx,H-pad.b+14);
+    ctx.fillStyle='#6b6e7a'; ctx.font='11px Calibri';
+    ctx.fillText(feb[i]+'%',cx-bw/2-2,base-bh_f-5);
+    ctx.fillStyle='#1a1c22'; ctx.font='bold 11px Calibri';
+    ctx.fillText(mar[i]+'%',cx+bw/2+2,base-bh_m-5);
+  });
+}
+
+function drawBusyHourChart() {
+  var c = document.getElementById('monthly-busy-chart');
+  if (!c) return;
+  var ctx = c.getContext('2d');
+  var W = c.width, H = c.height;
+  ctx.clearRect(0,0,W,H);
+  var D = MONTHLY_INTERVAL_DATA;
+  var n = D.labels.length;
+  var pad = {l:50,r:20,t:20,b:40};
+  var bw = (W - pad.l - pad.r) / n * 0.75;
+  var maxV = 170;
+  D.labels.forEach(function(lbl,i) {
+    var x = pad.l + (i+0.5)*(W-pad.l-pad.r)/n;
+    var vo = (D.voice[i]/maxV)*(H-pad.t-pad.b);
+    var ch = (D.chat[i]/maxV)*(H-pad.t-pad.b);
+    var em = (D.email[i]/maxV)*(H-pad.t-pad.b);
+    var base = H - pad.b;
+    ctx.fillStyle='#1a2a4a'; ctx.fillRect(x-bw/2, base-vo, bw, vo);
+    ctx.fillStyle='#1a6e44'; ctx.fillRect(x-bw/2, base-vo-ch, bw, ch);
+    ctx.fillStyle='#1a5fa8'; ctx.fillRect(x-bw/2, base-vo-ch-em, bw, em);
+    if (i % 2 === 0) {
+      ctx.fillStyle='#9ea2ae'; ctx.font='10px Calibri'; ctx.textAlign='center';
+      ctx.fillText(lbl, x, H-pad.b+14);
+    }
+  });
+  // legend
+  [['#1a2a4a','Voice'],['#1a6e44','Chat'],['#1a5fa8','Email']].forEach(function(item,i){
+    ctx.fillStyle=item[0]; ctx.fillRect(pad.l+i*90, pad.t, 12, 12);
+    ctx.fillStyle='#3a3d48'; ctx.font='11px Calibri'; ctx.textAlign='left';
+    ctx.fillText(item[1], pad.l+i*90+16, pad.t+10);
+  });
+}
+</script>
+</body></html>
