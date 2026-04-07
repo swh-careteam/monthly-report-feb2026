@@ -11,7 +11,7 @@
 :root{--navy:#1a2a4a;--navy-deep:#0f1c33;--navy-mid:#243559;--red:#c0202a;--red-light:#fbeaea;--red-mid:#a01820;--silver:#d6dae2;--silver-lt:#eef0f4;--white:#ffffff;--bg:#f4f5f8;--ink:#1a1c22;--ink-2:#3a3d48;--ink-3:#6b6e7a;--ink-4:#9ea2ae;--border:#dde0e8;--border-str:#c4c8d4;--amber:#c47a10;--amber-lt:#fef4e0;--green:#1a6e44;--green-lt:#e3f4ec;--blue-acc:#1a5fa8;--blue-lt:#e6eef9;--stripe:rgba(26,42,74,0.025);}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Aptos',Calibri,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;}
-.header{background:var(--white);border-bottom:1px solid var(--border);}
+.header{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;}
 .header-inner{display:flex;align-items:center;padding:0 56px;height:80px;}
 .header-logo{display:flex;align-items:center;padding-right:36px;border-right:1px solid var(--border);height:100%;}
 .header-logo-text{font-family:'Aptos Display',Calibri,sans-serif;font-size:20px;font-weight:700;color:var(--navy-deep);letter-spacing:-.01em;}
@@ -25,7 +25,7 @@ body{font-family:'Aptos',Calibri,'Segoe UI',sans-serif;background:var(--bg);colo
 .hdr-period{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-4);margin-bottom:3px;}
 .hdr-date{font-family:'Aptos Display',Calibri,sans-serif;font-size:19px;font-weight:700;color:var(--navy-deep);line-height:1.1;}
 .hdr-gen{margin-top:3px;font-size:12px;color:var(--ink-4);}
-.nav-tabs{background:var(--navy-deep);display:flex;padding:0 56px;border-radius:0 0 12px 12px;overflow-x:auto;}
+.nav-tabs{background:var(--navy-deep);display:flex;padding:0 56px;border-radius:0 0 12px 12px;overflow-x:auto;position:sticky;top:80px;z-index:199;}
 .nav-tab{padding:13px 22px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);cursor:pointer;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;user-select:none;display:inline-flex;align-items:center;gap:7px;}
 .nav-tab:hover{color:rgba(255,255,255,.8);}
 .nav-tab.active{color:white;border-bottom-color:var(--red);}
@@ -287,7 +287,8 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     <div class="chart-box">
       <div class="chart-title">Answer / Completion Rate by Channel</div>
       <div class="chart-sub">vs. 80% target &mdash; March 2026</div>
-      <div class="hbar" style="position:relative">
+      <div class="hbar" style="position:relative;padding-top:22px">
+        <div style="position:absolute;top:0;left:calc(80% + 33px);transform:translateX(-50%);font-size:10px;font-weight:700;color:var(--red);white-space:nowrap;line-height:1;letter-spacing:.05em;">80%</div>
         <div class="hbar-row"><div class="hbar-label">Email Handle</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:98.7%;background:var(--green)"><span class="hbar-val-in">98.7%</span></div></div></div>
         <div class="hbar-row"><div class="hbar-label">Callback Comp.</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:100%;background:var(--green)"><span class="hbar-val-in">100.5%</span></div></div></div>
         <div class="hbar-row"><div class="hbar-label">Chat Ans.</div><div class="hbar-track"><div class="tgt-line" style="left:80%"></div><div class="hbar-fill" style="width:86.9%;background:var(--green)"><span class="hbar-val-in">86.9%</span></div></div></div>
