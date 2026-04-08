@@ -269,12 +269,12 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
       <div class="media-card mc-callback">
         <div class="mc-icon"><svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M4.5 3h2.4a.6.6 0 0 1 .57.42l.93 2.8a.6.6 0 0 1-.14.62L6.9 8.1a9.06 9.06 0 0 0 5 5l1.26-1.36a.6.6 0 0 1 .62-.14l2.8.93a.6.6 0 0 1 .42.57V15.5A1.5 1.5 0 0 1 15.5 17C8.6 17 3 11.4 3 4.5A1.5 1.5 0 0 1 4.5 3z" stroke="var(--amber)" stroke-width="1.4" stroke-linejoin="round"/><path d="M14 3v4h-4" stroke="var(--amber)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 7c0-2.21-1.79-4-4-4" stroke="var(--amber)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
         <div class="mc-type">Callback</div>
-        <div class="mc-vol">71</div>
+        <div class="mc-vol">86</div>
         <div class="mc-label">Callback requests</div>
         <div class="mc-stats">
-          <div class="mc-stat"><span>Completion Rate</span><span class="mc-stat-val good">97.2%</span></div>
+          <div class="mc-stat"><span>Completion Rate</span><span class="mc-stat-val good">98.8%</span></div>
           <div class="mc-stat"><span>Client Support Avg Wait</span><span class="mc-stat-val bad">15h 28m ⚠</span></div>
-          <div class="mc-stat"><span>CE Team Avg Wait</span><span class="mc-stat-val bad">2h 46m</span></div>
+          <div class="mc-stat"><span>Telemedica Avg Wait</span><span class="mc-stat-val bad">8h 17m ⚠</span></div>
           <div class="mc-stat"><span>POD Callbacks 100%</span><span class="mc-stat-val good">✓</span></div>
         </div>
       </div>
@@ -292,7 +292,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
         <div class="narr-col">
           <p><strong>Voice performance remained essentially flat week-over-week.</strong> Of 563 offered contacts, 305 were answered (54.2%) — nearly identical to last week's 55.1%. The abandon rate improved from 17.1% to 14.9%. Direct Routing accounted for 162 of the 563 offered contacts with only 41 answered (25.3%), reflecting the direct-to-agent routing model rather than a true miss. CE Team Voice posted an 82.3% answer rate — the first queue to break 80% this reporting period.</p>
           <p><strong>Chat volume surged 37.9% with stable quality.</strong> Chat contacts jumped from 195 to 269 offered this week. All four PODs maintained answer rates between 85–95%, though no queue reached the 80% SL threshold (best: POD1 at 66.0%). The POD3 chat ACW anomaly persists at 1h 23m 33s — now in its second consecutive week. POD4 chat ACW at 22m 29s remains elevated. Both queues need wrap-up state auditing.</p>
-          <p><strong>Telemedica showed continued partial recovery but remains critical.</strong> With 65 voice contacts and 32 answered (49.2%), Telemedica improved from last week's 33.7% answer rate but still sits far below the 80% target. The 27.7% abandon rate — more than 1 in 4 callers — remains unacceptable and unchanged from the prior week. No Telemedica callbacks were received this week.</p>
+          <p><strong>Telemedica showed continued partial recovery but remains critical.</strong> With 65 voice contacts and 32 answered (49.2%), Telemedica improved from last week's 33.7% answer rate but still sits far below the 80% target. The 27.7% abandon rate — more than 1 in 4 callers — remains unacceptable and unchanged from the prior week. Telemedica also received 15 callbacks this week, completing 16 (106.7%, including carryover), but the avg callback wait of 8h 17m is extremely elevated and requires immediate investigation.</p>
         </div>
         <div class="narr-col">
           <div class="flags">
@@ -300,6 +300,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
             <div class="flag"><div class="fdot crit">!</div><strong>Critical:</strong>&nbsp; POD3 Voice — 17.6% SL, worst performing queue — 5 of 22 calls abandoned</div>
             <div class="flag"><div class="fdot crit">!</div><strong>Critical:</strong>&nbsp; POD3 Chat ACW anomaly — 1h 23m 33s avg ACW, second consecutive week</div>
             <div class="flag"><div class="fdot warn">⚠</div><strong>Warning:</strong>&nbsp; Client Support callback avg wait 15h 28m — extremely elevated, up from prior week</div>
+            <div class="flag"><div class="fdot warn">⚠</div><strong>Warning:</strong>&nbsp; Telemedica Team callback avg wait 8h 17m — extremely elevated, requires investigation</div>
             <div class="flag"><div class="fdot warn">⚠</div><strong>Warning:</strong>&nbsp; Chat volume surge +37.9% — capacity planning required if trend continues</div>
             <div class="flag"><div class="fdot warn">⚠</div><strong>Warning:</strong>&nbsp; POD4 Chat ACW 22m 29s — elevated, requires wrap-up audit</div>
             <div class="flag"><div class="fdot good">↑</div><strong>Positive:</strong>&nbsp; CE Team Voice answer rate 82.3% — first queue to exceed 80% target</div>
@@ -675,12 +676,12 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 <div class="section-wrap" id="tab-callback">
 <div class="page">
   <section>
-    <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Callback Queue KPIs</span><span class="sec-sub">Week of Mar 29–Apr 4, 2026 · 71 callback requests</span></div>
+    <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Callback Queue KPIs</span><span class="sec-sub">Week of Mar 29–Apr 4, 2026 · 86 callback requests</span></div>
     <div class="kpi-row cols-4">
-      <div class="kpi navy"><div class="kpi-label">Callback Requests</div><div class="kpi-val">71</div><div class="kpi-sub">Total callback contacts offered</div><div class="kpi-badge amber">↓ -11 from prior week</div></div>
-      <div class="kpi green"><div class="kpi-label">Completion Rate</div><div class="kpi-val good">97.2%</div><div class="kpi-sub">69 of 71 completed</div></div>
+      <div class="kpi navy"><div class="kpi-label">Callback Requests</div><div class="kpi-val">86</div><div class="kpi-sub">Total callback contacts offered</div><div class="kpi-badge amber">↓ +4 from prior week</div></div>
+      <div class="kpi green"><div class="kpi-label">Completion Rate</div><div class="kpi-val good">98.8%</div><div class="kpi-sub">85 of 86 completed</div></div>
       <div class="kpi red"><div class="kpi-label">Client Sup Wait</div><div class="kpi-val bad">15h 28m</div><div class="kpi-sub">19 callbacks · avg wait time</div><div class="kpi-badge red">⚠ Extremely elevated</div></div>
-      <div class="kpi amber"><div class="kpi-label">CE Team Wait</div><div class="kpi-val warn">2h 46m</div><div class="kpi-sub">14 offered · 12 completed</div><div class="kpi-badge amber">85.7% completion</div></div>
+      <div class="kpi amber"><div class="kpi-label">Telemedica Wait</div><div class="kpi-val warn">8h 17m</div><div class="kpi-sub">15 offered · 16 completed</div><div class="kpi-badge amber">⚠ Elevated</div></div>
     </div>
   </section>
 
@@ -733,12 +734,17 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
   <td>6</td><td>6</td>
   <td><span class="chip good">100.0%</span></td>
   <td>15m 7s</td><td>18m 28s</td><td>18m 28s</td>
+</tr><tr>
+  <td><div class="q-name">Telemedica Team</div></td>
+  <td>15</td><td>16</td>
+  <td><span class="chip good">106.7%</span></td>
+  <td>8h 17m 11s</td><td>3m 56s</td><td>3m 54s</td>
 </tr>
         </tbody>
         <tfoot><tr>
           <td><strong>TOTAL</strong></td>
-          <td><strong>71</strong></td><td><strong>69</strong></td>
-          <td><strong>97.2%</strong></td>
+          <td><strong>86</strong></td><td><strong>85</strong></td>
+          <td><strong>98.8%</strong></td>
           <td>—</td><td>—</td><td>—</td>
         </tr></tfoot>
       </table>
@@ -752,14 +758,15 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
       <div class="chart-sub">Longer wait = greater customer effort before callback returned</div>
       <div class="hbar" style="margin-top:14px;">
         <div class="hbar-row"><div class="hbar-label">Client Support (New)</div><div class="hbar-track"><div class="hbar-fill" style="width:100.0%;background:var(--red)">15h 28m ⚠</div></div></div>
-        <div class="hbar-row"><div class="hbar-label">CE Team Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:17.9%;background:var(--amber)"></div><span class="hbar-val-out" style="left:17.9%;color:var(--amber)">2h 46m</span></div></div>
+        <div class="hbar-row"><div class="hbar-label">Telemedica Team</div><div class="hbar-track"><div class="hbar-fill" style="width:53.5%;background:var(--amber)">8h 17m ⚠</div></div></div>
         <div class="hbar-row"><div class="hbar-label">Health Care Coordinators</div><div class="hbar-track"><div class="hbar-fill" style="width:20.0%;background:var(--amber)">3h 5m</div></div></div>
+        <div class="hbar-row"><div class="hbar-label">CE Team Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:17.9%;background:var(--amber)"></div><span class="hbar-val-out" style="left:17.9%;color:var(--amber)">2h 46m</span></div></div>
         <div class="hbar-row"><div class="hbar-label">CE POD1 Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:3.6%;background:var(--green)"></div><span class="hbar-val-out" style="left:3.6%;color:var(--green)">33m 28s</span></div></div>
         <div class="hbar-row"><div class="hbar-label">CE POD2 Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:3.4%;background:var(--green)"></div><span class="hbar-val-out" style="left:3.4%;color:var(--green)">31m 26s</span></div></div>
         <div class="hbar-row"><div class="hbar-label">CE POD3 Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:3.1%;background:var(--green)"></div><span class="hbar-val-out" style="left:3.1%;color:var(--green)">29m 4s</span></div></div>
         <div class="hbar-row"><div class="hbar-label">CE POD4 Voice</div><div class="hbar-track"><div class="hbar-fill" style="width:1.6%;background:var(--green)"></div><span class="hbar-val-out" style="left:1.6%;color:var(--green)">15m 7s</span></div></div>
       </div>
-      <p style="margin-top:14px;font-size:13px;color:var(--ink-3);">⚠ Client Support callback avg wait of 15h 28m is extremely elevated and likely reflects callbacks queued overnight. POD callbacks (15–33 min range) are within acceptable range.</p>
+      <p style="margin-top:14px;font-size:13px;color:var(--ink-3);">⚠ Client Support callback avg wait of 15h 28m and Telemedica Team avg wait of 8h 17m are both extremely elevated and likely reflect callbacks queued overnight or across shift boundaries. POD callbacks (15–33 min range) are within acceptable range.</p>
     </div>
   </section>
 
@@ -990,8 +997,8 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
       <div class="rec-card rc-red">
         <div class="rc-priority urgent">URGENT</div>
         <div class="rc-title">Telemedica Team — Escalate Staffing Crisis (Week 4)</div>
-        <div class="rc-body">Telemedica has now posted below-target performance for 4 consecutive weeks. This week: 49.2% answer rate, 27.7% abandon rate, SL 32.0%. While improvement from last week's 33.7% is noted, performance remains structurally broken. Conduct immediate root cause analysis: staffing levels, agent skill assignments, schedule adherence, and call routing configuration. Telemedica callbacks show zero volume again — verify callback routing is active and accessible.</div>
-        <div class="rc-stat">Current: <strong>49.2% ans · 27.7% abn · 32.0% SL</strong> · Target: <strong>80% SL</strong></div>
+        <div class="rc-body">Telemedica has now posted below-target performance for 4 consecutive weeks. This week: 49.2% answer rate, 27.7% abandon rate, SL 32.0%. While improvement from last week's 33.7% is noted, performance remains structurally broken. Conduct immediate root cause analysis: staffing levels, agent skill assignments, schedule adherence, and call routing configuration. Additionally, Telemedica received 15 callbacks this week with an avg wait of 8h 17m — on par with Client Support's elevated wait — suggesting callback queue management and staffing for Telemedica also requires urgent review.</div>
+        <div class="rc-stat">Current: <strong>49.2% ans · 27.7% abn · 32.0% SL</strong> · Target: <strong>80% SL</strong> · Callback avg wait: <strong>8h 17m</strong></div>
       </div>
       <div class="rec-card rc-red">
         <div class="rc-priority urgent">URGENT</div>
@@ -1061,9 +1068,9 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
       </div>
       <div class="kpi amber">
         <div class="kpi-label">Callback Volume</div>
-        <div class="kpi-val warn">71</div>
+        <div class="kpi-val warn">86</div>
         <div class="kpi-sub">offered this week</div>
-        <div class="kpi-delta dn-good">▼ -11 vs 82 prior</div>
+        <div class="kpi-delta up-bad">▲ +4 vs 82 prior</div>
       </div>
     </div>
     <div class="kpi-row cols-4">
@@ -1087,9 +1094,9 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
       </div>
       <div class="kpi green">
         <div class="kpi-label">Callback Completion</div>
-        <div class="kpi-val good">97.2%</div>
-        <div class="kpi-sub">69 of 71 completed</div>
-        <div class="kpi-delta dn-bad">▼ -1.6pp vs 98.8%</div>
+        <div class="kpi-val good">98.8%</div>
+        <div class="kpi-sub">85 of 86 completed</div>
+        <div class="kpi-delta neutral">▶ 0.0pp vs 98.8%</div>
       </div>
     </div>
     <div class="trend-period-note">Comparison: prior week = Mar 22–28, 2026 (grey bars) vs this week = Mar 29–Apr 4, 2026 (blue bars)</div>
@@ -1246,7 +1253,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     </div>
   </section>
 
-<!-- TREND-DATA: {"voice_offered": 563, "voice_ans_rate": 54.2, "voice_abn_rate": 14.9, "email_offered": 115, "email_ans_rate": 99.1, "chat_offered": 269, "chat_ans_rate": 90.0, "callback_offered": 71, "callback_comp_rate": 97.2, "voice_queues_ans": {"CE Team": 82.3, "Client Support": 52.3, "HCC": 54.5, "Telemedica": 49.2, "POD_avg": 66.8}, "voice_queues_abn": {"CE Team": 9.7, "Client Support": 27.3, "HCC": 10.9, "Telemedica": 27.7, "POD_avg": 16.5}, "period_label": "Week of Mar 29\u2013Apr 4, 2026"} -->
+<!-- TREND-DATA: {"voice_offered": 563, "voice_ans_rate": 54.2, "voice_abn_rate": 14.9, "email_offered": 115, "email_ans_rate": 99.1, "chat_offered": 269, "chat_ans_rate": 90.0, "callback_offered": 86, "callback_comp_rate": 98.8, "voice_queues_ans": {"CE Team": 82.3, "Client Support": 52.3, "HCC": 54.5, "Telemedica": 49.2, "POD_avg": 66.8}, "voice_queues_abn": {"CE Team": 9.7, "Client Support": 27.3, "HCC": 10.9, "Telemedica": 27.7, "POD_avg": 16.5}, "period_label": "Week of Mar 29\u2013Apr 4, 2026"} -->
 
   <div class="report-footer">
     <span>Served With Honor · Care Team Operations</span>
@@ -1358,10 +1365,10 @@ function drawGroupedBarChart(ctx, W, H, cfg) {
 function drawTrendCharts() {
   const configs = [
     { id:'trend-vol-chart', labels:['Voice','Chat','Callback','Email'],
-       prevVals:[543, 195, 82, 99], currVals:[563, 269, 71, 115],
+       prevVals:[543, 195, 82, 99], currVals:[563, 269, 86, 115],
        colors:['#2060c8','#2060c8','#2060c8','#2060c8'], isRate:false },
     { id:'trend-rate-chart', labels:['Voice','Chat','Callback','Email'],
-       prevVals:[55.1, 88.2, 98.8, 96.0], currVals:[54.2, 90.0, 97.2, 99.1],
+       prevVals:[55.1, 88.2, 98.8, 96.0], currVals:[54.2, 90.0, 98.8, 99.1],
        colors:['#2060c8','#2060c8','#2060c8','#2060c8'],
        isRate:true, maxVal:110, title80:true },
     { id:'trend-voice-chart', labels:['CE Team','Client Sup','HCC','Telemedica','POD1\u20134 avg'],
