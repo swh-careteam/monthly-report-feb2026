@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SWH Care Team — Week of Apr 6–11, 2026</title>
+<style>
+/* ── Reset & base ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy-deep:#0d1b2e;--navy:#1a2a4a;
+  --red:#c0202a;--red-light:#fdecea;
+  --amber:#c47a10;--amber-lt:#fdf3e3;
+  --green:#1a6e44;--green-lt:#e8f5ee;
+  --blue-acc:#1a5fa8;--blue-lt:#e8f0fa;
+  --silver-lt:#f4f5f7;--border:#e2e4ea;--border-str:#c4c8d4;
+  --ink:#1e2130;--ink-2:#3a3d48;--ink-3:#6b6e7a;--ink-4:#9ea2ae;
+  --white:#ffffff;
+}
+body{font-family:'Aptos',Calibri,'Segoe UI',sans-serif;font-size:14px;color:var(--ink);background:#f0f2f7;min-height:100vh}
+
+/* ── Header ── */
+.report-header{background:var(--navy-deep);color:#fff;padding:14px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hub-btn{display:inline-block;padding:5px 14px;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;white-space:nowrap}
+.hub-btn:hover{background:rgba(255,255,255,.2)}
+.hdr-title{flex:1;font-family:'Aptos Display',Calibri,sans-serif;font-size:18px;font-weight:700;letter-spacing:.01em}
+.hdr-date{font-size:13px;color:rgba(255,255,255,.75);white-space:nowrap}
+.hdr-gen{font-size:12px;color:rgba(255,255,255,.5);white-space:nowrap}
+
+/* ── Nav tabs ── */
+.nav-bar{background:var(--navy);display:flex;padding:0 20px;overflow-x:auto;gap:2px}
+.nav-tab{padding:11px 16px;color:rgba(255,255,255,.65);font-size:13px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;user-select:none;transition:color .15s}
+.nav-tab:hover{color:#fff}
+.nav-tab.active{color:#fff;border-bottom-color:#4d9fff}
+
+/* ── Section wrap ── */
+.section-wrap{display:none;padding:24px 28px 36px}
+.section-wrap.active{display:block}
+
+/* ── Section header ── */
+.sec-hdr{display:flex;align-items:baseline;gap:10px;margin-bottom:18px;border-bottom:2px solid var(--border-str);padding-bottom:10px}
+.sec-num{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--ink-4);text-transform:uppercase}
+.sec-title{font-family:'Aptos Display',Calibri,sans-serif;font-size:17px;font-weight:700;color:var(--navy-deep)}
+.sec-sub{font-size:12px;color:var(--ink-3);margin-left:auto}
+
+/* ── KPI cards ── */
+.kpi-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.kpi-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 18px;min-width:140px;flex:1}
+.kpi-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.kpi-val{font-size:26px;font-weight:800;font-family:'Aptos Display',Calibri,sans-serif;color:var(--navy-deep);line-height:1}
+.kpi-sub{font-size:11px;color:var(--ink-3);margin-top:4px}
+.kpi-card.good .kpi-val{color:var(--green)}
+.kpi-card.warn .kpi-val{color:var(--amber)}
+.kpi-card.alert .kpi-val{color:var(--red)}
+
+/* ── Tables ── */
+.dtable-wrap{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--white);margin-bottom:22px}
+.dtable-wrap.scrollable{overflow-x:auto}
+.dtable{width:100%;border-collapse:collapse;font-size:13px}
+.dtable.compact td,.dtable.compact th{padding:7px 8px}
+.dtable thead tr{background:var(--navy-deep);color:#fff}
+.dtable thead th{padding:9px 8px;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-align:center;white-space:nowrap}
+.dtable thead th:first-child{text-align:left}
+.dtable tbody tr:nth-child(even){background:var(--silver-lt)}
+.dtable tbody tr:hover{background:var(--blue-lt)}
+.dtable td{padding:8px 8px;vertical-align:middle;text-align:center;border-bottom:1px solid var(--border)}
+.dtable td:first-child{text-align:left;font-weight:600}
+.dtable .q-name{font-weight:700;color:var(--navy-deep)}
+.dtable .q-sub{font-size:11px;color:var(--ink-3);font-weight:400}
+
+/* ── Service level bar ── */
+.sl-wrap{display:flex;align-items:center;gap:6px;min-width:90px}
+.sl-bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.sl-fill{height:100%;border-radius:4px}
+
+/* ── Chip badges ── */
+.chip{display:inline-block;padding:2px 7px;border-radius:4px;font-size:12px;font-weight:700}
+.chip.green{background:var(--green-lt);color:var(--green)}
+.chip.amber{background:var(--amber-lt);color:var(--amber)}
+.chip.red{background:var(--red-light);color:var(--red)}
+.chip.blue{background:var(--blue-lt);color:var(--blue-acc)}
+
+/* ── Horizontal bar chart ── */
+.hbar{margin-bottom:22px}
+.hbar-row{display:flex;align-items:center;gap:10px;margin-bottom:13px;position:relative}
+.hbar-label{width:170px;font-size:12px;font-weight:600;color:var(--ink-2);flex-shrink:0;text-align:right}
+.hbar-track{flex:1;position:relative;height:22px}
+.hbar-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:7px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap;min-width:2px}
+.hbar-val-out{position:absolute;top:50%;transform:translateY(-50%);font-size:12px;font-weight:700;padding-left:5px}
+.tgt-line{position:absolute;top:-10px;bottom:-10px;width:0;border-right:2px dashed var(--red);z-index:2}
+.tgt-line::after{content:none}
+.hbar .hbar-row:first-child .tgt-line::after{content:'80%';position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--red);font-weight:700;white-space:nowrap}
+
+/* ── Canvas chart boxes ── */
+.trend-canvas-box{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:22px}
+.trend-canvas-box canvas{width:100%;display:block}
+.chart-title{font-size:13px;font-weight:700;color:var(--navy-deep);margin-bottom:10px}
+.chart-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+.chart-legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink-3)}
+.chart-legend-swatch{width:12px;height:12px;border-radius:2px}
+
+/* ── Agent rank badges ── */
+.rank-badge{display:inline-block;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:800;text-align:center;line-height:20px;margin-right:5px}
+.g1{background:#FFD700;color:#7a5800}
+.g2{background:#C0C0C0;color:#555}
+.g3{background:#CD7F32;color:#5a3010}
+.gn{background:var(--silver-lt);color:var(--ink-3);font-size:10px}
+.anomaly-row td{color:var(--ink-4)!important;font-style:italic}
+
+/* ── Status bars (agent tab §03) ── */
+.status-bar-wrap{margin-bottom:22px}
+.status-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.status-bar-name{width:160px;font-size:12px;font-weight:600;color:var(--ink-2);flex-shrink:0;text-align:right}
+.status-bar-track{flex:1;height:14px;background:var(--border);border-radius:3px;overflow:hidden;display:flex}
+.status-seg{height:100%}
+
+/* ── Trending §04 heatmap ── */
+.ob-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:22px}
+.ob-card{background:var(--white);border:1px solid var(--border-str);border-radius:12px;padding:14px 12px 14px}
+.ob-day{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.ob-heatrow{display:flex;gap:2px;margin-bottom:6px;align-items:flex-end}
+.ob-cell{flex:1;border-radius:2px;position:relative;cursor:default}
+.ob-cell:hover .ob-tooltip{opacity:1;pointer-events:auto}
+.ob-tooltip{position:absolute;bottom:calc(100% + 5px);left:50%;transform:translateX(-50%);background:var(--navy);color:white;font-size:10px;font-weight:600;padding:3px 7px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;z-index:10}
+.ob-labels{display:flex;gap:2px;margin-bottom:12px}
+.ob-lbl{flex:1;font-size:8px;color:var(--ink-4);text-align:center}
+.ob-peaks{border-top:1px solid var(--border);padding-top:9px}
+.ob-peak-row{display:flex;align-items:center;gap:6px;margin-bottom:5px;font-size:12px}
+.ob-peak-row:last-child{margin-bottom:0}
+.ob-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ob-peak-time{color:var(--ink-2);flex:1}
+.ob-peak-count{font-weight:700;color:var(--navy-deep);font-size:13px}
+
+/* Stacked interval chart */
+.busy-hour-wrap{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:22px}
+.busy-hour-wrap canvas{width:100%;display:block}
+
+/* ── Insight cards ── */
+.insight-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+.insight-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px}
+.insight-card.full{grid-column:1/-1}
+.insight-type{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.insight-type.alert{color:var(--red)}
+.insight-type.warn{color:var(--amber)}
+.insight-type.good{color:var(--green)}
+.insight-type.info{color:var(--blue-acc)}
+.insight-title{font-size:14px;font-weight:700;color:var(--navy-deep);margin-bottom:6px}
+.insight-body{font-size:13px;color:var(--ink-2);line-height:1.5}
+
+/* ── Report footer ── */
+.report-footer{display:flex;justify-content:space-between;padding:12px 0 0;border-top:1px solid var(--border);font-size:11px;color:var(--ink-4);margin-top:28px;flex-wrap:wrap;gap:6px}
+
+/* ── Two-col layout ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.col-box{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px}
+
+@media(max-width:900px){
+  .ob-grid{grid-template-columns:repeat(3,1fr)}
+  .two-col,.insight-row{grid-template-columns:1fr}
+  .insight-card.full{grid-column:1}
+}
+@media(max-width:600px){
+  .ob-grid{grid-template-columns:1fr 1fr}
+  .section-wrap{padding:16px}
+}
+</style>
+</head>
+<body>
+<header class="report-header">
+  <a class="hub-btn" href="https://swh-careteam.github.io/performance-reports/">&#8249; Reporting Hub</a>
+  <div class="hdr-title">SWH Care Team — Weekly Performance Report</div>
+  <div class="hdr-date">Apr 6 – 11, 2026</div>
+  <div class="hdr-gen">Generated Apr 13, 2026</div>
+</header>
+<nav class="nav-bar">
+  <div class="nav-tab active" onclick="showTab(event,'overview')">Overview</div>
+  <div class="nav-tab" onclick="showTab(event,'voice')">Voice</div>
+  <div class="nav-tab" onclick="showTab(event,'email')">Email</div>
+  <div class="nav-tab" onclick="showTab(event,'chat')">Chat</div>
+  <div class="nav-tab" onclick="showTab(event,'callback')">Callback</div>
+  <div class="nav-tab" onclick="showTab(event,'agents')">Agent Performance</div>
+  <div class="nav-tab" onclick="showTab(event,'actions')">Recommendations</div>
+  <div class="nav-tab" onclick="showTab(event,'trending')">Trending</div>
+</nav>
+
+<!-- ======= OVERVIEW TAB ======= -->
+<section id="tab-overview" class="section-wrap active">
+  <div class="sec-hdr">
+    <span class="sec-num">§ 01</span>
+    <span class="sec-title">Weekly Snapshot</span>
+    <span class="sec-sub">All channels · Apr 6–10, 2026</span>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi-card warn">
+      <div class="kpi-label">Voice Offered</div>
+      <div class="kpi-val">412</div>
+      <div class="kpi-sub">Ans 242 · 58.7% ans rate</div>
+    </div>
+    <div class="kpi-card good">
+      <div class="kpi-label">Email Offered</div>
+      <div class="kpi-val">83</div>
+      <div class="kpi-sub">Ans 82 · 98.8% ans rate</div>
+    </div>
+    <div class="kpi-card good">
+      <div class="kpi-label">Chat Offered</div>
+      <div class="kpi-val">209</div>
+      <div class="kpi-sub">Ans 188 · 90.0% ans rate</div>
+    </div>
+    <div class="kpi-card good">
+      <div class="kpi-label">Callback Offered</div>
+      <div class="kpi-val">93</div>
+      <div class="kpi-sub">Comp 93 · 100% completion</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Contacts</div>
+      <div class="kpi-val">797</div>
+      <div class="kpi-sub">Voice + Email + Chat + Callback</div>
+    </div>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 02</span>
+    <span class="sec-title">Channel Service Levels</span>
+    <span class="sec-sub">80% target · Voice SL = answered within threshold</span>
+  </div>
+  <div class="hbar">
+    <div class="hbar-row">
+      <div class="hbar-label">Voice (All queues)</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:58.7%;background:var(--amber)">58.7%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Email (All queues)</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:98.8%;background:var(--green)">98.8%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Chat (All queues)</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:90.0%;background:var(--green)">90.0%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Callback</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:100%;background:var(--green)">100.0%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 03</span>
+    <span class="sec-title">Voice Queue Summary</span>
+    <span class="sec-sub">Answer rate vs 80% target</span>
+  </div>
+  <div class="hbar">
+    <div class="hbar-row">
+      <div class="hbar-label">CE Team Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:72.9%;background:var(--blue-acc)">72.9%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD1 Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:54.2%;background:var(--amber)">54.2%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD2 Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:57.5%;background:var(--amber)">57.5%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD3 Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:65.9%;background:var(--blue-acc)">65.9%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD4 Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:73.9%;background:var(--blue-acc)">73.9%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Client Support (New)</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:36.2%;background:var(--red)"></div>
+        <span class="hbar-val-out" style="left:36.2%;color:var(--red)">36.2%</span>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Health Care Coordinators</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:56.8%;background:var(--amber)">56.8%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Telemedica Team</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:50.7%;background:var(--amber)">50.7%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="report-footer">
+    <span>Served With Honor · Care Team Operations</span>
+    <span>Overview · Week of Apr 6–11, 2026</span>
+    <span>Generated Apr 13, 2026</span>
+  </div>
+</section>
+
+<!-- ======= VOICE TAB ======= -->
+<section id="tab-voice" class="section-wrap">
+  <div class="sec-hdr">
+    <span class="sec-num">§ 01</span>
+    <span class="sec-title">Voice Queue Performance</span>
+    <span class="sec-sub">All voice queues · Apr 6–10, 2026</span>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi-card warn">
+      <div class="kpi-label">Total Offered</div>
+      <div class="kpi-val">412</div>
+      <div class="kpi-sub">All voice queues combined</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="kpi-label">Answered</div>
+      <div class="kpi-val">242</div>
+      <div class="kpi-sub">58.7% answer rate</div>
+    </div>
+    <div class="kpi-card alert">
+      <div class="kpi-label">Abandoned</div>
+      <div class="kpi-val">73</div>
+      <div class="kpi-sub">17.7% abandon rate</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Transfers</div>
+      <div class="kpi-val">37</div>
+      <div class="kpi-sub">Across all voice queues</div>
+    </div>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 02</span>
+    <span class="sec-title">Queue Detail</span>
+    <span class="sec-sub">13 columns · Ranked by volume</span>
+  </div>
+  <div class="dtable-wrap scrollable">
+    <table class="dtable compact" style="table-layout:fixed;width:100%">
+      <thead><tr>
+        <th style="text-align:left;width:16%">Queue</th>
+        <th style="width:5.8%">Offered</th>
+        <th style="width:6.5%">Answered</th>
+        <th style="width:6.2%">Ans %</th>
+        <th style="width:6.2%">Abandon</th>
+        <th style="width:6.2%">Abn %</th>
+        <th style="width:6.5%">ASA</th>
+        <th style="width:6.8%">Avg Wait</th>
+        <th style="width:8.8%">Service Level</th>
+        <th style="width:7.2%">Avg Handle</th>
+        <th style="width:6.4%">Avg Talk</th>
+        <th style="width:6.4%">Avg ACW</th>
+        <th style="width:5.8%">Xfers</th>
+      </tr></thead>
+      <tbody>
+<tr>
+      <td><div class="q-name">Care Exp. Team Voice</div></td>
+      <td>107</td>
+      <td>78</td>
+      <td><span class="chip blue-acc">72.9%</span></td>
+      <td>13</td>
+      <td><span class="chip green">12.1%</span></td>
+      <td>1m 13s</td>
+      <td>1m 52s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:47%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">47.3%</span></div></td>
+      <td>9m 57s</td>
+      <td>6m 8s</td>
+      <td>4m 17s</td>
+      <td style="padding-right:12px">13</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD1 Voice</div></td>
+      <td>24</td>
+      <td>13</td>
+      <td><span class="chip amber">54.2%</span></td>
+      <td>7</td>
+      <td><span class="chip red">29.2%</span></td>
+      <td>1m 54s</td>
+      <td>2m 33s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:45%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">45.0%</span></div></td>
+      <td>5m 53s</td>
+      <td>3m 4s</td>
+      <td>2m 50s</td>
+      <td style="padding-right:12px">0</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD2 Voice</div></td>
+      <td>40</td>
+      <td>23</td>
+      <td><span class="chip amber">57.5%</span></td>
+      <td>8</td>
+      <td><span class="chip amber">20.0%</span></td>
+      <td>3m 42s</td>
+      <td>4m 9s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:10%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">9.7%</span></div></td>
+      <td>7m 20s</td>
+      <td>5m 41s</td>
+      <td>1m 35s</td>
+      <td style="padding-right:12px">3</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD3 Voice</div></td>
+      <td>41</td>
+      <td>27</td>
+      <td><span class="chip blue-acc">65.9%</span></td>
+      <td>2</td>
+      <td><span class="chip green">4.9%</span></td>
+      <td>44s</td>
+      <td>3m 39s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:38%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">37.9%</span></div></td>
+      <td>9m 24s</td>
+      <td>6m 29s</td>
+      <td>3m 10s</td>
+      <td style="padding-right:12px">5</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD4 Voice</div></td>
+      <td>23</td>
+      <td>17</td>
+      <td><span class="chip blue-acc">73.9%</span></td>
+      <td>2</td>
+      <td><span class="chip green">8.7%</span></td>
+      <td>2m 26s</td>
+      <td>3m 10s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:53%;background:var(--blue-acc)"></div></div><span style="font-size:13px;font-weight:700;color:var(--blue-acc)">52.6%</span></div></td>
+      <td>8m 8s</td>
+      <td>4m 10s</td>
+      <td>3m 59s</td>
+      <td style="padding-right:12px">3</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Client Support (New)</div></td>
+      <td>58</td>
+      <td>21</td>
+      <td><span class="chip red">36.2%</span></td>
+      <td>16</td>
+      <td><span class="chip red">27.6%</span></td>
+      <td>5m 24s</td>
+      <td>5m 5s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:16%;background:var(--red)"></div></div><span style="font-size:13px;font-weight:700;color:var(--red)">16.2%</span></div></td>
+      <td>6m 18s</td>
+      <td>3m 54s</td>
+      <td>4m 25s</td>
+      <td style="padding-right:12px">5</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Health Care Coordinators</div></td>
+      <td>44</td>
+      <td>25</td>
+      <td><span class="chip amber">56.8%</span></td>
+      <td>10</td>
+      <td><span class="chip amber">22.7%</span></td>
+      <td>2m 13s</td>
+      <td>4m 55s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:43%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">42.9%</span></div></td>
+      <td>4m 10s</td>
+      <td>2m 40s</td>
+      <td>1m 35s</td>
+      <td style="padding-right:12px">5</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Telemedica Team</div></td>
+      <td>75</td>
+      <td>38</td>
+      <td><span class="chip amber">50.7%</span></td>
+      <td>15</td>
+      <td><span class="chip amber">20.0%</span></td>
+      <td>3m 17s</td>
+      <td>3m 40s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:43%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">43.4%</span></div></td>
+      <td>8m 31s</td>
+      <td>5m 42s</td>
+      <td>3m 59s</td>
+      <td style="padding-right:12px">3</td>
+    </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 03</span>
+    <span class="sec-title">Service Level by Queue</span>
+    <span class="sec-sub">80% target line shown</span>
+  </div>
+  <div class="hbar">
+    <div class="hbar-row">
+      <div class="hbar-label">CE Team Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:47.3%;background:var(--blue-acc)">47.3%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD1 Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:45.0%;background:var(--blue-acc)">45.0%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD2 Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:9.7%;background:var(--red)"></div>
+        <span class="hbar-val-out" style="left:9.7%;color:var(--red)">9.7%</span>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD3 Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:37.9%;background:var(--amber)">37.9%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD4 Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:52.6%;background:var(--blue-acc)">52.6%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Client Support (New)</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:16.2%;background:var(--red)"></div>
+        <span class="hbar-val-out" style="left:16.2%;color:var(--red)">16.2%</span>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Health Care Coordinators</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:42.9%;background:var(--blue-acc)">42.9%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Telemedica Team</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:43.4%;background:var(--blue-acc)">43.4%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="report-footer">
+    <span>Served With Honor · Care Team Operations</span>
+    <span>Voice · Week of Apr 6–11, 2026</span>
+    <span>Generated Apr 13, 2026</span>
+  </div>
+</section>
+
+<!-- ======= EMAIL TAB ======= -->
+<section id="tab-email" class="section-wrap">
+  <div class="sec-hdr">
+    <span class="sec-num">§ 01</span>
+    <span class="sec-title">Email Queue Performance</span>
+    <span class="sec-sub">All email queues · Apr 6–10, 2026</span>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi-card good">
+      <div class="kpi-label">Total Offered</div>
+      <div class="kpi-val">83</div>
+      <div class="kpi-sub">All email queues combined</div>
+    </div>
+    <div class="kpi-card good">
+      <div class="kpi-label">Answered</div>
+      <div class="kpi-val">82</div>
+      <div class="kpi-sub">98.8% answer rate</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="kpi-label">SL — POD2</div>
+      <div class="kpi-val">90.7%</div>
+      <div class="kpi-sub">Only queue below 100% SL</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Avg Wait (POD4)</div>
+      <div class="kpi-val" style="font-size:18px">10h 2m</div>
+      <div class="kpi-sub">Longest avg queue wait</div>
+    </div>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 02</span>
+    <span class="sec-title">Queue Detail</span>
+    <span class="sec-sub">POD email queues</span>
+  </div>
+  <div class="dtable-wrap scrollable">
+    <table class="dtable compact" style="table-layout:fixed;width:100%">
+      <thead><tr>
+        <th style="text-align:left;width:22%">Queue</th>
+        <th style="width:8%">Offered</th>
+        <th style="width:8%">Answered</th>
+        <th style="width:9%">Ans %</th>
+        <th style="width:13%">ASA</th>
+        <th style="width:13%">Avg Wait</th>
+        <th style="width:15%">Service Level</th>
+        <th style="width:12%">Avg Handle</th>
+      </tr></thead>
+      <tbody>
+<tr>
+      <td><div class="q-name">Care Exp. POD1 Email</div></td>
+      <td>11</td>
+      <td>10</td>
+      <td><span class="chip green">90.9%</span></td>
+      <td>4h 4m 20s</td>
+      <td>4h 4m 20s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:100%;background:var(--green)"></div></div><span style="font-size:13px;font-weight:700;color:var(--green)">100.0%</span></div></td>
+      <td>8m 22s</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD2 Email</div></td>
+      <td>44</td>
+      <td>43</td>
+      <td><span class="chip green">97.7%</span></td>
+      <td>7h 44m 4s</td>
+      <td>7h 44m 4s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:91%;background:var(--green)"></div></div><span style="font-size:13px;font-weight:700;color:var(--green)">90.7%</span></div></td>
+      <td>39m 1s</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD3 Email</div></td>
+      <td>10</td>
+      <td>9</td>
+      <td><span class="chip green">90.0%</span></td>
+      <td>1h 56m 42s</td>
+      <td>1h 56m 42s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:100%;background:var(--green)"></div></div><span style="font-size:13px;font-weight:700;color:var(--green)">100.0%</span></div></td>
+      <td>2h 46m 53s</td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD4 Email</div></td>
+      <td>18</td>
+      <td>20</td>
+      <td><span class="chip green">111.1%</span> <span style="font-size:10px;color:var(--ink-3)">(carryover)</span></td>
+      <td>10h 32m 8s</td>
+      <td>10h 2m 15s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:85%;background:var(--green)"></div></div><span style="font-size:13px;font-weight:700;color:var(--green)">85.0%</span></div></td>
+      <td>12m 52s</td>
+    </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 03</span>
+    <span class="sec-title">Service Level by Queue</span>
+    <span class="sec-sub">80% target line shown</span>
+  </div>
+  <div class="hbar">
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD1 Email</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:100%;background:var(--green)">100.0%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD2 Email</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:90.7%;background:var(--green)">90.7%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD3 Email</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:100%;background:var(--green)">100.0%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD4 Email</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:85.0%;background:var(--green)">85.0%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="report-footer">
+    <span>Served With Honor · Care Team Operations</span>
+    <span>Email · Week of Apr 6–11, 2026</span>
+    <span>Generated Apr 13, 2026</span>
+  </div>
+</section>
+
+<!-- ======= CHAT TAB ======= -->
+<section id="tab-chat" class="section-wrap">
+  <div class="sec-hdr">
+    <span class="sec-num">§ 01</span>
+    <span class="sec-title">Chat Queue Performance</span>
+    <span class="sec-sub">All chat / message queues · Apr 6–10, 2026</span>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi-card good">
+      <div class="kpi-label">Total Offered</div>
+      <div class="kpi-val">209</div>
+      <div class="kpi-sub">All chat queues combined</div>
+    </div>
+    <div class="kpi-card good">
+      <div class="kpi-label">Answered</div>
+      <div class="kpi-val">188</div>
+      <div class="kpi-sub">90.0% answer rate</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="kpi-label">Lowest SL</div>
+      <div class="kpi-val">26.4%</div>
+      <div class="kpi-sub">Care Exp. POD2 Chat</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="kpi-label">Longest ASA</div>
+      <div class="kpi-val" style="font-size:18px">40m 7s</div>
+      <div class="kpi-sub">Care Exp. POD3 Chat</div>
+    </div>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 02</span>
+    <span class="sec-title">Queue Detail</span>
+    <span class="sec-sub">POD chat queues · Answer rate &amp; SL</span>
+  </div>
+  <div class="dtable-wrap scrollable">
+    <table class="dtable compact" style="table-layout:fixed;width:100%">
+      <thead><tr>
+        <th style="text-align:left;width:24%">Queue</th>
+        <th style="width:8%">Offered</th>
+        <th style="width:8%">Answered</th>
+        <th style="width:9%">Ans %</th>
+        <th style="width:12%">ASA</th>
+        <th style="width:12%">Avg Wait</th>
+        <th style="width:16%">Service Level</th>
+      </tr></thead>
+      <tbody>
+<tr>
+      <td><div class="q-name">Care Exp. POD1 Chat</div></td>
+      <td>48</td>
+      <td>45</td>
+      <td><span class="chip green">93.8%</span></td>
+      <td>7m 32s</td>
+      <td>7m 9s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:40%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">40.0%</span></div></td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD2 Chat</div></td>
+      <td>63</td>
+      <td>53</td>
+      <td><span class="chip blue-acc">84.1%</span></td>
+      <td>13m 30s</td>
+      <td>11m 52s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:26%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">26.4%</span></div></td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD3 Chat</div></td>
+      <td>53</td>
+      <td>47</td>
+      <td><span class="chip blue-acc">88.7%</span></td>
+      <td>40m 7s</td>
+      <td>36m 22s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:28%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">27.7%</span></div></td>
+    </tr>
+<tr>
+      <td><div class="q-name">Care Exp. POD4 Chat</div></td>
+      <td>45</td>
+      <td>43</td>
+      <td><span class="chip green">95.6%</span></td>
+      <td>27m 31s</td>
+      <td>26m 32s</td>
+      <td><div class="sl-wrap"><div class="sl-bar"><div class="sl-fill" style="width:44%;background:var(--amber)"></div></div><span style="font-size:13px;font-weight:700;color:var(--amber)">44.2%</span></div></td>
+    </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 03</span>
+    <span class="sec-title">Service Level by Queue</span>
+    <span class="sec-sub">80% target line shown</span>
+  </div>
+  <div class="hbar">
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD1 Chat</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:40.0%;background:var(--amber)">40.0%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD2 Chat</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:26.4%;background:var(--amber)">26.4%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD3 Chat</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:27.7%;background:var(--amber)">27.7%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD4 Chat</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:44.2%;background:var(--blue-acc)">44.2%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="report-footer">
+    <span>Served With Honor · Care Team Operations</span>
+    <span>Chat · Week of Apr 6–11, 2026</span>
+    <span>Generated Apr 13, 2026</span>
+  </div>
+</section>
+
+<!-- ======= CALLBACK TAB ======= -->
+<section id="tab-callback" class="section-wrap">
+  <div class="sec-hdr">
+    <span class="sec-num">§ 01</span>
+    <span class="sec-title">Callback Performance</span>
+    <span class="sec-sub">All callback queues · Apr 6–10, 2026</span>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi-card good">
+      <div class="kpi-label">Callbacks Offered</div>
+      <div class="kpi-val">93</div>
+      <div class="kpi-sub">Total callbacks this week</div>
+    </div>
+    <div class="kpi-card good">
+      <div class="kpi-label">Callbacks Completed</div>
+      <div class="kpi-val">93</div>
+      <div class="kpi-sub">100.0% completion rate</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="kpi-label">Longest Wait (CS)</div>
+      <div class="kpi-val" style="font-size:18px">9h 43m</div>
+      <div class="kpi-sub">Client Support queue</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="kpi-label">Longest Wait (CE Team)</div>
+      <div class="kpi-val" style="font-size:18px">7h 3m</div>
+      <div class="kpi-sub">CE Team Voice callbacks</div>
+    </div>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 02</span>
+    <span class="sec-title">Callback Queue Detail</span>
+    <span class="sec-sub">Callback media rows only</span>
+  </div>
+  <div class="dtable-wrap scrollable">
+    <table class="dtable compact" style="table-layout:fixed;width:100%">
+      <thead><tr>
+        <th style="text-align:left;width:28%">Queue</th>
+        <th style="width:9%">Offered</th>
+        <th style="width:9%">Completed</th>
+        <th style="width:10%">Comp %</th>
+        <th style="width:16%">ASA (Wait)</th>
+        <th style="width:14%">Avg Handle</th>
+        <th style="width:14%">Avg Talk</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><div class="q-name">Care Exp. POD1 Voice</div></td>
+          <td>4</td><td>4</td>
+          <td><span class="chip green">100.0%</span></td>
+          <td>7m 19s</td><td>2m 14s</td><td>2m 0s</td>
+        </tr>
+        <tr>
+          <td><div class="q-name">Care Exp. POD2 Voice</div></td>
+          <td>9</td><td>9</td>
+          <td><span class="chip green">100.0%</span></td>
+          <td>31m 0s</td><td>6m 10s</td><td>6m 9s</td>
+        </tr>
+        <tr>
+          <td><div class="q-name">Care Exp. POD3 Voice</div></td>
+          <td>12</td><td>12</td>
+          <td><span class="chip green">100.0%</span></td>
+          <td>1h 50m 23s</td><td>4m 23s</td><td>3m 51s</td>
+        </tr>
+        <tr>
+          <td><div class="q-name">Care Exp. POD4 Voice</div></td>
+          <td>4</td><td>4</td>
+          <td><span class="chip green">100.0%</span></td>
+          <td>31m 31s</td><td>1m 42s</td><td>1m 41s</td>
+        </tr>
+        <tr>
+          <td><div class="q-name">Care Exp. Team Voice</div></td>
+          <td>17</td><td>18</td>
+          <td><span class="chip green">100%</span> <span style="font-size:10px;color:var(--ink-3)">(incl. carryover)</span></td>
+          <td>7h 2m 37s</td><td>6m 25s</td><td>5m 41s</td>
+        </tr>
+        <tr>
+          <td><div class="q-name">Client Support (New)</div></td>
+          <td>38</td><td>37</td>
+          <td><span class="chip green">97.4%</span></td>
+          <td>9h 43m 0s</td><td>9m 48s</td><td>6m 3s</td>
+        </tr>
+        <tr>
+          <td><div class="q-name">Health Care Coordinators</div></td>
+          <td>9</td><td>9</td>
+          <td><span class="chip green">100.0%</span></td>
+          <td>12m 53s</td><td>8m 9s</td><td>8m 4s</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 03</span>
+    <span class="sec-title">Callback Completion Rate by Queue</span>
+    <span class="sec-sub">80% target line shown</span>
+  </div>
+  <div class="hbar">
+    <div class="hbar-row">
+      <div class="hbar-label">CE Team Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:100%;background:var(--green)">100%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD1 Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:100%;background:var(--green)">100%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD2 Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:100%;background:var(--green)">100%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD3 Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:100%;background:var(--green)">100%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Care Exp. POD4 Voice</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:100%;background:var(--green)">100%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Client Support (New)</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:97.4%;background:var(--green)">97.4%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+    <div class="hbar-row">
+      <div class="hbar-label">Health Care Coordinators</div>
+      <div class="hbar-track">
+        <div class="hbar-fill" style="width:100%;background:var(--green)">100%</div>
+        <div class="tgt-line" style="left:80%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="report-footer">
+    <span>Served With Honor · Care Team Operations</span>
+    <span>Callback · Week of Apr 6–11, 2026</span>
+    <span>Generated Apr 13, 2026</span>
+  </div>
+</section>
+
+<!-- ======= AGENT PERFORMANCE TAB ======= -->
+<section id="tab-agents" class="section-wrap">
+  <div class="sec-hdr">
+    <span class="sec-num">§ 01</span>
+    <span class="sec-title">Agent Performance</span>
+    <span class="sec-sub">All media · Ranked by answered volume (inbound) · Anomalous rows dimmed</span>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-label">Active Agents</div>
+      <div class="kpi-val">17</div>
+      <div class="kpi-sub">Had at least 1 contact</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Top Agent</div>
+      <div class="kpi-val" style="font-size:16px">Miguel Garcia</div>
+      <div class="kpi-sub">182 total answered</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Inbound Answered</div>
+      <div class="kpi-val">503</div>
+      <div class="kpi-sub">Voice + Email + Chat</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Zero Activity</div>
+      <div class="kpi-val">8</div>
+      <div class="kpi-sub">Agents with no answered contacts</div>
+    </div>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 02</span>
+    <span class="sec-title">Agent Detail</span>
+    <span class="sec-sub">All media · Ranked by answered volume (inbound)</span>
+  </div>
+  <div class="dtable-wrap scrollable">
+    <table class="dtable compact" style="table-layout:fixed;width:100%">
+      <thead><tr>
+        <th style="text-align:left;width:22%">Agent</th>
+        <th style="width:9%">Total Ans</th>
+        <th style="width:9%">Voice</th>
+        <th style="width:9%">Email</th>
+        <th style="width:8%">Chat</th>
+        <th style="width:11%">Avg Handle</th>
+        <th style="width:11%">Avg Talk</th>
+        <th style="width:11%">Avg ACW</th>
+      </tr></thead>
+      <tbody>
+<tr>
+      <td><span class="rank-badge g1">1</span>Miguel Garcia</td>
+      <td><strong>182</strong></td>
+      <td>84</td>
+      <td>25</td>
+      <td>73</td>
+      <td>5m 30s</td>
+      <td>3m 13s</td>
+      <td>3m 33s</td>
+    </tr><tr>
+      <td><span class="rank-badge g2">2</span>La'Shay Richard</td>
+      <td><strong>89</strong></td>
+      <td>26</td>
+      <td>13</td>
+      <td>50</td>
+      <td>10m 25s</td>
+      <td>4m 27s</td>
+      <td>5m 53s</td>
+    </tr><tr>
+      <td><span class="rank-badge g3">3</span>Rashidah Brown</td>
+      <td><strong>56</strong></td>
+      <td>21</td>
+      <td>16</td>
+      <td>19</td>
+      <td>12m 7s</td>
+      <td>4m 24s</td>
+      <td>9m 0s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">4</span>Dustin Duemer</td>
+      <td><strong>26</strong></td>
+      <td>18</td>
+      <td>3</td>
+      <td>5</td>
+      <td>3m 1s</td>
+      <td>2m 44s</td>
+      <td>13s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">5</span>Ashley Bradley</td>
+      <td><strong>22</strong></td>
+      <td>17</td>
+      <td>0</td>
+      <td>5</td>
+      <td>7m 27s</td>
+      <td>7m 15s</td>
+      <td>16s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">6</span>Samantha Shaw</td>
+      <td><strong>21</strong></td>
+      <td>17</td>
+      <td>0</td>
+      <td>4</td>
+      <td>7m 27s</td>
+      <td>7m 19s</td>
+      <td>12s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">7</span>Jenna Burns</td>
+      <td><strong>18</strong></td>
+      <td>13</td>
+      <td>0</td>
+      <td>5</td>
+      <td>11m 21s</td>
+      <td>7m 2s</td>
+      <td>4m 39s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">8</span>Auny Elias-Heath</td>
+      <td><strong>17</strong></td>
+      <td>15</td>
+      <td>1</td>
+      <td>1</td>
+      <td>8m 41s</td>
+      <td>4m 3s</td>
+      <td>5m 43s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">9</span>Christina Browley</td>
+      <td><strong>15</strong></td>
+      <td>3</td>
+      <td>8</td>
+      <td>4</td>
+      <td>5m 34s</td>
+      <td>3m 51s</td>
+      <td>1m 38s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">10</span>Kimberly Coleman</td>
+      <td><strong>15</strong></td>
+      <td>12</td>
+      <td>1</td>
+      <td>2</td>
+      <td>11m 30s</td>
+      <td>7m 45s</td>
+      <td>4m 9s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">11</span>Jennifer Fuston</td>
+      <td><strong>13</strong></td>
+      <td>10</td>
+      <td>2</td>
+      <td>1</td>
+      <td>9m 22s</td>
+      <td>9m 5s</td>
+      <td>5s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">12</span>Mirline Etienne</td>
+      <td><strong>8</strong></td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2m 31s</td>
+      <td>1m 57s</td>
+      <td>28s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">13</span>Austin Thomas</td>
+      <td><strong>7</strong></td>
+      <td>7</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5m 50s</td>
+      <td>4m 47s</td>
+      <td>1m 16s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">14</span>Tatiana Jean-Louis</td>
+      <td><strong>7</strong></td>
+      <td>5</td>
+      <td>0</td>
+      <td>2</td>
+      <td>12m 21s</td>
+      <td>4m 1s</td>
+      <td>8m 40s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">15</span>Alex DeTrolio</td>
+      <td><strong>3</strong></td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2m 16s</td>
+      <td>59s</td>
+      <td>2m 17s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">16</span>EuKyta Little</td>
+      <td><strong>2</strong></td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1m 31s</td>
+      <td>1m 16s</td>
+      <td>3m 23s</td>
+    </tr><tr>
+      <td><span class="rank-badge gn">17</span>Shalon Jones</td>
+      <td><strong>2</strong></td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3m 52s</td>
+      <td>2m 19s</td>
+      <td>1m 26s</td>
+    </tr><tr class="anomaly-row">
+          <td colspan="8" style="padding-left:16px;color:var(--ink-4);font-style:italic">Ashley Andrus</td>
+        </tr><tr class="anomaly-row">
+          <td colspan="8" style="padding-left:16px;color:var(--ink-4);font-style:italic">Carla Burks</td>
+        </tr><tr class="anomaly-row">
+          <td colspan="8" style="padding-left:16px;color:var(--ink-4);font-style:italic">Chelsey Wilson</td>
+        </tr><tr class="anomaly-row">
+          <td colspan="8" style="padding-left:16px;color:var(--ink-4);font-style:italic">Jeanette Burrell</td>
+        </tr><tr class="anomaly-row">
+          <td colspan="8" style="padding-left:16px;color:var(--ink-4);font-style:italic">Johnny James</td>
+        </tr><tr class="anomaly-row">
+          <td colspan="8" style="padding-left:16px;color:var(--ink-4);font-style:italic">Shannon Rogers</td>
+        </tr><tr class="anomaly-row">
+          <td colspan="8" style="padding-left:16px;color:var(--ink-4);font-style:italic">Thia Decker</td>
+        </tr><tr class="anomaly-row">
+          <td colspan="8" style="padding-left:16px;color:var(--ink-4);font-style:italic">Yveca Mary</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 03</span>
+    <span class="sec-title">Agent Status Overview</span>
+    <span class="sec-sub">Weekly time distribution · Logged-in agents</span>
+  </div>
+  <div class="two-col" style="margin-bottom:22px">
+    <div class="col-box">
+      <div style="font-size:12px;font-weight:700;color:var(--navy-deep);margin-bottom:10px">Team Total (All 25 Agents)</div>
+      <table style="width:100%;font-size:12px;border-collapse:collapse">
+        <tr><td style="padding:4px 0;color:var(--ink-2)">Total Logged In Time</td><td style="font-weight:700;text-align:right">29d 20h 58m</td></tr>
+        <tr><td style="padding:4px 0;color:var(--ink-2)">On Queue Time</td><td style="font-weight:700;text-align:right;color:var(--blue-acc)">7d 16h 15m</td></tr>
+        <tr><td style="padding:4px 0;color:var(--ink-2)">Available Time</td><td style="font-weight:700;text-align:right;color:var(--green)">16d 17h 34m</td></tr>
+        <tr><td style="padding:4px 0;color:var(--ink-2)">Away Time</td><td style="font-weight:700;text-align:right;color:var(--amber)">2h 48m</td></tr>
+        <tr><td style="padding:4px 0;color:var(--ink-2)">Break Time</td><td style="font-weight:700;text-align:right">6h 36m</td></tr>
+        <tr><td style="padding:4px 0;color:var(--ink-2)">Meal Time</td><td style="font-weight:700;text-align:right">19h 12m</td></tr>
+        <tr><td style="padding:4px 0;color:var(--ink-2)">Not Responding</td><td style="font-weight:700;text-align:right;color:var(--red)">1d 0h 10m</td></tr>
+      </table>
+    </div>
+    <div class="col-box">
+      <div style="font-size:12px;font-weight:700;color:var(--navy-deep);margin-bottom:10px">Top Agent Status — Miguel Garcia</div>
+      <table style="width:100%;font-size:12px;border-collapse:collapse">
+        <tr><td style="padding:4px 0;color:var(--ink-2)">Logged In</td><td style="font-weight:700;text-align:right">1d 10h 2m</td></tr>
+        <tr><td style="padding:4px 0;color:var(--ink-2)">On Queue</td><td style="font-weight:700;text-align:right;color:var(--blue-acc)">1d 5h 17m</td></tr>
+        <tr><td style="padding:4px 0;color:var(--ink-2)">Available</td><td style="font-weight:700;text-align:right;color:var(--green)">5m</td></tr>
+        <tr><td style="padding:4px 0;color:var(--ink-2)">Break</td><td style="font-weight:700;text-align:right">1h 59m</td></tr>
+        <tr><td style="padding:4px 0;color:var(--ink-2)">Meal</td><td style="font-weight:700;text-align:right">2m</td></tr>
+        <tr><td style="padding:4px 0;color:var(--ink-2)">Not Responding</td><td style="font-weight:700;text-align:right">12m</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="report-footer">
+    <span>Served With Honor · Care Team Operations</span>
+    <span>Agent Performance · Week of Apr 6–11, 2026</span>
+    <span>Generated Apr 13, 2026</span>
+  </div>
+</section>
+
+<!-- ======= RECOMMENDATIONS TAB ======= -->
+<section id="tab-actions" class="section-wrap">
+  <div class="sec-hdr">
+    <span class="sec-num">§ 01</span>
+    <span class="sec-title">Key Findings &amp; Recommendations</span>
+    <span class="sec-sub">Week of Apr 6–10, 2026</span>
+  </div>
+
+  <div class="insight-row">
+    <div class="insight-card">
+      <div class="insight-type alert">&#9888; Critical — Voice</div>
+      <div class="insight-title">Client Support Answer Rate: 36.2%</div>
+      <div class="insight-body">Client Support (New) answered only 21 of 58 offered calls (36.2%), with 16 abandoned (27.6%). Service level dropped to 16.2%. This queue continues to significantly underperform relative to the 80% target. Consider immediate staffing review and potential callback enrollment for overflow contacts.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-type alert">&#9888; Critical — Voice SL</div>
+      <div class="insight-title">POD2 Voice Service Level: 9.7%</div>
+      <div class="insight-body">Care Exp. POD2 Voice had the lowest service level of any queue at 9.7%, meaning nearly all answered contacts waited beyond the threshold. With 40 offered and only 23 answered, this POD needs immediate attention to routing and staffing coverage during business hours.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-type warn">&#9651; Action Needed — Voice</div>
+      <div class="insight-title">Telemedica &amp; HCC Below 60% Answer Rate</div>
+      <div class="insight-body">Telemedica Team answered 50.7% (38 of 75 offered) and Health Care Coordinators answered 56.8% (25 of 44). Both queues had abandon rates above 20%. Focus on scheduling optimization and consider dedicating additional agent capacity during peak intervals (10:30 AM–1:30 PM).</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-type warn">&#9651; Action Needed — Chat SL</div>
+      <div class="insight-title">Chat Service Levels Below Target Across All PODs</div>
+      <div class="insight-body">All four chat queues fell well below the 80% service level target. POD2 Chat had the lowest at 26.4%, while POD3 Chat had the longest ASA at 40m 7s. Despite good answer rates (84–96%), contacts are waiting too long before being picked up.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-type warn">&#9651; Monitor — Callback Wait</div>
+      <div class="insight-title">Extended Callback Wait Times for CS &amp; CE Team</div>
+      <div class="insight-body">Client Support callbacks waited an average of 9h 43m, and CE Team Voice callbacks averaged 7h 2m. While completion rates are strong (97–100%), the extended wait times indicate callers are queuing overnight or across shifts. Consider setting maximum callback window and overflow routing.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-type good">&#10003; Positive — Email &amp; Callback</div>
+      <div class="insight-title">Email (98.8%) and Callback (100%) Performing Well</div>
+      <div class="insight-body">Email and callback channels continue to exceed targets. Email maintained 98.8% answer rate and callback reached 100% completion this week. POD3 and POD1 Email both achieved 100% service level, demonstrating strong asynchronous channel management.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-type good">&#10003; Positive — Agents</div>
+      <div class="insight-title">Miguel Garcia Led Team with 182 Answered Contacts</div>
+      <div class="insight-body">Miguel Garcia handled 182 total contacts across voice (84), email (25), and chat (73) — the highest volume on the team. La&#8217;Shay Richard (89) and Rashidah Brown (56) also showed strong multi-channel performance. 8 agents had zero activity and may warrant schedule review.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-type info">&#8505; Week-over-Week</div>
+      <div class="insight-title">Volume Down vs. Prior Week, But SL Gaps Remain</div>
+      <div class="insight-body">Total voice offered dropped from 563 (week of Mar 29) to 412 this week, a 26.8% decrease. Answer rate improved slightly from 54.2% to 58.7%. However, service level gaps persist across all voice queues, suggesting insufficient staffing relative to demand even at lower volume.</div>
+    </div>
+  </div>
+
+  <div class="sec-hdr" style="margin-top:6px">
+    <span class="sec-num">§ 02</span>
+    <span class="sec-title">Recommended Actions This Week</span>
+    <span class="sec-sub">Prioritized by impact</span>
+  </div>
+  <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:22px">
+    <ol style="padding-left:20px;color:var(--ink-2);line-height:2;font-size:13px">
+      <li><strong>Client Support (New):</strong> Review agent scheduling and routing for this queue. Escalate if staffing is the root cause. Target 60%+ answer rate next week.</li>
+      <li><strong>POD2 Voice SL (9.7%):</strong> Investigate why contacts are not being answered within threshold. Review agent availability during POD2 peak hours (10:30 AM–1:00 PM).</li>
+      <li><strong>Chat SL Improvement:</strong> Consider reducing agent wrap-up (ACW) time to increase availability between chats. POD3 ACW is very high relative to talk time.</li>
+      <li><strong>Callback Wait Reduction:</strong> Review callback scheduling windows for CS and CE Team. Consider auto-expiry rules or same-day callback policies.</li>
+      <li><strong>Zero-Activity Agents (8):</strong> Confirm schedule compliance for agents with no answered contacts. Ensure they are properly rostered and accessible.</li>
+    </ol>
+  </div>
+
+  <div class="report-footer">
+    <span>Served With Honor · Care Team Operations</span>
+    <span>Recommendations · Week of Apr 6–11, 2026</span>
+    <span>Generated Apr 13, 2026</span>
+  </div>
+</section>
+
+<!-- ======= TRENDING TAB ======= -->
+<section id="tab-trending" class="section-wrap">
+
+  <!-- §01 Trend at a Glance -->
+  <div class="sec-hdr">
+    <span class="sec-num">§ 01</span>
+    <span class="sec-title">Trend at a Glance</span>
+    <span class="sec-sub">Current week vs. prior week</span>
+  </div>
+  <div class="kpi-row" style="margin-bottom:22px">
+    <div class="kpi-card">
+      <div class="kpi-label">Voice Offered</div>
+      <div class="kpi-val">412</div>
+      <div class="kpi-sub">Prior: 563 &nbsp; <span style="color:var(--green)">▲ 26.8%</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Voice Ans Rate</div>
+      <div class="kpi-val">58.7%</div>
+      <div class="kpi-sub">Prior: 54.2% &nbsp; <span style="color:var(--green)">▲ 8.3%</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Email Offered</div>
+      <div class="kpi-val">83</div>
+      <div class="kpi-sub">Prior: 115 &nbsp; <span style="color:var(--green)">▲ 27.8%</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Chat Offered</div>
+      <div class="kpi-val">209</div>
+      <div class="kpi-sub">Prior: 269 &nbsp; <span style="color:var(--green)">▲ 22.3%</span></div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Callback Offered</div>
+      <div class="kpi-val">93</div>
+      <div class="kpi-sub">Prior: 86 &nbsp; <span style="color:var(--red)">▼ 8.1%</span></div>
+    </div>
+  </div>
+
+  <!-- §02 Channel Comparison -->
+  <div class="sec-hdr">
+    <span class="sec-num">§ 02</span>
+    <span class="sec-title">Channel Comparison</span>
+    <span class="sec-sub">Contact volume and answer/completion rates · Current vs. prior week</span>
+  </div>
+  <div class="two-col" style="margin-bottom:22px">
+    <div class="trend-canvas-box">
+      <div class="chart-title">Contact Volume by Channel</div>
+      <div class="chart-legend">
+        <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:rgba(90,95,110,0.48)"></div><span>Prior week (Mar 29–Apr 4)</span></div>
+        <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#2060c8"></div><span>Current week (Apr 6–10)</span></div>
+      </div>
+      <canvas id="trend-vol-chart" height="330"></canvas>
+    </div>
+    <div class="trend-canvas-box">
+      <div class="chart-title">Answer / Completion Rate by Channel</div>
+      <div class="chart-legend">
+        <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:rgba(90,95,110,0.48)"></div><span>Prior week (Mar 29–Apr 4)</span></div>
+        <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#2060c8"></div><span>Current week (Apr 6–10)</span></div>
+      </div>
+      <canvas id="trend-rate-chart" height="330"></canvas>
+    </div>
+  </div>
+
+  <!-- §03 Voice Deep Dive -->
+  <div class="sec-hdr">
+    <span class="sec-num">§ 03</span>
+    <span class="sec-title">Voice Deep Dive</span>
+    <span class="sec-sub">Answer and abandon rates by voice queue · Current vs. prior week</span>
+  </div>
+  <div class="two-col" style="margin-bottom:22px">
+    <div class="trend-canvas-box">
+      <div class="chart-title">Voice Queue Answer Rate</div>
+      <div class="chart-legend">
+        <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:rgba(90,95,110,0.48)"></div><span>Prior week</span></div>
+        <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#2060c8"></div><span>Current week</span></div>
+      </div>
+      <canvas id="trend-voice-chart" height="330"></canvas>
+    </div>
+    <div class="trend-canvas-box">
+      <div class="chart-title">Voice Queue Abandon Rate</div>
+      <div class="chart-legend">
+        <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:rgba(90,95,110,0.48)"></div><span>Prior week</span></div>
+        <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#2060c8"></div><span>Current week</span></div>
+      </div>
+      <canvas id="trend-abandon-chart" height="330"></canvas>
+    </div>
+  </div>
+
+  <!-- §04 Busy Hour & Peak Interval Analysis -->
+  <div class="sec-hdr">
+    <span class="sec-num">§ 04</span>
+    <span class="sec-title">Busy Hour &amp; Peak Interval Analysis</span>
+    <span class="sec-sub">Top 3 Peak Intervals Per Day — 30-min · Interactions Offered</span>
+  </div>
+  <div class="ob-grid">
+<div class="ob-card">
+  <div class="ob-day">Mon 4/6</div>
+  <div class="ob-heatrow" style="height:36px;">
+<div class="ob-cell" style="background:#f0f2f7;height:2%;border-radius:2px"><div class="ob-tooltip">8:00a · 0</div></div>
+<div class="ob-cell" style="background:#f0f2f7;height:2%;border-radius:2px"><div class="ob-tooltip">8:30a · 0</div></div>
+<div class="ob-cell" style="background:#14417c;height:88%;border-radius:2px"><div class="ob-tooltip">9:00a · 15</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:35%;border-radius:2px"><div class="ob-tooltip">9:30a · 6</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:41%;border-radius:2px"><div class="ob-tooltip">10:00a · 7</div></div>
+<div class="ob-cell" style="background:#071e50;height:100%;border-radius:2px"><div class="ob-tooltip">10:30a · 17</div></div>
+<div class="ob-cell" style="background:#0c3268;height:94%;border-radius:2px"><div class="ob-tooltip">11:00a · 16</div></div>
+<div class="ob-cell" style="background:#3d6fa0;height:58%;border-radius:2px"><div class="ob-tooltip">11:30a · 10</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:35%;border-radius:2px"><div class="ob-tooltip">12:00p · 6</div></div>
+<div class="ob-cell" style="background:#3d6fa0;height:58%;border-radius:2px"><div class="ob-tooltip">12:30p · 10</div></div>
+<div class="ob-cell" style="background:#1e4f88;height:76%;border-radius:2px"><div class="ob-tooltip">1:00p · 13</div></div>
+<div class="ob-cell" style="background:#1e4f88;height:82%;border-radius:2px"><div class="ob-tooltip">1:30p · 14</div></div>
+<div class="ob-cell" style="background:#14417c;height:88%;border-radius:2px"><div class="ob-tooltip">2:00p · 15</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:41%;border-radius:2px"><div class="ob-tooltip">2:30p · 7</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:47%;border-radius:2px"><div class="ob-tooltip">3:00p · 8</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:47%;border-radius:2px"><div class="ob-tooltip">3:30p · 8</div></div>
+<div class="ob-cell" style="background:#3d6fa0;height:58%;border-radius:2px"><div class="ob-tooltip">4:00p · 10</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:41%;border-radius:2px"><div class="ob-tooltip">4:30p · 7</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:41%;border-radius:2px"><div class="ob-tooltip">5:00p · 7</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:41%;border-radius:2px"><div class="ob-tooltip">5:30p · 7</div></div>
+  </div>
+  <div class="ob-labels">
+    <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div>
+  </div>
+  <div class="ob-peaks">
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#d97706"></div>
+          <span class="ob-peak-time">10:30 AM</span>
+          <span class="ob-peak-count">17</span>
+        </div>
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#f59e0b"></div>
+          <span class="ob-peak-time">11:00 AM</span>
+          <span class="ob-peak-count">16</span>
+        </div>
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#fbbf24"></div>
+          <span class="ob-peak-time">2:00 PM</span>
+          <span class="ob-peak-count">15</span>
+        </div>
+  </div>
+</div>
+<div class="ob-card">
+  <div class="ob-day">Tue 4/7</div>
+  <div class="ob-heatrow" style="height:36px;">
+<div class="ob-cell" style="background:#f0f2f7;height:2%;border-radius:2px"><div class="ob-tooltip">8:00a · 0</div></div>
+<div class="ob-cell" style="background:#c4d8e8;height:13%;border-radius:2px"><div class="ob-tooltip">8:30a · 2</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:40%;border-radius:2px"><div class="ob-tooltip">9:00a · 6</div></div>
+<div class="ob-cell" style="background:#3d6fa0;height:60%;border-radius:2px"><div class="ob-tooltip">9:30a · 9</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:46%;border-radius:2px"><div class="ob-tooltip">10:00a · 7</div></div>
+<div class="ob-cell" style="background:#4d7fac;height:53%;border-radius:2px"><div class="ob-tooltip">10:30a · 8</div></div>
+<div class="ob-cell" style="background:#2e5f94;height:66%;border-radius:2px"><div class="ob-tooltip">11:00a · 10</div></div>
+<div class="ob-cell" style="background:#071e50;height:100%;border-radius:2px"><div class="ob-tooltip">11:30a · 15</div></div>
+<div class="ob-cell" style="background:#2e5f94;height:66%;border-radius:2px"><div class="ob-tooltip">12:00p · 10</div></div>
+<div class="ob-cell" style="background:#2e5f94;height:66%;border-radius:2px"><div class="ob-tooltip">12:30p · 10</div></div>
+<div class="ob-cell" style="background:#2e5f94;height:66%;border-radius:2px"><div class="ob-tooltip">1:00p · 10</div></div>
+<div class="ob-cell" style="background:#2e5f94;height:66%;border-radius:2px"><div class="ob-tooltip">1:30p · 10</div></div>
+<div class="ob-cell" style="background:#3d6fa0;height:60%;border-radius:2px"><div class="ob-tooltip">2:00p · 9</div></div>
+<div class="ob-cell" style="background:#14417c;height:86%;border-radius:2px"><div class="ob-tooltip">2:30p · 13</div></div>
+<div class="ob-cell" style="background:#4d7fac;height:53%;border-radius:2px"><div class="ob-tooltip">3:00p · 8</div></div>
+<div class="ob-cell" style="background:#2e5f94;height:73%;border-radius:2px"><div class="ob-tooltip">3:30p · 11</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:33%;border-radius:2px"><div class="ob-tooltip">4:00p · 5</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:46%;border-radius:2px"><div class="ob-tooltip">4:30p · 7</div></div>
+<div class="ob-cell" style="background:#7aabcf;height:26%;border-radius:2px"><div class="ob-tooltip">5:00p · 4</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:33%;border-radius:2px"><div class="ob-tooltip">5:30p · 5</div></div>
+  </div>
+  <div class="ob-labels">
+    <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div>
+  </div>
+  <div class="ob-peaks">
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#d97706"></div>
+          <span class="ob-peak-time">11:30 AM</span>
+          <span class="ob-peak-count">15</span>
+        </div>
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#f59e0b"></div>
+          <span class="ob-peak-time">2:30 PM</span>
+          <span class="ob-peak-count">13</span>
+        </div>
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#fbbf24"></div>
+          <span class="ob-peak-time">3:30 PM</span>
+          <span class="ob-peak-count">11</span>
+        </div>
+  </div>
+</div>
+<div class="ob-card">
+  <div class="ob-day">Wed 4/8</div>
+  <div class="ob-heatrow" style="height:36px;">
+<div class="ob-cell" style="background:#dde6f0;height:5%;border-radius:2px"><div class="ob-tooltip">8:00a · 1</div></div>
+<div class="ob-cell" style="background:#c4d8e8;height:11%;border-radius:2px"><div class="ob-tooltip">8:30a · 2</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:41%;border-radius:2px"><div class="ob-tooltip">9:00a · 7</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:47%;border-radius:2px"><div class="ob-tooltip">9:30a · 8</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:47%;border-radius:2px"><div class="ob-tooltip">10:00a · 8</div></div>
+<div class="ob-cell" style="background:#071e50;height:100%;border-radius:2px"><div class="ob-tooltip">10:30a · 17</div></div>
+<div class="ob-cell" style="background:#2e5f94;height:70%;border-radius:2px"><div class="ob-tooltip">11:00a · 12</div></div>
+<div class="ob-cell" style="background:#4d7fac;height:52%;border-radius:2px"><div class="ob-tooltip">11:30a · 9</div></div>
+<div class="ob-cell" style="background:#071e50;height:100%;border-radius:2px"><div class="ob-tooltip">12:00p · 17</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:35%;border-radius:2px"><div class="ob-tooltip">12:30p · 6</div></div>
+<div class="ob-cell" style="background:#3d6fa0;height:64%;border-radius:2px"><div class="ob-tooltip">1:00p · 11</div></div>
+<div class="ob-cell" style="background:#1e4f88;height:76%;border-radius:2px"><div class="ob-tooltip">1:30p · 13</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:47%;border-radius:2px"><div class="ob-tooltip">2:00p · 8</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:47%;border-radius:2px"><div class="ob-tooltip">2:30p · 8</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:41%;border-radius:2px"><div class="ob-tooltip">3:00p · 7</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:47%;border-radius:2px"><div class="ob-tooltip">3:30p · 8</div></div>
+<div class="ob-cell" style="background:#3d6fa0;height:58%;border-radius:2px"><div class="ob-tooltip">4:00p · 10</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:47%;border-radius:2px"><div class="ob-tooltip">4:30p · 8</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:41%;border-radius:2px"><div class="ob-tooltip">5:00p · 7</div></div>
+<div class="ob-cell" style="background:#a8c4df;height:23%;border-radius:2px"><div class="ob-tooltip">5:30p · 4</div></div>
+  </div>
+  <div class="ob-labels">
+    <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div>
+  </div>
+  <div class="ob-peaks">
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#d97706"></div>
+          <span class="ob-peak-time">12:00 PM</span>
+          <span class="ob-peak-count">17</span>
+        </div>
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#f59e0b"></div>
+          <span class="ob-peak-time">10:30 AM</span>
+          <span class="ob-peak-count">17</span>
+        </div>
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#fbbf24"></div>
+          <span class="ob-peak-time">1:30 PM</span>
+          <span class="ob-peak-count">13</span>
+        </div>
+  </div>
+</div>
+<div class="ob-card">
+  <div class="ob-day">Thu 4/9</div>
+  <div class="ob-heatrow" style="height:36px;">
+<div class="ob-cell" style="background:#f0f2f7;height:2%;border-radius:2px"><div class="ob-tooltip">8:00a · 0</div></div>
+<div class="ob-cell" style="background:#f0f2f7;height:2%;border-radius:2px"><div class="ob-tooltip">8:30a · 0</div></div>
+<div class="ob-cell" style="background:#7aabcf;height:30%;border-radius:2px"><div class="ob-tooltip">9:00a · 6</div></div>
+<div class="ob-cell" style="background:#7aabcf;height:30%;border-radius:2px"><div class="ob-tooltip">9:30a · 6</div></div>
+<div class="ob-cell" style="background:#7aabcf;height:25%;border-radius:2px"><div class="ob-tooltip">10:00a · 5</div></div>
+<div class="ob-cell" style="background:#7aabcf;height:25%;border-radius:2px"><div class="ob-tooltip">10:30a · 5</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:35%;border-radius:2px"><div class="ob-tooltip">11:00a · 7</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:40%;border-radius:2px"><div class="ob-tooltip">11:30a · 8</div></div>
+<div class="ob-cell" style="background:#1e4f88;height:75%;border-radius:2px"><div class="ob-tooltip">12:00p · 15</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:45%;border-radius:2px"><div class="ob-tooltip">12:30p · 9</div></div>
+<div class="ob-cell" style="background:#071e50;height:100%;border-radius:2px"><div class="ob-tooltip">1:00p · 20</div></div>
+<div class="ob-cell" style="background:#3d6fa0;height:65%;border-radius:2px"><div class="ob-tooltip">1:30p · 13</div></div>
+<div class="ob-cell" style="background:#4d7fac;height:55%;border-radius:2px"><div class="ob-tooltip">2:00p · 11</div></div>
+<div class="ob-cell" style="background:#4d7fac;height:55%;border-radius:2px"><div class="ob-tooltip">2:30p · 11</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:45%;border-radius:2px"><div class="ob-tooltip">3:00p · 9</div></div>
+<div class="ob-cell" style="background:#c4d8e8;height:15%;border-radius:2px"><div class="ob-tooltip">3:30p · 3</div></div>
+<div class="ob-cell" style="background:#7aabcf;height:30%;border-radius:2px"><div class="ob-tooltip">4:00p · 6</div></div>
+<div class="ob-cell" style="background:#7aabcf;height:30%;border-radius:2px"><div class="ob-tooltip">4:30p · 6</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:40%;border-radius:2px"><div class="ob-tooltip">5:00p · 8</div></div>
+<div class="ob-cell" style="background:#6b9ec4;height:35%;border-radius:2px"><div class="ob-tooltip">5:30p · 7</div></div>
+  </div>
+  <div class="ob-labels">
+    <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div>
+  </div>
+  <div class="ob-peaks">
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#d97706"></div>
+          <span class="ob-peak-time">1:00 PM</span>
+          <span class="ob-peak-count">20</span>
+        </div>
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#f59e0b"></div>
+          <span class="ob-peak-time">12:00 PM</span>
+          <span class="ob-peak-count">15</span>
+        </div>
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#fbbf24"></div>
+          <span class="ob-peak-time">1:30 PM</span>
+          <span class="ob-peak-count">13</span>
+        </div>
+  </div>
+</div>
+<div class="ob-card">
+  <div class="ob-day">Fri 4/10</div>
+  <div class="ob-heatrow" style="height:36px;">
+<div class="ob-cell" style="background:#f0f2f7;height:2%;border-radius:2px"><div class="ob-tooltip">8:00a · 0</div></div>
+<div class="ob-cell" style="background:#c4d8e8;height:9%;border-radius:2px"><div class="ob-tooltip">8:30a · 1</div></div>
+<div class="ob-cell" style="background:#7aabcf;height:27%;border-radius:2px"><div class="ob-tooltip">9:00a · 3</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:45%;border-radius:2px"><div class="ob-tooltip">9:30a · 5</div></div>
+<div class="ob-cell" style="background:#a8c4df;height:18%;border-radius:2px"><div class="ob-tooltip">10:00a · 2</div></div>
+<div class="ob-cell" style="background:#2e5f94;height:72%;border-radius:2px"><div class="ob-tooltip">10:30a · 8</div></div>
+<div class="ob-cell" style="background:#3d6fa0;height:63%;border-radius:2px"><div class="ob-tooltip">11:00a · 7</div></div>
+<div class="ob-cell" style="background:#3d6fa0;height:63%;border-radius:2px"><div class="ob-tooltip">11:30a · 7</div></div>
+<div class="ob-cell" style="background:#1e4f88;height:81%;border-radius:2px"><div class="ob-tooltip">12:00p · 9</div></div>
+<div class="ob-cell" style="background:#2e5f94;height:72%;border-radius:2px"><div class="ob-tooltip">12:30p · 8</div></div>
+<div class="ob-cell" style="background:#071e50;height:100%;border-radius:2px"><div class="ob-tooltip">1:00p · 11</div></div>
+<div class="ob-cell" style="background:#1e4f88;height:81%;border-radius:2px"><div class="ob-tooltip">1:30p · 9</div></div>
+<div class="ob-cell" style="background:#5b8fb8;height:45%;border-radius:2px"><div class="ob-tooltip">2:00p · 5</div></div>
+<div class="ob-cell" style="background:#1e4f88;height:81%;border-radius:2px"><div class="ob-tooltip">2:30p · 9</div></div>
+<div class="ob-cell" style="background:#3d6fa0;height:63%;border-radius:2px"><div class="ob-tooltip">3:00p · 7</div></div>
+<div class="ob-cell" style="background:#1e4f88;height:81%;border-radius:2px"><div class="ob-tooltip">3:30p · 9</div></div>
+<div class="ob-cell" style="background:#4d7fac;height:54%;border-radius:2px"><div class="ob-tooltip">4:00p · 6</div></div>
+<div class="ob-cell" style="background:#2e5f94;height:72%;border-radius:2px"><div class="ob-tooltip">4:30p · 8</div></div>
+<div class="ob-cell" style="background:#c4d8e8;height:9%;border-radius:2px"><div class="ob-tooltip">5:00p · 1</div></div>
+<div class="ob-cell" style="background:#4d7fac;height:54%;border-radius:2px"><div class="ob-tooltip">5:30p · 6</div></div>
+  </div>
+  <div class="ob-labels">
+    <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">12p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">2p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
+    <div class="ob-lbl">4p</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl">6p</div>
+  </div>
+  <div class="ob-peaks">
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#d97706"></div>
+          <span class="ob-peak-time">1:00 PM</span>
+          <span class="ob-peak-count">11</span>
+        </div>
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#f59e0b"></div>
+          <span class="ob-peak-time">12:00 PM</span>
+          <span class="ob-peak-count">9</span>
+        </div>
+<div class="ob-peak-row">
+          <div class="ob-dot" style="background:#fbbf24"></div>
+          <span class="ob-peak-time">1:30 PM</span>
+          <span class="ob-peak-count">9</span>
+        </div>
+  </div>
+</div>
+  </div>
+
+  <div class="busy-hour-wrap">
+    <div class="chart-title">Contacts by Media Type — Weekly Stacked Interval (8a–5:30p)</div>
+    <div class="chart-legend">
+      <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#1a5fa8"></div><span>Voice</span></div>
+      <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#2e8b57"></div><span>Chat/Message</span></div>
+      <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#c47a10"></div><span>Email</span></div>
+    </div>
+    <div style="margin-bottom:8px;font-size:12px;color:var(--ink-3)">
+      Peak interval: <strong style="color:var(--navy-deep)">1:00 PM</strong> with <strong style="color:var(--navy-deep)">65</strong> total contacts (Mon–Fri combined)
+    </div>
+    <canvas id="busy-hour-chart" height="330"></canvas>
+  </div>
+
+  <!-- §05 Trend Insights -->
+  <div class="sec-hdr">
+    <span class="sec-num">§ 05</span>
+    <span class="sec-title">Trend Insights</span>
+    <span class="sec-sub">Week-over-week observations</span>
+  </div>
+  <div class="insight-row">
+    <div class="insight-card">
+      <div class="insight-type warn">&#9651; Volume Trend</div>
+      <div class="insight-title">Voice Volume Down 26.8% Week-over-Week</div>
+      <div class="insight-body">Voice contacts fell from 563 to 412 (-26.8%). This is a significant reduction. Email also decreased from 115 to 83 (-27.8%) and chat from 269 to 209 (-22.3%). Callback volume slightly increased (86 → 93). Overall contact demand is lower this week.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-type info">&#8505; Peak Timing</div>
+      <div class="insight-title">Peak Contact Hour: 1:00 PM (65 contacts across week)</div>
+      <div class="insight-body">The 1:00 PM slot had the highest combined contact volume across all 5 weekdays. Thursday's 1:00 PM slot was the single busiest 30-minute interval with 20 contacts. Monday and Wednesday showed elevated demand from 10:30 AM onward.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-type good">&#10003; Answer Rate Improvement</div>
+      <div class="insight-title">Voice Answer Rate Improved from 54.2% to 58.7%</div>
+      <div class="insight-body">Despite no structural changes, the answer rate improved by 4.5 percentage points. CE Team Voice dropped from 82.3% to 72.9%, but POD4 Voice held at 73.9% and POD3 improved. Client Support continues to be the critical outlier at 36.2%.</div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-type warn">&#9651; Abandon Rate Concern</div>
+      <div class="insight-title">Voice Abandon Rate Increased: 14.9% → 17.7%</div>
+      <div class="insight-body">Despite lower volume, the abandon rate increased by 2.8 points. POD1 Voice had 29.2% abandon rate — the highest of any POD. This suggests that even with fewer calls, staffing capacity remains insufficient to serve demand within acceptable wait times.</div>
+    </div>
+  </div>
+
+  <div class="report-footer">
+    <span>Served With Honor · Care Team Operations</span>
+    <span>Trending · Week of Apr 6–11, 2026</span>
+    <span>Generated Apr 13, 2026</span>
+  </div>
+
+<!-- TREND-DATA: {"voice_offered": 412, "voice_ans_rate": 58.7, "voice_abn_rate": 17.7, "email_offered": 83, "email_ans_rate": 98.8, "chat_offered": 209, "chat_ans_rate": 90.0, "callback_offered": 93, "callback_comp_rate": 100.0, "voice_queues_ans": {"CE Team": 72.9, "Client Support": 36.2, "HCC": 56.8, "Telemedica": 50.7, "POD_avg": 62.9}, "voice_queues_abn": {"CE Team": 12.1, "Client Support": 27.6, "HCC": 22.7, "Telemedica": 20.0, "POD_avg": 15.7}, "period_label": "Week of Apr 6\u201311, 2026"} -->
+</section>
+
+<script>
+// ── Tab navigation ──
+function showTab(e, id) {
+  var tab = e.target.closest('.nav-tab');
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.section-wrap').forEach(function(s){s.classList.remove('active')});
+  if(tab) tab.classList.add('active');
+  var el = document.getElementById('tab-'+id);
+  if(el) el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(function(){
+    if(id==='trending'){
+      initTrendCharts();
+      initBusyHourChart();
+    }
+  }, 50);
+}
+
+// ── Grouped Bar Chart ──
+function drawGroupedBarChart(ctx, W, H, cfg) {
+  var pad = {top:76,right:52,bottom:62,left:42};
+  var lY = pad.top - 36;
+  var plotW = W - pad.left - pad.right;
+  var plotH = H - pad.top - pad.bottom;
+
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#fff'; ctx.fillRect(0,0,W,H);
+
+  var n = cfg.labels.length;
+  var grpW = plotW / n;
+  var bW = grpW * 0.32;
+  var gap = grpW * 0.06;
+
+  var maxV = cfg.maxVal || (cfg.isRate ? 100 : Math.max(...cfg.prevVals, ...cfg.currVals) * 1.15);
+
+  // Y gridlines
+  var ySteps = cfg.isRate ? [0,20,40,60,80,100] : [0, Math.round(maxV*0.25), Math.round(maxV*0.5), Math.round(maxV*0.75), Math.round(maxV)];
+  ctx.strokeStyle='#e8eaef'; ctx.lineWidth=1;
+  ctx.font='10px Aptos,Calibri,sans-serif'; ctx.fillStyle='#9ea2ae'; ctx.textAlign='right';
+  ySteps.forEach(function(v) {
+    var y = pad.top + plotH - (v/maxV)*plotH;
+    ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(pad.left+plotW,y); ctx.stroke();
+    ctx.fillText(cfg.isRate ? v+'%' : v, pad.left-4, y+3);
+  });
+
+  // 80% target line (for rate charts)
+  if(cfg.isRate && cfg.title80 !== false) {
+    var y80 = pad.top + plotH - (80/maxV)*plotH;
+    ctx.save();
+    ctx.strokeStyle='#c0202a'; ctx.lineWidth=1.5; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(pad.left,y80); ctx.lineTo(pad.left+plotW,y80); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#c0202a'; ctx.font='bold 10px Aptos,Calibri,sans-serif';
+    ctx.textAlign='left';
+    ctx.fillText('80%', pad.left+plotW+4, y80-5);
+    ctx.fillText('target', pad.left+plotW+4, y80+7);
+    ctx.restore();
+  }
+
+  // Bars
+  cfg.labels.forEach(function(lbl, i) {
+    var gx = pad.left + i*grpW + grpW/2;
+    var x1 = gx - bW - gap/2;
+    var x2 = gx + gap/2;
+
+    // Prev bar
+    var h1 = (cfg.prevVals[i]/maxV)*plotH;
+    ctx.fillStyle='rgba(90,95,110,0.13)';
+    ctx.fillRect(x1, pad.top+plotH-h1, bW, h1);
+    ctx.strokeStyle='rgba(90,95,110,0.48)'; ctx.lineWidth=1;
+    ctx.strokeRect(x1, pad.top+plotH-h1, bW, h1);
+    ctx.fillStyle='rgba(90,95,110,0.72)'; ctx.font='bold 9px Aptos,Calibri,sans-serif'; ctx.textAlign='center';
+    var lbl1 = cfg.isRate ? cfg.prevVals[i]+'%' : cfg.prevVals[i];
+    ctx.fillText(lbl1, x1+bW/2, pad.top+plotH-h1-3);
+
+    // Curr bar
+    var h2 = (cfg.currVals[i]/maxV)*plotH;
+    ctx.fillStyle=cfg.colors[i]||'#2060c8';
+    ctx.fillRect(x2, pad.top+plotH-h2, bW, h2);
+    var lbl2 = cfg.isRate ? cfg.currVals[i]+'%' : cfg.currVals[i];
+    ctx.fillStyle='#fff'; ctx.font='bold 9px Aptos,Calibri,sans-serif'; ctx.textAlign='center';
+    if(h2>16) { ctx.fillText(lbl2, x2+bW/2, pad.top+plotH-h2+11); }
+    else {
+      ctx.fillStyle='#2060c8'; ctx.fillText(lbl2, x2+bW/2, pad.top+plotH-h2-3);
+    }
+
+    // X label
+    ctx.fillStyle='#3a3d48'; ctx.font='10px Aptos,Calibri,sans-serif'; ctx.textAlign='center';
+    ctx.fillText(lbl, gx, pad.top+plotH+14);
+  });
+}
+
+// ── Busy Hour Chart ──
+function drawBusyHourChart(ctx, W, H, cfg) {
+  var pad = {top:30,right:20,bottom:50,left:42};
+  var plotW = W - pad.left - pad.right;
+  var plotH = H - pad.top - pad.bottom;
+  var n = 20;
+  var bW = plotW/n - 2;
+
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#fff'; ctx.fillRect(0,0,W,H);
+
+  var totals = cfg.wVoice.map(function(v,i){return v + cfg.wMsg[i] + cfg.wEmail[i];});
+  var maxV = Math.max(...totals) * 1.1 || 1;
+
+  // Y gridlines
+  ctx.strokeStyle='#e8eaef'; ctx.lineWidth=1;
+  ctx.font='10px Aptos,Calibri,sans-serif'; ctx.fillStyle='#9ea2ae'; ctx.textAlign='right';
+  [0,20,40,60,80].forEach(function(v) {
+    if(v > maxV) return;
+    var y = pad.top + plotH - (v/maxV)*plotH;
+    ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(pad.left+plotW,y); ctx.stroke();
+    ctx.fillText(v, pad.left-4, y+3);
+  });
+
+  // Stacked bars
+  var slotLabels = ['8a','','9a','','10a','','11a','','12p','','1p','','2p','','3p','','4p','','5p',''];
+  cfg.wVoice.forEach(function(v, i) {
+    var x = pad.left + i*(plotW/n) + 1;
+    var totalH = (totals[i]/maxV)*plotH;
+    var yBase = pad.top + plotH;
+
+    // Email (bottom)
+    var eH = (cfg.wEmail[i]/maxV)*plotH;
+    ctx.fillStyle='#c47a10';
+    ctx.fillRect(x, yBase-eH, bW, eH);
+
+    // Chat (middle)
+    var mH = (cfg.wMsg[i]/maxV)*plotH;
+    ctx.fillStyle='#2e8b57';
+    ctx.fillRect(x, yBase-eH-mH, bW, mH);
+
+    // Voice (top)
+    var vH = (cfg.wVoice[i]/maxV)*plotH;
+    ctx.fillStyle='#1a5fa8';
+    ctx.fillRect(x, yBase-eH-mH-vH, bW, vH);
+
+    // X label
+    if(slotLabels[i]) {
+      ctx.fillStyle='#6b6e7a'; ctx.font='9px Aptos,Calibri,sans-serif'; ctx.textAlign='center';
+      ctx.fillText(slotLabels[i], x+bW/2, pad.top+plotH+12);
+    }
+  });
+}
+
+// ── Init charts ──
+var trendChartsInited = false;
+function initTrendCharts() {
+  if(trendChartsInited) return;
+  trendChartsInited = true;
+
+  var charts = [
+    { id:'trend-vol-chart', prevVals:[563, 115, 269, 86], currVals:[412, 83, 209, 93],
+       labels:['Voice', 'Email', 'Chat', 'Callback'], colors:['#2060c8','#2060c8','#2060c8','#2060c8'], isRate:false },
+    { id:'trend-rate-chart', prevVals:[54.2, 99.1, 90.0, 98.8], currVals:[58.7, 98.8, 90.0, 100.0],
+       labels:['Voice', 'Email', 'Chat', 'Callback'], colors:['#2060c8','#2060c8','#2060c8','#2060c8'], isRate:true },
+    { id:'trend-voice-chart', prevVals:[82.3, 52.3, 54.5, 49.2, 66.8], currVals:[72.9, 36.2, 56.8, 50.7, 62.9],
+       labels:['CE Team', 'Client Support', 'HCC', 'Telemedica', 'POD avg'], colors:['#2060c8','#2060c8','#2060c8','#2060c8','#2060c8'], isRate:true },
+    { id:'trend-abandon-chart', prevVals:[9.7, 27.3, 10.9, 27.7, 16.5], currVals:[12.1, 27.6, 22.7, 20.0, 15.7],
+       labels:['CE Team', 'Client Support', 'HCC', 'Telemedica', 'POD avg'], colors:['#2060c8','#2060c8','#2060c8','#2060c8','#2060c8'], isRate:true, title80:false, maxVal:40 },
+  ];
+
+  charts.forEach(function(cfg) {
+    var canvas = document.getElementById(cfg.id);
+    if(!canvas) return;
+    var W = canvas.offsetWidth || canvas.parentElement.offsetWidth || 600;
+    var H = 330;
+    canvas.width = W; canvas.height = H;
+    var ctx = canvas.getContext('2d');
+    drawGroupedBarChart(ctx, W, H, cfg);
+  });
+}
+
+var busyInited = false;
+function initBusyHourChart() {
+  if(busyInited) return;
+  busyInited = true;
+  var canvas = document.getElementById('busy-hour-chart');
+  if(!canvas) return;
+  var W = canvas.offsetWidth || canvas.parentElement.offsetWidth || 700;
+  var H = 330;
+  canvas.width = W; canvas.height = H;
+  var ctx = canvas.getContext('2d');
+  drawBusyHourChart(ctx, W, H, {
+    wVoice: [0, 2, 19, 19, 17, 33, 36, 38, 37, 34, 46, 40, 23, 31, 28, 27, 24, 29, 22, 16],
+    wMsg:   [0, 0, 15, 9, 11, 18, 12, 9, 15, 9, 11, 13, 20, 16, 10, 10, 10, 6, 4, 11],
+    wEmail: [1, 3, 3, 6, 1, 4, 4, 2, 5, 0, 8, 6, 5, 1, 1, 2, 3, 1, 1, 2]
+  });
+}
+
+// On resize: re-render if trending is visible
+window.addEventListener('resize', function() {
+  var trending = document.getElementById('tab-trending');
+  if(trending && trending.classList.contains('active')) {
+    trendChartsInited = false;
+    busyInited = false;
+    initTrendCharts();
+    initBusyHourChart();
+  }
+});
+</script>
+</body>
+</html>
