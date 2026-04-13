@@ -23,7 +23,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Aptos',Calibri,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;}
-.header{background:var(--white);border-bottom:1px solid var(--border);}
+.header{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;}
 .header-inner{display:flex;align-items:center;padding:0 56px;height:80px;}
 .header-logo{display:flex;align-items:center;padding-right:36px;border-right:1px solid var(--border);height:100%;}
 .header-logo-text{font-family:'Aptos Display',Calibri,sans-serif;font-size:20px;font-weight:700;color:var(--navy-deep);letter-spacing:-.01em;}
@@ -37,7 +37,7 @@ body{font-family:'Aptos',Calibri,'Segoe UI',sans-serif;background:var(--bg);colo
 .hdr-period{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-4);margin-bottom:3px;}
 .hdr-date{font-family:'Aptos Display',Calibri,sans-serif;font-size:19px;font-weight:700;color:var(--navy-deep);line-height:1.1;}
 .hdr-gen{margin-top:3px;font-size:12px;color:var(--ink-4);}
-.nav-tabs{background:var(--navy-deep);display:flex;padding:0 56px;border-radius:0 0 12px 12px;overflow-x:auto;}
+.nav-tabs{background:var(--navy-deep);display:flex;padding:0 56px;border-radius:0 0 12px 12px;overflow-x:auto;position:sticky;top:80px;z-index:199;}
 .nav-tab{padding:13px 22px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);cursor:pointer;border-bottom:3px solid transparent;transition:color .15s,border-color .15s,background .15s;white-space:nowrap;user-select:none;display:inline-flex;align-items:center;gap:7px;}
 .nav-tab:hover{color:rgba(255,255,255,.8);background:rgba(255,255,255,.04);}
 .nav-tab.active{color:white;border-bottom-color:var(--red);}
@@ -451,13 +451,13 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
       <div class="chart-title">POD Voice Metrics — Answer Rate & SL</div>
       <div class="chart-sub">All POD-based voice queues · SL target 80%</div>
       <div class="hbar" style="margin-top:14px;">
-        <div class="hbar-row"><div class="hbar-label">POD4 Answer %</div><div class="hbar-track"><div class="hbar-fill" style="width:73.9%;background:var(--blue-acc)">73.9%</div></div></div>
+        <div class="hbar-row"><div class="hbar-label">POD4 Answer %</div><div class="hbar-track"><div class="hbar-fill" style="width:73.9%;background:var(--blue-acc)">73.9%</div><div class="tgt-line" style="left:80%"></div></div></div>
 <div class="hbar-row"><div class="hbar-label">POD4 SL</div><div class="hbar-track"><div class="hbar-fill" style="width:52.6%;background:var(--blue-acc)">52.6%</div><div class="tgt-line" style="left:80%"></div></div></div>
-<div class="hbar-row"><div class="hbar-label">POD1 Answer %</div><div class="hbar-track"><div class="hbar-fill" style="width:54.2%;background:var(--blue-acc)">54.2%</div></div></div>
+<div class="hbar-row"><div class="hbar-label">POD1 Answer %</div><div class="hbar-track"><div class="hbar-fill" style="width:54.2%;background:var(--blue-acc)">54.2%</div><div class="tgt-line" style="left:80%"></div></div></div>
 <div class="hbar-row"><div class="hbar-label">POD1 SL</div><div class="hbar-track"><div class="hbar-fill" style="width:45.0%;background:var(--blue-acc)">45.0%</div><div class="tgt-line" style="left:80%"></div></div></div>
-<div class="hbar-row"><div class="hbar-label">POD3 Answer %</div><div class="hbar-track"><div class="hbar-fill" style="width:65.9%;background:var(--blue-acc)">65.9%</div></div></div>
+<div class="hbar-row"><div class="hbar-label">POD3 Answer %</div><div class="hbar-track"><div class="hbar-fill" style="width:65.9%;background:var(--blue-acc)">65.9%</div><div class="tgt-line" style="left:80%"></div></div></div>
 <div class="hbar-row"><div class="hbar-label">POD3 SL</div><div class="hbar-track"><div class="hbar-fill" style="width:37.9%;background:var(--blue-acc)">37.9%</div><div class="tgt-line" style="left:80%"></div></div></div>
-<div class="hbar-row"><div class="hbar-label">POD2 Answer %</div><div class="hbar-track"><div class="hbar-fill" style="width:57.5%;background:var(--blue-acc)">57.5%</div></div></div>
+<div class="hbar-row"><div class="hbar-label">POD2 Answer %</div><div class="hbar-track"><div class="hbar-fill" style="width:57.5%;background:var(--blue-acc)">57.5%</div><div class="tgt-line" style="left:80%"></div></div></div>
 <div class="hbar-row"><div class="hbar-label">POD2 SL</div><div class="hbar-track"><div class="hbar-fill" style="width:9.7%;background:var(--red)">9.7% ⚠</div><div class="tgt-line" style="left:80%"></div></div></div>
       </div>
       <p style="margin-top:14px;font-size:13px;color:var(--ink-3);">POD avg answer rate: 62.9% · POD avg abandon rate: 15.7% · POD2 SL at 9.7% indicates critical staffing issue.</p>
@@ -734,144 +734,299 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     </div>
   </section>
 
-  <section>
-    <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Agent Performance Detail</span><span class="sec-sub">All media · Ranked by answered volume (inbound) · Top 3 flagged · Anomalous rows dimmed</span></div>
-    <div class="dtable-wrap">
-      <table class="dtable" style="width:100%">
-        <thead><tr>
-          <th style="width:5%;text-align:center">Rank</th>
-          <th style="text-align:left;width:25%">Agent</th>
-          <th style="width:12%">Total Answered</th>
-          <th style="width:22%">Breakdown (V/E/C)</th>
-          <th style="width:18%">Voice Avg Handle</th>
-          <th style="width:18%">Transfers</th>
-        </tr></thead>
-        <tbody>
+    <section>
+    <div class="sec-head"><span class="sec-num">§ 02</span><span class="sec-title">Individual Agent Performance</span><span class="sec-sub">Sorted by total answered desc &middot; V=Voice E=Email C=Chat</span></div>
+    <div class="dtable-wrap scrollable">
+    <table class="dtable compact" style="width:100%">
+      <thead><tr>
+        <th style="text-align:left;width:18%">Agent</th>
+        <th style="width:5%">Rank</th>
+        <th style="width:7%">Total Ans.</th>
+        <th style="width:13%">Media Mix</th>
+        <th style="width:8%">Voice AHT</th>
+        <th style="width:8%">Email AHT</th>
+        <th style="width:8%">Chat AHT</th>
+        <th style="width:7%">Chat ACW</th>
+        <th style="width:5%">Xfers</th>
+        <th style="width:8%">On Queue</th>
+        <th style="width:8%">Not Resp.</th>
+        <th style="width:7%">Status</th>
+      </tr></thead>
+      <tbody>
 <tr>
+  <td><div class="q-name">Miguel Garcia</div></td>
   <td><span class="rank g1">1</span></td>
-  <td><strong>Miguel Garcia</strong></td>
   <td><strong>182</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">84V · 25E · 73C</td>
+  <td><span class="chip navy">84V+25E+73C</span></td>
   <td>6m 12s</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
   <td>18</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
 </tr><tr>
+  <td><div class="q-name">La'Shay Richard</div></td>
   <td><span class="rank g2">2</span></td>
-  <td><strong>La'Shay Richard</strong></td>
   <td><strong>89</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">26V · 13E · 50C</td>
+  <td><span class="chip navy">26V+13E+50C</span></td>
   <td>8m 34s</td>
   <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
 </tr><tr>
+  <td><div class="q-name">Rashidah Brown</div></td>
   <td><span class="rank g3">3</span></td>
-  <td><strong>Rashidah Brown</strong></td>
   <td><strong>56</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">21V · 16E · 19C</td>
+  <td><span class="chip navy">21V+16E+19C</span></td>
   <td>5m 52s</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
   <td>7</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
 </tr><tr>
+  <td><div class="q-name">Dustin Duemer</div></td>
   <td><span class="rank gn">4</span></td>
-  <td><strong>Dustin Duemer</strong></td>
   <td><strong>26</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">18V · 3E · 5C</td>
+  <td><span class="chip navy">18V+3E+5C</span></td>
   <td>4m 28s</td>
   <td>—</td>
-</tr><tr>
-  <td><span class="rank gn">5</span></td>
-  <td><strong>Ashley Bradley</strong></td>
-  <td><strong>22</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">17V · 0E · 5C</td>
-  <td>5m 3s</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
   <td>—</td>
 </tr><tr>
+  <td><div class="q-name">Ashley Bradley</div></td>
+  <td><span class="rank gn">5</span></td>
+  <td><strong>22</strong></td>
+  <td><span class="chip navy">17V+5C</span></td>
+  <td>5m 03s</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+</tr><tr>
+  <td><div class="q-name">Samantha Shaw</div></td>
   <td><span class="rank gn">6</span></td>
-  <td><strong>Samantha Shaw</strong></td>
   <td><strong>21</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">17V · 0E · 4C</td>
+  <td><span class="chip navy">17V+4C</span></td>
   <td>6m 47s</td>
   <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
 </tr><tr>
+  <td><div class="q-name">Jenna Burns</div></td>
   <td><span class="rank gn">7</span></td>
-  <td><strong>Jenna Burns</strong></td>
   <td><strong>18</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">13V · 0E · 5C</td>
+  <td><span class="chip navy">13V+5C</span></td>
   <td>4m 22s</td>
   <td>—</td>
-</tr><tr>
-  <td><span class="rank gn">8</span></td>
-  <td><strong>Auny Elias-Heath</strong></td>
-  <td><strong>17</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">15V · 1E · 1C</td>
-  <td>5m 8s</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
   <td>—</td>
 </tr><tr>
+  <td><div class="q-name">Auny Elias-Heath</div></td>
+  <td><span class="rank gn">8</span></td>
+  <td><strong>17</strong></td>
+  <td><span class="chip navy">15V+1E+1C</span></td>
+  <td>5m 08s</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+</tr><tr>
+  <td><div class="q-name">Christina Browley</div></td>
   <td><span class="rank gn">9</span></td>
-  <td><strong>Christina Browley</strong></td>
   <td><strong>15</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">3V · 8E · 4C</td>
+  <td><span class="chip navy">3V+8E+4C</span></td>
   <td>4m 19s</td>
   <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
 </tr><tr>
+  <td><div class="q-name">Kimberly Coleman</div></td>
   <td><span class="rank gn">10</span></td>
-  <td><strong>Kimberly Coleman</strong></td>
   <td><strong>15</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">12V · 1E · 2C</td>
+  <td><span class="chip navy">12V+1E+2C</span></td>
   <td>7m 12s</td>
   <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
 </tr><tr>
+  <td><div class="q-name">Jennifer Fuston</div></td>
   <td><span class="rank gn">11</span></td>
-  <td><strong>Jennifer Fuston</strong></td>
   <td><strong>13</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">10V · 2E · 1C</td>
+  <td><span class="chip navy">10V+2E+1C</span></td>
   <td>6m 18s</td>
   <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
 </tr><tr>
+  <td><div class="q-name">Mirline Etienne</div></td>
   <td><span class="rank gn">12</span></td>
-  <td><strong>Mirline Etienne</strong></td>
   <td><strong>8</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">8V · 0E · 0C</td>
+  <td><span class="chip navy">8V</span></td>
   <td>5m 11s</td>
   <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
 </tr><tr>
+  <td><div class="q-name">Austin Thomas</div></td>
   <td><span class="rank gn">13</span></td>
-  <td><strong>Austin Thomas</strong></td>
   <td><strong>7</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">7V · 0E · 0C</td>
+  <td><span class="chip navy">7V</span></td>
   <td>4m 19s</td>
   <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
 </tr><tr>
+  <td><div class="q-name">Tatiana Jean-Louis</div></td>
   <td><span class="rank gn">14</span></td>
-  <td><strong>Tatiana Jean-Louis</strong></td>
   <td><strong>7</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">5V · 0E · 2C</td>
+  <td><span class="chip navy">5V+2C</span></td>
   <td>8m 22s</td>
   <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
 </tr><tr>
+  <td><div class="q-name">Alex DeTrolio</div></td>
   <td><span class="rank gn">15</span></td>
-  <td><strong>Alex DeTrolio</strong></td>
   <td><strong>3</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">3V · 0E · 0C</td>
+  <td><span class="chip navy">3V</span></td>
   <td>2m 18s</td>
   <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
 </tr><tr>
+  <td><div class="q-name">EuKyta Little</div></td>
   <td><span class="rank gn">16</span></td>
-  <td><strong>EuKyta Little</strong></td>
   <td><strong>2</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">1V · 0E · 1C</td>
+  <td><span class="chip navy">1V+1C</span></td>
   <td>3m 44s</td>
   <td>—</td>
-</tr><tr>
-  <td><span class="rank gn">17</span></td>
-  <td><strong>Shalon Jones</strong></td>
-  <td><strong>2</strong></td>
-  <td style="font-size:12px;color:var(--ink-3)">2V · 0E · 0C</td>
-  <td>4m 8s</td>
   <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+</tr><tr>
+  <td><div class="q-name">Shalon Jones</div></td>
+  <td><span class="rank gn">17</span></td>
+  <td><strong>2</strong></td>
+  <td><span class="chip navy">2V</span></td>
+  <td>4m 08s</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+  <td>—</td>
+</tr><tr class="anomaly-row">
+  <td><div class="q-name">Ashley Andrus</div><div class="q-sub">No activity this week</div></td>
+  <td><span class="rank gn">—</span></td>
+  <td>0</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td><span class="chip gray">Zero</span></td>
+</tr><tr class="anomaly-row">
+  <td><div class="q-name">Carla Burks</div><div class="q-sub">No activity this week</div></td>
+  <td><span class="rank gn">—</span></td>
+  <td>0</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td><span class="chip gray">Zero</span></td>
+</tr><tr class="anomaly-row">
+  <td><div class="q-name">Chelsey Wilson</div><div class="q-sub">No activity this week</div></td>
+  <td><span class="rank gn">—</span></td>
+  <td>0</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td><span class="chip gray">Zero</span></td>
+</tr><tr class="anomaly-row">
+  <td><div class="q-name">Jeanette Burrell</div><div class="q-sub">No activity this week</div></td>
+  <td><span class="rank gn">—</span></td>
+  <td>0</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td><span class="chip gray">Zero</span></td>
+</tr><tr class="anomaly-row">
+  <td><div class="q-name">Johnny James</div><div class="q-sub">No activity this week</div></td>
+  <td><span class="rank gn">—</span></td>
+  <td>0</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td><span class="chip gray">Zero</span></td>
+</tr><tr class="anomaly-row">
+  <td><div class="q-name">Shannon Rogers</div><div class="q-sub">No activity this week</div></td>
+  <td><span class="rank gn">—</span></td>
+  <td>0</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td><span class="chip gray">Zero</span></td>
+</tr><tr class="anomaly-row">
+  <td><div class="q-name">Thia Decker</div><div class="q-sub">No activity this week</div></td>
+  <td><span class="rank gn">—</span></td>
+  <td>0</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td><span class="chip gray">Zero</span></td>
+</tr><tr class="anomaly-row">
+  <td><div class="q-name">Yveca Mary</div><div class="q-sub">No activity this week</div></td>
+  <td><span class="rank gn">—</span></td>
+  <td>0</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td><span class="chip gray">Zero</span></td>
 </tr>
-<tr class="anomaly-row"><td><span class="rank gn">—</span></td><td><strong>Ashley Andrus</strong></td><td>0</td><td style="font-size:12px;color:var(--ink-3)">No activity</td><td>—</td><td>—</td></tr><tr class="anomaly-row"><td><span class="rank gn">—</span></td><td><strong>Carla Burks</strong></td><td>0</td><td style="font-size:12px;color:var(--ink-3)">No activity</td><td>—</td><td>—</td></tr><tr class="anomaly-row"><td><span class="rank gn">—</span></td><td><strong>Chelsey Wilson</strong></td><td>0</td><td style="font-size:12px;color:var(--ink-3)">No activity</td><td>—</td><td>—</td></tr><tr class="anomaly-row"><td><span class="rank gn">—</span></td><td><strong>Jeanette Burrell</strong></td><td>0</td><td style="font-size:12px;color:var(--ink-3)">No activity</td><td>—</td><td>—</td></tr><tr class="anomaly-row"><td><span class="rank gn">—</span></td><td><strong>Johnny James</strong></td><td>0</td><td style="font-size:12px;color:var(--ink-3)">No activity</td><td>—</td><td>—</td></tr><tr class="anomaly-row"><td><span class="rank gn">—</span></td><td><strong>Shannon Rogers</strong></td><td>0</td><td style="font-size:12px;color:var(--ink-3)">No activity</td><td>—</td><td>—</td></tr><tr class="anomaly-row"><td><span class="rank gn">—</span></td><td><strong>Thia Decker</strong></td><td>0</td><td style="font-size:12px;color:var(--ink-3)">No activity</td><td>—</td><td>—</td></tr><tr class="anomaly-row"><td><span class="rank gn">—</span></td><td><strong>Yveca Mary</strong></td><td>0</td><td style="font-size:12px;color:var(--ink-3)">No activity</td><td>—</td><td>—</td></tr>
-        </tbody>
-      </table>
+      </tbody>
+    </table>
     </div>
-    <div class="agent-note">V = Voice · E = Email · C = Chat · Voice Avg Handle shown for agents with voice activity. Anomaly rows (dimmed) = zero handle activity recorded this week. 8 agents with zero activity is a significant increase from the prior week.</div>
+    <div class="agent-note">V = Voice &middot; E = Email &middot; C = Chat &middot; Email AHT, Chat AHT, Chat ACW, On Queue, and Not Resp. columns will be populated in upcoming reports. Status will reflect Active / Review / Flag based on AHT and Not Responding thresholds. Anomaly rows (dimmed) = zero handle activity recorded this week.</div>
   </section>
 
   <div class="report-footer">
@@ -1038,7 +1193,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     <div class="peak-cards-grid">
 <div class="ob-card">
   <div class="ob-day">Mon 4/6</div>
-  <div class="ob-heatrow" style="height:36px;"><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:00 AM · 0</div></div><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:30 AM · 0</div></div><div class="ob-cell" style="background:#5b8fb8;height:21.2%;border-radius:2px;"><div class="ob-tooltip">9:00 AM · 2</div></div><div class="ob-cell" style="background:#7aabcf;height:10.6%;border-radius:2px;"><div class="ob-tooltip">9:30 AM · 1</div></div><div class="ob-cell" style="background:#5b8fb8;height:21.2%;border-radius:2px;"><div class="ob-tooltip">10:00 AM · 2</div></div><div class="ob-cell" style="background:#1e4f88;height:180.9%;border-radius:2px;"><div class="ob-tooltip">10:30 AM · 17</div></div><div class="ob-cell" style="background:#1e4f88;height:169.1%;border-radius:2px;"><div class="ob-tooltip">11:00 AM · 16</div></div><div class="ob-cell" style="background:#3d6fa0;height:84.8%;border-radius:2px;"><div class="ob-tooltip">11:30 AM · 8</div></div><div class="ob-cell" style="background:#3d6fa0;height:53.2%;border-radius:2px;"><div class="ob-tooltip">12:00 PM · 5</div></div><div class="ob-cell" style="background:#3d6fa0;height:74.5%;border-radius:2px;"><div class="ob-tooltip">12:30 PM · 7</div></div><div class="ob-cell" style="background:#2e5f94;height:106.4%;border-radius:2px;"><div class="ob-tooltip">1:00 PM · 10</div></div><div class="ob-cell" style="background:#4d7fac;height:85.1%;border-radius:2px;"><div class="ob-tooltip">1:30 PM · 8</div></div><div class="ob-cell" style="background:#f59e0b;height:159.6%;border-radius:2px;"><div class="ob-tooltip">2:00 PM · 15</div></div><div class="ob-cell" style="background:#5b8fb8;height:31.9%;border-radius:2px;"><div class="ob-tooltip">2:30 PM · 3</div></div><div class="ob-cell" style="background:#3d6fa0;height:95.7%;border-radius:2px;"><div class="ob-tooltip">3:00 PM · 9</div></div><div class="ob-cell" style="background:#5b8fb8;height:53.2%;border-radius:2px;"><div class="ob-tooltip">3:30 PM · 5</div></div><div class="ob-cell" style="background:#6b9ec4;height:42.6%;border-radius:2px;"><div class="ob-tooltip">4:00 PM · 4</div></div><div class="ob-cell" style="background:#5b8fb8;height:53.2%;border-radius:2px;"><div class="ob-tooltip">4:30 PM · 5</div></div><div class="ob-cell" style="background:#3d6fa0;height:63.8%;border-radius:2px;"><div class="ob-tooltip">5:00 PM · 6</div></div><div class="ob-cell" style="background:#7aabcf;height:31.9%;border-radius:2px;"><div class="ob-tooltip">5:30 PM · 3</div></div></div>
+  <div class="ob-heatrow" style="height:80px;"><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:00 AM · 0</div></div><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:30 AM · 0</div></div><div class="ob-cell" style="background:#5b8fb8;height:11.8%;border-radius:2px;"><div class="ob-tooltip">9:00 AM · 2</div></div><div class="ob-cell" style="background:#7aabcf;height:5.9%;border-radius:2px;"><div class="ob-tooltip">9:30 AM · 1</div></div><div class="ob-cell" style="background:#5b8fb8;height:11.8%;border-radius:2px;"><div class="ob-tooltip">10:00 AM · 2</div></div><div class="ob-cell" style="background:#1e4f88;height:100.0%;border-radius:2px;"><div class="ob-tooltip">10:30 AM · 17</div></div><div class="ob-cell" style="background:#1e4f88;height:94.1%;border-radius:2px;"><div class="ob-tooltip">11:00 AM · 16</div></div><div class="ob-cell" style="background:#3d6fa0;height:47.1%;border-radius:2px;"><div class="ob-tooltip">11:30 AM · 8</div></div><div class="ob-cell" style="background:#3d6fa0;height:29.4%;border-radius:2px;"><div class="ob-tooltip">12:00 PM · 5</div></div><div class="ob-cell" style="background:#3d6fa0;height:41.2%;border-radius:2px;"><div class="ob-tooltip">12:30 PM · 7</div></div><div class="ob-cell" style="background:#2e5f94;height:58.8%;border-radius:2px;"><div class="ob-tooltip">1:00 PM · 10</div></div><div class="ob-cell" style="background:#4d7fac;height:47.1%;border-radius:2px;"><div class="ob-tooltip">1:30 PM · 8</div></div><div class="ob-cell" style="background:#f59e0b;height:88.2%;border-radius:2px;"><div class="ob-tooltip">2:00 PM · 15</div></div><div class="ob-cell" style="background:#5b8fb8;height:17.6%;border-radius:2px;"><div class="ob-tooltip">2:30 PM · 3</div></div><div class="ob-cell" style="background:#3d6fa0;height:52.9%;border-radius:2px;"><div class="ob-tooltip">3:00 PM · 9</div></div><div class="ob-cell" style="background:#5b8fb8;height:29.4%;border-radius:2px;"><div class="ob-tooltip">3:30 PM · 5</div></div><div class="ob-cell" style="background:#6b9ec4;height:23.5%;border-radius:2px;"><div class="ob-tooltip">4:00 PM · 4</div></div><div class="ob-cell" style="background:#5b8fb8;height:29.4%;border-radius:2px;"><div class="ob-tooltip">4:30 PM · 5</div></div><div class="ob-cell" style="background:#3d6fa0;height:35.3%;border-radius:2px;"><div class="ob-tooltip">5:00 PM · 6</div></div><div class="ob-cell" style="background:#7aabcf;height:17.6%;border-radius:2px;"><div class="ob-tooltip">5:30 PM · 3</div></div></div>
   <div class="ob-labels">
     <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
     <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
@@ -1050,7 +1205,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 </div>
 <div class="ob-card">
   <div class="ob-day">Tue 4/7</div>
-  <div class="ob-heatrow" style="height:36px;"><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:00 AM · 0</div></div><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:30 AM · 0</div></div><div class="ob-cell" style="background:#3d6fa0;height:42.1%;border-radius:2px;"><div class="ob-tooltip">9:00 AM · 4</div></div><div class="ob-cell" style="background:#5b8fb8;height:42.1%;border-radius:2px;"><div class="ob-tooltip">9:30 AM · 4</div></div><div class="ob-cell" style="background:#5b8fb8;height:42.1%;border-radius:2px;"><div class="ob-tooltip">10:00 AM · 4</div></div><div class="ob-cell" style="background:#2e5f94;height:105.3%;border-radius:2px;"><div class="ob-tooltip">10:30 AM · 10</div></div><div class="ob-cell" style="background:#1e4f88;height:115.8%;border-radius:2px;"><div class="ob-tooltip">11:00 AM · 11</div></div><div class="ob-cell" style="background:#2e5f94;height:157.9%;border-radius:2px;"><div class="ob-tooltip">11:30 AM · 15</div></div><div class="ob-cell" style="background:#3d6fa0;height:84.2%;border-radius:2px;"><div class="ob-tooltip">12:00 PM · 8</div></div><div class="ob-cell" style="background:#5b8fb8;height:63.2%;border-radius:2px;"><div class="ob-tooltip">12:30 PM · 6</div></div><div class="ob-cell" style="background:#2e5f94;height:84.2%;border-radius:2px;"><div class="ob-tooltip">1:00 PM · 8</div></div><div class="ob-cell" style="background:#3d6fa0;height:73.7%;border-radius:2px;"><div class="ob-tooltip">1:30 PM · 7</div></div><div class="ob-cell" style="background:#6b9ec4;height:42.1%;border-radius:2px;"><div class="ob-tooltip">2:00 PM · 4</div></div><div class="ob-cell" style="background:#1e4f88;height:115.8%;border-radius:2px;"><div class="ob-tooltip">2:30 PM · 11</div></div><div class="ob-cell" style="background:#5b8fb8;height:42.1%;border-radius:2px;"><div class="ob-tooltip">3:00 PM · 4</div></div><div class="ob-cell" style="background:#f59e0b;height:115.8%;border-radius:2px;"><div class="ob-tooltip">3:30 PM · 11</div></div><div class="ob-cell" style="background:#6b9ec4;height:31.6%;border-radius:2px;"><div class="ob-tooltip">4:00 PM · 3</div></div><div class="ob-cell" style="background:#7aabcf;height:63.2%;border-radius:2px;"><div class="ob-tooltip">4:30 PM · 6</div></div><div class="ob-cell" style="background:#6b9ec4;height:31.6%;border-radius:2px;"><div class="ob-tooltip">5:00 PM · 3</div></div><div class="ob-cell" style="background:#5b8fb8;height:52.6%;border-radius:2px;"><div class="ob-tooltip">5:30 PM · 5</div></div></div>
+  <div class="ob-heatrow" style="height:80px;"><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:00 AM · 0</div></div><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:30 AM · 0</div></div><div class="ob-cell" style="background:#3d6fa0;height:26.7%;border-radius:2px;"><div class="ob-tooltip">9:00 AM · 4</div></div><div class="ob-cell" style="background:#5b8fb8;height:26.7%;border-radius:2px;"><div class="ob-tooltip">9:30 AM · 4</div></div><div class="ob-cell" style="background:#5b8fb8;height:26.7%;border-radius:2px;"><div class="ob-tooltip">10:00 AM · 4</div></div><div class="ob-cell" style="background:#2e5f94;height:66.7%;border-radius:2px;"><div class="ob-tooltip">10:30 AM · 10</div></div><div class="ob-cell" style="background:#1e4f88;height:73.3%;border-radius:2px;"><div class="ob-tooltip">11:00 AM · 11</div></div><div class="ob-cell" style="background:#2e5f94;height:100.0%;border-radius:2px;"><div class="ob-tooltip">11:30 AM · 15</div></div><div class="ob-cell" style="background:#3d6fa0;height:53.3%;border-radius:2px;"><div class="ob-tooltip">12:00 PM · 8</div></div><div class="ob-cell" style="background:#5b8fb8;height:40.0%;border-radius:2px;"><div class="ob-tooltip">12:30 PM · 6</div></div><div class="ob-cell" style="background:#2e5f94;height:53.3%;border-radius:2px;"><div class="ob-tooltip">1:00 PM · 8</div></div><div class="ob-cell" style="background:#3d6fa0;height:46.7%;border-radius:2px;"><div class="ob-tooltip">1:30 PM · 7</div></div><div class="ob-cell" style="background:#6b9ec4;height:26.7%;border-radius:2px;"><div class="ob-tooltip">2:00 PM · 4</div></div><div class="ob-cell" style="background:#1e4f88;height:73.3%;border-radius:2px;"><div class="ob-tooltip">2:30 PM · 11</div></div><div class="ob-cell" style="background:#5b8fb8;height:26.7%;border-radius:2px;"><div class="ob-tooltip">3:00 PM · 4</div></div><div class="ob-cell" style="background:#f59e0b;height:73.3%;border-radius:2px;"><div class="ob-tooltip">3:30 PM · 11</div></div><div class="ob-cell" style="background:#6b9ec4;height:20.0%;border-radius:2px;"><div class="ob-tooltip">4:00 PM · 3</div></div><div class="ob-cell" style="background:#7aabcf;height:40.0%;border-radius:2px;"><div class="ob-tooltip">4:30 PM · 6</div></div><div class="ob-cell" style="background:#6b9ec4;height:20.0%;border-radius:2px;"><div class="ob-tooltip">5:00 PM · 3</div></div><div class="ob-cell" style="background:#5b8fb8;height:33.3%;border-radius:2px;"><div class="ob-tooltip">5:30 PM · 5</div></div></div>
   <div class="ob-labels">
     <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
     <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
@@ -1062,7 +1217,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 </div>
 <div class="ob-card">
   <div class="ob-day">Wed 4/8</div>
-  <div class="ob-heatrow" style="height:36px;"><div class="ob-cell" style="background:#c4d8e8;height:5.3%;border-radius:2px;"><div class="ob-tooltip">8:00 AM · 0</div></div><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:30 AM · 0</div></div><div class="ob-cell" style="background:#5b8fb8;height:52.6%;border-radius:2px;"><div class="ob-tooltip">9:00 AM · 5</div></div><div class="ob-cell" style="background:#3d6fa0;height:73.7%;border-radius:2px;"><div class="ob-tooltip">9:30 AM · 7</div></div><div class="ob-cell" style="background:#5b8fb8;height:73.7%;border-radius:2px;"><div class="ob-tooltip">10:00 AM · 7</div></div><div class="ob-cell" style="background:#1e4f88;height:179.0%;border-radius:2px;"><div class="ob-tooltip">10:30 AM · 17</div></div><div class="ob-cell" style="background:#1e4f88;height:126.3%;border-radius:2px;"><div class="ob-tooltip">11:00 AM · 12</div></div><div class="ob-cell" style="background:#2e5f94;height:105.3%;border-radius:2px;"><div class="ob-tooltip">11:30 AM · 10</div></div><div class="ob-cell" style="background:#2e5f94;height:179.0%;border-radius:2px;"><div class="ob-tooltip">12:00 PM · 17</div></div><div class="ob-cell" style="background:#3d6fa0;height:73.7%;border-radius:2px;"><div class="ob-tooltip">12:30 PM · 7</div></div><div class="ob-cell" style="background:#2e5f94;height:147.4%;border-radius:2px;"><div class="ob-tooltip">1:00 PM · 14</div></div><div class="ob-cell" style="background:#4d7fac;height:105.3%;border-radius:2px;"><div class="ob-tooltip">1:30 PM · 10</div></div><div class="ob-cell" style="background:#4d7fac;height:84.2%;border-radius:2px;"><div class="ob-tooltip">2:00 PM · 8</div></div><div class="ob-cell" style="background:#3d6fa0;height:84.2%;border-radius:2px;"><div class="ob-tooltip">2:30 PM · 8</div></div><div class="ob-cell" style="background:#3d6fa0;height:84.2%;border-radius:2px;"><div class="ob-tooltip">3:00 PM · 8</div></div><div class="ob-cell" style="background:#5b8fb8;height:42.1%;border-radius:2px;"><div class="ob-tooltip">3:30 PM · 4</div></div><div class="ob-cell" style="background:#5b8fb8;height:73.7%;border-radius:2px;"><div class="ob-tooltip">4:00 PM · 7</div></div><div class="ob-cell" style="background:#5b8fb8;height:52.6%;border-radius:2px;"><div class="ob-tooltip">4:30 PM · 5</div></div><div class="ob-cell" style="background:#5b8fb8;height:31.6%;border-radius:2px;"><div class="ob-tooltip">5:00 PM · 3</div></div><div class="ob-cell" style="background:#6b9ec4;height:31.6%;border-radius:2px;"><div class="ob-tooltip">5:30 PM · 3</div></div></div>
+  <div class="ob-heatrow" style="height:80px;"><div class="ob-cell" style="background:#c4d8e8;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:00 AM · 0</div></div><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:30 AM · 0</div></div><div class="ob-cell" style="background:#5b8fb8;height:29.4%;border-radius:2px;"><div class="ob-tooltip">9:00 AM · 5</div></div><div class="ob-cell" style="background:#3d6fa0;height:41.2%;border-radius:2px;"><div class="ob-tooltip">9:30 AM · 7</div></div><div class="ob-cell" style="background:#5b8fb8;height:41.2%;border-radius:2px;"><div class="ob-tooltip">10:00 AM · 7</div></div><div class="ob-cell" style="background:#1e4f88;height:100.0%;border-radius:2px;"><div class="ob-tooltip">10:30 AM · 17</div></div><div class="ob-cell" style="background:#1e4f88;height:70.6%;border-radius:2px;"><div class="ob-tooltip">11:00 AM · 12</div></div><div class="ob-cell" style="background:#2e5f94;height:58.8%;border-radius:2px;"><div class="ob-tooltip">11:30 AM · 10</div></div><div class="ob-cell" style="background:#2e5f94;height:100.0%;border-radius:2px;"><div class="ob-tooltip">12:00 PM · 17</div></div><div class="ob-cell" style="background:#3d6fa0;height:41.2%;border-radius:2px;"><div class="ob-tooltip">12:30 PM · 7</div></div><div class="ob-cell" style="background:#2e5f94;height:82.4%;border-radius:2px;"><div class="ob-tooltip">1:00 PM · 14</div></div><div class="ob-cell" style="background:#4d7fac;height:58.8%;border-radius:2px;"><div class="ob-tooltip">1:30 PM · 10</div></div><div class="ob-cell" style="background:#4d7fac;height:47.1%;border-radius:2px;"><div class="ob-tooltip">2:00 PM · 8</div></div><div class="ob-cell" style="background:#3d6fa0;height:47.1%;border-radius:2px;"><div class="ob-tooltip">2:30 PM · 8</div></div><div class="ob-cell" style="background:#3d6fa0;height:47.1%;border-radius:2px;"><div class="ob-tooltip">3:00 PM · 8</div></div><div class="ob-cell" style="background:#5b8fb8;height:23.5%;border-radius:2px;"><div class="ob-tooltip">3:30 PM · 4</div></div><div class="ob-cell" style="background:#5b8fb8;height:41.2%;border-radius:2px;"><div class="ob-tooltip">4:00 PM · 7</div></div><div class="ob-cell" style="background:#5b8fb8;height:29.4%;border-radius:2px;"><div class="ob-tooltip">4:30 PM · 5</div></div><div class="ob-cell" style="background:#5b8fb8;height:17.6%;border-radius:2px;"><div class="ob-tooltip">5:00 PM · 3</div></div><div class="ob-cell" style="background:#6b9ec4;height:17.6%;border-radius:2px;"><div class="ob-tooltip">5:30 PM · 3</div></div></div>
   <div class="ob-labels">
     <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
     <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
@@ -1074,7 +1229,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 </div>
 <div class="ob-card">
   <div class="ob-day">Thu 4/9</div>
-  <div class="ob-heatrow" style="height:36px;"><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:00 AM · 0</div></div><div class="ob-cell" style="background:#c4d8e8;height:5.3%;border-radius:2px;"><div class="ob-tooltip">8:30 AM · 0</div></div><div class="ob-cell" style="background:#5b8fb8;height:42.1%;border-radius:2px;"><div class="ob-tooltip">9:00 AM · 4</div></div><div class="ob-cell" style="background:#5b8fb8;height:52.6%;border-radius:2px;"><div class="ob-tooltip">9:30 AM · 5</div></div><div class="ob-cell" style="background:#3d6fa0;height:73.7%;border-radius:2px;"><div class="ob-tooltip">10:00 AM · 7</div></div><div class="ob-cell" style="background:#6b9ec4;height:63.2%;border-radius:2px;"><div class="ob-tooltip">10:30 AM · 6</div></div><div class="ob-cell" style="background:#3d6fa0;height:84.2%;border-radius:2px;"><div class="ob-tooltip">11:00 AM · 8</div></div><div class="ob-cell" style="background:#5b8fb8;height:52.6%;border-radius:2px;"><div class="ob-tooltip">11:30 AM · 5</div></div><div class="ob-cell" style="background:#2e5f94;height:157.9%;border-radius:2px;"><div class="ob-tooltip">12:00 PM · 15</div></div><div class="ob-cell" style="background:#3d6fa0;height:84.2%;border-radius:2px;"><div class="ob-tooltip">12:30 PM · 8</div></div><div class="ob-cell" style="background:#d97706;height:210.5%;border-radius:2px;"><div class="ob-tooltip">1:00 PM · 20</div></div><div class="ob-cell" style="background:#2e5f94;height:136.8%;border-radius:2px;"><div class="ob-tooltip">1:30 PM · 13</div></div><div class="ob-cell" style="background:#3d6fa0;height:73.7%;border-radius:2px;"><div class="ob-tooltip">2:00 PM · 7</div></div><div class="ob-cell" style="background:#2e5f94;height:136.8%;border-radius:2px;"><div class="ob-tooltip">2:30 PM · 13</div></div><div class="ob-cell" style="background:#5b8fb8;height:73.7%;border-radius:2px;"><div class="ob-tooltip">3:00 PM · 7</div></div><div class="ob-cell" style="background:#6b9ec4;height:52.6%;border-radius:2px;"><div class="ob-tooltip">3:30 PM · 5</div></div><div class="ob-cell" style="background:#3d6fa0;height:73.7%;border-radius:2px;"><div class="ob-tooltip">4:00 PM · 7</div></div><div class="ob-cell" style="background:#3d6fa0;height:73.7%;border-radius:2px;"><div class="ob-tooltip">4:30 PM · 7</div></div><div class="ob-cell" style="background:#5b8fb8;height:63.2%;border-radius:2px;"><div class="ob-tooltip">5:00 PM · 6</div></div><div class="ob-cell" style="background:#5b8fb8;height:84.2%;border-radius:2px;"><div class="ob-tooltip">5:30 PM · 8</div></div></div>
+  <div class="ob-heatrow" style="height:80px;"><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:00 AM · 0</div></div><div class="ob-cell" style="background:#c4d8e8;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:30 AM · 0</div></div><div class="ob-cell" style="background:#5b8fb8;height:20.0%;border-radius:2px;"><div class="ob-tooltip">9:00 AM · 4</div></div><div class="ob-cell" style="background:#5b8fb8;height:25.0%;border-radius:2px;"><div class="ob-tooltip">9:30 AM · 5</div></div><div class="ob-cell" style="background:#3d6fa0;height:35.0%;border-radius:2px;"><div class="ob-tooltip">10:00 AM · 7</div></div><div class="ob-cell" style="background:#6b9ec4;height:30.0%;border-radius:2px;"><div class="ob-tooltip">10:30 AM · 6</div></div><div class="ob-cell" style="background:#3d6fa0;height:40.0%;border-radius:2px;"><div class="ob-tooltip">11:00 AM · 8</div></div><div class="ob-cell" style="background:#5b8fb8;height:25.0%;border-radius:2px;"><div class="ob-tooltip">11:30 AM · 5</div></div><div class="ob-cell" style="background:#2e5f94;height:75.0%;border-radius:2px;"><div class="ob-tooltip">12:00 PM · 15</div></div><div class="ob-cell" style="background:#3d6fa0;height:40.0%;border-radius:2px;"><div class="ob-tooltip">12:30 PM · 8</div></div><div class="ob-cell" style="background:#d97706;height:100.0%;border-radius:2px;"><div class="ob-tooltip">1:00 PM · 20</div></div><div class="ob-cell" style="background:#2e5f94;height:65.0%;border-radius:2px;"><div class="ob-tooltip">1:30 PM · 13</div></div><div class="ob-cell" style="background:#3d6fa0;height:35.0%;border-radius:2px;"><div class="ob-tooltip">2:00 PM · 7</div></div><div class="ob-cell" style="background:#2e5f94;height:65.0%;border-radius:2px;"><div class="ob-tooltip">2:30 PM · 13</div></div><div class="ob-cell" style="background:#5b8fb8;height:35.0%;border-radius:2px;"><div class="ob-tooltip">3:00 PM · 7</div></div><div class="ob-cell" style="background:#6b9ec4;height:25.0%;border-radius:2px;"><div class="ob-tooltip">3:30 PM · 5</div></div><div class="ob-cell" style="background:#3d6fa0;height:35.0%;border-radius:2px;"><div class="ob-tooltip">4:00 PM · 7</div></div><div class="ob-cell" style="background:#3d6fa0;height:35.0%;border-radius:2px;"><div class="ob-tooltip">4:30 PM · 7</div></div><div class="ob-cell" style="background:#5b8fb8;height:30.0%;border-radius:2px;"><div class="ob-tooltip">5:00 PM · 6</div></div><div class="ob-cell" style="background:#5b8fb8;height:40.0%;border-radius:2px;"><div class="ob-tooltip">5:30 PM · 8</div></div></div>
   <div class="ob-labels">
     <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
     <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
@@ -1086,7 +1241,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 </div>
 <div class="ob-card">
   <div class="ob-day">Fri 4/10</div>
-  <div class="ob-heatrow" style="height:36px;"><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:00 AM · 0</div></div><div class="ob-cell" style="background:#c4d8e8;height:10.3%;border-radius:2px;"><div class="ob-tooltip">8:30 AM · 2</div></div><div class="ob-cell" style="background:#3d6fa0;height:206.9%;border-radius:2px;"><div class="ob-tooltip">9:00 AM · 20</div></div><div class="ob-cell" style="background:#5b8fb8;height:103.4%;border-radius:2px;"><div class="ob-tooltip">9:30 AM · 10</div></div><div class="ob-cell" style="background:#5b8fb8;height:103.4%;border-radius:2px;"><div class="ob-tooltip">10:00 AM · 10</div></div><div class="ob-cell" style="background:#5b8fb8;height:103.4%;border-radius:2px;"><div class="ob-tooltip">10:30 AM · 10</div></div><div class="ob-cell" style="background:#5b8fb8;height:103.4%;border-radius:2px;"><div class="ob-tooltip">11:00 AM · 10</div></div><div class="ob-cell" style="background:#3d6fa0;height:206.9%;border-radius:2px;"><div class="ob-tooltip">11:30 AM · 20</div></div><div class="ob-cell" style="background:#d97706;height:268.1%;border-radius:2px;"><div class="ob-tooltip">12:00 PM · 26</div></div><div class="ob-cell" style="background:#f59e0b;height:247.4%;border-radius:2px;"><div class="ob-tooltip">12:30 PM · 24</div></div><div class="ob-cell" style="background:#4d7fac;height:113.8%;border-radius:2px;"><div class="ob-tooltip">1:00 PM · 11</div></div><div class="ob-cell" style="background:#3d6fa0;height:92.8%;border-radius:2px;"><div class="ob-tooltip">1:30 PM · 9</div></div><div class="ob-cell" style="background:#4d7fac;height:92.8%;border-radius:2px;"><div class="ob-tooltip">2:00 PM · 9</div></div><div class="ob-cell" style="background:#4d7fac;height:92.8%;border-radius:2px;"><div class="ob-tooltip">2:30 PM · 9</div></div><div class="ob-cell" style="background:#3d6fa0;height:92.8%;border-radius:2px;"><div class="ob-tooltip">3:00 PM · 9</div></div><div class="ob-cell" style="background:#5b8fb8;height:62.1%;border-radius:2px;"><div class="ob-tooltip">3:30 PM · 6</div></div><div class="ob-cell" style="background:#5b8fb8;height:41.4%;border-radius:2px;"><div class="ob-tooltip">4:00 PM · 4</div></div><div class="ob-cell" style="background:#7aabcf;height:31.0%;border-radius:2px;"><div class="ob-tooltip">4:30 PM · 3</div></div><div class="ob-cell" style="background:#6b9ec4;height:82.8%;border-radius:2px;"><div class="ob-tooltip">5:00 PM · 8</div></div><div class="ob-cell" style="background:#6b9ec4;height:31.0%;border-radius:2px;"><div class="ob-tooltip">5:30 PM · 3</div></div></div>
+  <div class="ob-heatrow" style="height:80px;"><div class="ob-cell" style="background:#eef0f4;height:5.0%;border-radius:2px;"><div class="ob-tooltip">8:00 AM · 0</div></div><div class="ob-cell" style="background:#c4d8e8;height:7.7%;border-radius:2px;"><div class="ob-tooltip">8:30 AM · 2</div></div><div class="ob-cell" style="background:#3d6fa0;height:76.9%;border-radius:2px;"><div class="ob-tooltip">9:00 AM · 20</div></div><div class="ob-cell" style="background:#5b8fb8;height:38.5%;border-radius:2px;"><div class="ob-tooltip">9:30 AM · 10</div></div><div class="ob-cell" style="background:#5b8fb8;height:38.5%;border-radius:2px;"><div class="ob-tooltip">10:00 AM · 10</div></div><div class="ob-cell" style="background:#5b8fb8;height:38.5%;border-radius:2px;"><div class="ob-tooltip">10:30 AM · 10</div></div><div class="ob-cell" style="background:#5b8fb8;height:38.5%;border-radius:2px;"><div class="ob-tooltip">11:00 AM · 10</div></div><div class="ob-cell" style="background:#3d6fa0;height:76.9%;border-radius:2px;"><div class="ob-tooltip">11:30 AM · 20</div></div><div class="ob-cell" style="background:#d97706;height:100.0%;border-radius:2px;"><div class="ob-tooltip">12:00 PM · 26</div></div><div class="ob-cell" style="background:#f59e0b;height:92.3%;border-radius:2px;"><div class="ob-tooltip">12:30 PM · 24</div></div><div class="ob-cell" style="background:#4d7fac;height:42.3%;border-radius:2px;"><div class="ob-tooltip">1:00 PM · 11</div></div><div class="ob-cell" style="background:#3d6fa0;height:34.6%;border-radius:2px;"><div class="ob-tooltip">1:30 PM · 9</div></div><div class="ob-cell" style="background:#4d7fac;height:34.6%;border-radius:2px;"><div class="ob-tooltip">2:00 PM · 9</div></div><div class="ob-cell" style="background:#4d7fac;height:34.6%;border-radius:2px;"><div class="ob-tooltip">2:30 PM · 9</div></div><div class="ob-cell" style="background:#3d6fa0;height:34.6%;border-radius:2px;"><div class="ob-tooltip">3:00 PM · 9</div></div><div class="ob-cell" style="background:#5b8fb8;height:23.1%;border-radius:2px;"><div class="ob-tooltip">3:30 PM · 6</div></div><div class="ob-cell" style="background:#5b8fb8;height:15.4%;border-radius:2px;"><div class="ob-tooltip">4:00 PM · 4</div></div><div class="ob-cell" style="background:#7aabcf;height:11.5%;border-radius:2px;"><div class="ob-tooltip">4:30 PM · 3</div></div><div class="ob-cell" style="background:#6b9ec4;height:30.8%;border-radius:2px;"><div class="ob-tooltip">5:00 PM · 8</div></div><div class="ob-cell" style="background:#6b9ec4;height:11.5%;border-radius:2px;"><div class="ob-tooltip">5:30 PM · 3</div></div></div>
   <div class="ob-labels">
     <div class="ob-lbl">8a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
     <div class="ob-lbl">10a</div><div class="ob-lbl"></div><div class="ob-lbl"></div><div class="ob-lbl"></div>
