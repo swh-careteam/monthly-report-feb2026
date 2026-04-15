@@ -1078,12 +1078,12 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     <div class="trend-chart-row">
       <div class="trend-canvas-box">
         <div class="trend-canvas-title">Contact Volume by Channel</div>
-        <div class="trend-canvas-sub">Prior week (grey) vs this week (blue) · Interactions offered</div>
+        <div class="trend-canvas-sub">4-week trend · Mar 15–Apr 11 · Interactions offered</div>
         <canvas id="trend-vol-chart" height="330"></canvas>
       </div>
       <div class="trend-canvas-box">
         <div class="trend-canvas-title">Answer / Completion Rate by Channel</div>
-        <div class="trend-canvas-sub">Prior week (grey) vs this week (blue) · % · 80% target line</div>
+        <div class="trend-canvas-sub">4-week trend · Mar 15–Apr 11 · % · 80% target line</div>
         <canvas id="trend-rate-chart" height="330"></canvas>
       </div>
     </div>
@@ -1094,12 +1094,12 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     <div class="trend-chart-row">
       <div class="trend-canvas-box">
         <div class="trend-canvas-title">Voice Queue Answer Rate</div>
-        <div class="trend-canvas-sub">Prior week (grey) vs this week (blue) · % · 80% target</div>
+        <div class="trend-canvas-sub">4-week trend · Mar 15–Apr 11 · % · 80% target</div>
         <canvas id="trend-voice-chart" height="330"></canvas>
       </div>
       <div class="trend-canvas-box">
         <div class="trend-canvas-title">Voice Queue Abandon Rate</div>
-        <div class="trend-canvas-sub">Prior week (grey) vs this week (blue) · Lower is better</div>
+        <div class="trend-canvas-sub">4-week trend · Mar 15–Apr 11 · Lower is better</div>
         <canvas id="trend-abandon-chart" height="330"></canvas>
       </div>
     </div>
@@ -1265,18 +1265,22 @@ function rrect(ctx, x, y, w, h, radii) {
 }
 
 function drawGroupedBarChart(ctx, W, H, cfg) {
-  const { labels, prevVals, currVals, colors, maxVal, isRate, title80, legendPrev, legendCurr } = cfg;
-  const pad = { top: 76, right: 52, bottom: 62, left: 42 };
+  const { labels, series, isRate, maxVal, title80 } = cfg;
+  const nS = series.length;
+  const pad = { top: 96, right: 54, bottom: 58, left: 46 };
   const chartW = W - pad.left - pad.right;
   const chartH = H - pad.top - pad.bottom;
   const n = labels.length;
   const groupW = chartW / n;
-  const barW = Math.min(groupW * 0.28, 30);
-  const barGap = 5;
-  const max = maxVal || Math.max(...prevVals, ...currVals) * 1.2;
+  const iGap = 3;
+  const barW = Math.max(Math.min(Math.floor((groupW * 0.78 - (nS-1)*iGap) / nS), 22), 9);
+  const grpTotalW = barW * nS + iGap * (nS - 1);
+  const allVals = series.flatMap(s => s.vals);
+  const max = maxVal || Math.max(...allVals) * 1.18;
 
   ctx.clearRect(0, 0, W, H);
 
+  // Grid lines + y-axis labels
   [0, 0.25, 0.5, 0.75, 1].forEach(frac => {
     const y = pad.top + chartH * (1 - frac);
     ctx.beginPath();
@@ -1285,75 +1289,146 @@ function drawGroupedBarChart(ctx, W, H, cfg) {
     ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + chartW, y); ctx.stroke();
     if (frac > 0) {
       const val = max * frac;
-      ctx.fillStyle = '#9ea2ae'; ctx.font = '10px Segoe UI, sans-serif'; ctx.textAlign = 'right';
-      ctx.fillText(isRate ? val.toFixed(0)+'%' : Math.round(val), pad.left - 4, y + 3.5);
+      ctx.fillStyle = '#9ea2ae'; ctx.font = '10px Segoe UI,sans-serif'; ctx.textAlign = 'right';
+      ctx.fillText(isRate ? val.toFixed(0)+'%' : Math.round(val), pad.left - 5, y + 3.5);
     }
   });
 
+  // 80% target line — unchanged
   if (title80 && max >= 80) {
     const y80 = pad.top + chartH * (1 - 80/max);
     ctx.beginPath(); ctx.setLineDash([4,3]); ctx.strokeStyle = '#c0202a'; ctx.lineWidth = 1.5;
     ctx.moveTo(pad.left, y80); ctx.lineTo(pad.left + chartW, y80); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle = '#c0202a'; ctx.font = 'bold 10px Segoe UI, sans-serif'; ctx.textAlign = 'right';
+    ctx.fillStyle = '#c0202a'; ctx.font = 'bold 10px Segoe UI,sans-serif'; ctx.textAlign = 'right';
     ctx.fillText('80%', W - 4, y80 - 3); ctx.fillText('target', W - 4, y80 + 9);
   }
 
+  // ── Collision-avoiding label placement ──────────────────────────────────────
+  // For each group, compute natural label positions then resolve vertical overlaps
+  function resolveLabels(rawLabels) {
+    // rawLabels: [{x, naturalY, text, color, bold}]
+    // Measure approximate text width (6px per char at 9px font is a good estimate)
+    const charW = 5.8;
+    rawLabels.forEach(l => { l.w = l.text.length * charW; l.y = l.naturalY; });
+    const lineH = 10; // font size + tiny gap
+    const vPad = 2;
+    // Multiple resolution passes
+    for (let pass = 0; pass < 6; pass++) {
+      let moved = false;
+      for (let i = 0; i < rawLabels.length; i++) {
+        for (let j = i + 1; j < rawLabels.length; j++) {
+          const li = rawLabels[i], lj = rawLabels[j];
+          const xOverlap = Math.abs(li.x - lj.x) < (li.w + lj.w) / 2 + 2;
+          if (!xOverlap) continue;
+          const yGap = Math.abs(li.y - lj.y);
+          if (yGap < lineH + vPad) {
+            const needed = lineH + vPad - yGap;
+            // Push both: higher one up by half, lower one down only if it wouldn't go into bar
+            if (li.y <= lj.y) {
+              li.y -= needed;        // push higher label further up
+            } else {
+              lj.y -= needed;
+            }
+            moved = true;
+          }
+        }
+      }
+      if (!moved) break;
+    }
+    return rawLabels;
+  }
+
+  // Draw bars and collect label info per group
   labels.forEach((lbl, i) => {
     const cx = pad.left + i * groupW + groupW / 2;
-    const x1 = cx - barW - barGap/2;
-    const x2 = cx + barGap/2;
-    const prevH = Math.max((prevVals[i] / max) * chartH, 2);
-    const prevY = pad.top + chartH - prevH;
-    ctx.fillStyle = 'rgba(90,95,110,0.13)'; ctx.strokeStyle = 'rgba(90,95,110,0.48)'; ctx.lineWidth = 1.5;
-    rrect(ctx, x1, prevY, barW, prevH, [3,3,0,0]); ctx.fill(); ctx.stroke();
-    ctx.fillStyle = 'rgba(90,95,110,0.72)'; ctx.font = '10px Segoe UI, sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText(isRate ? prevVals[i].toFixed(1)+'%' : prevVals[i], x1+barW/2, prevY - 7);
-    const currH = Math.max((currVals[i] / max) * chartH, 2);
-    const currY = pad.top + chartH - currH;
-    ctx.fillStyle = colors[i]; ctx.strokeStyle = 'transparent'; ctx.lineWidth = 0;
-    rrect(ctx, x2, currY, barW, currH, [3,3,0,0]); ctx.fill();
-    const currLbl = isRate ? currVals[i].toFixed(1)+'%' : String(currVals[i]);
-    ctx.fillStyle = colors[i]; ctx.font = 'bold 11px Segoe UI, sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText(currLbl, x2+barW/2, currY - 6);
-    const delta = currVals[i] - prevVals[i];
-    const isGood = isRate ? delta > 0 : null;
-    let dc = '#9ea2ae';
-    if (isGood === true) dc = '#1a6e44'; if (isGood === false) dc = '#c0202a';
-    const dStr = (delta >= 0 ? '▲' : '▼') + ' ' + Math.abs(isRate ? delta.toFixed(1) : delta) + (isRate ? 'pp' : '');
-    ctx.fillStyle = dc; ctx.font = 'bold 10px Segoe UI, sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText(dStr, cx, pad.top + chartH + 18);
-    ctx.fillStyle = '#3a3d48'; ctx.font = 'bold 12px Segoe UI, sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText(lbl, cx, pad.top + chartH + 34);
+    const x0 = cx - grpTotalW / 2;
+    const rawLabels = [];
+
+    series.forEach((s, si) => {
+      const x = x0 + si * (barW + iGap);
+      const val = s.vals[i];
+      const bH = Math.max((val / max) * chartH, 2);
+      const bY = pad.top + chartH - bH;
+      ctx.fillStyle = s.color; ctx.strokeStyle = 'transparent';
+      rrect(ctx, x, bY, barW, bH, [2,2,0,0]); ctx.fill();
+      const isNewest = si === nS - 1;
+      const valStr = isRate ? val.toFixed(1)+'%' : String(val);
+      rawLabels.push({
+        x: x + barW / 2,
+        naturalY: bY - 4,
+        text: valStr,
+        color: s.color,
+        bold: isNewest
+      });
+    });
+
+    // Resolve collisions then draw labels
+    const placed = resolveLabels(rawLabels);
+    placed.forEach(l => {
+      const fs = l.bold ? 9 : 8;
+      ctx.fillStyle = l.color;
+      ctx.font = (l.bold ? 'bold ' : '') + fs + 'px Segoe UI,sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(l.text, l.x, l.y);
+    });
+
+    // Group x-label
+    ctx.fillStyle = '#3a3d48'; ctx.font = 'bold 11px Segoe UI,sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(lbl, cx, pad.top + chartH + 16);
   });
 
-  const lY = pad.top - 36;
-  ctx.fillStyle = 'rgba(80,80,80,0.15)'; ctx.strokeStyle = 'rgba(80,80,80,0.5)'; ctx.lineWidth = 1.2;
-  rrect(ctx, pad.left, lY-8, 14, 9, 2); ctx.fill(); ctx.stroke();
-  ctx.fillStyle = '#6b6e7a'; ctx.font = '11px Segoe UI, sans-serif'; ctx.textAlign = 'left';
-  ctx.fillText(legendPrev || 'Mar 29–Apr 4 (prior week)', pad.left+18, lY);
-  ctx.fillStyle = colors[0]; ctx.strokeStyle = 'transparent';
-  rrect(ctx, pad.left+175, lY-8, 14, 9, 2); ctx.fill();
-  ctx.fillStyle = '#6b6e7a'; ctx.font = '11px Segoe UI, sans-serif';
-  ctx.fillText(legendCurr || 'Apr 6–11 (this week)', pad.left+193, lY);
+  // Legend — 2 rows × 2 cols
+  const col2X = pad.left + Math.floor(chartW / 2);
+  [[0,1],[2,3]].forEach((pair, row) => {
+    const lgY = pad.top - 58 + row * 22;
+    pair.forEach((si, col) => {
+      if (si >= nS) return;
+      const x = col === 0 ? pad.left : col2X;
+      ctx.fillStyle = series[si].color; ctx.strokeStyle = 'transparent';
+      rrect(ctx, x, lgY-7, 12, 8, 2); ctx.fill();
+      ctx.fillStyle = '#6b6e7a'; ctx.font = '10px Segoe UI,sans-serif'; ctx.textAlign = 'left';
+      ctx.fillText(series[si].label, x+15, lgY+1);
+    });
+  });
 }
 
 function drawTrendCharts() {
+  // Palette D — Slate + Bold Blue
+  const C = ['#d0d9e8','#9aaec8','#5878a8','#2060c8'];
+  const W1 = 'Mar 15–21', W2 = 'Mar 22–28', W3 = 'Mar 29–Apr 4', W4 = 'Apr 6–11';
   const configs = [
-    { id:'trend-vol-chart', labels:['Voice','Chat','Callback','Email'],
-       prevVals:[563, 269, 86, 115], currVals:[412, 209, 93, 83],
-       colors:['#2060c8','#2060c8','#2060c8','#2060c8'], isRate:false },
-    { id:'trend-rate-chart', labels:['Voice','Chat','Callback','Email'],
-       prevVals:[54.2, 90.0, 98.8, 99.1], currVals:[58.7, 90.0, 100.0, 98.8],
-       colors:['#2060c8','#2060c8','#2060c8','#2060c8'],
-       isRate:true, maxVal:110, title80:true },
-    { id:'trend-voice-chart', labels:['CE Team','Client Sup','HCC','Telemedica','POD1–4 avg'],
-       prevVals:[82.3, 52.3, 54.5, 49.2, 66.8], currVals:[72.9, 36.2, 56.8, 50.7, 62.9],
-       colors:['#2060c8','#2060c8','#2060c8','#2060c8','#2060c8'],
-       isRate:true, maxVal:100, title80:true },
-    { id:'trend-abandon-chart', labels:['CE Team','Client Sup','HCC','Telemedica','POD1–4 avg'],
-       prevVals:[12.1, 27.3, 10.9, 27.7, 16.5], currVals:[12.1, 27.6, 22.7, 20.0, 15.7],
-       colors:['#2060c8','#2060c8','#2060c8','#2060c8','#2060c8'],
-       isRate:true, maxVal:null },
+    { id:'trend-vol-chart',
+      labels:['Voice','Chat','Callback','Email'],
+      series:[
+        { label:W1, color:C[0], vals:[527,162,143,94] },
+        { label:W2, color:C[1], vals:[543,195,82,99] },
+        { label:W3, color:C[2], vals:[563,269,86,115] },
+        { label:W4, color:C[3], vals:[412,209,93,83] }
+      ], isRate:false },
+    { id:'trend-rate-chart',
+      labels:['Voice','Chat','Callback','Email'],
+      series:[
+        { label:W1, color:C[0], vals:[39.5,90.1,97.2,99.0] },
+        { label:W2, color:C[1], vals:[55.1,88.2,98.8,96.0] },
+        { label:W3, color:C[2], vals:[54.2,90.0,98.8,99.1] },
+        { label:W4, color:C[3], vals:[58.7,90.0,100.0,98.8] }
+      ], isRate:true, maxVal:110, title80:true },
+    { id:'trend-voice-chart',
+      labels:['CE Team','Client Sup','HCC','Telemedica','POD1–4 avg'],
+      series:[
+        { label:W1, color:C[0], vals:[66.2,41.4,58.5,5.9,34.8] },
+        { label:W2, color:C[1], vals:[75.7,71.0,73.5,33.7,55.7] },
+        { label:W3, color:C[2], vals:[82.3,52.3,54.5,49.2,66.8] },
+        { label:W4, color:C[3], vals:[72.9,36.2,56.8,50.7,62.9] }
+      ], isRate:true, maxVal:100, title80:true },
+    { id:'trend-abandon-chart',
+      labels:['CE Team','Client Sup','HCC','Telemedica','POD1–4 avg'],
+      series:[
+        { label:W1, color:C[0], vals:[16.2,23.2,24.4,36.1,25.0] },
+        { label:W2, color:C[1], vals:[13.0,13.0,12.2,27.0,19.1] },
+        { label:W3, color:C[2], vals:[9.7,27.3,10.9,27.7,16.5] },
+        { label:W4, color:C[3], vals:[12.1,27.6,22.7,20.0,15.7] }
+      ], isRate:true, maxVal:null }
   ];
   configs.forEach(cfg => {
     const canvas = document.getElementById(cfg.id);
