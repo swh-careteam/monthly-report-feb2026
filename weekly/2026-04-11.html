@@ -84,7 +84,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 .dtable tbody td:first-child{text-align:left;}
 .dtable tfoot td{padding:12px 14px;text-align:center;font-size:14px;font-weight:700;background:var(--silver-lt);border-top:2px solid var(--navy);color:var(--navy-deep);}
 .dtable tfoot td:first-child{text-align:left;}
-.dtable.compact thead th{padding:9px 7px;font-size:10.5px;letter-spacing:.04em;white-space:nowrap;}
+.dtable.compact thead th{padding:9px 7px;font-size:10.5px;letter-spacing:.04em;white-space:normal;line-height:1.3;}
 .dtable.compact tbody td{padding:9px 7px;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .dtable.compact tbody td:first-child{white-space:normal;}
 .dtable.compact tfoot td{padding:9px 7px;font-size:12.5px;}
@@ -112,10 +112,10 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 .tgt-line{position:absolute;top:-10px;bottom:-10px;width:0;border-right:2px dashed var(--red);z-index:2;}
 .tgt-line::after{content:none;}
 .hbar .hbar-row:first-child .tgt-line::after{content:'80%';position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--red);font-weight:700;white-space:nowrap;}
-.media-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.media-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
 .media-card{background:var(--white);padding:22px 20px 18px;position:relative;border-radius:12px;border:1px solid var(--border-str);overflow:hidden;}
 .media-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
-.mc-voice::before{background:var(--navy);}.mc-email::before{background:var(--blue-acc);}.mc-chat::before{background:var(--green);}.mc-callback::before{background:var(--amber);}
+.mc-voice::before{background:var(--navy);}.mc-email::before{background:var(--blue-acc);}.mc-chat::before{background:var(--green);}.mc-callback::before{background:var(--amber);}.mc-outbound::before{background:var(--red);}
 .mc-icon{height:32px;display:flex;align-items:center;margin-bottom:10px;}
 .mc-type{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;}
 .mc-vol{font-family:'Aptos Display',Calibri,sans-serif;font-size:40px;font-weight:700;color:var(--navy-deep);line-height:1;margin-bottom:4px;}
@@ -162,6 +162,24 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 .section-wrap.active .page>*:nth-child(3){animation-delay:.12s}.section-wrap.active .page>*:nth-child(4){animation-delay:.16s}
 .section-wrap.active .page>*:nth-child(5){animation-delay:.20s}.section-wrap.active .page>*:nth-child(6){animation-delay:.24s}
 @media print{.nav-tabs{display:none!important;}.section-wrap{display:block!important;}.page{padding:24px 36px!important;}body{background:white!important;}section{page-break-inside:avoid;}}
+/* Agent Insights tab */
+.insight-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:0;}
+.insight-card{background:var(--white);border:1px solid var(--border-str);border-radius:12px;padding:24px 24px 20px;position:relative;overflow:hidden;}
+.insight-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.ic-active::before{background:var(--green);}.ic-review::before{background:var(--amber);}.ic-flag::before{background:var(--red);}
+.ic-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.ic-rank{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;}
+.ic-name{font-family:'Aptos Display',Calibri,sans-serif;font-size:17px;font-weight:700;color:var(--navy-deep);line-height:1.2;}
+.ic-meta{font-size:12px;color:var(--ink-3);margin-top:2px;}
+.ic-status{margin-left:auto;flex-shrink:0;}
+.ic-stats-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;}
+.ic-stat{background:var(--silver-lt);border-radius:6px;padding:5px 10px;font-size:12px;color:var(--ink-2);}
+.ic-stat strong{color:var(--navy-deep);font-weight:700;}
+.ic-narrative{font-size:14px;color:var(--ink-2);line-height:1.65;margin-bottom:10px;}
+.ic-coaching{margin-top:10px;padding:10px 14px;background:var(--blue-lt);border-radius:8px;border-left:3px solid var(--blue-acc);}
+.ic-coaching-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-acc);margin-bottom:4px;}
+.ic-coaching-text{font-size:13px;color:var(--ink-2);line-height:1.55;}
+.ic-alert{margin-top:10px;padding:8px 12px;background:var(--red-light);border-radius:8px;border-left:3px solid var(--red);font-size:13px;color:var(--red);font-weight:600;}
 /* Peak interval heatmap */
 .ob-card{background:var(--white);border:1px solid var(--border-str);border-radius:12px;padding:14px 12px 14px;}
 .ob-day{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;}
@@ -218,6 +236,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
   <div class="nav-tab" onclick="showTab('agents', event)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 17c0-3.31 3.13-6 7-6s7 2.69 7 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> &nbsp; Agent Performance</div>
   <div class="nav-tab" onclick="showTab('actions', event)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><path d="M10 2l2.09 4.26L17 7.27l-3.5 3.41.83 4.82L10 13.27l-4.33 2.23.83-4.82L3 7.27l4.91-.71L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg> &nbsp; Recommendations</div>
   <div class="nav-tab" onclick="showTab('trending', event)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><polyline points="2,14 7,8 11,11 18,4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="14,4 18,4 18,8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> &nbsp; Trending</div>
+  <div class="nav-tab" onclick="showTab('insights', event)"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:inline-block;vertical-align:middle"><circle cx="10" cy="7" r="3.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 17c0-3.31 3.13-6 7-6s7 2.69 7 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 2l1.5 1.5M16 5h2M14.5 7.5L16 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> &nbsp; Agent Insights</div>
 </div>
 
 <!-- ═══════════ OVERVIEW ═══════════ -->
@@ -226,7 +245,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
   <section>
     <div class="sec-head">
       <span class="sec-num">§ 01</span>
-      <span class="sec-title">All-Channel Executive Summary</span>
+      <span class="sec-title">All-Channel Summary</span>
       <span class="sec-sub">Week of Apr 6–11, 2026 · All media types</span>
     </div>
     <div class="media-cards">
@@ -238,8 +257,6 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
         <div class="mc-stats">
           <div class="mc-stat"><span>Answer Rate</span><span class="mc-stat-val warn">58.7%</span></div>
           <div class="mc-stat"><span>Abandon Rate</span><span class="mc-stat-val warn">17.7%</span></div>
-          <div class="mc-stat"><span>Best SL (POD4 Voice)</span><span class="mc-stat-val warn">52.6%</span></div>
-          <div class="mc-stat"><span>CE Team Answer Rate</span><span class="mc-stat-val warn">72.9%</span></div>
         </div>
       </div>
       <div class="media-card mc-email">
@@ -249,9 +266,7 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
         <div class="mc-label">Offered interactions</div>
         <div class="mc-stats">
           <div class="mc-stat"><span>Handle Rate</span><span class="mc-stat-val good">98.8%</span></div>
-          <div class="mc-stat"><span>Best SL (POD1 & POD3)</span><span class="mc-stat-val good">100.0%</span></div>
-          <div class="mc-stat"><span>All PODs Above 85%</span><span class="mc-stat-val good">✓</span></div>
-          <div class="mc-stat"><span>POD4 AHT</span><span class="mc-stat-val warn">10h 32m ⚠</span></div>
+          <div class="mc-stat"><span>Best SL (POD1 &amp; POD3)</span><span class="mc-stat-val good">100.0%</span></div>
         </div>
       </div>
       <div class="media-card mc-chat">
@@ -262,8 +277,6 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
         <div class="mc-stats">
           <div class="mc-stat"><span>Answer Rate</span><span class="mc-stat-val good">90.0%</span></div>
           <div class="mc-stat"><span>Best SL (POD4)</span><span class="mc-stat-val warn">44.2%</span></div>
-          <div class="mc-stat"><span>POD1 ACW Still High</span><span class="mc-stat-val warn">4h 48m ⚠</span></div>
-          <div class="mc-stat"><span>All PODs 84%+ Ans Rate</span><span class="mc-stat-val good">✓</span></div>
         </div>
       </div>
       <div class="media-card mc-callback">
@@ -274,8 +287,16 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
         <div class="mc-stats">
           <div class="mc-stat"><span>Completion Rate</span><span class="mc-stat-val good">100.0%</span></div>
           <div class="mc-stat"><span>Client Support Avg Wait</span><span class="mc-stat-val warn">9h 43m ⚠</span></div>
-          <div class="mc-stat"><span>All POD Callbacks 100%</span><span class="mc-stat-val good">✓</span></div>
-          <div class="mc-stat"><span>Volume Up +8%</span><span class="mc-stat-val warn">86→93 ⚠</span></div>
+        </div>
+      </div>
+      <div class="media-card mc-outbound">
+        <div class="mc-icon"><svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M4.5 3h2.4a.6.6 0 0 1 .57.42l.93 2.8a.6.6 0 0 1-.14.62L6.9 8.1a9.06 9.06 0 0 0 5 5l1.26-1.36a.6.6 0 0 1 .62-.14l2.8.93a.6.6 0 0 1 .42.57V15.5A1.5 1.5 0 0 1 15.5 17C8.6 17 3 11.4 3 4.5A1.5 1.5 0 0 1 4.5 3z" stroke="var(--red)" stroke-width="1.4" stroke-linejoin="round"/><path d="M13 3h4v4" stroke="var(--red)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 3l-5 5" stroke="var(--red)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        <div class="mc-type">Outbound</div>
+        <div class="mc-vol">1,446</div>
+        <div class="mc-label">Agent outbound contacts</div>
+        <div class="mc-stats">
+          <div class="mc-stat"><span>Voice Outbound</span><span class="mc-stat-val">880</span></div>
+          <div class="mc-stat"><span>Email Outbound</span><span class="mc-stat-val">566</span></div>
         </div>
       </div>
     </div>
@@ -726,11 +747,12 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
 <div class="page">
   <section>
     <div class="sec-head"><span class="sec-num">§ 01</span><span class="sec-title">Agent KPIs</span><span class="sec-sub">Week of Apr 6–11, 2026 · All media</span></div>
-    <div class="kpi-row cols-4">
+    <div class="kpi-row cols-5">
       <div class="kpi navy"><div class="kpi-label">Active Agents</div><div class="kpi-val">17</div><div class="kpi-sub">Agents with handle activity</div></div>
       <div class="kpi red"><div class="kpi-label">Zero-Activity</div><div class="kpi-val bad">8</div><div class="kpi-sub">No contacts handled this week</div><div class="kpi-badge red">⚠ Increased anomaly count</div></div>
       <div class="kpi green"><div class="kpi-label">Top Agent (G1)</div><div class="kpi-val" style="font-size:22px">Miguel Garcia</div><div class="kpi-sub">182 total answered</div></div>
       <div class="kpi blue"><div class="kpi-label">Total Answered</div><div class="kpi-val">503</div><div class="kpi-sub">All media · all agents</div></div>
+      <div class="kpi red"><div class="kpi-label">Total Outbound</div><div class="kpi-val">1,446</div><div class="kpi-sub">880 Voice · 566 Email</div></div>
     </div>
   </section>
 
@@ -739,216 +761,234 @@ section{margin-top:44px;}section:first-child{margin-top:0;}
     <div class="dtable-wrap scrollable">
     <table class="dtable compact" style="width:100%">
       <thead><tr>
-        <th style="text-align:left;width:17%">Agent</th>
-        <th style="width:5%">Rank</th>
-        <th style="width:7%">Total Ans.</th>
-        <th style="width:12%">Media Mix</th>
-        <th style="width:8%">Voice AHT</th>
-        <th style="width:8%">Email AHT</th>
-        <th style="width:9%">Chat AHT</th>
-        <th style="width:7%">Chat ACW</th>
-        <th style="width:5%">Xfers</th>
-        <th style="width:8%">On Queue</th>
-        <th style="width:8%">Not Resp.</th>
-        <th style="width:7%">Status</th>
+        <th style="text-align:left;width:15%">Agent</th>
+        <th style="width:4%">Rank</th>
+        <th style="width:6%">Total<br>Answered</th>
+        <th style="width:10%">Media Mix</th>
+        <th style="width:5%">Outbound</th>
+        <th style="width:7%">Voice AHT</th>
+        <th style="width:7%">Email AHT</th>
+        <th style="width:7%">Chat AHT</th>
+        <th style="width:6%">Chat ACW</th>
+        <th style="width:4%">Xfers</th>
+        <th style="width:7%">On Queue</th>
+        <th style="width:7%">Not<br>Responding</th>
+        <th style="width:6%">Status</th>
       </tr></thead>
       <tbody>
 <tr>
   <td><div class="q-name">Miguel Garcia</div></td><td><span class="rank g1">1</span></td>
   <td><strong>182</strong></td><td><span class="chip navy">84V+25E+73C</span></td>
+  <td><span class="chip navy">40V</span></td>
   <td>5m 30s</td><td><span class="chip green">3m 45s</span></td>
   <td>10m 24s</td><td>16s</td>
-  <td>14</td><td>1d 5h</td><td>12m 24s</td>
+<td>14</td><td>1d 5h</td><td>12m 24s</td>
   <td><span class="chip green">Active</span></td>
 </tr>
 <tr>
   <td><div class="q-name">La'Shay Richard</div></td><td><span class="rank g2">2</span></td>
   <td><strong>89</strong></td><td><span class="chip navy">26V+13E+50C</span></td>
+  <td><span class="chip navy">14V</span></td>
   <td>10m 25s</td><td><span class="chip red">4h 49m 32s</span></td>
   <td><span class="chip red">1h 18m 51s</span></td><td><span class="chip red">1h 5m 5s</span></td>
-  <td>—</td><td>20h 19m</td><td>2h 23m</td>
+<td>—</td><td>20h 19m</td><td>2h 23m</td>
   <td><span class="chip red">Flag</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Rashidah Brown</div></td><td><span class="rank g3">3</span></td>
   <td><strong>56</strong></td><td><span class="chip navy">21V+16E+19C</span></td>
+  <td><span class="chip navy">12V</span></td>
   <td>12m 7s</td><td><span class="chip green">23m 59s</span></td>
   <td><span class="chip red">12h 45m 34s</span></td><td><span class="chip red">13h 6m 1s</span></td>
-  <td>2</td><td>15h 56m</td><td>3s</td>
+<td>2</td><td>15h 56m</td><td>3s</td>
   <td><span class="chip red">Flag</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Dustin Duemer</div></td><td><span class="rank gn">4</span></td>
   <td><strong>26</strong></td><td><span class="chip navy">18V+3E+5C</span></td>
+  <td><span class="chip navy">113V&thinsp;+&thinsp;72E</span></td>
   <td>3m 1s</td><td><span class="chip green">58s</span></td>
   <td><span class="chip amber">21m 57s</span></td><td>9m 25s</td>
-  <td>2</td><td>6h 53m</td><td>53m 2s</td>
+<td>2</td><td>6h 53m</td><td>53m 2s</td>
   <td><span class="chip green">Active</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Ashley Bradley</div></td><td><span class="rank gn">5</span></td>
   <td><strong>22</strong></td><td><span class="chip navy">17V+5C</span></td>
+  <td><span class="chip navy">50V</span></td>
   <td>7m 27s</td><td>—</td>
   <td>10m 10s</td><td>4m 40s</td>
-  <td>7</td><td>7h 55m</td><td>1h 1m</td>
+<td>7</td><td>7h 55m</td><td>1h 1m</td>
   <td><span class="chip green">Active</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Samantha Shaw</div></td><td><span class="rank gn">6</span></td>
   <td><strong>21</strong></td><td><span class="chip navy">17V+4C</span></td>
+  <td><span class="chip navy">99V&thinsp;+&thinsp;118E</span></td>
   <td>7m 27s</td><td><span class="chip green">1m 39s</span></td>
   <td>7m 50s</td><td>18s</td>
-  <td>4</td><td>9h 32m</td><td>26m 4s</td>
+<td>4</td><td>9h 32m</td><td>26m 4s</td>
   <td><span class="chip green">Active</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Jenna Burns</div></td><td><span class="rank gn">7</span></td>
   <td><strong>18</strong></td><td><span class="chip navy">13V+5C</span></td>
+  <td><span class="chip navy">67V&thinsp;+&thinsp;24E</span></td>
   <td>11m 21s</td><td><span class="chip green">4m 50s</span></td>
   <td>7m 37s</td><td>10s</td>
-  <td>—</td><td>21h 30m</td><td>1h 13m</td>
+<td>—</td><td>21h 30m</td><td>1h 13m</td>
   <td><span class="chip green">Active</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Auny Elias-Heath</div></td><td><span class="rank gn">8</span></td>
   <td><strong>17</strong></td><td><span class="chip navy">15V+1E+1C</span></td>
+  <td><span class="chip navy">165V&thinsp;+&thinsp;131E</span></td>
   <td>8m 41s</td><td><span class="chip green">20m 25s</span></td>
   <td>13m 44s</td><td>2m 7s</td>
-  <td>2</td><td>9h 16m</td><td>5m 54s</td>
+<td>2</td><td>9h 16m</td><td>5m 54s</td>
   <td><span class="chip green">Active</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Kimberly Coleman</div></td><td><span class="rank gn">9</span></td>
   <td><strong>15</strong></td><td><span class="chip navy">12V+1E+2C</span></td>
+  <td><span class="chip navy">35V&thinsp;+&thinsp;42E</span></td>
   <td>11m 30s</td><td><span class="chip green">2m 28s</span></td>
   <td>4m 7s</td><td>5s</td>
-  <td>—</td><td>6h 20m</td><td>10m 27s</td>
+<td>—</td><td>6h 20m</td><td>10m 27s</td>
   <td><span class="chip green">Active</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Christina Browley</div></td><td><span class="rank gn">10</span></td>
   <td><strong>15</strong></td><td><span class="chip navy">3V+8E+4C</span></td>
+  <td><span class="chip navy">106V&thinsp;+&thinsp;162E</span></td>
   <td>5m 34s</td><td><span class="chip green">1m 51s</span></td>
   <td><span class="chip amber">30m 57s</span></td><td>1m 28s</td>
-  <td>2</td><td>9h 29m</td><td>3h 15m</td>
+<td>2</td><td>9h 29m</td><td>3h 15m</td>
   <td><span class="chip amber">Review</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Jennifer Fuston</div></td><td><span class="rank gn">11</span></td>
   <td><strong>13</strong></td><td><span class="chip navy">10V+2E+1C</span></td>
+  <td><span class="chip navy">35V</span></td>
   <td>9m 22s</td><td><span class="chip green">3m 39s</span></td>
   <td>8m 20s</td><td>13s</td>
-  <td>—</td><td>5h 14m</td><td>7h 44m</td>
+<td>—</td><td>5h 14m</td><td>7h 44m</td>
   <td><span class="chip amber">Review</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Mirline Etienne</div></td><td><span class="rank gn">12</span></td>
   <td><strong>8</strong></td><td><span class="chip navy">8V</span></td>
+  <td><span class="chip navy">39V</span></td>
   <td>2m 31s</td><td>—</td>
   <td>—</td><td>—</td>
-  <td>—</td><td>9h 45m</td><td>1h 24m</td>
+<td>—</td><td>9h 45m</td><td>1h 24m</td>
   <td><span class="chip green">Active</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Austin Thomas</div></td><td><span class="rank gn">13</span></td>
   <td><strong>7</strong></td><td><span class="chip navy">7V</span></td>
+  <td><span class="chip navy">24V</span></td>
   <td>5m 50s</td><td>—</td>
   <td>—</td><td>—</td>
-  <td>2</td><td>9h 8m</td><td>—</td>
+<td>2</td><td>9h 8m</td><td>—</td>
   <td><span class="chip green">Active</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Tatiana Jean-Louis</div></td><td><span class="rank gn">14</span></td>
   <td><strong>7</strong></td><td><span class="chip navy">5V+2C</span></td>
+  <td><span class="chip navy">46V&thinsp;+&thinsp;6E</span></td>
   <td>12m 21s</td><td><span class="chip amber">46m 33s</span></td>
   <td><span class="chip amber">16m 35s</span></td><td>1m 40s</td>
-  <td>—</td><td>7h 56m</td><td>1h 15m</td>
+<td>—</td><td>7h 56m</td><td>1h 15m</td>
   <td><span class="chip amber">Review</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Alex DeTrolio</div></td><td><span class="rank gn">15</span></td>
   <td><strong>3</strong></td><td><span class="chip navy">3V</span></td>
+  <td><span class="chip navy">14V</span></td>
   <td>2m 16s</td><td>—</td>
   <td>—</td><td>—</td>
-  <td>1</td><td>9h 21m</td><td>1h 41m</td>
+<td>1</td><td>9h 21m</td><td>1h 41m</td>
   <td><span class="chip green">Active</span></td>
 </tr>
 <tr>
   <td><div class="q-name">EuKyta Little</div></td><td><span class="rank gn">16</span></td>
   <td><strong>2</strong></td><td><span class="chip navy">1V+1C</span></td>
+  <td><span class="chip navy">2V&thinsp;+&thinsp;11E</span></td>
   <td>1m 31s</td><td><span class="chip green">1m 9s</span></td>
   <td>12m 23s</td><td>—</td>
-  <td>—</td><td>2h 16m</td><td>1h 39m</td>
+<td>—</td><td>2h 16m</td><td>1h 39m</td>
   <td><span class="chip green">Active</span></td>
 </tr>
 <tr>
   <td><div class="q-name">Shalon Jones</div></td><td><span class="rank gn">17</span></td>
   <td><strong>2</strong></td><td><span class="chip navy">2V</span></td>
+  <td><span class="chip navy">14V</span></td>
   <td>3m 52s</td><td>—</td>
   <td>—</td><td>—</td>
-  <td>—</td><td>4h 1m</td><td>42m 57s</td>
+<td>—</td><td>4h 1m</td><td>42m 57s</td>
   <td><span class="chip green">Active</span></td>
 </tr>
 <tr class="anomaly-row">
   <td><div class="q-name">Carla Burks</div><div class="q-sub">No activity this week</div></td>
   <td><span class="rank gn">—</span></td><td>0</td><td>—</td>
-  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>3</td><td>—</td>
   <td>—</td><td>—</td>
   <td><span class="chip gray">Zero</span></td>
 </tr>
 <tr class="anomaly-row">
   <td><div class="q-name">Johnny James</div><div class="q-sub">No activity this week</div></td>
   <td><span class="rank gn">—</span></td><td>0</td><td>—</td>
-  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
   <td>—</td><td>—</td>
   <td><span class="chip gray">Zero</span></td>
 </tr>
 <tr class="anomaly-row">
   <td><div class="q-name">Ashley Andrus</div><div class="q-sub">No activity this week</div></td>
   <td><span class="rank gn">—</span></td><td>0</td><td>—</td>
-  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
   <td>—</td><td>—</td>
   <td><span class="chip gray">Zero</span></td>
 </tr>
 <tr class="anomaly-row">
   <td><div class="q-name">Shannon Rogers</div><div class="q-sub">No activity this week</div></td>
   <td><span class="rank gn">—</span></td><td>0</td><td>—</td>
-  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
   <td>—</td><td>—</td>
   <td><span class="chip gray">Zero</span></td>
 </tr>
 <tr class="anomaly-row">
   <td><div class="q-name">Chelsey Wilson</div><div class="q-sub">No activity this week</div></td>
   <td><span class="rank gn">—</span></td><td>0</td><td>—</td>
-  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
   <td>—</td><td>—</td>
   <td><span class="chip gray">Zero</span></td>
 </tr>
 <tr class="anomaly-row">
   <td><div class="q-name">Jeanette Burrell</div><div class="q-sub">No activity this week</div></td>
   <td><span class="rank gn">—</span></td><td>0</td><td>—</td>
-  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
   <td>—</td><td>—</td>
   <td><span class="chip gray">Zero</span></td>
 </tr>
 <tr class="anomaly-row">
   <td><div class="q-name">Thia Decker</div><div class="q-sub">No activity this week</div></td>
   <td><span class="rank gn">—</span></td><td>0</td><td>—</td>
-  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>2</td><td>—</td>
   <td>—</td><td>—</td>
   <td><span class="chip gray">Zero</span></td>
 </tr>
 <tr class="anomaly-row">
   <td><div class="q-name">Yveca Mary</div><div class="q-sub">No activity this week</div></td>
   <td><span class="rank gn">—</span></td><td>0</td><td>—</td>
-  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+  <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
   <td>—</td><td>—</td>
   <td><span class="chip gray">Zero</span></td>
 </tr>
       </tbody>
     </table>
     </div>
-    <div class="agent-note">V=Voice &middot; E=Email &middot; C=Chat &middot; Email/Chat AHT highlighted <span class="chip red" style="font-size:11px;padding:1px 6px">red</span> if extreme (&gt;2h email / &gt;1h chat), <span class="chip amber" style="font-size:11px;padding:1px 6px">amber</span> if elevated. Status: <span class="chip green" style="font-size:11px;padding:1px 6px">Active</span> normal &middot; <span class="chip amber" style="font-size:11px;padding:1px 6px">Review</span> Not Resp &gt;2h or Email AHT &gt;30m &middot; <span class="chip red" style="font-size:11px;padding:1px 6px">Flag</span> extreme AHT/ACW or Not Resp &gt;8h. Anomaly rows dimmed = zero activity.</div>
+    <div class="agent-note">V=Voice &middot; E=Email &middot; C=Chat &middot; Email/Chat AHT highlighted <span class="chip red" style="font-size:11px;padding:1px 6px">red</span> if extreme (&gt;2h email / &gt;1h chat), <span class="chip amber" style="font-size:11px;padding:1px 6px">amber</span> if elevated. Outbound Calls = total agent-initiated outbound contacts (voice + email). Status: <span class="chip green" style="font-size:11px;padding:1px 6px">Active</span> normal &middot; <span class="chip amber" style="font-size:11px;padding:1px 6px">Review</span> Not Responding &gt;2h or Email AHT &gt;30m &middot; <span class="chip red" style="font-size:11px;padding:1px 6px">Flag</span> extreme AHT/ACW or Not Responding &gt;8h. Anomaly rows dimmed = zero inbound activity.</div>
   </section>
 
   <div class="report-footer">
@@ -1504,5 +1544,436 @@ if (document.getElementById('tab-trending') && document.getElementById('tab-tren
   setTimeout(() => { drawTrendCharts(); drawBusyHourChart(); }, 100);
 }
 </script>
+
+<!-- ═══════════ AGENT INSIGHTS ═══════════ -->
+<div class="section-wrap" id="tab-insights">
+<div class="page">
+  <section>
+    <div class="sec-head">
+      <span class="sec-num">§ 01</span>
+      <span class="sec-title">Agent Insights &amp; Coaching</span>
+      <span class="sec-sub">Week of Apr 6–11, 2026 · Individual performance narratives</span>
+    </div>
+
+    <div class="insight-grid">
+
+      <!-- ── Miguel Garcia ── -->
+      <div class="insight-card ic-active">
+        <div class="ic-header">
+          <div class="ic-rank rank g1">1</div>
+          <div>
+            <div class="ic-name">Miguel Garcia</div>
+            <div class="ic-meta">182 answered · 84V + 25E + 73C · 40 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip green">Active</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>5m 30s</strong></div>
+          <div class="ic-stat">Email AHT <strong style="color:var(--green)">3m 45s</strong></div>
+          <div class="ic-stat">Chat AHT <strong>10m 24s</strong></div>
+          <div class="ic-stat">On Queue <strong>1d 5h</strong></div>
+          <div class="ic-stat">Xfers <strong>14</strong></div>
+        </div>
+        <div class="ic-narrative">Miguel is the clear top performer this week with 182 total interactions across all three media types — nearly double the second-ranked agent. His on-queue commitment of 1 day 5 hours demonstrates exceptional dedication, and his email AHT of 3m 45s is among the best on the team. His voice and chat handling times are well within acceptable range. The only area for attention is his transfer count of 14, which is the highest on the team by a significant margin — roughly 1 transfer for every 13 interactions handled.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Investigate Miguel's transfer patterns — are these warm transfers to specialists, or cold transfers due to scope uncertainty? If the latter, a focused review of Telemedica escalation thresholds could reduce unnecessary handoffs and improve first-contact resolution. Miguel is also an excellent candidate for peer mentorship on efficiency practices.</div>
+        </div>
+      </div>
+
+      <!-- ── La'Shay Richard ── -->
+      <div class="insight-card ic-flag">
+        <div class="ic-header">
+          <div class="ic-rank rank g2">2</div>
+          <div>
+            <div class="ic-name">La'Shay Richard</div>
+            <div class="ic-meta">89 answered · 26V + 13E + 50C · 14 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip red">Flag</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>10m 25s</strong></div>
+          <div class="ic-stat">Email AHT <strong style="color:var(--red)">4h 49m 32s</strong></div>
+          <div class="ic-stat">Chat AHT <strong style="color:var(--red)">1h 18m 51s</strong></div>
+          <div class="ic-stat">Chat ACW <strong style="color:var(--red)">1h 5m 5s</strong></div>
+          <div class="ic-stat">On Queue <strong>20h 19m</strong></div>
+          <div class="ic-stat">NR <strong>2h 23m</strong></div>
+        </div>
+        <div class="ic-narrative">La'Shay is the second-highest volume agent this week with 89 answered contacts and the longest on-queue time of any active agent (20h 19m) — a strong commitment indicator. However, her AHT figures across email and chat are critically elevated. Her email AHT of nearly 5 hours far exceeds the 30-minute review threshold and approaches the 2-hour "flag" threshold on a per-interaction basis. Her chat AHT of 1h 19m and chat ACW of over 1 hour both indicate either open interactions being left unresolved or system/workflow issues that are artificially inflating time.</div>
+        <div class="ic-alert">⚠ IMMEDIATE REVIEW REQUIRED: Email AHT 4h 49m and Chat AHT 1h 19m with ACW 1h 5m — check for stuck/abandoned interactions and provide workflow coaching.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Conduct a session review of La'Shay's email and chat interactions from this week. Determine whether elevated AHT reflects genuine complexity or habit patterns (e.g., leaving interactions open). Reinforce ACW discipline — ACW over 1 hour suggests interactions aren't being properly closed. Despite volume, handle time efficiency coaching is urgently needed.</div>
+        </div>
+      </div>
+
+      <!-- ── Rashidah Brown ── -->
+      <div class="insight-card ic-flag">
+        <div class="ic-header">
+          <div class="ic-rank rank g3">3</div>
+          <div>
+            <div class="ic-name">Rashidah Brown</div>
+            <div class="ic-meta">56 answered · 21V + 16E + 19C · 12 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip red">Flag</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>12m 7s</strong></div>
+          <div class="ic-stat">Email AHT <strong style="color:var(--green)">23m 59s</strong></div>
+          <div class="ic-stat">Chat AHT <strong style="color:var(--red)">12h 45m 34s</strong></div>
+          <div class="ic-stat">Chat ACW <strong style="color:var(--red)">13h 6m 1s</strong></div>
+          <div class="ic-stat">On Queue <strong>15h 56m</strong></div>
+          <div class="ic-stat">NR <strong>3s</strong></div>
+        </div>
+        <div class="ic-narrative">Rashidah ranks third overall with solid multi-channel volume and an exceptional availability record — her not-responding time of only 3 seconds is effectively zero. Her email AHT of 24 minutes is healthy and within green range. However, her chat figures are extreme: a chat AHT of nearly 13 hours and chat ACW exceeding 13 hours strongly indicate that one or more chat interactions were left open for the entire shift without being closed. This is almost certainly a system artifact (open interaction not wrapped up) rather than genuine handle time.</div>
+        <div class="ic-alert">⚠ CHAT INTERACTION AUDIT NEEDED: Chat AHT 12h 46m and ACW 13h 6m are system-anomalous. Likely one unclosed interaction inflating all metrics — verify in Genesys.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Pull Rashidah's specific chat interactions from this week and identify any that show multi-hour handle times. Coach on proper interaction closure procedures — agents must wrap and ACW-complete every interaction promptly. This is a quick fix that will dramatically improve her chat metrics. Acknowledge her outstanding availability record (NR ≈ 0).</div>
+        </div>
+      </div>
+
+      <!-- ── Dustin Duemer ── -->
+      <div class="insight-card ic-active">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">4</div>
+          <div>
+            <div class="ic-name">Dustin Duemer</div>
+            <div class="ic-meta">26 answered · 18V + 3E + 5C · 185 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip green">Active</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>3m 1s</strong></div>
+          <div class="ic-stat">Email AHT <strong style="color:var(--green)">58s</strong></div>
+          <div class="ic-stat">Chat AHT <strong style="color:var(--amber)">21m 57s</strong></div>
+          <div class="ic-stat">On Queue <strong>6h 53m</strong></div>
+          <div class="ic-stat">NR <strong>53m</strong></div>
+        </div>
+        <div class="ic-narrative">Dustin posts excellent handle times across all media types — his voice AHT of 3m 01s and email AHT of under 1 minute reflect strong efficiency and concise interaction management. His chat AHT is slightly elevated at 22 minutes but still within the amber threshold. The most notable datapoint is his outbound call volume of 185 — the fourth highest on the team — suggesting significant proactive or follow-up contact activity. His moderate on-queue time (6h 53m) relative to his outbound volume suggests he may be dedicating time to proactive outreach.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Dustin is performing well. A brief chat coaching session to improve AHT from amber to green range would be valuable. Verify that his high outbound activity aligns with team objectives — if outbound is part of his role, this is a positive. If not, ensure outbound contacts are being properly documented and are productive.</div>
+        </div>
+      </div>
+
+      <!-- ── Ashley Bradley ── -->
+      <div class="insight-card ic-active">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">5</div>
+          <div>
+            <div class="ic-name">Ashley Bradley</div>
+            <div class="ic-meta">22 answered · 17V + 5C · 50 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip green">Active</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>7m 27s</strong></div>
+          <div class="ic-stat">Chat AHT <strong>10m 10s</strong></div>
+          <div class="ic-stat">Chat ACW <strong>4m 40s</strong></div>
+          <div class="ic-stat">On Queue <strong>7h 55m</strong></div>
+          <div class="ic-stat">Xfers <strong>7</strong></div>
+        </div>
+        <div class="ic-narrative">Ashley handled 22 interactions across voice and chat with consistent handle times. Her voice AHT is solid at 7m 27s and chat AHT of 10m 10s is healthy. However, her transfer rate stands out — 7 transfers on 22 answered contacts represents a 31.8% transfer rate, one of the highest on the team. This may indicate scope challenges or routing issues where contacts are arriving that are outside her skill coverage. Her not-responding time of 1h 1m is borderline but acceptable.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Prioritize a review of Ashley's transfer reasons this week — are these warm transfers to specialists, or contacts that are being transferred because Ashley is uncertain about resolution? If skill gaps are identified, targeted knowledge training could significantly improve her first-contact resolution rate. Strong chat ACW at 4m 40s is acceptable but could be tightened.</div>
+        </div>
+      </div>
+
+      <!-- ── Samantha Shaw ── -->
+      <div class="insight-card ic-active">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">6</div>
+          <div>
+            <div class="ic-name">Samantha Shaw</div>
+            <div class="ic-meta">21 answered · 17V + 4C · 217 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip green">Active</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>7m 27s</strong></div>
+          <div class="ic-stat">Email AHT <strong style="color:var(--green)">1m 39s</strong></div>
+          <div class="ic-stat">Chat AHT <strong>7m 50s</strong></div>
+          <div class="ic-stat">Chat ACW <strong>18s</strong></div>
+          <div class="ic-stat">On Queue <strong>9h 32m</strong></div>
+        </div>
+        <div class="ic-narrative">Samantha delivers strong, balanced performance this week with a particularly impressive email AHT of 1m 39s and chat ACW of just 18 seconds — both outstanding. Her outbound call volume of 217 is the second-highest on the team, demonstrating substantial proactive engagement. Despite her high outbound activity, her inbound AHT figures remain excellent, suggesting she manages her time effectively between inbound handling and outbound work. Only 4 inbound transfers in the week at a moderate volume shows strong ownership of her contacts.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Samantha is a strong all-around performer and a prime candidate for recognition. Explore whether her outbound patterns are best-practice that others could learn from. Her email ACW speed suggests she has effective templating or workflow habits — consider documenting these for team-wide sharing.</div>
+        </div>
+      </div>
+
+      <!-- ── Jenna Burns ── -->
+      <div class="insight-card ic-active">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">7</div>
+          <div>
+            <div class="ic-name">Jenna Burns</div>
+            <div class="ic-meta">18 answered · 13V + 5C · 91 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip green">Active</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>11m 21s</strong></div>
+          <div class="ic-stat">Email AHT <strong style="color:var(--green)">4m 50s</strong></div>
+          <div class="ic-stat">Chat AHT <strong>7m 37s</strong></div>
+          <div class="ic-stat">On Queue <strong>21h 30m</strong></div>
+          <div class="ic-stat">NR <strong>1h 13m</strong></div>
+        </div>
+        <div class="ic-narrative">Jenna logs the highest on-queue time of any active agent this week at 21h 30m — a remarkable commitment across the 5-day period averaging over 4 hours on queue per day. Her chat and email AHT figures are solid. Voice AHT at 11m 21s is slightly elevated, suggesting calls may require more resolution time or that Jenna handles more complex voice contacts. Her not-responding time of 1h 13m is within acceptable range. Outbound volume of 91 is the 5th highest — demonstrating active proactive work alongside high inbound availability.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Jenna's availability and consistency are exemplary and should be recognized. Coach on voice AHT reduction — review whether call structures or knowledge gaps contribute to longer call durations. A brief review of her call recordings this week may reveal opportunities for faster resolution or use of scripted summaries.</div>
+        </div>
+      </div>
+
+      <!-- ── Auny Elias-Heath ── -->
+      <div class="insight-card ic-active">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">8</div>
+          <div>
+            <div class="ic-name">Auny Elias-Heath</div>
+            <div class="ic-meta">17 answered · 15V + 1E + 1C · 296 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip green">Active</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>8m 41s</strong></div>
+          <div class="ic-stat">Email AHT <strong style="color:var(--green)">20m 25s</strong></div>
+          <div class="ic-stat">Chat AHT <strong>13m 44s</strong></div>
+          <div class="ic-stat">On Queue <strong>9h 16m</strong></div>
+          <div class="ic-stat">NR <strong>5m 54s</strong></div>
+        </div>
+        <div class="ic-narrative">Auny is this week's outbound champion with 296 outbound contacts — the highest on the team by a substantial margin, spanning both voice (165) and email (131) channels. Her inbound handle times are solid: voice at 8m 41s and email AHT at 20m 25s are both in good range. Her not-responding time is nearly zero (5m 54s), suggesting outstanding discipline and availability throughout the week. The combination of high outbound, strong availability, and good handle times makes Auny one of the most productive agents this week.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Auny's productivity level is exceptional. Ensure her outbound activity is being tracked and credited appropriately in performance metrics. Validate that the quality of her 296 outbound interactions meets team standards — high volume outbound should be quality-checked periodically. Consider Auny as a model for outbound engagement practices.</div>
+        </div>
+      </div>
+
+      <!-- ── Kimberly Coleman ── -->
+      <div class="insight-card ic-active">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">9</div>
+          <div>
+            <div class="ic-name">Kimberly Coleman</div>
+            <div class="ic-meta">15 answered · 12V + 1E + 2C · 77 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip green">Active</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>11m 30s</strong></div>
+          <div class="ic-stat">Email AHT <strong style="color:var(--green)">2m 28s</strong></div>
+          <div class="ic-stat">Chat AHT <strong>4m 7s</strong></div>
+          <div class="ic-stat">Chat ACW <strong>5s</strong></div>
+          <div class="ic-stat">On Queue <strong>6h 20m</strong></div>
+        </div>
+        <div class="ic-narrative">Kimberly shows a well-rounded performance profile with excellent email AHT (2m 28s) and an impressively low chat ACW of just 5 seconds, reflecting strong workflow habits and prompt interaction closure. Her chat AHT of 4m 07s is one of the best on the team. Voice AHT at 11m 30s is slightly elevated, mirroring a pattern seen across several agents suggesting voice interactions are carrying more complexity this week. Her on-queue time of 6h 20m is moderate, and 77 outbound contacts shows active engagement beyond inbound.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Kimberly is performing well overall. Focus coaching on voice AHT — her efficiency in email and chat suggests she has the capability to tighten voice interactions too. A call recording review may reveal opportunities for more concise greetings, information gathering, or closing techniques. Recognize her outstanding chat ACW discipline.</div>
+        </div>
+      </div>
+
+      <!-- ── Christina Browley ── -->
+      <div class="insight-card ic-review">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">10</div>
+          <div>
+            <div class="ic-name">Christina Browley</div>
+            <div class="ic-meta">15 answered · 3V + 8E + 4C · 268 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip amber">Review</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>5m 34s</strong></div>
+          <div class="ic-stat">Email AHT <strong style="color:var(--green)">1m 51s</strong></div>
+          <div class="ic-stat">Chat AHT <strong style="color:var(--amber)">30m 57s</strong></div>
+          <div class="ic-stat">On Queue <strong>9h 29m</strong></div>
+          <div class="ic-stat">NR <strong>3h 15m</strong></div>
+        </div>
+        <div class="ic-narrative">Christina has an interesting performance profile this week: excellent email AHT of 1m 51s and strong voice AHT of 5m 34s, but an elevated chat AHT of 30m 57s that puts her in amber review status. Her outbound volume of 268 is the third-highest on the team — extremely high relative to her 15 answered inbound contacts. The primary concern is her not-responding time of 3h 15m, which triggers review status and suggests significant unavailability periods during the week. This combination warrants a scheduling and activity audit.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Investigate Christina's not-responding time — 3h 15m in a week is above threshold. Are there documented schedule exceptions, break overruns, or system issues? Address NR patterns immediately. Separately, review her chat interactions to understand why AHT is elevated — her strong email efficiency suggests she can do better in chat. Consider pairing outbound expectations with clear inbound availability requirements.</div>
+        </div>
+      </div>
+
+      <!-- ── Jennifer Fuston ── -->
+      <div class="insight-card ic-review">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">11</div>
+          <div>
+            <div class="ic-name">Jennifer Fuston</div>
+            <div class="ic-meta">13 answered · 10V + 2E + 1C · 35 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip amber">Review</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>9m 22s</strong></div>
+          <div class="ic-stat">Email AHT <strong style="color:var(--green)">3m 39s</strong></div>
+          <div class="ic-stat">Chat AHT <strong>8m 20s</strong></div>
+          <div class="ic-stat">On Queue <strong>5h 14m</strong></div>
+          <div class="ic-stat">NR <strong style="color:var(--amber)">7h 44m</strong></div>
+        </div>
+        <div class="ic-narrative">Jennifer's handle times are reasonable across all channels, with a notably efficient email AHT of 3m 39s and solid chat AHT of 8m 20s. The critical concern is her not-responding time of 7h 44m — the highest of any active agent this week and just 16 minutes short of the 8-hour "flag" threshold. With only 5h 14m on queue, her ratio of NR to on-queue time is severely imbalanced. She is logged in but not available for a disproportionate portion of her work time, which represents a significant lost capacity concern.</div>
+        <div class="ic-alert">⚠ HIGH PRIORITY: Not-Responding time 7h 44m — borderline Flag threshold. Immediate manager discussion required to understand root cause and establish corrective action plan.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Conduct a one-on-one with Jennifer to understand what is driving her NR time. Is she in training, handling tasks outside the queue, or experiencing system/technical issues? Establish a clear expectation for maximum NR time per shift and set a monitoring cadence. If this is a recurring pattern, a Performance Improvement Plan reference may be appropriate.</div>
+        </div>
+      </div>
+
+      <!-- ── Mirline Etienne ── -->
+      <div class="insight-card ic-active">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">12</div>
+          <div>
+            <div class="ic-name">Mirline Etienne</div>
+            <div class="ic-meta">8 answered · 8V · 39 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip green">Active</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>2m 31s</strong></div>
+          <div class="ic-stat">On Queue <strong>9h 45m</strong></div>
+          <div class="ic-stat">NR <strong>1h 24m</strong></div>
+        </div>
+        <div class="ic-narrative">Mirline handles exclusively voice interactions this week and delivers the best voice AHT among active agents at just 2m 31s — nearly 50% faster than the team average. With 9h 45m on queue, she is one of the more available agents. Her low inbound volume of 8 answered calls relative to her on-queue time may indicate she is primarily routed to lower-traffic queues, or that her skills are not aligned with the highest-demand queues. Her 39 outbound contacts show active engagement despite low inbound routing.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Investigate Mirline's routing configuration — with the best voice AHT on the team and high on-queue availability, she should be handling more inbound volume. Verify her skill assignments and ensure she is included in the appropriate queues. Her efficiency makes her a strong candidate for higher-traffic voice queue assignment. Recognize her excellent handle time.</div>
+        </div>
+      </div>
+
+      <!-- ── Austin Thomas ── -->
+      <div class="insight-card ic-active">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">13</div>
+          <div>
+            <div class="ic-name">Austin Thomas</div>
+            <div class="ic-meta">7 answered · 7V · 24 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip green">Active</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>5m 50s</strong></div>
+          <div class="ic-stat">On Queue <strong>9h 8m</strong></div>
+          <div class="ic-stat">NR <strong>—</strong></div>
+          <div class="ic-stat">Xfers <strong>2</strong></div>
+        </div>
+        <div class="ic-narrative">Austin logs zero not-responding time this week — perfect availability throughout his scheduled work period. His voice AHT of 5m 50s is solid and his inbound volume of 7 answered calls, while low, may reflect routing constraints rather than performance issues. Similar to Mirline, the contrast between strong on-queue presence (9h 8m) and low inbound volume raises a routing question. He handled 2 transfers from 7 calls (28.6%), which warrants a look at whether those were appropriate escalations.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Verify Austin's skill and queue assignments. His zero NR time is excellent and should be recognized — this reflects the type of availability discipline expected of the team. Review his 2 transfers to determine appropriateness. If routing is limiting his volume, consider adding additional queue skills to increase contact throughput.</div>
+        </div>
+      </div>
+
+      <!-- ── Tatiana Jean-Louis ── -->
+      <div class="insight-card ic-review">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">14</div>
+          <div>
+            <div class="ic-name">Tatiana Jean-Louis</div>
+            <div class="ic-meta">7 answered · 5V + 2C · 52 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip amber">Review</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>12m 21s</strong></div>
+          <div class="ic-stat">Email AHT <strong style="color:var(--amber)">46m 33s</strong></div>
+          <div class="ic-stat">Chat AHT <strong style="color:var(--amber)">16m 35s</strong></div>
+          <div class="ic-stat">Chat ACW <strong>1m 40s</strong></div>
+          <div class="ic-stat">On Queue <strong>7h 56m</strong></div>
+        </div>
+        <div class="ic-narrative">Tatiana's handle times are elevated across all three channels she worked this week. Her voice AHT of 12m 21s is the highest of any active agent, her email AHT of 46m 33s sits in the amber zone (below the 2-hour flag but above the 30-minute review threshold), and her chat AHT of 16m 35s is also elevated. This pattern across all media types suggests a systemic challenge with efficiency or with the complexity of contacts she's handling, rather than a channel-specific issue.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Schedule a focused coaching session reviewing Tatiana's interactions across voice, email, and chat. Look for common patterns that are extending handle times: excessive pleasantries, insufficient use of knowledge base resources, slow typing, or unresolved complexity requiring multiple look-ups. Establish specific AHT targets for the next 2 weeks and check in mid-week to assess progress. This is a sustained pattern that needs structured improvement planning.</div>
+        </div>
+      </div>
+
+      <!-- ── Alex DeTrolio ── -->
+      <div class="insight-card ic-active">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">15</div>
+          <div>
+            <div class="ic-name">Alex DeTrolio</div>
+            <div class="ic-meta">3 answered · 3V · 14 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip green">Active</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>2m 16s</strong></div>
+          <div class="ic-stat">On Queue <strong>9h 21m</strong></div>
+          <div class="ic-stat">NR <strong>1h 41m</strong></div>
+          <div class="ic-stat">Xfers <strong>1</strong></div>
+        </div>
+        <div class="ic-narrative">Alex posts the lowest voice AHT on the team at 2m 16s — an impressive efficiency metric. However, his inbound volume of just 3 answered calls over a full week despite 9h 21m on queue raises a significant routing concern. With that level of availability and that level of efficiency, Alex should theoretically be handling far more contacts. His 1h 41m NR time is within acceptable range. The mismatch between his strong efficiency and very low volume is the primary story this week.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Audit Alex's skill and queue assignments immediately. A 3-answered-call week with 9h 21m on queue means contacts are not routing to him despite his availability. Verify his skills in Genesys match the queues experiencing volume. Once routing is confirmed, Alex's efficiency metrics suggest he can handle a significantly higher volume. Recognize his excellent AHT.</div>
+        </div>
+      </div>
+
+      <!-- ── EuKyta Little ── -->
+      <div class="insight-card ic-active">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">16</div>
+          <div>
+            <div class="ic-name">EuKyta Little</div>
+            <div class="ic-meta">2 answered · 1V + 1C · 13 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip green">Active</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>1m 31s</strong></div>
+          <div class="ic-stat">Email AHT <strong style="color:var(--green)">1m 9s</strong></div>
+          <div class="ic-stat">Chat AHT <strong>12m 23s</strong></div>
+          <div class="ic-stat">On Queue <strong>2h 16m</strong></div>
+          <div class="ic-stat">NR <strong>1h 39m</strong></div>
+        </div>
+        <div class="ic-narrative">EuKyta shows very limited activity this week — only 2 answered contacts and just 9h logged in total, with only 2h 16m on queue. This appears to be a reduced-schedule week rather than a performance concern. Her handle times where she did engage are generally fine: voice AHT of 1m 31s is excellent. Her NR-to-on-queue ratio (1h 39m NR vs 2h 16m on queue) is elevated but may be understandable given the limited schedule. The chat AHT of 12m 23s from a single interaction is insufficient to draw conclusions from.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Confirm EuKyta's scheduled hours for the week of Apr 6–11. If this was a limited or partial week, no performance action is needed. If she was scheduled for standard hours, investigate why she was on queue for only 2h 16m. Ensure she understands availability expectations and confirm her Genesys status settings are configured correctly.</div>
+        </div>
+      </div>
+
+      <!-- ── Shalon Jones ── -->
+      <div class="insight-card ic-active">
+        <div class="ic-header">
+          <div class="ic-rank rank gn">17</div>
+          <div>
+            <div class="ic-name">Shalon Jones</div>
+            <div class="ic-meta">2 answered · 2V · 14 outbound</div>
+          </div>
+          <div class="ic-status"><span class="chip green">Active</span></div>
+        </div>
+        <div class="ic-stats-row">
+          <div class="ic-stat">Voice AHT <strong>3m 52s</strong></div>
+          <div class="ic-stat">On Queue <strong>4h 1m</strong></div>
+          <div class="ic-stat">NR <strong>42m 57s</strong></div>
+        </div>
+        <div class="ic-narrative">Shalon logged a very limited week with 2 answered voice calls and 4h 1m on queue. Similar to EuKyta, this is likely a reduced-schedule or partial-week situation. Her voice AHT of 3m 52s is efficient. Her logged-in time of 1d 10h 34m vs on-queue time of 4h 1m suggests she was available in the system but not routing to queues for most of that time. With 14 outbound contacts, she was engaged in proactive work. The on-queue to logged-in ratio warrants a check of her status settings.</div>
+        <div class="ic-coaching">
+          <div class="ic-coaching-label">Coaching Recommendation</div>
+          <div class="ic-coaching-text">Verify Shalon's schedule and routing configuration for this week. The significant gap between logged-in time (1d 10h+) and on-queue time (4h 1m) suggests she may be spending time in non-queue statuses (Away, Break, etc.) for extended periods. Confirm that her on-queue vs. off-queue balance aligns with expectations and that her queue skills are properly configured.</div>
+        </div>
+      </div>
+
+    </div><!-- /insight-grid -->
+  </section>
+
+  <div class="report-footer">
+    <span>Served With Honor · Care Team Operations</span>
+    <span>Agent Insights · Week of Apr 6–11, 2026</span>
+    <span>Generated Apr 13, 2026</span>
+  </div>
+</div>
+</div><!-- /tab-insights -->
+
 </body>
 </html>
